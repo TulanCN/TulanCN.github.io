@@ -45,4 +45,77 @@
         <tag>-【杂谈】博客</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Java反射调用的优化</title>
+    <url>/2023/05/04/10-44-04/</url>
+    <content><![CDATA[<p>effective java中曾言，避免反射的最好方式是定义接口。但反射是orm框架中不得不使用的能力，这次对反射的操作做了一次性能优化。</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在公司内部的缓存框架中，需要实现类似数据库的能力：比如主键、索引，还有条件查询等。</p>
+<p>这些能力不可避免的需要从一个对象中，通过反射的方式来取参数的值。且目前没有办法通过定义接口的方式来优化。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>以前的方式大多是建立Method对象的缓存，但是在查阅资料之后，我使用了一个新的方式。</p>
+<p>这里我先给出一个原本的实现: </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  private static final Map&lt;String, Method&gt; methodsCache = new ConcurrentHashMap&lt;&gt;(256);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">   * 获取Object对象中指定属性的值。</span><br><span class="line">   * @param instance instance</span><br><span class="line">   * @param fieldName fieldName</span><br><span class="line">   * @return Object</span><br><span class="line">   */</span><br><span class="line">  public static Object getFieldValue(Class&lt;?&gt; clazz, Object instance, String fieldName) &#123;</span><br><span class="line">      Method method = findMethod(clazz, fieldName);</span><br><span class="line">      if (!Objects.isNull(method)) &#123;</span><br><span class="line">          try &#123;</span><br><span class="line">              return method.invoke(instance);</span><br><span class="line">          &#125; catch (IllegalAccessException | InvocationTargetException e) &#123;</span><br><span class="line">              throw new RuntimeException(e);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  private static Method findMethod(Class&lt;?&gt; clazz, String fieldName) &#123;</span><br><span class="line">      String methodName = &quot;get&quot; + changeFirstCharacterCase(fieldName, true);</span><br><span class="line">      // 优先从缓存获取</span><br><span class="line">      Method method = methodsCache.get(clazz.getName() + &quot;#&quot; + methodName);</span><br><span class="line">      if (!Objects.isNull(method)) &#123;</span><br><span class="line">          return method;</span><br><span class="line">      &#125;</span><br><span class="line">      // 缓存中未找到，从clazz中获取</span><br><span class="line">      try &#123;</span><br><span class="line">          method =  clazz.getMethod(methodName);</span><br><span class="line">          methodsCache.put(clazz.getName() + &quot;#&quot; + methodName, method);</span><br><span class="line">          return method;</span><br><span class="line">      &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">          logger.error(&quot;在&#123;&#125;中未找到名为&#123;&#125;的方法名。&quot;, clazz.getName(), methodName);</span><br><span class="line">      &#125; catch (Exception e) &#123;</span><br><span class="line">          logger.error(e.getMessage(), e);</span><br><span class="line">      &#125;</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这逻辑不难理解，缓存了Method对象，避免每次都要进行查找。一般来说这可以很大程度的提升性能。</p>
+<p>不过我随后进行了jmh的测试，发现了一些问题。</p>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>Mode</th>
+<th>Cnt</th>
+<th>Score</th>
+<th>Score</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>testNormal</td>
+<td>avgt</td>
+<td>10</td>
+<td>0.338</td>
+<td>±   0.003</td>
+<td>ns&#x2F;op</td>
+</tr>
+<tr>
+<td>testRef</td>
+<td>avgt</td>
+<td>10</td>
+<td>4.423</td>
+<td>±   0.174</td>
+<td>ns&#x2F;op</td>
+</tr>
+<tr>
+<td>testRefBuild</td>
+<td>avgt</td>
+<td>10</td>
+<td>181.405</td>
+<td>±  21.063</td>
+<td>ns&#x2F;op</td>
+</tr>
+</tbody></table>
+<p>表格中，第一行数据是通过get方法取值；第二行是通过从缓存中获取Method然后调用取值；第三行是构建Method方法并取值。</p>
+<p>不难看出：哪怕是通过缓存的方式来取值，也会导致性能下降大约十倍。</p>
+<p>在查阅资料时，我发现了这篇文章：</p>
+<p>[1]: <a href="https://dzone.com/articles/java-reflection-but-faster">https://dzone.com/articles/java-reflection-but-faster</a>	“java-reflection-but-faster”</p>
+<p>这里提供了一个思路：通过LambdaMetafactory构建lambda表达式，在构建的lambda表达式中调用对应的方法。</p>
+<p>最后的实现如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 对象访问器</span><br><span class="line"> *</span><br><span class="line"> * @author daizheli</span><br><span class="line"> * @since 4.2.0 2023/4/13 </span><br><span class="line"> */</span><br><span class="line">public class ObjGetter &#123;</span><br><span class="line"></span><br><span class="line">    private final Function getterFunction;</span><br><span class="line"></span><br><span class="line">    public ObjGetter(Method method) &#123;</span><br><span class="line">        MethodHandles.Lookup lookup = MethodHandles.lookup();</span><br><span class="line">        try &#123;</span><br><span class="line">            MethodHandle methodHandle = lookup.unreflect(method);</span><br><span class="line">            CallSite site = LambdaMetafactory.metafactory(lookup, &quot;apply&quot;, MethodType.methodType(Function.class),</span><br><span class="line">                MethodType.methodType(Object.class, Object.class), methodHandle, methodHandle.type());</span><br><span class="line">            getterFunction = (Function) site.getTarget().invokeExact();</span><br><span class="line">        &#125; catch (Throwable e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Object executeGetter(Object bean) &#123;</span><br><span class="line">        return getterFunction.apply(bean);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 对象设置器</span><br><span class="line"> *</span><br><span class="line"> * @author daizheli</span><br><span class="line"> * @since 4.2.0 2023/4/13 </span><br><span class="line"> */</span><br><span class="line">public class ObjSetter &#123;</span><br><span class="line"></span><br><span class="line">    private final BiConsumer function;</span><br><span class="line"></span><br><span class="line">    public ObjSetter(Method method) &#123;</span><br><span class="line">        MethodHandles.Lookup lookup = MethodHandles.lookup();</span><br><span class="line">        try &#123;</span><br><span class="line">            MethodHandle methodHandle = lookup.unreflect(method);</span><br><span class="line">            CallSite site = LambdaMetafactory.metafactory(lookup, &quot;accept&quot;, MethodType.methodType(BiConsumer.class),</span><br><span class="line">                MethodType.methodType(void.class, Object.class, Object.class), methodHandle, methodHandle.type());</span><br><span class="line">            function = (BiConsumer) site.getTarget().invokeExact();</span><br><span class="line">        &#125; catch (Throwable e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void executeSetter(Object bean, Object value) &#123;</span><br><span class="line">        function.accept(bean, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也跑了一下jmh，测试结果是</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Benchmark                           Mode  Cnt      Score     Error  Units</span><br><span class="line">ObjGetterBatchTest.testLambda       avgt   10      0.692 ±   0.037  ns/op</span><br><span class="line">ObjGetterBatchTest.testLambdaBuild  avgt   10  25439.081 ± 956.824  ns/op</span><br><span class="line">ObjGetterBatchTest.testNormal       avgt   10      0.338 ±   0.003  ns/op</span><br><span class="line">ObjGetterBatchTest.testRef          avgt   10      4.423 ±   0.174  ns/op</span><br><span class="line">ObjGetterBatchTest.testRefBuild     avgt   10    181.405 ±  21.063  ns/op</span><br></pre></td></tr></table></figure>
+
+<p>构建的速度有明显下降，但是每次调用的速度也有明显的提升。</p>
+<p>在我们内部的场景下，会有启动时从数据库加载数据创建索引的步骤，因此启动时就会构建好这部分缓存，从而提高运行时的速度。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>每次反射都去查询Method是不可接受的。在缓存的基础上，通过MethodHandles其实可以提高一部分调用的性能。</p>
+<p>但是综合考虑之后，还是使用LambdaMetafactory在运行时构建lambda表达式更适合当前的场景。</p>
+<p>可惜的是LambdaMetafactory的案例和解析在中文网站上几乎找不到，哪怕是英文资料也很少。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
 </search>
