@@ -1,51 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/03/29/18-22-38/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d </span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第一篇博客，聊聊这个博客本身</title>
-    <url>/2023/03/29/20-26-12/</url>
-    <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
-<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
-<p>为了解决文档的管理问题，我就建了一个博客。</p>
-<h2 id="还有更多的想法么？"><a href="#还有更多的想法么？" class="headerlink" title="还有更多的想法么？"></a>还有更多的想法么？</h2><p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
-<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
-<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
-<h2 id="博客的内容会有哪些？"><a href="#博客的内容会有哪些？" class="headerlink" title="博客的内容会有哪些？"></a>博客的内容会有哪些？</h2><p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
-<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
-<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
-<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
-<h2 id="后续规划？"><a href="#后续规划？" class="headerlink" title="后续规划？"></a>后续规划？</h2><p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
-<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
-<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
-<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java反射调用的优化</title>
     <url>/2023/05/04/10-44-04/</url>
     <content><![CDATA[<p>effective java中曾言，避免反射的最好方式是定义接口。但反射是orm框架中不得不使用的能力，这次对反射的操作做了一次性能优化。</p>
@@ -116,6 +71,85 @@
 ]]></content>
       <tags>
         <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>老年代大对象的问题排查</title>
+    <url>/2023/05/05/10-26-55/</url>
+    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
+<span id="more"></span>
+
+<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
+<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
+<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
+<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
+<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
+<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
+<blockquote>
+<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
+</blockquote>
+<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
+<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
+<blockquote>
+<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
+<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
+</blockquote>
+<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
+<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
+<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
+<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
+<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
+<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/03/29/18-22-38/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d </span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一篇博客，聊聊这个博客本身</title>
+    <url>/2023/03/29/20-26-12/</url>
+    <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
+<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
+<p>为了解决文档的管理问题，我就建了一个博客。</p>
+<h2 id="还有更多的想法么？"><a href="#还有更多的想法么？" class="headerlink" title="还有更多的想法么？"></a>还有更多的想法么？</h2><p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
+<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
+<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
+<h2 id="博客的内容会有哪些？"><a href="#博客的内容会有哪些？" class="headerlink" title="博客的内容会有哪些？"></a>博客的内容会有哪些？</h2><p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
+<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
+<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
+<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
+<h2 id="后续规划？"><a href="#后续规划？" class="headerlink" title="后续规划？"></a>后续规划？</h2><p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
+<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
+<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
+<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】博客</tag>
       </tags>
   </entry>
 </search>
