@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>内存分析记录手册</title>
+    <url>/2023/06/12/13-46-18/</url>
+    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
+<span id="more"></span>
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2>]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>聊聊Java Native和虚拟线程</title>
+    <url>/2023/06/08/14-59-09/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>Java反射调用的优化</title>
     <url>/2023/05/04/10-44-04/</url>
     <content><![CDATA[<p>effective java中曾言，避免反射的最好方式是定义接口。但反射是orm框架中不得不使用的能力，这次对反射的操作做了一次性能优化。</p>
@@ -105,6 +121,72 @@
 ]]></content>
       <tags>
         <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Java程序使用Grpc protobuf的动态加载及类型反射</title>
+    <url>/2023/05/31/15-41-05/</url>
+    <content><![CDATA[<p>对于各个公司负责的基础技术框架部门，接入gRPC往往是一个老大难问题。我也遇到了同样的问题。</p>
+<p>很遗憾，在查阅资料的过程中，我发现中文博客中极少有gRPC反射（更确切的说是Protobuf反射）的资料。而反射恰恰是解决框架对gRPC兼容的一种手段。</p>
+<span id="more"></span>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>在阅读下面的文章之前，读者需要懂得gRPC的服务端、调用端的基本使用方式。否则可能无法理解文章中出现的部分概念。</p>
+<h2 id="区分Protobuf和gRPC"><a href="#区分Protobuf和gRPC" class="headerlink" title="区分Protobuf和gRPC"></a>区分Protobuf和gRPC</h2><p>我发现很多人会把Protobuf和gRPC混为一谈，这是不对的。</p>
+<p>我这里直接引用Protobuf官网文档中的一段话来说明：</p>
+<blockquote>
+<p>The most straightforward RPC system to use with protocol buffers is <a href="https://grpc.io/">gRPC</a>: a language- and platform-neutral open source RPC system developed at Google. gRPC works particularly well with protocol buffers and lets you generate the relevant RPC code directly from your <code>.proto</code> files using a special protocol buffer compiler plugin.</p>
+<p>If you don’t want to use gRPC, it’s also possible to use protocol buffers with your own RPC implementation. You can find out more about this in the <a href="https://protobuf.dev/programming-guides/proto#services">Proto2 Language Guide</a>.</p>
+<p>There are also a number of ongoing third-party projects to develop RPC implementations for Protocol Buffers. For a list of links to projects we know about, see the <a href="https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md">third-party add-ons wiki page</a>.</p>
+</blockquote>
+<p>gRPC是一种RPC通讯的方式，而Protobuf是一种用于序列化和反序列化结构化数据的二进制编码格式。gRPC在通讯时将传输的数据转变为Protobuf格式。</p>
+<p>如果不使用gRPC，完全可以基于Protobuf的api实现一套自己的RPC通讯框架。</p>
+<h2 id="Protobuf的Descriptor"><a href="#Protobuf的Descriptor" class="headerlink" title="Protobuf的Descriptor"></a>Protobuf的Descriptor</h2><p>在百度中查询关于gRPC反射的资料，得到的信息大多牛头不对马嘴。但是查询Protobuf的反射，则可以获得一些案例。</p>
+<p>这其实也说明了Protobuf和gRPC并不是同一个玩意儿。</p>
+<p>Protobuf封装了Descriptor对象，提供了反射构建Protobuf消息对象的能力。所有Protobuf消息对象都要实现Message接口。</p>
+<p>但是Descriptor对象的来源还是proto文件，为了使用反射的能力，我们需要一种特殊的二进制文件。</p>
+<p>可以通过在maven编译插件中添加如下配置来生成这种二进制文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;protobuf.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;protocArtifact&gt;com.google.protobuf:protoc:$&#123;protoc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/protocArtifact&gt;</span><br><span class="line">                &lt;pluginId&gt;grpc-java&lt;/pluginId&gt;</span><br><span class="line">                &lt;pluginArtifact&gt;io.grpc:protoc-gen-grpc-java:$&#123;grpc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/pluginArtifact&gt;</span><br><span class="line">                &lt;writeDescriptorSet&gt;true&lt;/writeDescriptorSet&gt;</span><br><span class="line">                &lt;descriptorSetOutputDirectory&gt;src/main/resources/desc&lt;/descriptorSetOutputDirectory&gt;</span><br><span class="line">                &lt;descriptorSetFileName&gt;descriptor.pb&lt;/descriptorSetFileName&gt;</span><br><span class="line">                &lt;descriptorSetClassifier&gt;descriptor&lt;/descriptorSetClassifier&gt;</span><br><span class="line">                &lt;clearOutputDirectory&gt;false&lt;/clearOutputDirectory&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;compile&lt;/goal&gt;</span><br><span class="line">                        &lt;goal&gt;compile-custom&lt;/goal&gt;</span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                &lt;/execution&gt;</span><br><span class="line">            &lt;/executions&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br><span class="line">    &lt;extensions&gt;</span><br><span class="line">        &lt;extension&gt;</span><br><span class="line">            &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;</span><br><span class="line">            &lt;!--引入操作系统os设置的属性插件,否则$&#123;os.detected.classifier&#125; 操作系统版本会找不到 --&gt;</span><br><span class="line">            &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;os.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/extension&gt;</span><br><span class="line">    &lt;/extensions&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在protobuf的maven编译插件中添加了生成<code>descriptor.pb</code>文件的配置，这个文件中包含了所有proto文件中的信息。</p>
+<p>然后，我们开始加载这份文件，这里使用的是Protobuf的api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PathMatchingResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();</span><br><span class="line">Resource[] descriptorFiles = new Resource[0];</span><br><span class="line">try &#123;</span><br><span class="line">    descriptorFiles = resourceLoader.getResources(&quot;classpath*:**/*.pb&quot;);</span><br><span class="line"></span><br><span class="line">    if (descriptorFiles.length == 0) &#123;</span><br><span class="line">        logger.info(&quot;No pb file found!&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (Resource descriptorFile : descriptorFiles) &#123;</span><br><span class="line">        logger.log(Level.INFO, &quot;正在加载pb文件: &quot; + descriptorFile.getURL());</span><br><span class="line">        // 使用Protobuf提供的api，加载文件</span><br><span class="line">        DescriptorProtos.FileDescriptorSet fileSet =</span><br><span class="line">            DescriptorProtos.FileDescriptorSet.parseFrom(descriptorFile.getInputStream());</span><br><span class="line">    &#125;</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    throw new RuntimeException(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>待续…</p>
+]]></content>
+      <tags>
+        <tag>【工作】gRPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>远程调试案例</title>
+    <url>/2023/07/10/15-08-11/</url>
+    <content><![CDATA[<p>在开发过程中，总是会遇到本地无法重现服务器端报错的问题，这时候远程调试（remote debug）就是很好的应对方法。</p>
+<span id="more"></span>
+
+<p>下面我们来看一下怎么使用jvm的远程调试能力。</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>本地需要有源码，有源码才可以敲断点调试。</p>
+<h2 id="编写启动脚本"><a href="#编写启动脚本" class="headerlink" title="编写启动脚本"></a>编写启动脚本</h2><p>在实际项目中我们往往是通过脚本来启动Java程序，我们需要在启动命令上添加参数来开启远程debug模式。</p>
+<p>需要添加的命令如下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y</span><br></pre></td></tr></table></figure>
+
+<p>以下是一份常见的启动脚本示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get current folder.</span></span><br><span class="line">CMD_DIR=$(cd $(dirname $0); pwd)</span><br><span class="line">cd &quot;$CMD_DIR/..&quot;</span><br><span class="line">CURRENT_DIR=$(pwd)</span><br><span class="line">echo User dir: &quot;$CURRENT_DIR&quot;</span><br><span class="line">CONF_DIR=&quot;$CURRENT_DIR/conf&quot;</span><br><span class="line">STATIC_DIR=&quot;$CURRENT_DIR/static&quot;</span><br><span class="line">ARGS=$*</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get file name.</span></span><br><span class="line">FILE_PATH=&quot;$CURRENT_DIR/lib&quot;</span><br><span class="line">files=$(ls &quot;$FILE_PATH&quot;)</span><br><span class="line">for filename in $files</span><br><span class="line">do</span><br><span class="line">   echo Main Jar: $filename</span><br><span class="line">done</span><br><span class="line">if [[  -f &quot;$CONF_DIR/application.yml&quot; || -f &quot;$CONF_DIR/bootstrap.yml&quot; ]]; then</span><br><span class="line">    echo &quot;Startup app $filename with parameter: $ARGS &quot;</span><br><span class="line">    nohup java \</span><br><span class="line">    -server \</span><br><span class="line">    -Dspring.web.resources.static-locations=&quot;$STATIC_DIR/&quot; \</span><br><span class="line">    -Dspring.config.location=&quot;$CONF_DIR/&quot; \</span><br><span class="line">    -Dkoca.config.location=&quot;config&quot; \</span><br><span class="line">    -Dkoca.lcp.dump.location=&quot;$CURRENT_DIR/&quot; \</span><br><span class="line">    -Dlogging.config=&quot;$CONF_DIR/logback-spring.xml&quot; \</span><br><span class="line">    -Dspring.banner.location=&quot;file:$CONF_DIR/banner.txt&quot; \</span><br><span class="line">    -Duser.timezone=GMT+08 \</span><br><span class="line">    -Xdebug \</span><br><span class="line">    -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y \</span><br><span class="line">    -jar &quot;$CURRENT_DIR/lib/$filename&quot; \</span><br><span class="line">    $ARGS \</span><br><span class="line">    &gt;./nohup.log 2&gt;&amp;1 &amp;</span><br><span class="line">else</span><br><span class="line">    echo &quot;Configuration folder or files is not exist.&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="运行启动脚本"><a href="#运行启动脚本" class="headerlink" title="运行启动脚本"></a>运行启动脚本</h2><p>我们修改脚本后，将这份脚本上传到服务器。</p>
+<p>正常启动时，程序会有一大堆运行日志。但是使用这份脚本启动后，程序启动时会卡住，等待其他客户端连接debug端口。</p>
+<p>这个debug端口就是命令中设置的5005。</p>
+<h2 id="本地创建客户端"><a href="#本地创建客户端" class="headerlink" title="本地创建客户端"></a>本地创建客户端</h2><p>本地使用IDEA创建客户端。</p>
+<p><img src="/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E6%A1%88%E4%BE%8B-image/image-20230630174009789.png" alt="image-20230630174009789"></p>
+<p>修改host为服务器地址</p>
+<p><img src="/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E6%A1%88%E4%BE%8B-image/image-20230630174033683.png" alt="image-20230630174033683"></p>
+<p>创建完毕后运行该客户端，运行时该客户端会和服务端建立连接。</p>
+<p>可以看到原本卡住的服务端开始正常运行。</p>
+<p>在本地的代码中敲断点，就可以进行debug了，和平时在本地debug没什么差别。</p>
+]]></content>
+      <tags>
+        <tag>【工作】运维部署</tag>
       </tags>
   </entry>
   <entry>
