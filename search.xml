@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>内存分析记录手册</title>
+    <url>/2023/06/12/13-46-18/</url>
+    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
+<span id="more"></span>
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2>]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>聊聊Java Native和虚拟线程</title>
     <url>/2023/06/08/14-59-09/</url>
     <content><![CDATA[]]></content>
@@ -157,17 +168,6 @@
 ]]></content>
       <tags>
         <tag>【工作】gRPC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>内存分析记录手册</title>
-    <url>/2023/06/12/13-46-18/</url>
-    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
-<span id="more"></span>
-
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2>]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
       </tags>
   </entry>
   <entry>
