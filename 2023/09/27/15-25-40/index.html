@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://tulancn.github.io/2023/09/27/15-25-40/image-20230927153017161.png">
 <meta property="article:published_time" content="2023-09-27T07:25:40.000Z">
-<meta property="article:modified_time" content="2023-09-27T07:30:58.714Z">
+<meta property="article:modified_time" content="2023-09-28T12:24:14.035Z">
 <meta property="article:author" content="Tulan">
 <meta property="article:tag" content="【工作】优秀实践">
 <meta name="twitter:card" content="summary">
@@ -180,10 +180,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-09-27 15:25:40 / 修改时间：15:30:58" itemprop="dateCreated datePublished" datetime="2023-09-27T15:25:40+08:00">2023-09-27</time>
+              <time title="创建时间：2023-09-27 15:25:40" itemprop="dateCreated datePublished" datetime="2023-09-27T15:25:40+08:00">2023-09-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-28 20:24:14" itemprop="dateModified" datetime="2023-09-28T20:24:14+08:00">2023-09-28</time>
+              </span>
 
           
 
@@ -202,7 +208,7 @@
 <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
 <p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
 <h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var myHeaders = new Headers();</span><br><span class="line">myHeaders.append(&quot;Content-Type&quot;, &quot;application/json&quot;);</span><br><span class="line"></span><br><span class="line">var raw = JSON.stringify(&#123;</span><br><span class="line">  &quot;id&quot;: &quot;999999999&quot;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var requestOptions = &#123;</span><br><span class="line">  method: &#x27;POST&#x27;,</span><br><span class="line">  headers: myHeaders,</span><br><span class="line">  body: raw,</span><br><span class="line">  redirect: &#x27;follow&#x27;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fetch(&quot;http://127.0.0.1:8101/del-condition&quot;, requestOptions)</span><br><span class="line">  .then(response =&gt; response.text())</span><br><span class="line">  .then(result =&gt; console.log(result))</span><br><span class="line">  .catch(error =&gt; console.log(&#x27;error&#x27;, error));</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>表现如下：</p>
 <img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
