@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>我为什么选择去留学</title>
-    <url>/2023/09/28/19-55-01/</url>
-    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
-<span id="more"></span>
-
-<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
-<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
-<p>但最后各方面原因，还是没有去。</p>
-<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 我看了MBA和其他的途径，</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java反射调用的优化</title>
     <url>/2023/05/04/10-44-04/</url>
     <content><![CDATA[<p>effective java中曾言，避免反射的最好方式是定义接口。但反射是orm框架中不得不使用的能力，这次对反射的操作做了一次性能优化。</p>
@@ -296,6 +280,42 @@
       </tags>
   </entry>
   <entry>
+    <title>我为什么选择去留学</title>
+    <url>/2023/09/28/19-55-01/</url>
+    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
+<span id="more"></span>
+
+<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
+<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
+<p>但最后各方面原因，还是没有去。</p>
+<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 我看了MBA和其他的途径，</p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用浏览器发送POST请求</title>
+    <url>/2023/09/27/15-25-40/</url>
+    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
+<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
+<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>表现如下：</p>
+<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
+
+<p>完事。</p>
+]]></content>
+      <tags>
+        <tag>【工作】优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2023/03/29/18-22-38/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -338,26 +358,6 @@
 ]]></content>
       <tags>
         <tag>-【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用浏览器发送POST请求</title>
-    <url>/2023/09/27/15-25-40/</url>
-    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
-<span id="more"></span>
-
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
-<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
-<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>表现如下：</p>
-<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
-
-<p>完事。</p>
-]]></content>
-      <tags>
-        <tag>【工作】优秀实践</tag>
       </tags>
   </entry>
 </search>
