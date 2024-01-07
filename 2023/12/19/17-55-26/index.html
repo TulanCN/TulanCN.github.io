@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tulancn.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在今年11月，我接到一个封装JNI的task。这次对接的是C++实现的内存数据库，性能要求实在太高了，只能采取一些不同寻常的方式来做JNI层调用优化。这里记录一下我的优化思路。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JNI调用的优化">
+<meta property="og:url" content="http://tulancn.github.io/2023/12/19/17-55-26/index.html">
+<meta property="og:site_name" content="涂蓝">
+<meta property="og:description" content="在今年11月，我接到一个封装JNI的task。这次对接的是C++实现的内存数据库，性能要求实在太高了，只能采取一些不同寻常的方式来做JNI层调用优化。这里记录一下我的优化思路。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-19T09:55:26.000Z">
+<meta property="article:modified_time" content="2024-01-07T03:12:17.266Z">
+<meta property="article:author" content="Tulan">
+<meta property="article:tag" content="【工作】性能调优">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://tulancn.github.io/2023/12/19/17-55-26/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JNI调用的优化 | 涂蓝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">涂蓝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tulancn.github.io/2023/12/19/17-55-26/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/upload/avatar.jpeg">
+      <meta itemprop="name" content="Tulan">
+      <meta itemprop="description" content="分享 生活 工作">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="涂蓝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JNI调用的优化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-19 17:55:26" itemprop="dateCreated datePublished" datetime="2023-12-19T17:55:26+08:00">2023-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-07 11:12:17" itemprop="dateModified" datetime="2024-01-07T11:12:17+08:00">2024-01-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在今年11月，我接到一个封装JNI的task。这次对接的是C++实现的内存数据库，性能要求实在太高了，只能采取一些不同寻常的方式来做JNI层调用优化。这里记录一下我的优化思路。</p>
+<span id="more"></span>
+
+<h2 id="传统的优化方式"><a href="#传统的优化方式" class="headerlink" title="传统的优化方式"></a>传统的优化方式</h2><p>首先，我这里给出JNI的官方手册：<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html">https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html</a></p>
+<p>Java本身已经提供了相当数量的接口用于JNI开发，一般来说是够用了。但在低时延或频繁调用的场景，JNI层的性能损耗还是不能忽视的。</p>
+<p>在传统的优化方式中，最常提到的就是缓存方法ID、字段ID和类。通过<code>GetFieldID</code>或<code>GetMethodID</code>获取到的指针（或者说句柄），在JVM的全生命周期都是可用的，因此完全可以把它们缓存起来。每次调用时如果都去获取一遍，会有相当大的性能损耗。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int sumValues2(JNIEnv∗ env, jobject obj, jobject allValues)&#123;</span><br><span class="line">   // 这些都可以缓存</span><br><span class="line">   jclass cls = (∗env)‑&gt;GetObjectClass(env,allValues);</span><br><span class="line">   jfieldID a = (∗env)‑&gt;GetFieldID(env, cls, &quot;a&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID b = (∗env)‑&gt;GetFieldID(env, cls, &quot;b&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID c = (∗env)‑&gt;GetFieldID(env, cls, &quot;c&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID d = (∗env)‑&gt;GetFieldID(env, cls, &quot;d&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID e = (∗env)‑&gt;GetFieldID(env, cls, &quot;e&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID f = (∗env)‑&gt;GetFieldID(env, cls, &quot;f&quot;, &quot;I&quot;);</span><br><span class="line">   // 调用时如果是通过缓存的句柄来调用，就不用每次都get一遍句柄，可以大大提升性能</span><br><span class="line">   jint avalue = (∗env)‑&gt;GetIntField(env, allValues, a);</span><br><span class="line">   jint bvalue = (∗env)‑&gt;GetIntField(env, allValues, b);</span><br><span class="line">   jint cvalue = (∗env)‑&gt;GetIntField(env, allValues, c);</span><br><span class="line">   jint dvalue = (∗env)‑&gt;GetIntField(env, allValues, d);</span><br><span class="line">   jint evalue = (∗env)‑&gt;GetIntField(env, allValues, e);</span><br><span class="line">   jint fvalue = (∗env)‑&gt;GetIntField(env, allValues, f);</span><br><span class="line">   return avalue + bvalue + cvalue + dvalue + evalue + fvalue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至于其他的方式，基本没有像缓存句柄这样显著的提升了。这些优化方式可以在百度中搜索IBM+最佳实践的关键字找到。原文链接的话在这：<a target="_blank" rel="noopener" href="https://developer.ibm.com/articles/j-jni/">https://developer.ibm.com/articles/j-jni/</a></p>
+<h2 id="新的优化方式"><a href="#新的优化方式" class="headerlink" title="新的优化方式"></a>新的优化方式</h2><p>上述的文章是2009年发表，至今（2023年）已经过去了14年。时代在进步，经过这么多年的实践和探索，在性能调优这方面，大家有了新的思路和手段。</p>
+<p>这里我不得不提一句，FastJSON2给了我很大的帮助，在阅读其源码的过程中，我也尝试着把它的一些优秀实现迁移到我的工作项目中来。</p>
+<h3 id="使用Unsafe构建结构体"><a href="#使用Unsafe构建结构体" class="headerlink" title="使用Unsafe构建结构体"></a>使用Unsafe构建结构体</h3><p>某些情况下，可以通过构建结构体来与JNI层通讯。需要强调的是，这种操作在大部分时候都不会有很好的效果。</p>
+<p>只有少数场合——尤其是想复用一个已经存在的C++程序的能力时，才可能有些用处。</p>
+<p>通过构建结构体，最大的好处是，使得JNI接口可以传递指针了。</p>
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 查询</span><br><span class="line"> *</span><br><span class="line"> * @param record      结构体指针</span><br><span class="line"> * @return 查询结果</span><br><span class="line"> */</span><br><span class="line">public native long select(long record);</span><br></pre></td></tr></table></figure>
+
+<p>上面这个接口，我们通过传递了一个结构体指针。</p>
+<p>查询条件我们写到这个结构体里，C++拿着结构体中的条件数据去查询，查完了再把结果写到原来的结构体内，最后Java解析这个结构体，封装为Java对象传回上层。</p>
+<p>上面这事说起来简单，但其实已经经过了Java对象到结构体，结构体再转回Java对象的序列化和反序列化两个处理。</p>
+<p>通过传递指针，可以让C++的JNI这一层变得非常简单，很多时候都是透传，直接去调用原生的接口了。</p>
+<p>实际写代码的时候，这部分逻辑会变得相当抽象，下面给个示例的硬编码代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">long pointer = UNSAFE.allocateMemory(32);</span><br><span class="line">// pointer是内存块的起始地址</span><br><span class="line">long offset = pointer;</span><br><span class="line">// 正常模式、备用模式(只读方式) 4</span><br><span class="line">UNSAFE.putInt(offset, instance.getRunType());</span><br><span class="line">offset += 4;</span><br><span class="line">// 补齐 8</span><br><span class="line">offset += 4;</span><br><span class="line">// 内存数据库大小 16</span><br><span class="line">UNSAFE.putLong(offset, instance.getDbSize());</span><br><span class="line">offset += 8;</span><br><span class="line">// 内存数据库事务日志大小 24</span><br><span class="line">UNSAFE.putLong(offset, instance.getRedoLogSize());</span><br><span class="line">offset += 8;</span><br><span class="line">// 内存数据库事务日志文件数量 28</span><br><span class="line">UNSAFE.putInt(offset, instance.getRedoLogNum());</span><br><span class="line">offset += 4;</span><br><span class="line">// 补齐 32</span><br><span class="line">offset += 4;</span><br></pre></td></tr></table></figure>
+
+<p>还得考虑内存对齐，编码体验确实不太好，但确实性能上是满足了现在的需求。</p>
+<p>基于这种逻辑，我实现了一种通用的结构体创建方式，但是很遗憾由于保密协议我不能在此分享。</p>
+<p>性能上来说：硬编码&gt;通用。</p>
+<p>因为内存数据库存储的数据行是由Java对象转换过来的，所以必须有一种通用的结构体转换方式，这写的时候还是废了我不少功夫的。</p>
+<h3 id="字符串序列化优化"><a href="#字符串序列化优化" class="headerlink" title="字符串序列化优化"></a>字符串序列化优化</h3><p>正常在JNI层，如果需要使用Java传递的字符串，我们会使用以下的方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;jni.h&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot; JNIEXPORT void JNICALL</span><br><span class="line">Java_MyJNIClass_nativeDoSomething(JNIEnv *env, jobject obj, jstring str) &#123;</span><br><span class="line">    const char *data = env-&gt;GetStringUTFChars(str, NULL);</span><br><span class="line">    // 使用data处理Java字符串</span><br><span class="line">    // ...</span><br><span class="line">    env-&gt;ReleaseStringUTFChars(str, data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际测试之后，发现这个GetStringUTFChars方法还是有些性能损耗的。</p>
+<p>那么，有没有办法避免这种字符串转码的性能损耗呢？答案是肯定的。</p>
+<p>还是利用Unsafe的能力，我们在Java中可以做到内存拷贝。</p>
+<p>通过直接把String中的char数组内存拷贝到一个固定的内存块上，我们就可以避免序列化，直接把数据传递给了JNI层。</p>
+<p>甚至，如果可以保证JNI层不会修改字符串的数据，我们可以再次优化，直接将char数组的指针传给C++程序。</p>
+<p>以下是代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">   * 存入字符串</span><br><span class="line">   *</span><br><span class="line">   * @param pointer 指针</span><br><span class="line">   * @param size    长度</span><br><span class="line">   * @param value  字符串</span><br><span class="line">   */</span><br><span class="line">  public static void putString(long pointer, long size, String value) &#123;</span><br><span class="line">      // size必须为偶数</span><br><span class="line">      char[] valueChars = StringOptimizer.getCharArray(value);</span><br><span class="line">      long length = (long) valueChars.length &lt;&lt; 1;</span><br><span class="line">      if (length &gt; size) &#123;</span><br><span class="line">          UNSAFE.copyMemory(valueChars, Unsafe.ARRAY_CHAR_BASE_OFFSET, null, pointer, size);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          char[] chars = new char[(int) size &gt;&gt; 1];</span><br><span class="line">          System.arraycopy(valueChars, 0, chars, 0, valueChars.length);</span><br><span class="line">          UNSAFE.copyMemory(chars, Unsafe.ARRAY_CHAR_BASE_OFFSET, null, pointer, size);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>解释一下，StringOptimizer是一个工具类，使用Unsafe类去直接获取字符串中的char数组。由于java9对String字符串有重写，需要在启动时就进行判断jdk版本，不同版本会有不同的实现。为了方便使用，这里单独抽了一个工具类出来。</p>
+<p>另外，由于Unsafe工具类申请的内存可能含有脏数据，需要申请者手动置0或者覆盖。由于字符串的长度可能小于申请的内存块，所以先拷贝到一个长度与内存块相同的char数组中，再把这个char数据内存拷贝到内存块中，这样就避免了手动置0的操作。</p>
+<p>字符串在Java中的使用实在是过于频繁了，毕竟好用嘛。在C++中字符串用起来比Java要麻烦很多，这也导致在JNI优化的时候，字符串不得不单独拎出来优化。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在特定场景下，使用Unsafe能显著提高Java程序与C++的交互性能。</p>
+<p>但我觉得更重要的是，使用Unsafe使得Java具有了直接去操作内存的能力，这就解放了JNI调用的束缚，可以直接通过指针的方式来交互。这在异构系统的层次划分和接口设计上是会有相当大的影响的。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Tulan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://tulancn.github.io/2023/12/19/17-55-26/" title="JNI调用的优化">http://tulancn.github.io/2023/12/19/17-55-26/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E3%80%90%E5%B7%A5%E4%BD%9C%E3%80%91%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" rel="tag"># 【工作】性能调优</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/09/10-09-51/" rel="prev" title="施工计划">
+      <i class="fa fa-chevron-left"></i> 施工计划
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">传统的优化方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">新的优化方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Unsafe%E6%9E%84%E5%BB%BA%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">2.1.</span> <span class="nav-text">使用Unsafe构建结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BA%8F%E5%88%97%E5%8C%96%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">字符串序列化优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tulan"
+      src="/upload/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Tulan</p>
+  <div class="site-description" itemprop="description">分享 生活 工作</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tulan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
