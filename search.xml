@@ -126,34 +126,6 @@
       </tags>
   </entry>
   <entry>
-    <title>内存分析记录手册</title>
-    <url>/2023/06/12/13-46-18/</url>
-    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
-<span id="more"></span>
-
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><code>jps</code> jps命令，查看所有java程序</p>
-<p><code>jmap -heap &lt;pid&gt;</code> jmap命令，查看jvm内存分区，包括老年代、新生代等内存占用情况</p>
-<p><code>jmap -dump:live,format=b,file=/tmp/dump.hprof &lt;pid&gt;</code> jmap的dump命令</p>
-<p><code>jmap -histo &lt;pid&gt;</code> 和 <code>jmap -histo:live &lt;pid&gt;</code> 抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象</p>
-<p>arthus命令略，可借用arthus的IDEA插件生成command</p>
-<h2 id="什么是大对象"><a href="#什么是大对象" class="headerlink" title="什么是大对象"></a>什么是大对象</h2><p>都说大对象会进入老年代，那么什么才是大对象呢？</p>
-<p>假如一个对象A，内部引用了对象B，那么在计算对象大小的时候，是否会把对象B的大小也计入对象A呢？</p>
-<p>答案是不会，这个有很多的地方可以证明：每个对象其实都只是存了其他对象的指针；dump文件在分析时，对象大小需要先用工具进行计算；在代码中分析对象大小大家用的都是第三方工具。这些都从侧面说明了，JVM本身并没有去计算对象引用的实际大小。</p>
-<p>那么，JVM做垃圾回收时，其实垃圾收集器关心的只是对象本身的大小。所有对象的引用，都是一个内存地址，也就是指针。</p>
-<p>举例，假如B是一个大数组，B在老年代。假如A在B进入老年代之后，持有了B对象作为成员变量。</p>
-<p>在Java的垃圾回收机制中，对象进入老年代（Old Generation）通常需要满足以下条件：</p>
-<ol>
-<li>对象经过多次GC仍然存活。在Eden区进行Minor GC后，如果对象仍然存活，会被移动到Survivor区。在Survivor区进行GC后，如果对象仍然存活，会被移动到老年代。</li>
-<li>对象的大小超过了Survivor区的阈值。每个Survivor区都有一个固定的容量限制。如果新创建的对象太大，以至于在当前Survivor区容纳不下，那么这个对象就会被直接分配到老年代。</li>
-<li>对象被长期持有。一些被长时间持有的对象，比如长期存活或者被强引用的对象，可能会被直接分配到老年代。</li>
-</ol>
-<p>所以，如果对象A持有一个老年代对象B，并不意味着A自己会进入老年代。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Unsafe的使用记录</title>
     <url>/2024/01/07/11-15-32/</url>
     <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
@@ -219,6 +191,34 @@
 ]]></content>
       <tags>
         <tag>【工作】Java底层原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内存分析记录手册</title>
+    <url>/2023/06/12/13-46-18/</url>
+    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
+<span id="more"></span>
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><code>jps</code> jps命令，查看所有java程序</p>
+<p><code>jmap -heap &lt;pid&gt;</code> jmap命令，查看jvm内存分区，包括老年代、新生代等内存占用情况</p>
+<p><code>jmap -dump:live,format=b,file=/tmp/dump.hprof &lt;pid&gt;</code> jmap的dump命令</p>
+<p><code>jmap -histo &lt;pid&gt;</code> 和 <code>jmap -histo:live &lt;pid&gt;</code> 抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象</p>
+<p>arthus命令略，可借用arthus的IDEA插件生成command</p>
+<h2 id="什么是大对象"><a href="#什么是大对象" class="headerlink" title="什么是大对象"></a>什么是大对象</h2><p>都说大对象会进入老年代，那么什么才是大对象呢？</p>
+<p>假如一个对象A，内部引用了对象B，那么在计算对象大小的时候，是否会把对象B的大小也计入对象A呢？</p>
+<p>答案是不会，这个有很多的地方可以证明：每个对象其实都只是存了其他对象的指针；dump文件在分析时，对象大小需要先用工具进行计算；在代码中分析对象大小大家用的都是第三方工具。这些都从侧面说明了，JVM本身并没有去计算对象引用的实际大小。</p>
+<p>那么，JVM做垃圾回收时，其实垃圾收集器关心的只是对象本身的大小。所有对象的引用，都是一个内存地址，也就是指针。</p>
+<p>举例，假如B是一个大数组，B在老年代。假如A在B进入老年代之后，持有了B对象作为成员变量。</p>
+<p>在Java的垃圾回收机制中，对象进入老年代（Old Generation）通常需要满足以下条件：</p>
+<ol>
+<li>对象经过多次GC仍然存活。在Eden区进行Minor GC后，如果对象仍然存活，会被移动到Survivor区。在Survivor区进行GC后，如果对象仍然存活，会被移动到老年代。</li>
+<li>对象的大小超过了Survivor区的阈值。每个Survivor区都有一个固定的容量限制。如果新创建的对象太大，以至于在当前Survivor区容纳不下，那么这个对象就会被直接分配到老年代。</li>
+<li>对象被长期持有。一些被长时间持有的对象，比如长期存活或者被强引用的对象，可能会被直接分配到老年代。</li>
+</ol>
+<p>所以，如果对象A持有一个老年代对象B，并不意味着A自己会进入老年代。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
       </tags>
   </entry>
   <entry>
@@ -370,40 +370,6 @@
       </tags>
   </entry>
   <entry>
-    <title>老年代大对象的问题排查</title>
-    <url>/2023/05/05/10-26-55/</url>
-    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
-<span id="more"></span>
-
-<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
-<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
-<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
-<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
-<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
-<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
-<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
-<blockquote>
-<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
-</blockquote>
-<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
-<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
-<blockquote>
-<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
-<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
-</blockquote>
-<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
-<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
-<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
-<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
-<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
-<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>我是怎么使用线程池的</title>
     <url>/2023/09/25/17-37-38/</url>
     <content><![CDATA[<p>这是一份线程池的使用说明文档。</p>
@@ -480,6 +446,71 @@
       </tags>
   </entry>
   <entry>
+    <title>老年代大对象的问题排查</title>
+    <url>/2023/05/05/10-26-55/</url>
+    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
+<span id="more"></span>
+
+<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
+<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
+<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
+<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
+<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
+<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
+<blockquote>
+<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
+</blockquote>
+<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
+<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
+<blockquote>
+<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
+<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
+</blockquote>
+<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
+<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
+<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
+<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
+<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
+<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我为什么选择去留学</title>
+    <url>/2023/09/28/19-55-01/</url>
+    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
+<span id="more"></span>
+
+<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
+<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
+<p>但最后各方面原因，还是没有去。</p>
+<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
+<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
+<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
+<p>主要原因有三点。</p>
+<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
+<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
+<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
+<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
+<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
+<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
+<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
+<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
+<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
+<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
+<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>远程调试案例</title>
     <url>/2023/07/10/15-08-11/</url>
     <content><![CDATA[<p>在开发过程中，总是会遇到本地无法重现服务器端报错的问题，这时候远程调试（remote debug）就是很好的应对方法。</p>
@@ -532,37 +563,6 @@
       </tags>
   </entry>
   <entry>
-    <title>我为什么选择去留学</title>
-    <url>/2023/09/28/19-55-01/</url>
-    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
-<span id="more"></span>
-
-<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
-<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
-<p>但最后各方面原因，还是没有去。</p>
-<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
-<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
-<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
-<p>主要原因有三点。</p>
-<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
-<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
-<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
-<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
-<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
-<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
-<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
-<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
-<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
-<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
-<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第一篇博客，聊聊这个博客本身</title>
     <url>/2023/03/29/20-26-12/</url>
     <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
@@ -582,26 +582,6 @@
 ]]></content>
       <tags>
         <tag>-【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用浏览器发送POST请求</title>
-    <url>/2023/09/27/15-25-40/</url>
-    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
-<span id="more"></span>
-
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
-<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
-<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
-
-<p>表现如下：</p>
-<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
-
-<p>完事。</p>
-]]></content>
-      <tags>
-        <tag>【工作】优秀实践</tag>
       </tags>
   </entry>
   <entry>
@@ -625,6 +605,26 @@
 ]]></content>
       <tags>
         <tag>-【杂谈】博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用浏览器发送POST请求</title>
+    <url>/2023/09/27/15-25-40/</url>
+    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
+<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
+<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
+
+<p>表现如下：</p>
+<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
+
+<p>完事。</p>
+]]></content>
+      <tags>
+        <tag>【工作】优秀实践</tag>
       </tags>
   </entry>
 </search>
