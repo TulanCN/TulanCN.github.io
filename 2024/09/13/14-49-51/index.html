@@ -20,22 +20,20 @@
     var CONFIG = {"hostname":"tulancn.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一个没什么卵用的小技巧，用chorme等浏览器发送POST请求">
+  <meta name="description" content="在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用浏览器发送POST请求">
-<meta property="og:url" content="http://tulancn.github.io/2023/09/27/15-25-40/index.html">
+<meta property="og:title" content="Netty的FastThreadLocal带来了什么？">
+<meta property="og:url" content="http://tulancn.github.io/2024/09/13/14-49-51/index.html">
 <meta property="og:site_name" content="涂蓝">
-<meta property="og:description" content="一个没什么卵用的小技巧，用chorme等浏览器发送POST请求">
+<meta property="og:description" content="在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://tulancn.github.io/2023/09/27/15-25-40/image-20230927153017161.png">
-<meta property="article:published_time" content="2023-09-27T07:25:40.000Z">
-<meta property="article:modified_time" content="2023-09-28T12:28:41.927Z">
+<meta property="article:published_time" content="2024-09-13T06:49:51.000Z">
+<meta property="article:modified_time" content="2024-09-16T12:51:47.522Z">
 <meta property="article:author" content="Tulan">
-<meta property="article:tag" content="【工作】优秀实践">
+<meta property="article:tag" content="【工作】Netty">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://tulancn.github.io/2023/09/27/15-25-40/image-20230927153017161.png">
 
-<link rel="canonical" href="http://tulancn.github.io/2023/09/27/15-25-40/">
+<link rel="canonical" href="http://tulancn.github.io/2024/09/13/14-49-51/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>用浏览器发送POST请求 | 涂蓝</title>
+  <title>Netty的FastThreadLocal带来了什么？ | 涂蓝</title>
   
 
 
@@ -158,7 +156,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tulancn.github.io/2023/09/27/15-25-40/">
+    <link itemprop="mainEntityOfPage" href="http://tulancn.github.io/2024/09/13/14-49-51/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/upload/avatar.jpeg">
@@ -171,7 +169,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          用浏览器发送POST请求
+          Netty的FastThreadLocal带来了什么？
         </h1>
 
         <div class="post-meta">
@@ -181,14 +179,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-09-27 15:25:40" itemprop="dateCreated datePublished" datetime="2023-09-27T15:25:40+08:00">2023-09-27</time>
+              <time title="创建时间：2024-09-13 14:49:51" itemprop="dateCreated datePublished" datetime="2024-09-13T14:49:51+08:00">2024-09-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-28 20:28:41" itemprop="dateModified" datetime="2023-09-28T20:28:41+08:00">2023-09-28</time>
+                <time title="修改时间：2024-09-16 20:51:47" itemprop="dateModified" datetime="2024-09-16T20:51:47+08:00">2024-09-16</time>
               </span>
 
           
@@ -202,18 +200,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
+        <p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
 <span id="more"></span>
 
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
-<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
-<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
+<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
+<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
+<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
+<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
+<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
+<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
+<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
+<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
+<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
+<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
+<p>然后再来聊聊其中的实现。</p>
+<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
+<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
+<p>它的get()过程是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
 
-<p>表现如下：</p>
-<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
+<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
+<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
+<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
 
-<p>完事。</p>
+<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
+<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
+<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
+<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
+<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
+<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
 
     </div>
 
@@ -229,7 +246,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://tulancn.github.io/2023/09/27/15-25-40/" title="用浏览器发送POST请求">http://tulancn.github.io/2023/09/27/15-25-40/</a>
+    <a href="http://tulancn.github.io/2024/09/13/14-49-51/" title="Netty的FastThreadLocal带来了什么？">http://tulancn.github.io/2024/09/13/14-49-51/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -240,7 +257,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E3%80%90%E5%B7%A5%E4%BD%9C%E3%80%91%E4%BC%98%E7%A7%80%E5%AE%9E%E8%B7%B5/" rel="tag"># 【工作】优秀实践</a>
+              <a href="/tags/%E3%80%90%E5%B7%A5%E4%BD%9C%E3%80%91Netty/" rel="tag"># 【工作】Netty</a>
           </div>
 
         
@@ -249,12 +266,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/09/25/17-37-38/" rel="prev" title="我是怎么使用线程池的">
-      <i class="fa fa-chevron-left"></i> 我是怎么使用线程池的
+    <a href="/2024/08/08/10-28-13/" rel="prev" title="JNI调用的优化（第二版)">
+      <i class="fa fa-chevron-left"></i> JNI调用的优化（第二版)
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/09/28/19-55-01/" rel="next" title="我为什么选择去留学">
-      我为什么选择去留学 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/09/16/20-02-30/" rel="next" title="工作中印象最深刻的一件事">
+      工作中印象最深刻的一件事 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -314,7 +331,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">方式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8CNetty%E7%9A%84%E7%BC%98%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">和Netty的缘分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FastThreadLocal%E5%BF%AB%E5%9C%A8%E5%93%AA%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">FastThreadLocal快在哪？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">带来了什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%9F%E6%83%B3"><span class="nav-number">4.</span> <span class="nav-text">感想</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
