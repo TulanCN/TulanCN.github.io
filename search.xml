@@ -1,97 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JNI调用的优化</title>
-    <url>/2023/12/19/17-55-26/</url>
-    <content><![CDATA[<p>在今年11月，我接到一个封装JNI的task。这次对接的是C++实现的内存数据库，性能要求实在太高了，只能采取一些不同寻常的方式来做JNI层调用优化。这里记录一下我的优化思路。</p>
-<span id="more"></span>
-
-<h2 id="传统的优化方式"><a href="#传统的优化方式" class="headerlink" title="传统的优化方式"></a>传统的优化方式</h2><p>首先，我这里给出JNI的官方手册：<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html">https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html</a></p>
-<p>Java本身已经提供了相当数量的接口用于JNI开发，一般来说是够用了。但在低时延或频繁调用的场景，JNI层的性能损耗还是不能忽视的。</p>
-<p>在传统的优化方式中，最常提到的就是缓存方法ID、字段ID和类。通过<code>GetFieldID</code>或<code>GetMethodID</code>获取到的指针（或者说句柄），在JVM的全生命周期都是可用的，因此完全可以把它们缓存起来。每次调用时如果都去获取一遍，会有相当大的性能损耗。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int sumValues2(JNIEnv∗ env, jobject obj, jobject allValues)&#123;</span><br><span class="line">   // 这些都可以缓存</span><br><span class="line">   jclass cls = (∗env)‑&gt;GetObjectClass(env,allValues);</span><br><span class="line">   jfieldID a = (∗env)‑&gt;GetFieldID(env, cls, &quot;a&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID b = (∗env)‑&gt;GetFieldID(env, cls, &quot;b&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID c = (∗env)‑&gt;GetFieldID(env, cls, &quot;c&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID d = (∗env)‑&gt;GetFieldID(env, cls, &quot;d&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID e = (∗env)‑&gt;GetFieldID(env, cls, &quot;e&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID f = (∗env)‑&gt;GetFieldID(env, cls, &quot;f&quot;, &quot;I&quot;);</span><br><span class="line">   // 调用时如果是通过缓存的句柄来调用，就不用每次都get一遍句柄，可以大大提升性能</span><br><span class="line">   jint avalue = (∗env)‑&gt;GetIntField(env, allValues, a);</span><br><span class="line">   jint bvalue = (∗env)‑&gt;GetIntField(env, allValues, b);</span><br><span class="line">   jint cvalue = (∗env)‑&gt;GetIntField(env, allValues, c);</span><br><span class="line">   jint dvalue = (∗env)‑&gt;GetIntField(env, allValues, d);</span><br><span class="line">   jint evalue = (∗env)‑&gt;GetIntField(env, allValues, e);</span><br><span class="line">   jint fvalue = (∗env)‑&gt;GetIntField(env, allValues, f);</span><br><span class="line">   return avalue + bvalue + cvalue + dvalue + evalue + fvalue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>至于其他的方式，基本没有像缓存句柄这样显著的提升了。这些优化方式可以在百度中搜索IBM+最佳实践的关键字找到。原文链接的话在这：<a href="https://developer.ibm.com/articles/j-jni/">https://developer.ibm.com/articles/j-jni/</a></p>
-<h2 id="新的优化方式"><a href="#新的优化方式" class="headerlink" title="新的优化方式"></a>新的优化方式</h2><p>上述的文章是2009年发表，至今（2023年）已经过去了14年。时代在进步，经过这么多年的实践和探索，在性能调优这方面，大家有了新的思路和手段。</p>
-<p>这里我不得不提一句，FastJSON2给了我很大的帮助，在阅读其源码的过程中，我也尝试着把它的一些优秀实现迁移到我的工作项目中来。</p>
-<h3 id="使用Unsafe构建结构体"><a href="#使用Unsafe构建结构体" class="headerlink" title="使用Unsafe构建结构体"></a>使用Unsafe构建结构体</h3><p>某些情况下，可以通过构建结构体来与JNI层通讯。需要强调的是，这种操作在大部分时候都不会有很好的效果。</p>
-<p>只有少数场合——尤其是想复用一个已经存在的C++程序的能力时，才可能有些用处。</p>
-<p>通过构建结构体，最大的好处是，使得JNI接口可以传递指针了。</p>
-<p>举例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 查询</span><br><span class="line"> *</span><br><span class="line"> * @param record      结构体指针</span><br><span class="line"> * @return 查询结果</span><br><span class="line"> */</span><br><span class="line">public native long select(long record);</span><br></pre></td></tr></table></figure>
-
-<p>上面这个接口，我们通过传递了一个结构体指针。</p>
-<p>查询条件我们写到这个结构体里，C++拿着结构体中的条件数据去查询，查完了再把结果写到原来的结构体内，最后Java解析这个结构体，封装为Java对象传回上层。</p>
-<p>上面这事说起来简单，但其实已经经过了Java对象到结构体，结构体再转回Java对象的序列化和反序列化两个处理。</p>
-<p>通过传递指针，可以让C++的JNI这一层变得非常简单，很多时候都是透传，直接去调用原生的接口了。</p>
-<p>实际写代码的时候，这部分逻辑会变得相当抽象，下面给个示例的硬编码代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">long pointer = UNSAFE.allocateMemory(32);</span><br><span class="line">// pointer是内存块的起始地址</span><br><span class="line">long offset = pointer;</span><br><span class="line">// 正常模式、备用模式(只读方式) 4</span><br><span class="line">UNSAFE.putInt(offset, instance.getRunType());</span><br><span class="line">offset += 4;</span><br><span class="line">// 补齐 8</span><br><span class="line">offset += 4;</span><br><span class="line">// 内存数据库大小 16</span><br><span class="line">UNSAFE.putLong(offset, instance.getDbSize());</span><br><span class="line">offset += 8;</span><br><span class="line">// 内存数据库事务日志大小 24</span><br><span class="line">UNSAFE.putLong(offset, instance.getRedoLogSize());</span><br><span class="line">offset += 8;</span><br><span class="line">// 内存数据库事务日志文件数量 28</span><br><span class="line">UNSAFE.putInt(offset, instance.getRedoLogNum());</span><br><span class="line">offset += 4;</span><br><span class="line">// 补齐 32</span><br><span class="line">offset += 4;</span><br></pre></td></tr></table></figure>
-
-<p>还得考虑内存对齐，编码体验确实不太好，但确实性能上是满足了现在的需求。</p>
-<p>基于这种逻辑，我实现了一种通用的结构体创建方式，但是很遗憾由于保密协议我不能在此分享。</p>
-<p>性能上来说：硬编码&gt;通用。</p>
-<p>因为内存数据库存储的数据行是由Java对象转换过来的，所以必须有一种通用的结构体转换方式，这写的时候还是废了我不少功夫的。</p>
-<h3 id="字符串序列化优化"><a href="#字符串序列化优化" class="headerlink" title="字符串序列化优化"></a>字符串序列化优化</h3><p>正常在JNI层，如果需要使用Java传递的字符串，我们会使用以下的方式：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;jni.h&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot; JNIEXPORT void JNICALL</span><br><span class="line">Java_MyJNIClass_nativeDoSomething(JNIEnv *env, jobject obj, jstring str) &#123;</span><br><span class="line">    const char *data = env-&gt;GetStringUTFChars(str, NULL);</span><br><span class="line">    // 使用data处理Java字符串</span><br><span class="line">    // ...</span><br><span class="line">    env-&gt;ReleaseStringUTFChars(str, data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际测试之后，发现这个GetStringUTFChars方法还是有些性能损耗的。</p>
-<p>那么，有没有办法避免这种字符串转码的性能损耗呢？答案是肯定的。</p>
-<p>还是利用Unsafe的能力，我们在Java中可以做到内存拷贝。</p>
-<p>通过直接把String中的char数组内存拷贝到一个固定的内存块上，我们就可以避免序列化，直接把数据传递给了JNI层。</p>
-<p>甚至，如果可以保证JNI层不会修改字符串的数据，我们可以再次优化，直接将char数组的指针传给C++程序。</p>
-<p>以下是代码示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">   * 存入字符串</span><br><span class="line">   *</span><br><span class="line">   * @param pointer 指针</span><br><span class="line">   * @param size    长度</span><br><span class="line">   * @param value  字符串</span><br><span class="line">   */</span><br><span class="line">  public static void putString(long pointer, long size, String value) &#123;</span><br><span class="line">      // size必须为偶数</span><br><span class="line">      char[] valueChars = StringOptimizer.getCharArray(value);</span><br><span class="line">      long length = (long) valueChars.length &lt;&lt; 1;</span><br><span class="line">      if (length &gt; size) &#123;</span><br><span class="line">          UNSAFE.copyMemory(valueChars, Unsafe.ARRAY_CHAR_BASE_OFFSET, null, pointer, size);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          char[] chars = new char[(int) size &gt;&gt; 1];</span><br><span class="line">          System.arraycopy(valueChars, 0, chars, 0, valueChars.length);</span><br><span class="line">          UNSAFE.copyMemory(chars, Unsafe.ARRAY_CHAR_BASE_OFFSET, null, pointer, size);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>解释一下，StringOptimizer是一个工具类，使用Unsafe类去直接获取字符串中的char数组。由于java9对String字符串有重写，需要在启动时就进行判断jdk版本，不同版本会有不同的实现。为了方便使用，这里单独抽了一个工具类出来。</p>
-<p>另外，由于Unsafe工具类申请的内存可能含有脏数据，需要申请者手动置0或者覆盖。由于字符串的长度可能小于申请的内存块，所以先拷贝到一个长度与内存块相同的char数组中，再把这个char数据内存拷贝到内存块中，这样就避免了手动置0的操作。</p>
-<p>字符串在Java中的使用实在是过于频繁了，毕竟好用嘛。在C++中字符串用起来比Java要麻烦很多，这也导致在JNI优化的时候，字符串不得不单独拎出来优化。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在特定场景下，使用Unsafe能显著提高Java程序与C++的交互性能。</p>
-<p>但我觉得更重要的是，使用Unsafe使得Java具有了直接去操作内存的能力，这就解放了JNI调用的束缚，可以直接通过指针的方式来交互。这在异构系统的层次划分和接口设计上是会有相当大的影响的。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Netty的FastThreadLocal带来了什么？</title>
-    <url>/2024/09/13/14-49-51/</url>
-    <content><![CDATA[<p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
-<span id="more"></span>
-
-<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
-<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
-<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
-<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
-<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
-<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
-<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
-<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
-<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
-<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
-<p>然后再来聊聊其中的实现。</p>
-<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
-<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
-<p>它的get()过程是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
-
-<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
-<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
-<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
-
-<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
-<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
-<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
-<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
-<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
-<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
-<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
-]]></content>
-      <tags>
-        <tag>【工作】Netty</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java反射调用的优化</title>
     <url>/2023/05/04/10-44-04/</url>
     <content><![CDATA[<p>effective java中曾言，避免反射的最好方式是定义接口。但反射是orm框架中不得不使用的能力，这次对反射的操作做了一次性能优化。</p>
@@ -183,6 +92,58 @@
       </tags>
   </entry>
   <entry>
+    <title>JNI调用的优化</title>
+    <url>/2023/12/19/17-55-26/</url>
+    <content><![CDATA[<p>在今年11月，我接到一个封装JNI的task。这次对接的是C++实现的内存数据库，性能要求实在太高了，只能采取一些不同寻常的方式来做JNI层调用优化。这里记录一下我的优化思路。</p>
+<span id="more"></span>
+
+<h2 id="传统的优化方式"><a href="#传统的优化方式" class="headerlink" title="传统的优化方式"></a>传统的优化方式</h2><p>首先，我这里给出JNI的官方手册：<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html">https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html</a></p>
+<p>Java本身已经提供了相当数量的接口用于JNI开发，一般来说是够用了。但在低时延或频繁调用的场景，JNI层的性能损耗还是不能忽视的。</p>
+<p>在传统的优化方式中，最常提到的就是缓存方法ID、字段ID和类。通过<code>GetFieldID</code>或<code>GetMethodID</code>获取到的指针（或者说句柄），在JVM的全生命周期都是可用的，因此完全可以把它们缓存起来。每次调用时如果都去获取一遍，会有相当大的性能损耗。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int sumValues2(JNIEnv∗ env, jobject obj, jobject allValues)&#123;</span><br><span class="line">   // 这些都可以缓存</span><br><span class="line">   jclass cls = (∗env)‑&gt;GetObjectClass(env,allValues);</span><br><span class="line">   jfieldID a = (∗env)‑&gt;GetFieldID(env, cls, &quot;a&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID b = (∗env)‑&gt;GetFieldID(env, cls, &quot;b&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID c = (∗env)‑&gt;GetFieldID(env, cls, &quot;c&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID d = (∗env)‑&gt;GetFieldID(env, cls, &quot;d&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID e = (∗env)‑&gt;GetFieldID(env, cls, &quot;e&quot;, &quot;I&quot;);</span><br><span class="line">   jfieldID f = (∗env)‑&gt;GetFieldID(env, cls, &quot;f&quot;, &quot;I&quot;);</span><br><span class="line">   // 调用时如果是通过缓存的句柄来调用，就不用每次都get一遍句柄，可以大大提升性能</span><br><span class="line">   jint avalue = (∗env)‑&gt;GetIntField(env, allValues, a);</span><br><span class="line">   jint bvalue = (∗env)‑&gt;GetIntField(env, allValues, b);</span><br><span class="line">   jint cvalue = (∗env)‑&gt;GetIntField(env, allValues, c);</span><br><span class="line">   jint dvalue = (∗env)‑&gt;GetIntField(env, allValues, d);</span><br><span class="line">   jint evalue = (∗env)‑&gt;GetIntField(env, allValues, e);</span><br><span class="line">   jint fvalue = (∗env)‑&gt;GetIntField(env, allValues, f);</span><br><span class="line">   return avalue + bvalue + cvalue + dvalue + evalue + fvalue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至于其他的方式，基本没有像缓存句柄这样显著的提升了。这些优化方式可以在百度中搜索IBM+最佳实践的关键字找到。原文链接的话在这：<a href="https://developer.ibm.com/articles/j-jni/">https://developer.ibm.com/articles/j-jni/</a></p>
+<h2 id="新的优化方式"><a href="#新的优化方式" class="headerlink" title="新的优化方式"></a>新的优化方式</h2><p>上述的文章是2009年发表，至今（2023年）已经过去了14年。时代在进步，经过这么多年的实践和探索，在性能调优这方面，大家有了新的思路和手段。</p>
+<p>这里我不得不提一句，FastJSON2给了我很大的帮助，在阅读其源码的过程中，我也尝试着把它的一些优秀实现迁移到我的工作项目中来。</p>
+<h3 id="使用Unsafe构建结构体"><a href="#使用Unsafe构建结构体" class="headerlink" title="使用Unsafe构建结构体"></a>使用Unsafe构建结构体</h3><p>某些情况下，可以通过构建结构体来与JNI层通讯。需要强调的是，这种操作在大部分时候都不会有很好的效果。</p>
+<p>只有少数场合——尤其是想复用一个已经存在的C++程序的能力时，才可能有些用处。</p>
+<p>通过构建结构体，最大的好处是，使得JNI接口可以传递指针了。</p>
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 查询</span><br><span class="line"> *</span><br><span class="line"> * @param record      结构体指针</span><br><span class="line"> * @return 查询结果</span><br><span class="line"> */</span><br><span class="line">public native long select(long record);</span><br></pre></td></tr></table></figure>
+
+<p>上面这个接口，我们通过传递了一个结构体指针。</p>
+<p>查询条件我们写到这个结构体里，C++拿着结构体中的条件数据去查询，查完了再把结果写到原来的结构体内，最后Java解析这个结构体，封装为Java对象传回上层。</p>
+<p>上面这事说起来简单，但其实已经经过了Java对象到结构体，结构体再转回Java对象的序列化和反序列化两个处理。</p>
+<p>通过传递指针，可以让C++的JNI这一层变得非常简单，很多时候都是透传，直接去调用原生的接口了。</p>
+<p>实际写代码的时候，这部分逻辑会变得相当抽象，下面给个示例的硬编码代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">long pointer = UNSAFE.allocateMemory(32);</span><br><span class="line">// pointer是内存块的起始地址</span><br><span class="line">long offset = pointer;</span><br><span class="line">// 正常模式、备用模式(只读方式) 4</span><br><span class="line">UNSAFE.putInt(offset, instance.getRunType());</span><br><span class="line">offset += 4;</span><br><span class="line">// 补齐 8</span><br><span class="line">offset += 4;</span><br><span class="line">// 内存数据库大小 16</span><br><span class="line">UNSAFE.putLong(offset, instance.getDbSize());</span><br><span class="line">offset += 8;</span><br><span class="line">// 内存数据库事务日志大小 24</span><br><span class="line">UNSAFE.putLong(offset, instance.getRedoLogSize());</span><br><span class="line">offset += 8;</span><br><span class="line">// 内存数据库事务日志文件数量 28</span><br><span class="line">UNSAFE.putInt(offset, instance.getRedoLogNum());</span><br><span class="line">offset += 4;</span><br><span class="line">// 补齐 32</span><br><span class="line">offset += 4;</span><br></pre></td></tr></table></figure>
+
+<p>还得考虑内存对齐，编码体验确实不太好，但确实性能上是满足了现在的需求。</p>
+<p>基于这种逻辑，我实现了一种通用的结构体创建方式，但是很遗憾由于保密协议我不能在此分享。</p>
+<p>性能上来说：硬编码&gt;通用。</p>
+<p>因为内存数据库存储的数据行是由Java对象转换过来的，所以必须有一种通用的结构体转换方式，这写的时候还是废了我不少功夫的。</p>
+<h3 id="字符串序列化优化"><a href="#字符串序列化优化" class="headerlink" title="字符串序列化优化"></a>字符串序列化优化</h3><p>正常在JNI层，如果需要使用Java传递的字符串，我们会使用以下的方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;jni.h&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot; JNIEXPORT void JNICALL</span><br><span class="line">Java_MyJNIClass_nativeDoSomething(JNIEnv *env, jobject obj, jstring str) &#123;</span><br><span class="line">    const char *data = env-&gt;GetStringUTFChars(str, NULL);</span><br><span class="line">    // 使用data处理Java字符串</span><br><span class="line">    // ...</span><br><span class="line">    env-&gt;ReleaseStringUTFChars(str, data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际测试之后，发现这个GetStringUTFChars方法还是有些性能损耗的。</p>
+<p>那么，有没有办法避免这种字符串转码的性能损耗呢？答案是肯定的。</p>
+<p>还是利用Unsafe的能力，我们在Java中可以做到内存拷贝。</p>
+<p>通过直接把String中的char数组内存拷贝到一个固定的内存块上，我们就可以避免序列化，直接把数据传递给了JNI层。</p>
+<p>甚至，如果可以保证JNI层不会修改字符串的数据，我们可以再次优化，直接将char数组的指针传给C++程序。</p>
+<p>以下是代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">   * 存入字符串</span><br><span class="line">   *</span><br><span class="line">   * @param pointer 指针</span><br><span class="line">   * @param size    长度</span><br><span class="line">   * @param value  字符串</span><br><span class="line">   */</span><br><span class="line">  public static void putString(long pointer, long size, String value) &#123;</span><br><span class="line">      // size必须为偶数</span><br><span class="line">      char[] valueChars = StringOptimizer.getCharArray(value);</span><br><span class="line">      long length = (long) valueChars.length &lt;&lt; 1;</span><br><span class="line">      if (length &gt; size) &#123;</span><br><span class="line">          UNSAFE.copyMemory(valueChars, Unsafe.ARRAY_CHAR_BASE_OFFSET, null, pointer, size);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          char[] chars = new char[(int) size &gt;&gt; 1];</span><br><span class="line">          System.arraycopy(valueChars, 0, chars, 0, valueChars.length);</span><br><span class="line">          UNSAFE.copyMemory(chars, Unsafe.ARRAY_CHAR_BASE_OFFSET, null, pointer, size);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>解释一下，StringOptimizer是一个工具类，使用Unsafe类去直接获取字符串中的char数组。由于java9对String字符串有重写，需要在启动时就进行判断jdk版本，不同版本会有不同的实现。为了方便使用，这里单独抽了一个工具类出来。</p>
+<p>另外，由于Unsafe工具类申请的内存可能含有脏数据，需要申请者手动置0或者覆盖。由于字符串的长度可能小于申请的内存块，所以先拷贝到一个长度与内存块相同的char数组中，再把这个char数据内存拷贝到内存块中，这样就避免了手动置0的操作。</p>
+<p>字符串在Java中的使用实在是过于频繁了，毕竟好用嘛。在C++中字符串用起来比Java要麻烦很多，这也导致在JNI优化的时候，字符串不得不单独拎出来优化。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在特定场景下，使用Unsafe能显著提高Java程序与C++的交互性能。</p>
+<p>但我觉得更重要的是，使用Unsafe使得Java具有了直接去操作内存的能力，这就解放了JNI调用的束缚，可以直接通过指针的方式来交互。这在异构系统的层次划分和接口设计上是会有相当大的影响的。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>内存分析记录手册</title>
     <url>/2023/06/12/13-46-18/</url>
     <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
@@ -211,71 +172,40 @@
       </tags>
   </entry>
   <entry>
-    <title>Unsafe的使用记录</title>
-    <url>/2024/01/07/11-15-32/</url>
-    <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
+    <title>双重锁和CAS</title>
+    <url>/2024/02/18/13-47-01/</url>
+    <content><![CDATA[<p>这次来聊聊多线程场景的二次确认机制。</p>
 <span id="more"></span>
 
-<h2 id="什么是Unsafe"><a href="#什么是Unsafe" class="headerlink" title="什么是Unsafe"></a>什么是Unsafe</h2><p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
+<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>在做一些变量的初始化时，我会有如下的实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">private volatile Class&lt;?&gt; rowType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取缓存存储对象的类型</span><br><span class="line"> *</span><br><span class="line"> * @return 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">public Class&lt;?&gt; rowType() &#123;</span><br><span class="line">    if (rowType == null) &#123;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            if (rowType == null) &#123;</span><br><span class="line">                // todo 这里是初始化rowType的逻辑</span><br><span class="line">             </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return rowType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
-<p>为何如此？</p>
-<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
-<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
-<h2 id="使用Unsafe"><a href="#使用Unsafe" class="headerlink" title="使用Unsafe"></a>使用Unsafe</h2><p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>这种写法，我最初是在Protobuf生成的代码中看到的，后来查阅了一下，这种逻辑叫双重锁。</p>
+<p>或者说，叫双重检查模式，是一种软件的设计模式。</p>
+<p>而我在写一些其他的代码时，往往也会使用类似这种模式的方式。用多了以后，我觉得可以分析一下其中的道理。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>双重锁的逻辑是两次检查：首先验证锁定条件(第一次检查)，只有通过锁定条件验证才真正的进行加锁逻辑并再次验证条件(第二次检查)。</p>
+<p>那么，如果中间的锁定操作，我们改成一个计算过程，在最后赋值之前做二次检查，是否也是可以的呢？</p>
+<p>答案是肯定的。下面给个伪代码说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">int b = a;</span><br><span class="line">// 第一次检查</span><br><span class="line">if (a == b) &#123;</span><br><span class="line">  // 上锁</span><br><span class="line">  lock.lock();</span><br><span class="line">  // 第二次检查</span><br><span class="line">  if (a == b) &#123;</span><br><span class="line">  	// 计算操作</span><br><span class="line">		int c = b + 1；</span><br><span class="line">  	// 赋值</span><br><span class="line">  	a = c;</span><br><span class="line">  &#125;</span><br><span class="line">  lock.unLock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>但是也不麻烦，我们可以使用如下代码获取到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可是这样就太重了，要知道，有些时候，加锁的成本也很高。使用双重锁仅仅是能避免锁定中的操作多次重复，但是没有从根本上避免锁，所有的操作还是在锁中进行的，这就没有很好地发挥多线程的优势。</p>
+<p>那么优化一下，把这个锁去掉，只在计算结束后进行一次检查，是否可行呢？答案也是肯定的，这样就变成了乐观锁+自旋锁的结合。伪代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">// 自旋</span><br><span class="line">for (;;) &#123;</span><br><span class="line">	int b = a;</span><br><span class="line">	// 计算操作</span><br><span class="line">	int c = b + 1；</span><br><span class="line">	// 第一次检查</span><br><span class="line">	if (b == a) &#123;</span><br><span class="line">		// 赋值</span><br><span class="line">		a = c;</span><br><span class="line">		// 第二次检查</span><br><span class="line">		if (a == c) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
-<h2 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h2><p>要说Unsafe提供最大的能力，就是内存操作了。</p>
-<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
-<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
-<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
-<p>那么我们看一下实际怎么操作内存：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
-
-<p>这种操作，几乎和C++程序是一致的了。</p>
-<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
-<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
-<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
-
-<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
-<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
-<p>首先来看一个Java对象的内存结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
-
-<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
-<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
-<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
-<p>下面看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
-<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
-<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
-<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
-<p>下面简单看一个api：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
-
-<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
-<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
-<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
-<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>还是要额外提一下关于Unsafe的版本支持问题。</p>
-<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
-<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
-<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
-<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
+<p>可以看到锁被去掉了，这样并发时性能会远优于加锁。这就是CAS机制。</p>
+<p>但是这里的CAS机制还不够，并不能保证极端情况下的线程安全。因为还有指令重排序的问题。</p>
+<p>为了解决指令重排序的问题，需要在特定的变量上添加volatile注解。</p>
+<p>在高性能场景下，CAS是一种非常优秀的机制，有以下优点：</p>
+<ol>
+<li>高效性：CAS 操作不需要加锁，因此可以避免加锁操作所带来的性能开销。</li>
+<li>原子性：CAS 操作是原子的，因此可以保证操作的一致性。</li>
+<li>无阻塞：CAS 操作不会阻塞线程，因此可以避免线程的切换和上下文切换带来的开销。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>双重锁的方式，一般是用于初始化的场景，是用来避免某个代码块执行两次的。</p>
+<p>而在此基础上我们推演出自旋锁+乐观锁的方式，这样能实现无锁并发，这就是CAS机制。</p>
 ]]></content>
       <tags>
-        <tag>【工作】Java底层原理</tag>
+        <tag>【工作】多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -315,37 +245,76 @@
       </tags>
   </entry>
   <entry>
-    <title>双重锁和CAS</title>
-    <url>/2024/02/18/13-47-01/</url>
-    <content><![CDATA[<p>这次来聊聊多线程场景的二次确认机制。</p>
+    <title>我是怎么使用线程池的</title>
+    <url>/2023/09/25/17-37-38/</url>
+    <content><![CDATA[<p>这是一份线程池的使用说明文档。</p>
+<p>我会举例我在实际项目对线程池的用法，来说明我是如何使用线程池来达成目的。</p>
 <span id="more"></span>
 
-<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>在做一些变量的初始化时，我会有如下的实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">private volatile Class&lt;?&gt; rowType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取缓存存储对象的类型</span><br><span class="line"> *</span><br><span class="line"> * @return 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">public Class&lt;?&gt; rowType() &#123;</span><br><span class="line">    if (rowType == null) &#123;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            if (rowType == null) &#123;</span><br><span class="line">                // todo 这里是初始化rowType的逻辑</span><br><span class="line">             </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return rowType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="简单的说明"><a href="#简单的说明" class="headerlink" title="简单的说明"></a>简单的说明</h2><p>首先给出声明的方法，也就是线程池的构造器。</p>
+<img src="/2023/09/25/17-37-38/image-20230926151418320.png" class="" title="image-20230926151418320">
 
-<p>这种写法，我最初是在Protobuf生成的代码中看到的，后来查阅了一下，这种逻辑叫双重锁。</p>
-<p>或者说，叫双重检查模式，是一种软件的设计模式。</p>
-<p>而我在写一些其他的代码时，往往也会使用类似这种模式的方式。用多了以后，我觉得可以分析一下其中的道理。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>双重锁的逻辑是两次检查：首先验证锁定条件(第一次检查)，只有通过锁定条件验证才真正的进行加锁逻辑并再次验证条件(第二次检查)。</p>
-<p>那么，如果中间的锁定操作，我们改成一个计算过程，在最后赋值之前做二次检查，是否也是可以的呢？</p>
-<p>答案是肯定的。下面给个伪代码说明：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">int b = a;</span><br><span class="line">// 第一次检查</span><br><span class="line">if (a == b) &#123;</span><br><span class="line">  // 上锁</span><br><span class="line">  lock.lock();</span><br><span class="line">  // 第二次检查</span><br><span class="line">  if (a == b) &#123;</span><br><span class="line">  	// 计算操作</span><br><span class="line">		int c = b + 1；</span><br><span class="line">  	// 赋值</span><br><span class="line">  	a = c;</span><br><span class="line">  &#125;</span><br><span class="line">  lock.unLock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>corePoolSize：线程池中一直存活的线程数量</p>
+</li>
+<li><p>maximunPoolSize：线程池中最多存活的线程数量</p>
+</li>
+<li><p>keepAliveTime：当存活线程数量大于核心线程数量时，多余线程的存活时间，空闲时间超过这个数值则销毁线程</p>
+</li>
+<li><p>unit：时间单位</p>
+</li>
+<li><p>workQueue：工作队列，必须是阻塞的</p>
+</li>
+<li><p>threadFactory：线程工厂，用于新建线程时给线程添加一些配置。最常用的就是设置线程名。</p>
+</li>
+<li><p>handler：当任务被拒绝时的后续处理。默认实现是任务被拒绝时会抛出一个异常。</p>
+</li>
+</ul>
+<p>线程池还有很多构造器，其他构造器大多是封装了一些默认实现，比如给了默认的threadFactory或者handler。</p>
+<hr>
+<p>线程池有一个很反直觉的逻辑：只有任务队列满之后，才会创建新线程。</p>
+<p>为什么这么设计？我们只需要记住：创建线程、销毁线程是一个性能开销很大的工作，我们应该尽量复用线程。</p>
+<p>因此，<strong>除非任务队列已满，否则都不会创建线程</strong>。</p>
+<p>下面来看一个实际使用时线程池的声明。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 10, TimeUnit.SECONDS, new ArrayBlockingQueue(1), r -&gt; new Thread(r, &quot;cache-clean-thread&quot;), new ThreadPoolExecutor.DiscardOldestPolicy());</span><br></pre></td></tr></table></figure>
 
-<p>可是这样就太重了，要知道，有些时候，加锁的成本也很高。使用双重锁仅仅是能避免锁定中的操作多次重复，但是没有从根本上避免锁，所有的操作还是在锁中进行的，这就没有很好地发挥多线程的优势。</p>
-<p>那么优化一下，把这个锁去掉，只在计算结束后进行一次检查，是否可行呢？答案也是肯定的，这样就变成了乐观锁+自旋锁的结合。伪代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">// 自旋</span><br><span class="line">for (;;) &#123;</span><br><span class="line">	int b = a;</span><br><span class="line">	// 计算操作</span><br><span class="line">	int c = b + 1；</span><br><span class="line">	// 第一次检查</span><br><span class="line">	if (b == a) &#123;</span><br><span class="line">		// 赋值</span><br><span class="line">		a = c;</span><br><span class="line">		// 第二次检查</span><br><span class="line">		if (a == c) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们来模拟一下这个线程池的处理逻辑，假设有耗时很长的任务：</p>
+<ul>
+<li><p>第一个任务来到线程池，任务直接由核心线程执行。</p>
+</li>
+<li><p>第二个任务来到线程池，没有空闲线程，进入任务队列。</p>
+</li>
+<li><p>第三个任务来到线程池，没有空闲线程，任务队列也满了。这时候假如最大线程数大于核心线程数，则应该要创建一个新线程来执行任务，而当前任务则进入任务队列。但是我们不允许创建更多的线程，于是这个任务会被拒绝，进入handler的后置处理逻辑。我们直接使用了<code>new ThreadPoolExecutor.DiscardOldestPolicy()</code>作为后置处理逻辑，这个方法会移除最老的任务，然后把当前任务放到队列末尾。于是这个任务进入队列，最老的任务被移除，由于刚好我们队列为1，所以结果就是正在等待的任务被新来的任务替换了。</p>
+</li>
+</ul>
+<p>可以看到，线程池处理的关键是workQueue，threadFactory和handler这三个参数，通过设定这三个参数，我们可以把线程池玩出各种花样来。</p>
+<p>接下来的章节，就主要针对线程池的使用了。</p>
+<h2 id="线程池的使用"><a href="#线程池的使用" class="headerlink" title="线程池的使用"></a>线程池的使用</h2><h3 id="命名规定"><a href="#命名规定" class="headerlink" title="命名规定"></a>命名规定</h3><p>我们要求使用线程池时必须重写threadFactory来命名线程。在命名线程时说明线程大概要处理的任务，可以有效提高后续通过日志排查问题的效率。</p>
+<p>以下是命名的示例</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 创建读线程池</span><br><span class="line"> */</span><br><span class="line">private static final ThreadPoolExecutor READ_EXECUTOR = </span><br><span class="line">	new ThreadPoolExecutor(4, 4, 30, TimeUnit.SECONDS, </span><br><span class="line">		new LinkedBlockingQueue(400), </span><br><span class="line">		new ThreadFactory() &#123;</span><br><span class="line">			private final AtomicInteger threadNumber = new AtomicInteger(1);</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			public Thread newThread(Runnable r) &#123;</span><br><span class="line">				return new Thread(r, &quot;cache-read-thread-&quot; + threadNumber.getAndIncrement());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>可以看到锁被去掉了，这样并发时性能会远优于加锁。这就是CAS机制。</p>
-<p>但是这里的CAS机制还不够，并不能保证极端情况下的线程安全。因为还有指令重排序的问题。</p>
-<p>为了解决指令重排序的问题，需要在特定的变量上添加volatile注解。</p>
-<p>在高性能场景下，CAS是一种非常优秀的机制，有以下优点：</p>
-<ol>
-<li>高效性：CAS 操作不需要加锁，因此可以避免加锁操作所带来的性能开销。</li>
-<li>原子性：CAS 操作是原子的，因此可以保证操作的一致性。</li>
-<li>无阻塞：CAS 操作不会阻塞线程，因此可以避免线程的切换和上下文切换带来的开销。</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>双重锁的方式，一般是用于初始化的场景，是用来避免某个代码块执行两次的。</p>
-<p>而在此基础上我们推演出自旋锁+乐观锁的方式，这样能实现无锁并发，这就是CAS机制。</p>
+<h3 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h3><p>有两个方法：excuse和submit</p>
+<p>区别在于submit之后可以获得一个Future，在后续逻辑中监控任务是否执行完，并获得其堆栈。</p>
+<p>excuse方法执行完之后当前线程就无法感知这个任务是否执行完了，这在大多数情况下是不可接受的。</p>
+<p>一般是建议使用submit。</p>
+<p>案例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Runnable writeTask1 = () -&gt; &#123;</span><br><span class="line">// do something</span><br><span class="line">&#125;;</span><br><span class="line">Runnable writeTask2 = () -&gt; &#123;</span><br><span class="line">// do something</span><br><span class="line">&#125;;</span><br><span class="line">int writeThreadCount = 4;</span><br><span class="line">Future[] writeFutures = new Future[writeThreadCount];</span><br><span class="line">// 提交任务到线程池</span><br><span class="line">for (int i = 0; i &lt; writeThreadCount; i++) &#123;</span><br><span class="line">	writeFutures[i] = WRITE_EXECUTOR.submit(i % 2 == 0 ? writeTask1 : writeTask2);</span><br><span class="line">&#125;        </span><br><span class="line">// 等待所有线程执行完毕</span><br><span class="line">for (Future future : writeFutures) &#123;</span><br><span class="line">	future.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h3><p>一般来说，拒绝策略可以通过设置workQueue和handler两种方式来修改。</p>
+<p>ThreadPoolExecutor中已提供了四种内置策略，已经覆盖了绝大部分场景</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 在当前线程执行任务</span><br><span class="line">new ThreadPoolExecutor.CallerRunsPolicy()</span><br><span class="line">// 抛出任务被拒绝的异常</span><br><span class="line">new ThreadPoolExecutor.AbortPolicy()</span><br><span class="line">// 忽略最新提交的任务</span><br><span class="line">new ThreadPoolExecutor.DiscardPolicy()</span><br><span class="line">// 忽略最老提交的任务</span><br><span class="line">new ThreadPoolExecutor.DiscardOldestPolicy()</span><br></pre></td></tr></table></figure>
+
+<p>以下列举两种特殊的策略</p>
+<h4 id="不拒绝任何任务"><a href="#不拒绝任何任务" class="headerlink" title="不拒绝任何任务"></a>不拒绝任何任务</h4><p>不希望有任何任务被拒绝，需要设置workQueue为LinkedBlockingQueue，并且不设置长度限制。但要注意人物堆积时可能导致内存溢出。</p>
+<p>同时，由于线程池的创建线程只发生在任务队列已满时，这种用链表作为workQueue的线程池将不会创建任何新的线程。</p>
+<p>以下是示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final ThreadPoolExecutor notifyExecutor =</span><br><span class="line">        new ThreadPoolExecutor(5, 5, 10, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(),</span><br><span class="line">            new ThreadPoolExecutor.AbortPolicy());</span><br></pre></td></tr></table></figure>
+
+<p>由于没有任何任务被拒绝，handler其实也没有什么用了。</p>
+<h4 id="任务溢出时让工作线程参与任务，且保证顺序"><a href="#任务溢出时让工作线程参与任务，且保证顺序" class="headerlink" title="任务溢出时让工作线程参与任务，且保证顺序"></a>任务溢出时让工作线程参与任务，且保证顺序</h4><p>这是一种特殊情况下出现的需求，要求任务能保持一个大概的顺序（有时间戳），且数据不能丢失。</p>
+<p>下面是代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final ThreadPoolExecutor NOTIFY_EXECUTOR =</span><br><span class="line">    new ThreadPoolExecutor(1, 1, 10, TimeUnit.SECONDS, new ArrayBlockingQueue&lt;&gt;(5000),</span><br><span class="line">        r -&gt; new Thread(r, &quot;cache-tx-notify-thread&quot;), (r, e) -&gt; &#123;</span><br><span class="line">        // 把最老的任务拿出来在当前线程执行，把新任务放到队列里</span><br><span class="line">        // 用来保证任务的顺序性</span><br><span class="line">        if (!e.isShutdown()) &#123;</span><br><span class="line">            Runnable oldTask = e.getQueue().poll();</span><br><span class="line">            e.execute(r);</span><br><span class="line">            oldTask.run();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <tags>
         <tag>【工作】多线程</tag>
@@ -427,79 +396,37 @@
       </tags>
   </entry>
   <entry>
-    <title>我是怎么使用线程池的</title>
-    <url>/2023/09/25/17-37-38/</url>
-    <content><![CDATA[<p>这是一份线程池的使用说明文档。</p>
-<p>我会举例我在实际项目对线程池的用法，来说明我是如何使用线程池来达成目的。</p>
+    <title>老年代大对象的问题排查</title>
+    <url>/2023/05/05/10-26-55/</url>
+    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
 <span id="more"></span>
 
-<h2 id="简单的说明"><a href="#简单的说明" class="headerlink" title="简单的说明"></a>简单的说明</h2><p>首先给出声明的方法，也就是线程池的构造器。</p>
-<img src="/2023/09/25/17-37-38/image-20230926151418320.png" class="" title="image-20230926151418320">
-
-<ul>
-<li><p>corePoolSize：线程池中一直存活的线程数量</p>
-</li>
-<li><p>maximunPoolSize：线程池中最多存活的线程数量</p>
-</li>
-<li><p>keepAliveTime：当存活线程数量大于核心线程数量时，多余线程的存活时间，空闲时间超过这个数值则销毁线程</p>
-</li>
-<li><p>unit：时间单位</p>
-</li>
-<li><p>workQueue：工作队列，必须是阻塞的</p>
-</li>
-<li><p>threadFactory：线程工厂，用于新建线程时给线程添加一些配置。最常用的就是设置线程名。</p>
-</li>
-<li><p>handler：当任务被拒绝时的后续处理。默认实现是任务被拒绝时会抛出一个异常。</p>
-</li>
-</ul>
-<p>线程池还有很多构造器，其他构造器大多是封装了一些默认实现，比如给了默认的threadFactory或者handler。</p>
-<hr>
-<p>线程池有一个很反直觉的逻辑：只有任务队列满之后，才会创建新线程。</p>
-<p>为什么这么设计？我们只需要记住：创建线程、销毁线程是一个性能开销很大的工作，我们应该尽量复用线程。</p>
-<p>因此，<strong>除非任务队列已满，否则都不会创建线程</strong>。</p>
-<p>下面来看一个实际使用时线程池的声明。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 10, TimeUnit.SECONDS, new ArrayBlockingQueue(1), r -&gt; new Thread(r, &quot;cache-clean-thread&quot;), new ThreadPoolExecutor.DiscardOldestPolicy());</span><br></pre></td></tr></table></figure>
-
-<p>我们来模拟一下这个线程池的处理逻辑，假设有耗时很长的任务：</p>
-<ul>
-<li><p>第一个任务来到线程池，任务直接由核心线程执行。</p>
-</li>
-<li><p>第二个任务来到线程池，没有空闲线程，进入任务队列。</p>
-</li>
-<li><p>第三个任务来到线程池，没有空闲线程，任务队列也满了。这时候假如最大线程数大于核心线程数，则应该要创建一个新线程来执行任务，而当前任务则进入任务队列。但是我们不允许创建更多的线程，于是这个任务会被拒绝，进入handler的后置处理逻辑。我们直接使用了<code>new ThreadPoolExecutor.DiscardOldestPolicy()</code>作为后置处理逻辑，这个方法会移除最老的任务，然后把当前任务放到队列末尾。于是这个任务进入队列，最老的任务被移除，由于刚好我们队列为1，所以结果就是正在等待的任务被新来的任务替换了。</p>
-</li>
-</ul>
-<p>可以看到，线程池处理的关键是workQueue，threadFactory和handler这三个参数，通过设定这三个参数，我们可以把线程池玩出各种花样来。</p>
-<p>接下来的章节，就主要针对线程池的使用了。</p>
-<h2 id="线程池的使用"><a href="#线程池的使用" class="headerlink" title="线程池的使用"></a>线程池的使用</h2><h3 id="命名规定"><a href="#命名规定" class="headerlink" title="命名规定"></a>命名规定</h3><p>我们要求使用线程池时必须重写threadFactory来命名线程。在命名线程时说明线程大概要处理的任务，可以有效提高后续通过日志排查问题的效率。</p>
-<p>以下是命名的示例</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 创建读线程池</span><br><span class="line"> */</span><br><span class="line">private static final ThreadPoolExecutor READ_EXECUTOR = </span><br><span class="line">	new ThreadPoolExecutor(4, 4, 30, TimeUnit.SECONDS, </span><br><span class="line">		new LinkedBlockingQueue(400), </span><br><span class="line">		new ThreadFactory() &#123;</span><br><span class="line">			private final AtomicInteger threadNumber = new AtomicInteger(1);</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			public Thread newThread(Runnable r) &#123;</span><br><span class="line">				return new Thread(r, &quot;cache-read-thread-&quot; + threadNumber.getAndIncrement());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h3><p>有两个方法：excuse和submit</p>
-<p>区别在于submit之后可以获得一个Future，在后续逻辑中监控任务是否执行完，并获得其堆栈。</p>
-<p>excuse方法执行完之后当前线程就无法感知这个任务是否执行完了，这在大多数情况下是不可接受的。</p>
-<p>一般是建议使用submit。</p>
-<p>案例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Runnable writeTask1 = () -&gt; &#123;</span><br><span class="line">// do something</span><br><span class="line">&#125;;</span><br><span class="line">Runnable writeTask2 = () -&gt; &#123;</span><br><span class="line">// do something</span><br><span class="line">&#125;;</span><br><span class="line">int writeThreadCount = 4;</span><br><span class="line">Future[] writeFutures = new Future[writeThreadCount];</span><br><span class="line">// 提交任务到线程池</span><br><span class="line">for (int i = 0; i &lt; writeThreadCount; i++) &#123;</span><br><span class="line">	writeFutures[i] = WRITE_EXECUTOR.submit(i % 2 == 0 ? writeTask1 : writeTask2);</span><br><span class="line">&#125;        </span><br><span class="line">// 等待所有线程执行完毕</span><br><span class="line">for (Future future : writeFutures) &#123;</span><br><span class="line">	future.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h3><p>一般来说，拒绝策略可以通过设置workQueue和handler两种方式来修改。</p>
-<p>ThreadPoolExecutor中已提供了四种内置策略，已经覆盖了绝大部分场景</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 在当前线程执行任务</span><br><span class="line">new ThreadPoolExecutor.CallerRunsPolicy()</span><br><span class="line">// 抛出任务被拒绝的异常</span><br><span class="line">new ThreadPoolExecutor.AbortPolicy()</span><br><span class="line">// 忽略最新提交的任务</span><br><span class="line">new ThreadPoolExecutor.DiscardPolicy()</span><br><span class="line">// 忽略最老提交的任务</span><br><span class="line">new ThreadPoolExecutor.DiscardOldestPolicy()</span><br></pre></td></tr></table></figure>
-
-<p>以下列举两种特殊的策略</p>
-<h4 id="不拒绝任何任务"><a href="#不拒绝任何任务" class="headerlink" title="不拒绝任何任务"></a>不拒绝任何任务</h4><p>不希望有任何任务被拒绝，需要设置workQueue为LinkedBlockingQueue，并且不设置长度限制。但要注意人物堆积时可能导致内存溢出。</p>
-<p>同时，由于线程池的创建线程只发生在任务队列已满时，这种用链表作为workQueue的线程池将不会创建任何新的线程。</p>
-<p>以下是示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final ThreadPoolExecutor notifyExecutor =</span><br><span class="line">        new ThreadPoolExecutor(5, 5, 10, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(),</span><br><span class="line">            new ThreadPoolExecutor.AbortPolicy());</span><br></pre></td></tr></table></figure>
-
-<p>由于没有任何任务被拒绝，handler其实也没有什么用了。</p>
-<h4 id="任务溢出时让工作线程参与任务，且保证顺序"><a href="#任务溢出时让工作线程参与任务，且保证顺序" class="headerlink" title="任务溢出时让工作线程参与任务，且保证顺序"></a>任务溢出时让工作线程参与任务，且保证顺序</h4><p>这是一种特殊情况下出现的需求，要求任务能保持一个大概的顺序（有时间戳），且数据不能丢失。</p>
-<p>下面是代码示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final ThreadPoolExecutor NOTIFY_EXECUTOR =</span><br><span class="line">    new ThreadPoolExecutor(1, 1, 10, TimeUnit.SECONDS, new ArrayBlockingQueue&lt;&gt;(5000),</span><br><span class="line">        r -&gt; new Thread(r, &quot;cache-tx-notify-thread&quot;), (r, e) -&gt; &#123;</span><br><span class="line">        // 把最老的任务拿出来在当前线程执行，把新任务放到队列里</span><br><span class="line">        // 用来保证任务的顺序性</span><br><span class="line">        if (!e.isShutdown()) &#123;</span><br><span class="line">            Runnable oldTask = e.getQueue().poll();</span><br><span class="line">            e.execute(r);</span><br><span class="line">            oldTask.run();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-
+<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
+<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
+<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
+<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
+<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
+<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
+<blockquote>
+<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
+</blockquote>
+<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
+<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
+<blockquote>
+<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
+<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
+</blockquote>
+<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
+<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
+<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
+<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
+<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
+<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
 ]]></content>
       <tags>
-        <tag>【工作】多线程</tag>
+        <tag>【工作】性能调优</tag>
       </tags>
   </entry>
   <entry>
@@ -603,40 +530,6 @@
       </tags>
   </entry>
   <entry>
-    <title>老年代大对象的问题排查</title>
-    <url>/2023/05/05/10-26-55/</url>
-    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
-<span id="more"></span>
-
-<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
-<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
-<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
-<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
-<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
-<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
-<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
-<blockquote>
-<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
-</blockquote>
-<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
-<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
-<blockquote>
-<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
-<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
-</blockquote>
-<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
-<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
-<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
-<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
-<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
-<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>用浏览器发送POST请求</title>
     <url>/2023/09/27/15-25-40/</url>
     <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
@@ -654,6 +547,182 @@
 ]]></content>
       <tags>
         <tag>【工作】优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-数据库</title>
+    <url>/2024/10/14/13-48-06/</url>
+    <content><![CDATA[<p>这里记录一下面试的准备过程中关于数据库的笔记。</p>
+<p>原先工作中对数据库的使用实在是太少了…写个可运行的SQL都有些困难。</p>
+<span id="more"></span>
+
+<h3 id="三范式"><a href="#三范式" class="headerlink" title="三范式"></a>三范式</h3><p>第一范式：列不可再分；</p>
+<p>第二范式：表中的每一行都可以唯一区分，通过主键实现；</p>
+<p>第三范式：（用于避免数据冗余，减少内存占用，实践中常被忽视）表的非主键字段不能依赖于其他非主键字段；比如学生表，里边有班级名称字段和辅导员名称字段，那么班级和辅导员会大量重复，应当拆分出班级表和辅导员表。</p>
+<h3 id="MySQL的存储引擎"><a href="#MySQL的存储引擎" class="headerlink" title="MySQL的存储引擎"></a>MySQL的存储引擎</h3><p>MyISAM、InnoDB、Memory</p>
+<p>MyISAM：全表锁，没有事务和外键，单表执行性能高，并发性能差，空间占用小。</p>
+<p>InnoDB：行锁，有事务，支持自增序列，支持外键，并发性能高，空间占用大。</p>
+<p>Memory：纯内存。</p>
+<h3 id="InnoDB和MyISAM"><a href="#InnoDB和MyISAM" class="headerlink" title="InnoDB和MyISAM"></a>InnoDB和MyISAM</h3><p>InnoDB支持事务，默认是每一条SQL都封装为一个事务。MyISAM没有事务。</p>
+<p>InnoDB有外键，MyISAM没有。</p>
+<p>InnoDB是行锁，MyISAM是表锁，InnoDB并发场景性能会好一些。</p>
+<p>InnoDB是聚集索引，必须有主键。在表上建立的其他索引，都是指向主键。通过其他索引查询时，先经过索引查到主键，再通过主键查找数据。MyISAM是非聚集索引，主键和索引都是直接指向数据指针，主键和索引相互独立。</p>
+<p>InnoDB不保存表的行数，计算行数时要全表扫描。MyISAM保存了表的行数。</p>
+<p>InnoDB不支持全文索引，需要通过第三方工具来实现，比如Elasticsearch。MyISAM直接支持。</p>
+<h3 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h3><p>ACID：atomic、consistency、isolation、durability</p>
+<p>原子性：一个事务内的多个操作可以看成一个原子操作，即要么成功要么失败。事务中任意一个操作失败了都会回滚到没有开始事务之前的状态。</p>
+<p>一致性：事务操作的结果和业务规则是一致的。即事务成功时，可以达成操作者目的。</p>
+<p>隔离性：多个事务之间互相数据隔离，彼此没有影响。</p>
+<p>持久性：事务完成后会持久化到数据库。</p>
+<h3 id="索引是什么"><a href="#索引是什么" class="headerlink" title="索引是什么"></a>索引是什么</h3><p>官方：一种帮助MySQL快速获取数据的数据结构。</p>
+<p>类似目录，默认是B+树实现。</p>
+<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><p>原则：避免全表扫描，查询时尽量走索引。少于三张表的查询允许关联，关联不了就走子查询。</p>
+<p>1、尽量不要用select *</p>
+<p>2、减少子查询，用少于三张表的关联查询替代</p>
+<p>3、少用in和not in，因为绝对可以用exists和not exists替代</p>
+<p>4、where子句中慎用!&#x3D;，走不到索引</p>
+<p>5、少用or，走不到索引</p>
+<p>6、少用null判断，走不到索引</p>
+<h3 id="drop、delete和truncate"><a href="#drop、delete和truncate" class="headerlink" title="drop、delete和truncate"></a>drop、delete和truncate</h3><p>drop和truncate不能回滚，不在事务中。delete是在事务中，提交时才生效。</p>
+<p>drop删的最多，会删表结构，可以重新建同名表，及时生效不在事务中。</p>
+<p>truncate其次，对比drop是少删表结构，仅删除数据，还是不在事务中。</p>
+<p>delete再次，仅删除表数据，会在事务中，事务提交后才生效。</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>理解为虚拟表。类似函数封装的概念。</p>
+<p>可以封装复杂查询的结果。</p>
+<p>可以用来做权限隔离，比如仅展示某几个字段给特定用户。</p>
+<p>底层表有改动，比如拆分了，可以建一个视图，避免上层应用修改SQL。</p>
+<h3 id="并发事务的问题"><a href="#并发事务的问题" class="headerlink" title="并发事务的问题"></a>并发事务的问题</h3>]]></content>
+      <tags>
+        <tag>【工作】面试</tag>
+        <tag>【工作】数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-网络协议</title>
+    <url>/2024/10/14/13-41-52/</url>
+    <content><![CDATA[<p>这里记录一下面试的准备过程中关于网络协议的笔记。</p>
+<span id="more"></span>
+
+<h3 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h3><p>200 - 成功</p>
+<p>301 - 永久重定向    302 - 临时重定向</p>
+<p>4开头是客户端问题</p>
+<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
+<p>5开头是服务器问题</p>
+<p>500 - 服务器崩了  504 - badgateway</p>
+<h3 id="Forward和Redirect"><a href="#Forward和Redirect" class="headerlink" title="Forward和Redirect"></a>Forward和Redirect</h3><p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
+<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
+<h3 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h3><p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
+<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
+<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
+<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
+<p>UDP无连接，不可靠，传输性能高</p>
+<p>TCP是点对点，UDP支持广播</p>
+<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
+<h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><p>HTTP用80端口，HTTPS用443</p>
+<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
+<h3 id="HTTP、TCP和Socket"><a href="#HTTP、TCP和Socket" class="headerlink" title="HTTP、TCP和Socket"></a>HTTP、TCP和Socket</h3><p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
+<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
+<p>HTTP是应用层的协议，基于TCP来实现</p>
+<p>TCP是网络层协议</p>
+<h3 id="HTTP的长连接和短连接"><a href="#HTTP的长连接和短连接" class="headerlink" title="HTTP的长连接和短连接"></a>HTTP的长连接和短连接</h3><p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
+<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
+<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
+<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
+<p>第一次：客户端-&gt;服务端，syn&#x3D;1，seq&#x3D;x</p>
+<p>第二次：服务端-&gt;客户端，syn&#x3D;1，seq&#x3D;y，ack&#x3D;x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
+<p>第三次：客户端-&gt;服务端，seq&#x3D;x+1, ack&#x3D;y+1。告知服务端，你发送的消息我也能收到。</p>
+<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
+<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
+<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
+<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
+<h3 id="TCP粘包"><a href="#TCP粘包" class="headerlink" title="TCP粘包"></a>TCP粘包</h3><p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
+<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
+<p>TCP的分包是由滑动窗口来控制的。</p>
+<p>解决方式，都是在应用的协议层解决：</p>
+<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
+<p>2、把协议固定长度，所有协议包的长度都一致。</p>
+<p>3、特殊分隔符号。</p>
+<h3 id="TCP可靠性"><a href="#TCP可靠性" class="headerlink" title="TCP可靠性"></a>TCP可靠性</h3><p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
+<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
+<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
+<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
+<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
+<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>应用层：HTTP、FTP</p>
+<p>表示层：加解密</p>
+<p>会话层：RPC</p>
+<p>传输层：TCP、UDP</p>
+<p>网络层：IP、IPv6</p>
+<p>数据链路层：物理寻址层。交换机等</p>
+<p>物理层：硬件</p>
+<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
+<h3 id="浏览器输入一个网址后发生了什么"><a href="#浏览器输入一个网址后发生了什么" class="headerlink" title="浏览器输入一个网址后发生了什么"></a>浏览器输入一个网址后发生了什么</h3><p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
+<p>2、建立TCP连接</p>
+<p>3、发送HTTP的GET请求</p>
+<p>4、请求经过路由器转发到服务器</p>
+<p>5、服务器处理请求，返回网页文件（HTML）</p>
+<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
+<h3 id="如何跨域"><a href="#如何跨域" class="headerlink" title="如何跨域"></a>如何跨域</h3><p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
+<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
+<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
+<h3 id="HTTP-1-0-1-1-2-0-3-0"><a href="#HTTP-1-0-1-1-2-0-3-0" class="headerlink" title="HTTP 1.0 1.1 2.0 3.0"></a>HTTP 1.0 1.1 2.0 3.0</h3><p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
+<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
+<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
+<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
+<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
+<h3 id="HTTP与TCP-x2F-IP"><a href="#HTTP与TCP-x2F-IP" class="headerlink" title="HTTP与TCP&#x2F;IP"></a>HTTP与TCP&#x2F;IP</h3><p>HTTP是应用层的报文协议，一般数据传输是用TCP&#x2F;IP实现。</p>
+<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
+<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
+<h3 id="HTTP长连接短连接"><a href="#HTTP长连接短连接" class="headerlink" title="HTTP长连接短连接"></a>HTTP长连接短连接</h3><p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
+<h3 id="长连接和短连接的优缺点"><a href="#长连接和短连接的优缺点" class="headerlink" title="长连接和短连接的优缺点"></a>长连接和短连接的优缺点</h3><p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
+<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
+<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>从开销最小的地方开始找，没有就去更远的地方找。</p>
+<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
+<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
+<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
+<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
+]]></content>
+      <tags>
+        <tag>【工作】面试</tag>
+        <tag>【工作】网络协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Netty的FastThreadLocal带来了什么？</title>
+    <url>/2024/09/13/14-49-51/</url>
+    <content><![CDATA[<p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
+<span id="more"></span>
+
+<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
+<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
+<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
+<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
+<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
+<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
+<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
+<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
+<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
+<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
+<p>然后再来聊聊其中的实现。</p>
+<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
+<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
+<p>它的get()过程是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
+
+<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
+<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
+<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
+
+<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
+<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
+<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
+<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
+<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
+<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
+]]></content>
+      <tags>
+        <tag>【工作】Netty</tag>
       </tags>
   </entry>
   <entry>
@@ -680,33 +749,6 @@
 <p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
 <p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
 <p>这就是我从这件事情里学到的。</p>
-]]></content>
-      <tags>
-        <tag>【工作】经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>聊聊管理</title>
-    <url>/2024/04/29/14-42-33/</url>
-    <content><![CDATA[<p>想起来写这个事情，是正好从上海出差回家的时候，回想起这两年的经历，让我深有感触。</p>
-<span id="more"></span>
-
-<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><p>从我工作以来，我一直在和管理打交道。</p>
-<p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
-<p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p>
-<p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p>
-<p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p>
-<p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p>
-<p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p>
-<p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p>
-<p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p>
-<h2 id="领导力的来源是什么？"><a href="#领导力的来源是什么？" class="headerlink" title="领导力的来源是什么？"></a>领导力的来源是什么？</h2><p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p>
-<p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p>
-<p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p>
-<p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p>
-<p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p>
-<p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p>
-<p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>
 ]]></content>
       <tags>
         <tag>【工作】经验总结</tag>
@@ -741,6 +783,101 @@
 ]]></content>
       <tags>
         <tag>【工作】经验总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>聊聊管理</title>
+    <url>/2024/04/29/14-42-33/</url>
+    <content><![CDATA[<p>想起来写这个事情，是正好从上海出差回家的时候，回想起这两年的经历，让我深有感触。</p>
+<span id="more"></span>
+
+<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><p>从我工作以来，我一直在和管理打交道。</p>
+<p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
+<p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p>
+<p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p>
+<p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p>
+<p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p>
+<p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p>
+<p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p>
+<p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p>
+<h2 id="领导力的来源是什么？"><a href="#领导力的来源是什么？" class="headerlink" title="领导力的来源是什么？"></a>领导力的来源是什么？</h2><p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p>
+<p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p>
+<p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p>
+<p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p>
+<p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p>
+<p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p>
+<p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>
+]]></content>
+      <tags>
+        <tag>【工作】经验总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Unsafe的使用记录</title>
+    <url>/2024/01/07/11-15-32/</url>
+    <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
+<span id="more"></span>
+
+<h2 id="什么是Unsafe"><a href="#什么是Unsafe" class="headerlink" title="什么是Unsafe"></a>什么是Unsafe</h2><p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
+
+<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
+<p>为何如此？</p>
+<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
+<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
+<h2 id="使用Unsafe"><a href="#使用Unsafe" class="headerlink" title="使用Unsafe"></a>使用Unsafe</h2><p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是也不麻烦，我们可以使用如下代码获取到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
+<h2 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h2><p>要说Unsafe提供最大的能力，就是内存操作了。</p>
+<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
+<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
+<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
+<p>那么我们看一下实际怎么操作内存：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
+
+<p>这种操作，几乎和C++程序是一致的了。</p>
+<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
+<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
+<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
+<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
+<p>首先来看一个Java对象的内存结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
+
+<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
+<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
+<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
+<p>下面看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
+<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
+<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
+<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
+<p>下面简单看一个api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
+
+<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
+<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
+<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
+<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>还是要额外提一下关于Unsafe的版本支持问题。</p>
+<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
+<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
+<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
+<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
+]]></content>
+      <tags>
+        <tag>【工作】Java底层原理</tag>
       </tags>
   </entry>
   <entry>
