@@ -1,63 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Netty的FastThreadLocal带来了什么？</title>
-    <url>/2024/09/13/14-49-51/</url>
-    <content><![CDATA[<p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
-<span id="more"></span>
-
-<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
-<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
-<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
-<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
-<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
-<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
-<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
-<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
-<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
-<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
-<p>然后再来聊聊其中的实现。</p>
-<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
-<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
-<p>它的get()过程是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
-
-<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
-<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
-<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
-
-<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
-<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
-<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
-<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
-<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
-<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
-<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
-]]></content>
-      <tags>
-        <tag>【工作】Netty</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JNI调用的优化（第二版)</title>
-    <url>/2024/08/08/10-28-13/</url>
-    <content><![CDATA[<p>这一次验证了critical native调用。</p>
-<span id="more"></span>
-
-<p>源头是这篇博客：<a href="http://blog.hakugyokurou.net/?p=1758">http://blog.hakugyokurou.net/?p=1758</a></p>
-<p>讲到了最正式的文档也就是bug系统中的一条记录：<a href="https://bugs.openjdk.org/browse/JDK-7013347">https://bugs.openjdk.org/browse/JDK-7013347</a></p>
-<p>另外在stackoverflow上有人爆料了这个能力：<a href="https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652">https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652</a></p>
-<p>处于验证的目的，我写了jmh对其进行测试。</p>
-<p>不过测试结果倒是有提升，但也仅仅是20ns。</p>
-<p>聊胜于无，就目前的场景（单次调用800ns）来看，并没有必要做这个优化。</p>
-<p>带来的不稳定因素反而是更大的问题。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JNI调用的优化</title>
     <url>/2023/12/19/17-55-26/</url>
     <content><![CDATA[<p>在今年11月，我接到一个封装JNI的task。这次对接的是C++实现的内存数据库，性能要求实在太高了，只能采取一些不同寻常的方式来做JNI层调用优化。这里记录一下我的优化思路。</p>
@@ -110,28 +53,18 @@
       </tags>
   </entry>
   <entry>
-    <title>内存分析记录手册</title>
-    <url>/2023/06/12/13-46-18/</url>
-    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
+    <title>JNI调用的优化（第二版)</title>
+    <url>/2024/08/08/10-28-13/</url>
+    <content><![CDATA[<p>这一次验证了critical native调用。</p>
 <span id="more"></span>
 
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><code>jps</code> jps命令，查看所有java程序</p>
-<p><code>jmap -heap &lt;pid&gt;</code> jmap命令，查看jvm内存分区，包括老年代、新生代等内存占用情况</p>
-<p><code>jmap -dump:live,format=b,file=/tmp/dump.hprof &lt;pid&gt;</code> jmap的dump命令</p>
-<p><code>jmap -histo &lt;pid&gt;</code> 和 <code>jmap -histo:live &lt;pid&gt;</code> 抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象</p>
-<p>arthus命令略，可借用arthus的IDEA插件生成command</p>
-<h2 id="什么是大对象"><a href="#什么是大对象" class="headerlink" title="什么是大对象"></a>什么是大对象</h2><p>都说大对象会进入老年代，那么什么才是大对象呢？</p>
-<p>假如一个对象A，内部引用了对象B，那么在计算对象大小的时候，是否会把对象B的大小也计入对象A呢？</p>
-<p>答案是不会，这个有很多的地方可以证明：每个对象其实都只是存了其他对象的指针；dump文件在分析时，对象大小需要先用工具进行计算；在代码中分析对象大小大家用的都是第三方工具。这些都从侧面说明了，JVM本身并没有去计算对象引用的实际大小。</p>
-<p>那么，JVM做垃圾回收时，其实垃圾收集器关心的只是对象本身的大小。所有对象的引用，都是一个内存地址，也就是指针。</p>
-<p>举例，假如B是一个大数组，B在老年代。假如A在B进入老年代之后，持有了B对象作为成员变量。</p>
-<p>在Java的垃圾回收机制中，对象进入老年代（Old Generation）通常需要满足以下条件：</p>
-<ol>
-<li>对象经过多次GC仍然存活。在Eden区进行Minor GC后，如果对象仍然存活，会被移动到Survivor区。在Survivor区进行GC后，如果对象仍然存活，会被移动到老年代。</li>
-<li>对象的大小超过了Survivor区的阈值。每个Survivor区都有一个固定的容量限制。如果新创建的对象太大，以至于在当前Survivor区容纳不下，那么这个对象就会被直接分配到老年代。</li>
-<li>对象被长期持有。一些被长时间持有的对象，比如长期存活或者被强引用的对象，可能会被直接分配到老年代。</li>
-</ol>
-<p>所以，如果对象A持有一个老年代对象B，并不意味着A自己会进入老年代。</p>
+<p>源头是这篇博客：<a href="http://blog.hakugyokurou.net/?p=1758">http://blog.hakugyokurou.net/?p=1758</a></p>
+<p>讲到了最正式的文档也就是bug系统中的一条记录：<a href="https://bugs.openjdk.org/browse/JDK-7013347">https://bugs.openjdk.org/browse/JDK-7013347</a></p>
+<p>另外在stackoverflow上有人爆料了这个能力：<a href="https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652">https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652</a></p>
+<p>处于验证的目的，我写了jmh对其进行测试。</p>
+<p>不过测试结果倒是有提升，但也仅仅是20ns。</p>
+<p>聊胜于无，就目前的场景（单次调用800ns）来看，并没有必要做这个优化。</p>
+<p>带来的不稳定因素反而是更大的问题。</p>
 ]]></content>
       <tags>
         <tag>【工作】性能调优</tag>
@@ -211,6 +144,102 @@
       </tags>
   </entry>
   <entry>
+    <title>Unsafe的使用记录</title>
+    <url>/2024/01/07/11-15-32/</url>
+    <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
+<span id="more"></span>
+
+<h2 id="什么是Unsafe"><a href="#什么是Unsafe" class="headerlink" title="什么是Unsafe"></a>什么是Unsafe</h2><p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
+
+<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
+<p>为何如此？</p>
+<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
+<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
+<h2 id="使用Unsafe"><a href="#使用Unsafe" class="headerlink" title="使用Unsafe"></a>使用Unsafe</h2><p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是也不麻烦，我们可以使用如下代码获取到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
+<h2 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h2><p>要说Unsafe提供最大的能力，就是内存操作了。</p>
+<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
+<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
+<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
+<p>那么我们看一下实际怎么操作内存：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
+
+<p>这种操作，几乎和C++程序是一致的了。</p>
+<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
+<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
+<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
+<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
+<p>首先来看一个Java对象的内存结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
+
+<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
+<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
+<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
+<p>下面看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
+<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
+<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
+<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
+<p>下面简单看一个api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
+
+<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
+<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
+<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
+<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>还是要额外提一下关于Unsafe的版本支持问题。</p>
+<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
+<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
+<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
+<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
+]]></content>
+      <tags>
+        <tag>【工作】Java底层原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内存分析记录手册</title>
+    <url>/2023/06/12/13-46-18/</url>
+    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
+<span id="more"></span>
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><code>jps</code> jps命令，查看所有java程序</p>
+<p><code>jmap -heap &lt;pid&gt;</code> jmap命令，查看jvm内存分区，包括老年代、新生代等内存占用情况</p>
+<p><code>jmap -dump:live,format=b,file=/tmp/dump.hprof &lt;pid&gt;</code> jmap的dump命令</p>
+<p><code>jmap -histo &lt;pid&gt;</code> 和 <code>jmap -histo:live &lt;pid&gt;</code> 抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象</p>
+<p>arthus命令略，可借用arthus的IDEA插件生成command</p>
+<h2 id="什么是大对象"><a href="#什么是大对象" class="headerlink" title="什么是大对象"></a>什么是大对象</h2><p>都说大对象会进入老年代，那么什么才是大对象呢？</p>
+<p>假如一个对象A，内部引用了对象B，那么在计算对象大小的时候，是否会把对象B的大小也计入对象A呢？</p>
+<p>答案是不会，这个有很多的地方可以证明：每个对象其实都只是存了其他对象的指针；dump文件在分析时，对象大小需要先用工具进行计算；在代码中分析对象大小大家用的都是第三方工具。这些都从侧面说明了，JVM本身并没有去计算对象引用的实际大小。</p>
+<p>那么，JVM做垃圾回收时，其实垃圾收集器关心的只是对象本身的大小。所有对象的引用，都是一个内存地址，也就是指针。</p>
+<p>举例，假如B是一个大数组，B在老年代。假如A在B进入老年代之后，持有了B对象作为成员变量。</p>
+<p>在Java的垃圾回收机制中，对象进入老年代（Old Generation）通常需要满足以下条件：</p>
+<ol>
+<li>对象经过多次GC仍然存活。在Eden区进行Minor GC后，如果对象仍然存活，会被移动到Survivor区。在Survivor区进行GC后，如果对象仍然存活，会被移动到老年代。</li>
+<li>对象的大小超过了Survivor区的阈值。每个Survivor区都有一个固定的容量限制。如果新创建的对象太大，以至于在当前Survivor区容纳不下，那么这个对象就会被直接分配到老年代。</li>
+<li>对象被长期持有。一些被长时间持有的对象，比如长期存活或者被强引用的对象，可能会被直接分配到老年代。</li>
+</ol>
+<p>所以，如果对象A持有一个老年代对象B，并不意味着A自己会进入老年代。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>双重锁和CAS</title>
     <url>/2024/02/18/13-47-01/</url>
     <content><![CDATA[<p>这次来聊聊多线程场景的二次确认机制。</p>
@@ -284,75 +313,34 @@
       </tags>
   </entry>
   <entry>
-    <title>字符串编解码的特殊处理</title>
-    <url>/2024/01/28/11-39-06/</url>
-    <content><![CDATA[<p>FastJSON2中，对于字符串做了特殊的优化，这里分析记录一下。</p>
+    <title>老年代大对象的问题排查</title>
+    <url>/2023/05/05/10-26-55/</url>
+    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
 <span id="more"></span>
 
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>起因是在做内存数据库时，遇到了序列化的问题。其中，Java的字符串最是重量级，转化时怎么搞都有很大的性能问题。</p>
-<p>后来搜寻了资料，FastJSON2的作者高铁在阿里开发者的公众号分享了一篇文章，阅读后受益匪浅，决定改动之后运用到自己的项目中。</p>
-<p>高铁对String对象转化字节数组的优化主要有两方面：</p>
-<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
-<p>2、重写unicode到utf8的转换逻辑。</p>
-<p>而字节数组转化为String对象，使用的是：</p>
-<p>1、重写utf8到unicode的转换逻辑。</p>
-<p>2、通过零拷贝构造器构建String对象。</p>
-<p>说白了，就是通过一些旁门左道（比如Lambda表达式工厂替代反射，Unsafe操作）来绕过String对象本身的一些限制，从而重写其编解码逻辑。</p>
-<p>但是话又说回来，结合实际场景分析后，字节数组转化为String对象似乎并没有太多的提升。后文会解释为什么提升有限。</p>
-<p>实际运用到自己项目中时，我也进行了一些改造，从而适配项目本身的情况。</p>
-<h2 id="String转byte"><a href="#String转byte" class="headerlink" title="String转byte[]"></a>String转byte[]</h2><p>Java的String，本质是一个封装好的不可变char数组对象。</p>
-<p>Java的char类型，底层编码是unicode，每个char占两位字节。而UTF-8使用可变长度的编码，不同字符所占的字节数不同。</p>
-<p>FastJSON2的优化就如上文所述，分两步：</p>
-<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
-<p>2、重写unicode到utf8的转换逻辑。</p>
-<p>我们先开看第一步，以下是核心代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 当前优化仅在Java8有效</span><br><span class="line">// Java9修改了String的字符串实现，因此无法使用以下的方式初始化</span><br><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	Field field = null;</span><br><span class="line">	long fieldOffset = -1;</span><br><span class="line">	if (!ANDROID) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			field = String.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">			field.setAccessible(true);</span><br><span class="line">			fieldOffset = UNSAFE.objectFieldOffset(field);</span><br><span class="line">		&#125; catch (Exception ignored) &#123;</span><br><span class="line">			FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	FIELD_STRING_VALUE = field;</span><br><span class="line">	FIELD_STRING_VALUE_OFFSET = fieldOffset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用反射和Unsafe获取了value对象的偏移量，缓存到了一个静态变量汇总。</p>
-<p>后续是使用Unsafe，通过缓存的静态变量来获取char数组：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static char[] getCharArray(String str) &#123;</span><br><span class="line">    // GraalVM not support</span><br><span class="line">    // Android not support</span><br><span class="line">    if (!FIELD_STRING_VALUE_ERROR) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return (char[]) UNSAFE.getObject(str, FIELD_STRING_VALUE_OFFSET);</span><br><span class="line">        &#125; catch (Exception ignored) &#123;</span><br><span class="line">            FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return str.toCharArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而编码逻辑，则是参考了JDK原来的实现，进行了一定的修改：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    public static int encodeUTF8(char[] src, int offset, int len, byte[] dst, int dp) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        int dlASCII = dp + Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            dst[dp++] = (byte) src[offset++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                dst[dp++] = (byte) c;</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                dst[dp] = (byte) (0xc0 | (c &gt;&gt; 6));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) + (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">//                            throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                            dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                    continue;</span><br><span class="line">//                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (byte) (0xf0 | ((uc &gt;&gt; 18)));</span><br><span class="line">                    dst[dp + 1] = (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 2] = (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 3] = (byte) (0x80 | (uc &amp; 0x3f));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                dst[dp] = (byte) (0xe0 | ((c &gt;&gt; 12)));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | ((c &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                dst[dp + 2] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里有个很抽象的逻辑需要解释一下。</p>
-<p>上述编码的方法入参有个名为dst的byte数组，它的意思是最终要写入的目标数组。在序列化框架中，有的时候就是要在一个已经提前创建好的byte[]数组里，从某个位置开始把转换后的结果append进去。这个方法就是为了兼容这种情况，所以还额外提供了dp这一入参，用来标识是从dst[]的第几位开始写数据。</p>
-<h2 id="byte-转String"><a href="#byte-转String" class="headerlink" title="byte[]转String"></a>byte[]转String</h2><p>FastJSON2在处理此类场景时，也是进行了优化，分两步：</p>
-<p>1、重写utf8到unicode的转换逻辑。</p>
-<p>2、通过零拷贝构造器构建String对象。</p>
-<p>重写后的代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">public static int decodeUTF8(byte[] src, int off, int len, char[] dst) &#123;</span><br><span class="line">    final int sl = off + len;</span><br><span class="line">    int dp = 0;</span><br><span class="line">    int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">    // ASCII only optimized loop</span><br><span class="line">    while (dp &lt; dlASCII &amp;&amp; src[off] &gt;= 0) &#123;</span><br><span class="line">        dst[dp++] = (char) src[off++];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while (off &lt; sl) &#123;</span><br><span class="line">        int b1 = src[off++];</span><br><span class="line">        if (b1 &gt;= 0) &#123;</span><br><span class="line">            // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">            dst[dp++] = (char) b1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">            // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">            if (off &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off++];</span><br><span class="line">                if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^</span><br><span class="line">                            (((byte) 0xC0 &lt;&lt; 6) ^</span><br><span class="line">                                    ((byte) 0x80)));</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">            // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 1 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                off += 2;</span><br><span class="line">                if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    char c = (char) ((b1 &lt;&lt; 12) ^</span><br><span class="line">                            (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^</span><br><span class="line">                                    (((byte) 0xE0 &lt;&lt; 12) ^</span><br><span class="line">                                            ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                            ((byte) 0x80))));</span><br><span class="line">                    boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                    if (isSurrogate) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = c;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">            // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 2 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                int b4 = src[off + 2];</span><br><span class="line">                off += 3;</span><br><span class="line">                int uc = ((b1 &lt;&lt; 18) ^</span><br><span class="line">                        (b2 &lt;&lt; 12) ^</span><br><span class="line">                        (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^</span><br><span class="line">                                (((byte) 0xF0 &lt;&lt; 18) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 12) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                        ((byte) 0x80))));</span><br><span class="line">                if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                ) &#123;</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                    dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                    dp += 2;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>至于零拷贝的构造器，是使用了Lambda工厂来实现的，这里不多提，就看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	MethodHandles.Lookup lookup = trustedLookup(String.class);</span><br><span class="line"></span><br><span class="line">	MethodHandle handle = lookup.findConstructor(</span><br><span class="line">				String.class, methodType(void.class, char[].class, boolean.class)</span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">	CallSite callSite = LambdaMetafactory.metafactory(</span><br><span class="line">				lookup,</span><br><span class="line">				&quot;apply&quot;,</span><br><span class="line">				methodType(BiFunction.class),</span><br><span class="line">				methodType(Object.class, Object.class, Object.class),</span><br><span class="line">				handle,</span><br><span class="line">				methodType(String.class, char[].class, boolean.class)</span><br><span class="line">	);</span><br><span class="line">	stringCreatorJDK8 = (BiFunction&lt;char[], Boolean, String&gt;) callSite.getTarget().invokeExact();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>主要还是讲下为什么这个零拷贝构造器实际用的时候发现很鸡肋。</p>
-<p>首先，这个零拷贝构造器是要求传入一个<code>char[]</code>，传的<code>char[]</code>是什么它就用什么。</p>
-<p>那么这个<code>char[]</code>哪里来？通过<code>decodeUTF8</code>方法构建的。</p>
-<p>但是，在编码这一步，我们不能保证获得一个正确的<code>char[]</code>。这问题是UTF-8和Unicode的编码长度差异带来的。</p>
-<p>我简单用代码举个例子。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 假设我们已经有了一个固定长度的byte[]</span><br><span class="line">public String getString(byte[] src) &#123;</span><br><span class="line">		// 首先得创建一个dst，才能decode</span><br><span class="line">		char[] dst = new char[src.length / 3];</span><br><span class="line">		int dp = StringUtils.decodeUTF8(src, 0, src.length, dst);</span><br><span class="line">		// 后续代码略……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，必须先创建好dst对象，才能做decode。但是由于UTF-8和Unicode编码长度的差异，初始化的dst长度可能过长了，也就是dst可能最后几位是<code>\u0000</code>。</p>
-<p>如果不清理最后这几位，直接用零拷贝的方法去构建String，就会导致字符串在其他地方展示的时候最后有乱码或空白。</p>
-<p>但是Java中又没有办法零拷贝截断数组。所有的截断方式本质都是通过创建一个新的数组，然后把原来数组的数据拷贝过去。</p>
-<p>所以，用零拷贝的方式去构建，就必须在外部显式地拷贝一次。那既然如此，和直接使用String本身提供的方法又有什么区别呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public String(char value[], int offset, int count) &#123;</span><br><span class="line">        if (offset &lt; 0) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset);</span><br><span class="line">        &#125;</span><br><span class="line">        if (count &lt;= 0) &#123;</span><br><span class="line">            if (count &lt; 0) &#123;</span><br><span class="line">                throw new StringIndexOutOfBoundsException(count);</span><br><span class="line">            &#125;</span><br><span class="line">            if (offset &lt;= value.length) &#123;</span><br><span class="line">                this.value = &quot;&quot;.value;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // Note: offset or count might be near -1&gt;&gt;&gt;1.</span><br><span class="line">        if (offset &gt; value.length - count) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset + count);</span><br><span class="line">        &#125;</span><br><span class="line">        this.value = Arrays.copyOfRange(value, offset, offset+count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到String本来就是拷贝一次然后创建对象的。</p>
-<p>所以这种零拷贝的方式就很鸡肋。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>最后简单聊聊我在项目的使用。</p>
-<p>我的项目是需要把String的数据转换为UTF-8编码，然后通过Unsafe写到一个内存块上。同时也有从内存块读取的需求。</p>
-<p>很可惜现在提供的api，最终都是落到byte[]。因此我修改了这两个方法，重写了其中对于dst的操作，变更为直接操作内存块。</p>
-<p>修改后的代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    private static int getStringUTF8JDK8(long off, int len, char[] dst) &#123;</span><br><span class="line">        final long sl = off + len;</span><br><span class="line">        int dp = 0;</span><br><span class="line">        int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; UNSAFE.getByte(off) &gt; 0) &#123;</span><br><span class="line">            dst[dp++] = (char) UNSAFE.getByte(off++);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (off &lt; sl) &#123;</span><br><span class="line">            int b1 = UNSAFE.getByte(off++);</span><br><span class="line">            if (b1 == 0) &#123;</span><br><span class="line">            // 读到0直接返回，不需要继续读取</span><br><span class="line">                return dp;</span><br><span class="line">            &#125; else if (b1 &gt; 0) &#123;</span><br><span class="line">                // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">                dst[dp++] = (char) b1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">                // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">                if (off &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off++);</span><br><span class="line">                    if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^ (((byte) 0xC0 &lt;&lt; 6) ^ ((byte) 0x80)));</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">                // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 1 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    off += 2;</span><br><span class="line">                    if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char c = (char) ((b1 &lt;&lt; 12) ^ (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^ (((byte) 0xE0 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                        boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                        if (isSurrogate) &#123;</span><br><span class="line">                            return -1;</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            dst[dp++] = c;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">                // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 2 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    int b4 = UNSAFE.getByte(off + 2);</span><br><span class="line">                    off += 3;</span><br><span class="line">                    int uc = ((b1 &lt;&lt; 18) ^ (b2 &lt;&lt; 12) ^ (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^ (((byte) 0xF0 &lt;&lt; 18) ^ ((byte) 0x80 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                    if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                    ) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                        dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                        dp += 2;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">private static long putStringUTF8JDK8(char[] src, int offset, int len, long dp, int size) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        long dlASCII = dp + Math.min(len, size);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            UNSAFE.putByte(dp++, (byte) src[offset++]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                UNSAFE.putByte(dp++, (byte) c);</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xc0 | (c &gt;&gt; 6)));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (c &amp; 0x3f)));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) +</span><br><span class="line">                                (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            //                            throw new JSONException(&quot;encodeUTF8 error&quot;, new</span><br><span class="line">                            //                            MalformedInputException(1));</span><br><span class="line">                            UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                    continue;</span><br><span class="line">                    //                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException</span><br><span class="line">                    //                        (1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    UNSAFE.putByte(dp, (byte) (0xf0 | ((uc &gt;&gt; 18))));</span><br><span class="line">                    UNSAFE.putByte(dp + 1, (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 2, (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 3, (byte) (0x80 | (uc &amp; 0x3f)));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xe0 | ((c &gt;&gt; 12))));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (((c &gt;&gt; 6) &amp; 0x3f))));</span><br><span class="line">                UNSAFE.putByte(dp + 2, (byte) (0x80 | ((c &amp; 0x3f))));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>另外，从内存块读取字节时，读到<code>0x00</code>就可以停止了，这个逻辑我也加了进去。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>还是得例行总结一下。</p>
-<p>阅读开源代码确实能快速提升个人能力，我觉得以后这种事情应该多做。</p>
-<p>使用开源代码，不仅仅是引入人家的包，为了追求技术可控性，我们也应当了解开源代码中的实现。而且追求极致性能的场景，还是得改改人家的代码，拿过来直接能用的概率还是挺小的。</p>
-<p>再说远点的话，读到高铁的分享时，我确实觉得是受益匪浅。程序员中有一类很特殊的人，自己写了个很牛逼的东西，希望全世界都能知道我写了个很牛逼的玩意儿，让大家都用起来。就是有着这类人，才让软件行业一往无前地汹涌发展吧。</p>
-<p>我尊敬，并希望也能成为那样的人。</p>
+<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
+<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
+<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
+<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
+<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
+<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
+<blockquote>
+<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
+</blockquote>
+<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
+<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
+<blockquote>
+<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
+<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
+</blockquote>
+<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
+<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
+<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
+<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
+<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
+<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
 ]]></content>
       <tags>
         <tag>【工作】性能调优</tag>
@@ -435,114 +423,78 @@
       </tags>
   </entry>
   <entry>
-    <title>老年代大对象的问题排查</title>
-    <url>/2023/05/05/10-26-55/</url>
-    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
+    <title>字符串编解码的特殊处理</title>
+    <url>/2024/01/28/11-39-06/</url>
+    <content><![CDATA[<p>FastJSON2中，对于字符串做了特殊的优化，这里分析记录一下。</p>
 <span id="more"></span>
 
-<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
-<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
-<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
-<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
-<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
-<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
-<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
-<blockquote>
-<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
-</blockquote>
-<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
-<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
-<blockquote>
-<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
-<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
-</blockquote>
-<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
-<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
-<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
-<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
-<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
-<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>起因是在做内存数据库时，遇到了序列化的问题。其中，Java的字符串最是重量级，转化时怎么搞都有很大的性能问题。</p>
+<p>后来搜寻了资料，FastJSON2的作者高铁在阿里开发者的公众号分享了一篇文章，阅读后受益匪浅，决定改动之后运用到自己的项目中。</p>
+<p>高铁对String对象转化字节数组的优化主要有两方面：</p>
+<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
+<p>2、重写unicode到utf8的转换逻辑。</p>
+<p>而字节数组转化为String对象，使用的是：</p>
+<p>1、重写utf8到unicode的转换逻辑。</p>
+<p>2、通过零拷贝构造器构建String对象。</p>
+<p>说白了，就是通过一些旁门左道（比如Lambda表达式工厂替代反射，Unsafe操作）来绕过String对象本身的一些限制，从而重写其编解码逻辑。</p>
+<p>但是话又说回来，结合实际场景分析后，字节数组转化为String对象似乎并没有太多的提升。后文会解释为什么提升有限。</p>
+<p>实际运用到自己项目中时，我也进行了一些改造，从而适配项目本身的情况。</p>
+<h2 id="String转byte"><a href="#String转byte" class="headerlink" title="String转byte[]"></a>String转byte[]</h2><p>Java的String，本质是一个封装好的不可变char数组对象。</p>
+<p>Java的char类型，底层编码是unicode，每个char占两位字节。而UTF-8使用可变长度的编码，不同字符所占的字节数不同。</p>
+<p>FastJSON2的优化就如上文所述，分两步：</p>
+<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
+<p>2、重写unicode到utf8的转换逻辑。</p>
+<p>我们先开看第一步，以下是核心代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 当前优化仅在Java8有效</span><br><span class="line">// Java9修改了String的字符串实现，因此无法使用以下的方式初始化</span><br><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	Field field = null;</span><br><span class="line">	long fieldOffset = -1;</span><br><span class="line">	if (!ANDROID) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			field = String.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">			field.setAccessible(true);</span><br><span class="line">			fieldOffset = UNSAFE.objectFieldOffset(field);</span><br><span class="line">		&#125; catch (Exception ignored) &#123;</span><br><span class="line">			FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	FIELD_STRING_VALUE = field;</span><br><span class="line">	FIELD_STRING_VALUE_OFFSET = fieldOffset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用反射和Unsafe获取了value对象的偏移量，缓存到了一个静态变量汇总。</p>
+<p>后续是使用Unsafe，通过缓存的静态变量来获取char数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static char[] getCharArray(String str) &#123;</span><br><span class="line">    // GraalVM not support</span><br><span class="line">    // Android not support</span><br><span class="line">    if (!FIELD_STRING_VALUE_ERROR) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return (char[]) UNSAFE.getObject(str, FIELD_STRING_VALUE_OFFSET);</span><br><span class="line">        &#125; catch (Exception ignored) &#123;</span><br><span class="line">            FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return str.toCharArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而编码逻辑，则是参考了JDK原来的实现，进行了一定的修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    public static int encodeUTF8(char[] src, int offset, int len, byte[] dst, int dp) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        int dlASCII = dp + Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            dst[dp++] = (byte) src[offset++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                dst[dp++] = (byte) c;</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                dst[dp] = (byte) (0xc0 | (c &gt;&gt; 6));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) + (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">//                            throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                            dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                    continue;</span><br><span class="line">//                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (byte) (0xf0 | ((uc &gt;&gt; 18)));</span><br><span class="line">                    dst[dp + 1] = (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 2] = (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 3] = (byte) (0x80 | (uc &amp; 0x3f));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                dst[dp] = (byte) (0xe0 | ((c &gt;&gt; 12)));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | ((c &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                dst[dp + 2] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里有个很抽象的逻辑需要解释一下。</p>
+<p>上述编码的方法入参有个名为dst的byte数组，它的意思是最终要写入的目标数组。在序列化框架中，有的时候就是要在一个已经提前创建好的byte[]数组里，从某个位置开始把转换后的结果append进去。这个方法就是为了兼容这种情况，所以还额外提供了dp这一入参，用来标识是从dst[]的第几位开始写数据。</p>
+<h2 id="byte-转String"><a href="#byte-转String" class="headerlink" title="byte[]转String"></a>byte[]转String</h2><p>FastJSON2在处理此类场景时，也是进行了优化，分两步：</p>
+<p>1、重写utf8到unicode的转换逻辑。</p>
+<p>2、通过零拷贝构造器构建String对象。</p>
+<p>重写后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">public static int decodeUTF8(byte[] src, int off, int len, char[] dst) &#123;</span><br><span class="line">    final int sl = off + len;</span><br><span class="line">    int dp = 0;</span><br><span class="line">    int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">    // ASCII only optimized loop</span><br><span class="line">    while (dp &lt; dlASCII &amp;&amp; src[off] &gt;= 0) &#123;</span><br><span class="line">        dst[dp++] = (char) src[off++];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while (off &lt; sl) &#123;</span><br><span class="line">        int b1 = src[off++];</span><br><span class="line">        if (b1 &gt;= 0) &#123;</span><br><span class="line">            // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">            dst[dp++] = (char) b1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">            // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">            if (off &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off++];</span><br><span class="line">                if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^</span><br><span class="line">                            (((byte) 0xC0 &lt;&lt; 6) ^</span><br><span class="line">                                    ((byte) 0x80)));</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">            // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 1 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                off += 2;</span><br><span class="line">                if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    char c = (char) ((b1 &lt;&lt; 12) ^</span><br><span class="line">                            (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^</span><br><span class="line">                                    (((byte) 0xE0 &lt;&lt; 12) ^</span><br><span class="line">                                            ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                            ((byte) 0x80))));</span><br><span class="line">                    boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                    if (isSurrogate) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = c;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">            // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 2 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                int b4 = src[off + 2];</span><br><span class="line">                off += 3;</span><br><span class="line">                int uc = ((b1 &lt;&lt; 18) ^</span><br><span class="line">                        (b2 &lt;&lt; 12) ^</span><br><span class="line">                        (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^</span><br><span class="line">                                (((byte) 0xF0 &lt;&lt; 18) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 12) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                        ((byte) 0x80))));</span><br><span class="line">                if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                ) &#123;</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                    dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                    dp += 2;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至于零拷贝的构造器，是使用了Lambda工厂来实现的，这里不多提，就看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	MethodHandles.Lookup lookup = trustedLookup(String.class);</span><br><span class="line"></span><br><span class="line">	MethodHandle handle = lookup.findConstructor(</span><br><span class="line">				String.class, methodType(void.class, char[].class, boolean.class)</span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">	CallSite callSite = LambdaMetafactory.metafactory(</span><br><span class="line">				lookup,</span><br><span class="line">				&quot;apply&quot;,</span><br><span class="line">				methodType(BiFunction.class),</span><br><span class="line">				methodType(Object.class, Object.class, Object.class),</span><br><span class="line">				handle,</span><br><span class="line">				methodType(String.class, char[].class, boolean.class)</span><br><span class="line">	);</span><br><span class="line">	stringCreatorJDK8 = (BiFunction&lt;char[], Boolean, String&gt;) callSite.getTarget().invokeExact();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要还是讲下为什么这个零拷贝构造器实际用的时候发现很鸡肋。</p>
+<p>首先，这个零拷贝构造器是要求传入一个<code>char[]</code>，传的<code>char[]</code>是什么它就用什么。</p>
+<p>那么这个<code>char[]</code>哪里来？通过<code>decodeUTF8</code>方法构建的。</p>
+<p>但是，在编码这一步，我们不能保证获得一个正确的<code>char[]</code>。这问题是UTF-8和Unicode的编码长度差异带来的。</p>
+<p>我简单用代码举个例子。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 假设我们已经有了一个固定长度的byte[]</span><br><span class="line">public String getString(byte[] src) &#123;</span><br><span class="line">		// 首先得创建一个dst，才能decode</span><br><span class="line">		char[] dst = new char[src.length / 3];</span><br><span class="line">		int dp = StringUtils.decodeUTF8(src, 0, src.length, dst);</span><br><span class="line">		// 后续代码略……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，必须先创建好dst对象，才能做decode。但是由于UTF-8和Unicode编码长度的差异，初始化的dst长度可能过长了，也就是dst可能最后几位是<code>\u0000</code>。</p>
+<p>如果不清理最后这几位，直接用零拷贝的方法去构建String，就会导致字符串在其他地方展示的时候最后有乱码或空白。</p>
+<p>但是Java中又没有办法零拷贝截断数组。所有的截断方式本质都是通过创建一个新的数组，然后把原来数组的数据拷贝过去。</p>
+<p>所以，用零拷贝的方式去构建，就必须在外部显式地拷贝一次。那既然如此，和直接使用String本身提供的方法又有什么区别呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public String(char value[], int offset, int count) &#123;</span><br><span class="line">        if (offset &lt; 0) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset);</span><br><span class="line">        &#125;</span><br><span class="line">        if (count &lt;= 0) &#123;</span><br><span class="line">            if (count &lt; 0) &#123;</span><br><span class="line">                throw new StringIndexOutOfBoundsException(count);</span><br><span class="line">            &#125;</span><br><span class="line">            if (offset &lt;= value.length) &#123;</span><br><span class="line">                this.value = &quot;&quot;.value;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // Note: offset or count might be near -1&gt;&gt;&gt;1.</span><br><span class="line">        if (offset &gt; value.length - count) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset + count);</span><br><span class="line">        &#125;</span><br><span class="line">        this.value = Arrays.copyOfRange(value, offset, offset+count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到String本来就是拷贝一次然后创建对象的。</p>
+<p>所以这种零拷贝的方式就很鸡肋。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>最后简单聊聊我在项目的使用。</p>
+<p>我的项目是需要把String的数据转换为UTF-8编码，然后通过Unsafe写到一个内存块上。同时也有从内存块读取的需求。</p>
+<p>很可惜现在提供的api，最终都是落到byte[]。因此我修改了这两个方法，重写了其中对于dst的操作，变更为直接操作内存块。</p>
+<p>修改后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    private static int getStringUTF8JDK8(long off, int len, char[] dst) &#123;</span><br><span class="line">        final long sl = off + len;</span><br><span class="line">        int dp = 0;</span><br><span class="line">        int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; UNSAFE.getByte(off) &gt; 0) &#123;</span><br><span class="line">            dst[dp++] = (char) UNSAFE.getByte(off++);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (off &lt; sl) &#123;</span><br><span class="line">            int b1 = UNSAFE.getByte(off++);</span><br><span class="line">            if (b1 == 0) &#123;</span><br><span class="line">            // 读到0直接返回，不需要继续读取</span><br><span class="line">                return dp;</span><br><span class="line">            &#125; else if (b1 &gt; 0) &#123;</span><br><span class="line">                // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">                dst[dp++] = (char) b1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">                // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">                if (off &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off++);</span><br><span class="line">                    if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^ (((byte) 0xC0 &lt;&lt; 6) ^ ((byte) 0x80)));</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">                // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 1 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    off += 2;</span><br><span class="line">                    if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char c = (char) ((b1 &lt;&lt; 12) ^ (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^ (((byte) 0xE0 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                        boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                        if (isSurrogate) &#123;</span><br><span class="line">                            return -1;</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            dst[dp++] = c;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">                // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 2 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    int b4 = UNSAFE.getByte(off + 2);</span><br><span class="line">                    off += 3;</span><br><span class="line">                    int uc = ((b1 &lt;&lt; 18) ^ (b2 &lt;&lt; 12) ^ (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^ (((byte) 0xF0 &lt;&lt; 18) ^ ((byte) 0x80 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                    if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                    ) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                        dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                        dp += 2;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">private static long putStringUTF8JDK8(char[] src, int offset, int len, long dp, int size) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        long dlASCII = dp + Math.min(len, size);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            UNSAFE.putByte(dp++, (byte) src[offset++]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                UNSAFE.putByte(dp++, (byte) c);</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xc0 | (c &gt;&gt; 6)));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (c &amp; 0x3f)));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) +</span><br><span class="line">                                (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            //                            throw new JSONException(&quot;encodeUTF8 error&quot;, new</span><br><span class="line">                            //                            MalformedInputException(1));</span><br><span class="line">                            UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                    continue;</span><br><span class="line">                    //                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException</span><br><span class="line">                    //                        (1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    UNSAFE.putByte(dp, (byte) (0xf0 | ((uc &gt;&gt; 18))));</span><br><span class="line">                    UNSAFE.putByte(dp + 1, (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 2, (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 3, (byte) (0x80 | (uc &amp; 0x3f)));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xe0 | ((c &gt;&gt; 12))));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (((c &gt;&gt; 6) &amp; 0x3f))));</span><br><span class="line">                UNSAFE.putByte(dp + 2, (byte) (0x80 | ((c &amp; 0x3f))));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，从内存块读取字节时，读到<code>0x00</code>就可以停止了，这个逻辑我也加了进去。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>还是得例行总结一下。</p>
+<p>阅读开源代码确实能快速提升个人能力，我觉得以后这种事情应该多做。</p>
+<p>使用开源代码，不仅仅是引入人家的包，为了追求技术可控性，我们也应当了解开源代码中的实现。而且追求极致性能的场景，还是得改改人家的代码，拿过来直接能用的概率还是挺小的。</p>
+<p>再说远点的话，读到高铁的分享时，我确实觉得是受益匪浅。程序员中有一类很特殊的人，自己写了个很牛逼的东西，希望全世界都能知道我写了个很牛逼的玩意儿，让大家都用起来。就是有着这类人，才让软件行业一往无前地汹涌发展吧。</p>
+<p>我尊敬，并希望也能成为那样的人。</p>
 ]]></content>
       <tags>
         <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/03/29/18-22-38/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d </span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第一篇博客，聊聊这个博客本身</title>
-    <url>/2023/03/29/20-26-12/</url>
-    <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
-<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
-<p>为了解决文档的管理问题，我就建了一个博客。</p>
-<h2 id="还有更多的想法么？"><a href="#还有更多的想法么？" class="headerlink" title="还有更多的想法么？"></a>还有更多的想法么？</h2><p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
-<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
-<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
-<h2 id="博客的内容会有哪些？"><a href="#博客的内容会有哪些？" class="headerlink" title="博客的内容会有哪些？"></a>博客的内容会有哪些？</h2><p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
-<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
-<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
-<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
-<h2 id="后续规划？"><a href="#后续规划？" class="headerlink" title="后续规划？"></a>后续规划？</h2><p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
-<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
-<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
-<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>远程调试案例</title>
-    <url>/2023/07/10/15-08-11/</url>
-    <content><![CDATA[<p>在开发过程中，总是会遇到本地无法重现服务器端报错的问题，这时候远程调试（remote debug）就是很好的应对方法。</p>
-<span id="more"></span>
-
-<p>下面我们来看一下怎么使用jvm的远程调试能力。</p>
-<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>本地需要有源码，有源码才可以敲断点调试。</p>
-<h2 id="编写启动脚本"><a href="#编写启动脚本" class="headerlink" title="编写启动脚本"></a>编写启动脚本</h2><p>在实际项目中我们往往是通过脚本来启动Java程序，我们需要在启动命令上添加参数来开启远程debug模式。</p>
-<p>需要添加的命令如下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y</span><br></pre></td></tr></table></figure>
-
-<p>以下是一份常见的启动脚本示例</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get current folder.</span></span><br><span class="line">CMD_DIR=$(cd $(dirname $0); pwd)</span><br><span class="line">cd &quot;$CMD_DIR/..&quot;</span><br><span class="line">CURRENT_DIR=$(pwd)</span><br><span class="line">echo User dir: &quot;$CURRENT_DIR&quot;</span><br><span class="line">CONF_DIR=&quot;$CURRENT_DIR/conf&quot;</span><br><span class="line">STATIC_DIR=&quot;$CURRENT_DIR/static&quot;</span><br><span class="line">ARGS=$*</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get file name.</span></span><br><span class="line">FILE_PATH=&quot;$CURRENT_DIR/lib&quot;</span><br><span class="line">files=$(ls &quot;$FILE_PATH&quot;)</span><br><span class="line">for filename in $files</span><br><span class="line">do</span><br><span class="line">   echo Main Jar: $filename</span><br><span class="line">done</span><br><span class="line">if [[  -f &quot;$CONF_DIR/application.yml&quot; || -f &quot;$CONF_DIR/bootstrap.yml&quot; ]]; then</span><br><span class="line">    echo &quot;Startup app $filename with parameter: $ARGS &quot;</span><br><span class="line">    nohup java \</span><br><span class="line">    -server \</span><br><span class="line">    -Dspring.web.resources.static-locations=&quot;$STATIC_DIR/&quot; \</span><br><span class="line">    -Dspring.config.location=&quot;$CONF_DIR/&quot; \</span><br><span class="line">    -Dkoca.config.location=&quot;config&quot; \</span><br><span class="line">    -Dkoca.lcp.dump.location=&quot;$CURRENT_DIR/&quot; \</span><br><span class="line">    -Dlogging.config=&quot;$CONF_DIR/logback-spring.xml&quot; \</span><br><span class="line">    -Dspring.banner.location=&quot;file:$CONF_DIR/banner.txt&quot; \</span><br><span class="line">    -Duser.timezone=GMT+08 \</span><br><span class="line">    -Xdebug \</span><br><span class="line">    -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y \</span><br><span class="line">    -jar &quot;$CURRENT_DIR/lib/$filename&quot; \</span><br><span class="line">    $ARGS \</span><br><span class="line">    &gt;./nohup.log 2&gt;&amp;1 &amp;</span><br><span class="line">else</span><br><span class="line">    echo &quot;Configuration folder or files is not exist.&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="运行启动脚本"><a href="#运行启动脚本" class="headerlink" title="运行启动脚本"></a>运行启动脚本</h2><p>我们修改脚本后，将这份脚本上传到服务器。</p>
-<p>正常启动时，程序会有一大堆运行日志。但是使用这份脚本启动后，程序启动时会卡住，等待其他客户端连接debug端口。</p>
-<p>这个debug端口就是命令中设置的5005。</p>
-<h2 id="本地创建客户端"><a href="#本地创建客户端" class="headerlink" title="本地创建客户端"></a>本地创建客户端</h2><p>本地使用IDEA创建客户端。</p>
-<img src="/2023/07/10/15-08-11/image-20230630174009789.png" class="" title="image-20230630174009789">
-
-<p>修改host为服务器地址</p>
-<img src="/2023/07/10/15-08-11/image-20230630174033683.png" class="" title="image-20230630174033683">
-
-<p>创建完毕后运行该客户端，运行时该客户端会和服务端建立连接。</p>
-<p>可以看到原本卡住的服务端开始正常运行。</p>
-<p>在本地的代码中敲断点，就可以进行debug了，和平时在本地debug没什么差别。</p>
-]]></content>
-      <tags>
-        <tag>【工作】运维部署</tag>
       </tags>
   </entry>
   <entry>
@@ -577,6 +529,45 @@
       </tags>
   </entry>
   <entry>
+    <title>Netty的FastThreadLocal带来了什么？</title>
+    <url>/2024/09/13/14-49-51/</url>
+    <content><![CDATA[<p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
+<span id="more"></span>
+
+<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
+<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
+<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
+<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
+<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
+<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
+<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
+<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
+<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
+<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
+<p>然后再来聊聊其中的实现。</p>
+<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
+<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
+<p>它的get()过程是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
+
+<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
+<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
+<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
+
+<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
+<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
+<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
+<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
+<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
+<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
+]]></content>
+      <tags>
+        <tag>【工作】Netty</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>聊聊管理</title>
     <url>/2024/04/29/14-42-33/</url>
     <content><![CDATA[<p>想起来写这个事情，是正好从上海出差回家的时候，回想起这两年的经历，让我深有感触。</p>
@@ -604,26 +595,106 @@
       </tags>
   </entry>
   <entry>
-    <title>JRE环境使用Arthas</title>
-    <url>/2024/09/20/19-12-39/</url>
-    <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
+    <title>工作中印象最深刻的一件事</title>
+    <url>/2024/09/16/20-02-30/</url>
+    <content><![CDATA[<p>在准备秋招面试，看到这个常见的面试题，突然有感而发。工作之后，发现这个问题只从技术角度看，实在是有些肤浅，或许可以提出更多的东西。</p>
 <span id="more"></span>
 
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
-<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
-<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
-<p>这里提供一个脚本：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>最关键的就是脚本中最后的两句</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
-
-<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
-<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
+<h2 id="技术之外的东西"><a href="#技术之外的东西" class="headerlink" title="技术之外的东西"></a>技术之外的东西</h2><p>如果是放在还没参加工作时，看到这个问题“你在项目中遇到过的印象最深刻的一件事”，我大概率就是：胡诌一个很难的技术问题，然后说这问题解决的过程有些困难，但是经过我艰苦卓绝地努力，还是完成了，最后觉得自己很有成就感巴拉巴拉……</p>
+<p>但是放到今天，再看这问题，我就倾向于带一些技术之外的东西进去。</p>
+<p>这能聊的就多了。</p>
+<p>比如有个不怎么开窍的实习生，怎么教都教不会，最后是我自己帮他写了代码。我反思之后，觉得自己带人的方式有些问题，从此之后就换了一种方式教人。如果实习生能力差，就选取一些时间上限制不那么多的任务；如果愿意挑战，就分一些预研性质的任务，让他产出方案。<br>这样能说的就多多了，我相信也是大部分面试官可以感同身受的。</p>
+<p>当然上面只是个例子，最主要的一点就是，我觉得和同事相处的方式、选取某种技术的决断、一些任务优先级的取舍，这些都可以是印象深刻的事情。对于这些事情，技术固然包含在其中，但提升了这些事难度的、给人深刻印象的，恰恰就是技术之外的东西。</p>
+<h2 id="印象最深的一件事"><a href="#印象最深的一件事" class="headerlink" title="印象最深的一件事"></a>印象最深的一件事</h2><p>然后就提到我自己参加工作后印象最深的一件事，应该就是写公司业务协议序列化框架的纯Java版本了。</p>
+<p>准确说起来，这块的代码我没有写多少。我主要是负责这个任务的分配、监督和技术指导，编码由组内的一个同事负责。</p>
+<p>前期预研时，阅读了Protobuf的源码，然后实现时是参考了C++的实现。</p>
+<p>简单来说，就是参考C++的代码，从Protobuf中找到对应的可用代码，然后移植到我们的框架中。</p>
+<p>包体的解析逻辑有大量的可用实现，但是Java对象属性的获取和设置的逻辑，我们是用Unsafe重新写了一遍。</p>
+<p>整个过程顺利得不可思议，原计划两个月的任务，最后一个月就完成了。</p>
+<p>但是问题就出在这个完成之后，我们发现还有一些性能优化的空间。</p>
+<p>这个同事有些钻牛角尖，希望能把整个代码重构，然后做性能优化。但是我组织了他。</p>
+<p>这就是我印象最深的地方了，我经过了取舍，决定把重构和优化的工作往后无限期推迟，让他先基于目前的版本给出详细的文档。</p>
+<p>我们大部分同事都不具备给项目收尾的能力，就是一个模块，写到什么程度，我们就应该停止迭代，转而发布正式版。</p>
+<p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
+<p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
+<p>这就是我从这件事情里学到的。</p>
 ]]></content>
       <tags>
-        <tag>【工作】优秀实践</tag>
+        <tag>【工作】经验总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我为什么选择去留学</title>
+    <url>/2023/09/28/19-55-01/</url>
+    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
+<span id="more"></span>
+
+<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
+<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
+<p>但最后各方面原因，还是没有去。</p>
+<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
+<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
+<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
+<p>主要原因有三点。</p>
+<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
+<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
+<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
+<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
+<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
+<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
+<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
+<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
+<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
+<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
+<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>龙年第一天</title>
+    <url>/2024/02/18/13-22-14/</url>
+    <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
+<span id="more"></span>
+
+<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
+<p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
+<p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
+<p>去年确实是做了不少事。</p>
+<p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p>
+<p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p>
+<p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p>
+<p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p>
+<p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/03/29/18-22-38/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d </span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】博客</tag>
       </tags>
   </entry>
   <entry>
@@ -647,129 +718,90 @@
       </tags>
   </entry>
   <entry>
-    <title>面试笔记-Spring</title>
-    <url>/2024/10/16/11-43-17/</url>
-    <content><![CDATA[<p>这里记录一下面试的准备过程中关于Spring的笔记。</p>
-<p>问Java不问Spring简直不可能好吧。</p>
+    <title>第一篇博客，聊聊这个博客本身</title>
+    <url>/2023/03/29/20-26-12/</url>
+    <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
+<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
+<p>为了解决文档的管理问题，我就建了一个博客。</p>
+<h2 id="还有更多的想法么？"><a href="#还有更多的想法么？" class="headerlink" title="还有更多的想法么？"></a>还有更多的想法么？</h2><p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
+<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
+<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
+<h2 id="博客的内容会有哪些？"><a href="#博客的内容会有哪些？" class="headerlink" title="博客的内容会有哪些？"></a>博客的内容会有哪些？</h2><p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
+<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
+<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
+<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
+<h2 id="后续规划？"><a href="#后续规划？" class="headerlink" title="后续规划？"></a>后续规划？</h2><p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
+<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
+<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
+<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JRE环境使用Arthas</title>
+    <url>/2024/09/20/19-12-39/</url>
+    <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
 <span id="more"></span>
 
-<h2 id="Spring篇"><a href="#Spring篇" class="headerlink" title="Spring篇"></a>Spring篇</h2><p>Spring是一个Java开发框架，主要是解决企业级开发的一些痛点。一开始可能主要是用于Web应用的开发，但目前实践中它已经在国内Java后端开发这方面一统江湖。</p>
-<p>它把各种业务逻辑都抽象封装为Bean，Spring负责项目启动时把这些Bean创建出来，进行业务开发的时候只需要通过Spring提供的API或其他方式，获取到对应的Bean就可以执行各种复杂业务操作。</p>
-<h3 id="为什么是Spring"><a href="#为什么是Spring" class="headerlink" title="为什么是Spring"></a>为什么是Spring</h3><p>轻量。</p>
-<p>IOC，控制反转。业务开发不用关注对象创建之类的事情，只需要编码，并给出依赖，框架会自动帮你找到对应的实现类。</p>
-<p>AOP，面向切面编程。</p>
-<p>事务管理。</p>
-<p>异常处理。</p>
-<h3 id="Autowired和Resource的区别"><a href="#Autowired和Resource的区别" class="headerlink" title="Autowired和Resource的区别"></a>Autowired和Resource的区别</h3><p>Autowired是Spring提供的注解，Resource是javax的注解。Spring是支持了javax提供的标准注解，是标准的一个实现。</p>
-<p>假如换了框架（一般不会），Autowired必定不可用，Resource可能还能用。</p>
-<p>Autowired默认按照type类装配，默认要求对象必须存在且唯一。可以用Qualifier来指定BeanName。</p>
-<p>Resource注解提供了type和name两个注解字段。name的优先级高于type。</p>
-<h3 id="依赖注入的方式"><a href="#依赖注入的方式" class="headerlink" title="依赖注入的方式"></a>依赖注入的方式</h3><p>构造器、setter、接口。反射注入</p>
-<h3 id="Spring-MVC"><a href="#Spring-MVC" class="headerlink" title="Spring MVC"></a>Spring MVC</h3><p>Spring MVC是Spring的一个模块，针对web应用的场景。</p>
-<p>V不是普遍意义上的前端，而是用jsp或其他方式渲染的一个页面。</p>
-<p>M是逻辑层，做计算和数据库操作。C是控制层，负责接收网络请求。</p>
-<p>Spring在Servlet的基础上实现，定义了一个统一的请求接收入口：DispatcherServlet。DispatcherServlet会根据url和请求类型分发请求到用户编码的Controller中，然后执行用户的逻辑。</p>
-<p>常用注解：@RequestMapping、@RequestBody、@ResponseBody</p>
-<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>把一些业务无关，在系统层面共通的逻辑封装起来，从而减少代码冗余，有利于代码的扩展性和维护性。比如参数校验、日志采集、权限控制。</p>
-<p>Spring的AOP是基于动态代理实现的。对于已经实现了接口的，用JDK动态代理，创建一个接口的实现类然后代理。没有实现的，用CGlib，创建一个类的子类然后代理。</p>
-<p>也可以用AspectJ实现自己的AOP逻辑。</p>
-<p>Spring的AOP属于运行时增强，AspectJ的AOP是编译时增强。AspectJ是字节码操作，性能稍高。</p>
-<h3 id="关注点和横切关注点"><a href="#关注点和横切关注点" class="headerlink" title="关注点和横切关注点"></a>关注点和横切关注点</h3><p>关注点是某个特定的业务功能，横切关注点是多个业务都会用到的系统功能，比如日志、参数校验、权限。</p>
-<h3 id="什么是通知advice"><a href="#什么是通知advice" class="headerlink" title="什么是通知advice"></a>什么是通知advice</h3><p>方法执行前和后要做的逻辑处理。</p>
-<p>before</p>
-<p>after</p>
-<p>after-returning</p>
-<p>after-throwing</p>
-<p>around</p>
-<p>这个结果处理和Spring WebFlux中的回调很像。</p>
-<h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>控制反转，把创建对象的权利移交给框架。</p>
-<p>对象不需要程序自己去new，而是通过依赖注入从框架中获取。</p>
-<p>IOC让组件保持松散的耦合，从而创造了可以进行AOP编程的余地。</p>
-<h3 id="Spring-Bean生命周期"><a href="#Spring-Bean生命周期" class="headerlink" title="Spring Bean生命周期"></a>Spring Bean生命周期</h3><p>Servlet：实例化、初始化、接收请求、销毁。</p>
-<p>Bean：</p>
-<p>1、配置扫描，创建BeanDefinition，构建BeanFactory。</p>
-<p>2、实例化：启动时的第一步。当BeanFactory被请求一个未实例化的Bean时，会调用createBean方法实例化一个Bean。</p>
-<p>3、依赖注入：实例化之后的对象在BeanWrapper中，Spring通过BeanDefinition的配置进行依赖注入。这里会先找这个Bean的依赖所对应的BeanFactory，然后提供一个实例化Bean进行依赖注入。</p>
-<p>4、处理Aware接口：BeanNameAware、BeanFactoryAware、ApplicationContextAware</p>
-<p>5、BeanPostProcessor的postProcessBeforeInitialization方法</p>
-<p>6、InitializingBean的afterPropertiesSet</p>
-<p>7、BeanPostProcessor的postProcessAfterInitialization方法</p>
-<p>8、scope为singleton的缓存在容器，prototype的返回最开始请求的客户端。</p>
-<p>9、销毁，调用DisposableBean的afterPropertiesSet</p>
-<h3 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h3><p>1、singleton：单例</p>
-<p>2、prototype：每个Bean一个实例</p>
-<p>3、request：每个网络请求一个实例</p>
-<p>4、session：每个session一个实例</p>
-<p>5、globe-session</p>
-<h3 id="Spring的设计模式"><a href="#Spring的设计模式" class="headerlink" title="Spring的设计模式"></a>Spring的设计模式</h3><p>简单工厂模式：Bean的创建</p>
-<p>单例模式：单例的Bean</p>
-<p>代理模式：AOP的实现</p>
-<p>适配器：Adapter，Spring中以Adapter结尾的一般都是适配器模式。比如AdvisorAdapter</p>
-<p>观察者模式：Spring事件</p>
-<p>模版模式：JdbcTemplate</p>
-<h3 id="ApplicationContext和BeanFactory"><a href="#ApplicationContext和BeanFactory" class="headerlink" title="ApplicationContext和BeanFactory"></a>ApplicationContext和BeanFactory</h3><p>BeanFactory是基础接口，只提供最基础的Bean管理功能，在spring-beans包中。</p>
-<p>ApplicationContext继承了BeanFactory，并且扩展了事务管理、国际化、AOP。</p>
-<p>BeanFactory是延迟加载，而ApplicationContext是启动时实例化所有的Bean。</p>
-<h3 id="Spring的单例Bean是线程安全的吗"><a href="#Spring的单例Bean是线程安全的吗" class="headerlink" title="Spring的单例Bean是线程安全的吗"></a>Spring的单例Bean是线程安全的吗</h3><p>是否线程安全和单例无关。Spring本身没有对Bean做任何并发的保护，这也不是Spring应该关心的东西。是否线程安全由开发者来保证。</p>
-<h3 id="循环依赖怎么解决"><a href="#循环依赖怎么解决" class="headerlink" title="循环依赖怎么解决"></a>循环依赖怎么解决</h3><p>三级缓存</p>
-<p>第一级缓存是初始化完成的Bean；第二级是完成了实例化，但是没有完成依赖注入的Bean；第三级是没实例化的Bean，存放其BeanFactory。</p>
-<p>假设有两个Bean A、B，AB循环依赖</p>
-<p>1、Bean都是由BeanFactory创建，A的BeanFactory会先实例化A，放入二级缓存，随后进行依赖注入。</p>
-<p>2、A的BeanFactory通过依赖找到了B，先从一级缓存找，一路找到三级缓存，最后找到了B的BeanFactory。这时候B没有创建，所以用B的BeanFactory创建B。BeanFactory会先创建一个B的实例，这样在二级缓存就有了一个B的实例，然后进行依赖注入。</p>
-<p>3、B在依赖注入的时候会在二级缓存找到A，这时会直接获取A的实例注入B，这样就完成B的依赖注入。B完成创建后放入一级缓存，然后把B通过BeanFactory的方法返回给A，A就可以继续进行依赖注入。</p>
-<h3 id="Spring事务隔离级别"><a href="#Spring事务隔离级别" class="headerlink" title="Spring事务隔离级别"></a>Spring事务隔离级别</h3><p>同数据库的级别：读未提交、读已提交、可重复读、串行化</p>
-<h3 id="Spring事务传播级别"><a href="#Spring事务传播级别" class="headerlink" title="Spring事务传播级别"></a>Spring事务传播级别</h3><p>PROPAGATION_REQUIRED：有事务就加入，没有就创建</p>
-<p>PROPAGATION_SUPPORTS：有就加入，没有就不加事务</p>
-<p>PROPAGATION_MANDATORY：有就加入，没有就抛异常</p>
-<p>PROPAGATION_REQUIRES_NEW：永远创建一个新的事务执行</p>
-<p>PROPAGATION_NOT_SUPPORTED：永远不以事务执行</p>
-<p>PROPAGATION_NEVER：有事务就抛异常</p>
-<p>PROPAGATION_NESTED：有事务就创建嵌套事务，没有就创建</p>
-<h3 id="Spring事务实现"><a href="#Spring事务实现" class="headerlink" title="Spring事务实现"></a>Spring事务实现</h3><p>编程式事务、声明式事务。</p>
-<p>PlatformTransactionManager中定义了事务的开始、提交、回滚等操作。不同数据库会有不同实现。</p>
-<h3 id="Spring事务管理优点"><a href="#Spring事务管理优点" class="headerlink" title="Spring事务管理优点"></a>Spring事务管理优点</h3><p>抽象了统一的接口。支持声明式事务管理。</p>
-<p>可以和Spring多数据源结合。</p>
-<h3 id="事务三要素"><a href="#事务三要素" class="headerlink" title="事务三要素"></a>事务三要素</h3><p>数据源：事务的真正处理者。</p>
-<p>事务管理器：处理事务的打开、提交、回滚。</p>
-<p>事务应用和配置：表明哪些方法参与事务，事务的隔离级别，传播级别，超时时间。</p>
-<h3 id="事务注解的本质"><a href="#事务注解的本质" class="headerlink" title="事务注解的本质"></a>事务注解的本质</h3><p>@Transactional仅仅是一些元数据，这里通过AOP的方式，将元信息传递事务管理器，事务管理器再提交给数据源实现具体的事务。</p>
-<p>其实就相当于在方法前后加了一些事务的代码。</p>
-<h2 id="Spring-Boot篇"><a href="#Spring-Boot篇" class="headerlink" title="Spring Boot篇"></a>Spring Boot篇</h2><h3 id="为什么是Spring-Boot"><a href="#为什么是Spring-Boot" class="headerlink" title="为什么是Spring Boot"></a>为什么是Spring Boot</h3><p>独立运行：内嵌了tomcat、Jetty。不需要打成war包部署到容器。可以打成独立的Jar包运行。</p>
-<p>配置简化，自动装配：能根据当前路径下的类、jar来自动配置bean。</p>
-<p>无代码生成：配置过程中没有代码生成，没有xml配置文件，都是基于条件注解完成。</p>
-<p>监控：默认就提供了很多监控端点。</p>
-<p>Spring Boot大量使用了注解来驱动开发。</p>
-<h3 id="核心注解"><a href="#核心注解" class="headerlink" title="核心注解"></a>核心注解</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@SpringBootConfiguration</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@ComponentScan</span><br></pre></td></tr></table></figure>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
+<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
+<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
+<p>这里提供一个脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="如何理解starters"><a href="#如何理解starters" class="headerlink" title="如何理解starters"></a>如何理解starters</h3><p>一个把所有依赖都集成在一起的依赖包，简化引入的成本。</p>
-<h3 id="如何在启动时执行一些特殊的逻辑"><a href="#如何在启动时执行一些特殊的逻辑" class="headerlink" title="如何在启动时执行一些特殊的逻辑"></a>如何在启动时执行一些特殊的逻辑</h3><p>ApplicationRunner，CommandLineRunner。</p>
-<p>ApplicationRunner有一个实现，是在启动时把程序的pid打印到一个文件中，方便运维。</p>
-<h3 id="监视器-actuator"><a href="#监视器-actuator" class="headerlink" title="监视器 actuator"></a>监视器 actuator</h3><p>actuator会对外暴露一些端点，可以通过配置的方式管理这些端点（endpoint）。这是能让用户来访问和监控程序当前的运行状态。配合运维平台使用。</p>
-<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>ControllerAdvice，可以用来处理所有的异常，封装为统一的异常信息返回。</p>
-<h3 id="配置加载顺序"><a href="#配置加载顺序" class="headerlink" title="配置加载顺序"></a>配置加载顺序</h3><p>Spring Boot的配置加载顺序和其优先级一致。</p>
-<p>1、命令行，–大于-D</p>
-<p>2、Java系统属性，System.getProperties。</p>
-<p>3、环境变量</p>
-<p>4、yml文件</p>
-<p>5、默认配置</p>
-<h3 id="application和bootstrap文件"><a href="#application和bootstrap文件" class="headerlink" title="application和bootstrap文件"></a>application和bootstrap文件</h3><p>老版本Spring Cloud Alibaba的Nacos只能使用bootstrap文件，后面版本修改了。</p>
-<h2 id="Spring-Cloud篇"><a href="#Spring-Cloud篇" class="headerlink" title="Spring Cloud篇"></a>Spring Cloud篇</h2><h3 id="为什么是Spring-Cloud"><a href="#为什么是Spring-Cloud" class="headerlink" title="为什么是Spring Cloud"></a>为什么是Spring Cloud</h3><p>是用于构建分布式应用的开源框架。基于Spring Boot，提供与外部系统集成的能力。国内有很多二开的框架，比如Spring Cloud Alibaba，TSF，Spring Cloud Huawei。</p>
-<h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>一种架构。将单一功能的应用程序划分为一组小的服务，每个服务独立运行，服务之间相互协调、配合，最终实现一个业务功能。</p>
-<p>服务之间使用轻量级的通讯机制（通常是http，但是dubbo之类的也可以）。</p>
-<p>需要有一个中心来集中化管理这些服务。</p>
-<h3 id="服务熔断和降级"><a href="#服务熔断和降级" class="headerlink" title="服务熔断和降级"></a>服务熔断和降级</h3><p>分布式的场景下，某个服务出现异常，当检测到这种情况后，可以切断对该服务的调用。等到服务正常以后，再恢复服务。这就是熔断。</p>
-<p>降级是是指服务熔断以后，如果还有对该服务的调用，直接失败。</p>
-<h3 id="eureka-zookeeper-nacos"><a href="#eureka-zookeeper-nacos" class="headerlink" title="eureka zookeeper nacos"></a>eureka zookeeper nacos</h3><p>Eureka的高可用机制比较完善，可以保证服务随时可用。</p>
-<p>zookeeper对于多节点的数据一致性处理比较完善，可以用于主从选举。zk其实为了分布式协调而设计的，比如分布式锁、选举都可以用zk来做。</p>
-<p>nacos提供了可视化界面，同时支持服务注册发现和配置下发，一个人干了两个人的活。</p>
-<h3 id="Spring-Boot-Spring-Cloud"><a href="#Spring-Boot-Spring-Cloud" class="headerlink" title="Spring Boot Spring Cloud"></a>Spring Boot Spring Cloud</h3><p>Spring Boot是专注于开发单个微服务。</p>
-<p>Spring Cloud是关注分布式系统的，分布式系统可以是多个Spring Boot开发的微服务的集合，Spring Cloud用于提供微服务之间调用、微服务的配置获取、服务注册、路由等。</p>
-<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>某个服务可能有多个实例，调用该服务时，每个请求会分发到不同的实例处理，有助于提高服务的吞吐量。</p>
-<h3 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h3><p>Feign是一个HTTP请求客户端，提供了声明式的调用方式。主要是通过JDK动态代理实现。它整合了负载均衡的能力（Spring Cloud LoadBalance）</p>
+<p>最关键的就是脚本中最后的两句</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
+
+<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
+<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
+]]></content>
+      <tags>
+        <tag>【工作】优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-Java基础</title>
+    <url>/2024/10/16/15-04-36/</url>
+    <content><![CDATA[<p>Java基础是纯纯的八股文了，但还是要过一遍。</p>
+<span id="more"></span>
 ]]></content>
       <tags>
         <tag>【工作】面试</tag>
-        <tag>【工作】Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>远程调试案例</title>
+    <url>/2023/07/10/15-08-11/</url>
+    <content><![CDATA[<p>在开发过程中，总是会遇到本地无法重现服务器端报错的问题，这时候远程调试（remote debug）就是很好的应对方法。</p>
+<span id="more"></span>
+
+<p>下面我们来看一下怎么使用jvm的远程调试能力。</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>本地需要有源码，有源码才可以敲断点调试。</p>
+<h2 id="编写启动脚本"><a href="#编写启动脚本" class="headerlink" title="编写启动脚本"></a>编写启动脚本</h2><p>在实际项目中我们往往是通过脚本来启动Java程序，我们需要在启动命令上添加参数来开启远程debug模式。</p>
+<p>需要添加的命令如下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y</span><br></pre></td></tr></table></figure>
+
+<p>以下是一份常见的启动脚本示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get current folder.</span></span><br><span class="line">CMD_DIR=$(cd $(dirname $0); pwd)</span><br><span class="line">cd &quot;$CMD_DIR/..&quot;</span><br><span class="line">CURRENT_DIR=$(pwd)</span><br><span class="line">echo User dir: &quot;$CURRENT_DIR&quot;</span><br><span class="line">CONF_DIR=&quot;$CURRENT_DIR/conf&quot;</span><br><span class="line">STATIC_DIR=&quot;$CURRENT_DIR/static&quot;</span><br><span class="line">ARGS=$*</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get file name.</span></span><br><span class="line">FILE_PATH=&quot;$CURRENT_DIR/lib&quot;</span><br><span class="line">files=$(ls &quot;$FILE_PATH&quot;)</span><br><span class="line">for filename in $files</span><br><span class="line">do</span><br><span class="line">   echo Main Jar: $filename</span><br><span class="line">done</span><br><span class="line">if [[  -f &quot;$CONF_DIR/application.yml&quot; || -f &quot;$CONF_DIR/bootstrap.yml&quot; ]]; then</span><br><span class="line">    echo &quot;Startup app $filename with parameter: $ARGS &quot;</span><br><span class="line">    nohup java \</span><br><span class="line">    -server \</span><br><span class="line">    -Dspring.web.resources.static-locations=&quot;$STATIC_DIR/&quot; \</span><br><span class="line">    -Dspring.config.location=&quot;$CONF_DIR/&quot; \</span><br><span class="line">    -Dkoca.config.location=&quot;config&quot; \</span><br><span class="line">    -Dkoca.lcp.dump.location=&quot;$CURRENT_DIR/&quot; \</span><br><span class="line">    -Dlogging.config=&quot;$CONF_DIR/logback-spring.xml&quot; \</span><br><span class="line">    -Dspring.banner.location=&quot;file:$CONF_DIR/banner.txt&quot; \</span><br><span class="line">    -Duser.timezone=GMT+08 \</span><br><span class="line">    -Xdebug \</span><br><span class="line">    -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y \</span><br><span class="line">    -jar &quot;$CURRENT_DIR/lib/$filename&quot; \</span><br><span class="line">    $ARGS \</span><br><span class="line">    &gt;./nohup.log 2&gt;&amp;1 &amp;</span><br><span class="line">else</span><br><span class="line">    echo &quot;Configuration folder or files is not exist.&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="运行启动脚本"><a href="#运行启动脚本" class="headerlink" title="运行启动脚本"></a>运行启动脚本</h2><p>我们修改脚本后，将这份脚本上传到服务器。</p>
+<p>正常启动时，程序会有一大堆运行日志。但是使用这份脚本启动后，程序启动时会卡住，等待其他客户端连接debug端口。</p>
+<p>这个debug端口就是命令中设置的5005。</p>
+<h2 id="本地创建客户端"><a href="#本地创建客户端" class="headerlink" title="本地创建客户端"></a>本地创建客户端</h2><p>本地使用IDEA创建客户端。</p>
+<img src="/2023/07/10/15-08-11/image-20230630174009789.png" class="" title="image-20230630174009789">
+
+<p>修改host为服务器地址</p>
+<img src="/2023/07/10/15-08-11/image-20230630174033683.png" class="" title="image-20230630174033683">
+
+<p>创建完毕后运行该客户端，运行时该客户端会和服务端建立连接。</p>
+<p>可以看到原本卡住的服务端开始正常运行。</p>
+<p>在本地的代码中敲断点，就可以进行debug了，和平时在本地debug没什么差别。</p>
+]]></content>
+      <tags>
+        <tag>【工作】运维部署</tag>
       </tags>
   </entry>
   <entry>
@@ -896,6 +928,134 @@
       </tags>
   </entry>
   <entry>
+    <title>面试笔记-Spring</title>
+    <url>/2024/10/16/11-43-17/</url>
+    <content><![CDATA[<p>这里记录一下面试的准备过程中关于Spring的笔记。</p>
+<p>问Java不问Spring简直不可能好吧。</p>
+<span id="more"></span>
+
+<h2 id="Spring篇"><a href="#Spring篇" class="headerlink" title="Spring篇"></a>Spring篇</h2><p>Spring是一个Java开发框架，主要是解决企业级开发的一些痛点。一开始可能主要是用于Web应用的开发，但目前实践中它已经在国内Java后端开发这方面一统江湖。</p>
+<p>它把各种业务逻辑都抽象封装为Bean，Spring负责项目启动时把这些Bean创建出来，进行业务开发的时候只需要通过Spring提供的API或其他方式，获取到对应的Bean就可以执行各种复杂业务操作。</p>
+<h3 id="为什么是Spring"><a href="#为什么是Spring" class="headerlink" title="为什么是Spring"></a>为什么是Spring</h3><p>轻量。</p>
+<p>IOC，控制反转。业务开发不用关注对象创建之类的事情，只需要编码，并给出依赖，框架会自动帮你找到对应的实现类。</p>
+<p>AOP，面向切面编程。</p>
+<p>事务管理。</p>
+<p>异常处理。</p>
+<h3 id="Autowired和Resource的区别"><a href="#Autowired和Resource的区别" class="headerlink" title="Autowired和Resource的区别"></a>Autowired和Resource的区别</h3><p>Autowired是Spring提供的注解，Resource是javax的注解。Spring是支持了javax提供的标准注解，是标准的一个实现。</p>
+<p>假如换了框架（一般不会），Autowired必定不可用，Resource可能还能用。</p>
+<p>Autowired默认按照type类装配，默认要求对象必须存在且唯一。可以用Qualifier来指定BeanName。</p>
+<p>Resource注解提供了type和name两个注解字段。name的优先级高于type。</p>
+<h3 id="依赖注入的方式"><a href="#依赖注入的方式" class="headerlink" title="依赖注入的方式"></a>依赖注入的方式</h3><p>构造器、setter、接口。反射注入</p>
+<h3 id="Spring-MVC"><a href="#Spring-MVC" class="headerlink" title="Spring MVC"></a>Spring MVC</h3><p>Spring MVC是Spring的一个模块，针对web应用的场景。</p>
+<p>V不是普遍意义上的前端，而是用jsp或其他方式渲染的一个页面。</p>
+<p>M是逻辑层，做计算和数据库操作。C是控制层，负责接收网络请求。</p>
+<p>Spring在Servlet的基础上实现，定义了一个统一的请求接收入口：DispatcherServlet。DispatcherServlet会根据url和请求类型分发请求到用户编码的Controller中，然后执行用户的逻辑。</p>
+<p>常用注解：@RequestMapping、@RequestBody、@ResponseBody</p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>把一些业务无关，在系统层面共通的逻辑封装起来，从而减少代码冗余，有利于代码的扩展性和维护性。比如参数校验、日志采集、权限控制。</p>
+<p>Spring的AOP是基于动态代理实现的。对于已经实现了接口的，用JDK动态代理，创建一个接口的实现类然后代理。没有实现的，用CGlib，创建一个类的子类然后代理。</p>
+<p>也可以用AspectJ实现自己的AOP逻辑。</p>
+<p>Spring的AOP属于运行时增强，AspectJ的AOP是编译时增强。AspectJ是字节码操作，性能稍高。</p>
+<h3 id="关注点和横切关注点"><a href="#关注点和横切关注点" class="headerlink" title="关注点和横切关注点"></a>关注点和横切关注点</h3><p>关注点是某个特定的业务功能，横切关注点是多个业务都会用到的系统功能，比如日志、参数校验、权限。</p>
+<h3 id="什么是通知advice"><a href="#什么是通知advice" class="headerlink" title="什么是通知advice"></a>什么是通知advice</h3><p>方法执行前和后要做的逻辑处理。</p>
+<p>before</p>
+<p>after</p>
+<p>after-returning</p>
+<p>after-throwing</p>
+<p>around</p>
+<p>这个结果处理和Spring WebFlux中的回调很像。</p>
+<h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>控制反转，把创建对象的权利移交给框架。</p>
+<p>对象不需要程序自己去new，而是通过依赖注入从框架中获取。</p>
+<p>IOC让组件保持松散的耦合，从而创造了可以进行AOP编程的余地。</p>
+<h3 id="Spring-Bean生命周期"><a href="#Spring-Bean生命周期" class="headerlink" title="Spring Bean生命周期"></a>Spring Bean生命周期</h3><p>Servlet：实例化、初始化、接收请求、销毁。</p>
+<p>Bean：</p>
+<p>1、配置扫描，创建BeanDefinition，构建BeanFactory。</p>
+<p>2、实例化：启动时的第一步。当BeanFactory被请求一个未实例化的Bean时，会调用createBean方法实例化一个Bean。</p>
+<p>3、依赖注入：实例化之后的对象在BeanWrapper中，Spring通过BeanDefinition的配置进行依赖注入。这里会先找这个Bean的依赖所对应的BeanFactory，然后提供一个实例化Bean进行依赖注入。</p>
+<p>4、处理Aware接口：BeanNameAware、BeanFactoryAware、ApplicationContextAware</p>
+<p>5、BeanPostProcessor的postProcessBeforeInitialization方法</p>
+<p>6、InitializingBean的afterPropertiesSet</p>
+<p>7、BeanPostProcessor的postProcessAfterInitialization方法</p>
+<p>8、scope为singleton的缓存在容器，prototype的返回最开始请求的客户端。</p>
+<p>9、销毁，调用DisposableBean的afterPropertiesSet</p>
+<h3 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h3><p>1、singleton：单例</p>
+<p>2、prototype：每个Bean一个实例</p>
+<p>3、request：每个网络请求一个实例</p>
+<p>4、session：每个session一个实例</p>
+<p>5、globe-session</p>
+<h3 id="Spring的设计模式"><a href="#Spring的设计模式" class="headerlink" title="Spring的设计模式"></a>Spring的设计模式</h3><p>简单工厂模式：Bean的创建</p>
+<p>单例模式：单例的Bean</p>
+<p>代理模式：AOP的实现</p>
+<p>适配器：Adapter，Spring中以Adapter结尾的一般都是适配器模式。比如AdvisorAdapter</p>
+<p>观察者模式：Spring事件</p>
+<p>模版模式：JdbcTemplate</p>
+<h3 id="ApplicationContext和BeanFactory"><a href="#ApplicationContext和BeanFactory" class="headerlink" title="ApplicationContext和BeanFactory"></a>ApplicationContext和BeanFactory</h3><p>BeanFactory是基础接口，只提供最基础的Bean管理功能，在spring-beans包中。</p>
+<p>ApplicationContext继承了BeanFactory，并且扩展了事务管理、国际化、AOP。</p>
+<p>BeanFactory是延迟加载，而ApplicationContext是启动时实例化所有的Bean。</p>
+<h3 id="Spring的单例Bean是线程安全的吗"><a href="#Spring的单例Bean是线程安全的吗" class="headerlink" title="Spring的单例Bean是线程安全的吗"></a>Spring的单例Bean是线程安全的吗</h3><p>是否线程安全和单例无关。Spring本身没有对Bean做任何并发的保护，这也不是Spring应该关心的东西。是否线程安全由开发者来保证。</p>
+<h3 id="循环依赖怎么解决"><a href="#循环依赖怎么解决" class="headerlink" title="循环依赖怎么解决"></a>循环依赖怎么解决</h3><p>三级缓存</p>
+<p>第一级缓存是初始化完成的Bean；第二级是完成了实例化，但是没有完成依赖注入的Bean；第三级是没实例化的Bean，存放其BeanFactory。</p>
+<p>假设有两个Bean A、B，AB循环依赖</p>
+<p>1、Bean都是由BeanFactory创建，A的BeanFactory会先实例化A，放入二级缓存，随后进行依赖注入。</p>
+<p>2、A的BeanFactory通过依赖找到了B，先从一级缓存找，一路找到三级缓存，最后找到了B的BeanFactory。这时候B没有创建，所以用B的BeanFactory创建B。BeanFactory会先创建一个B的实例，这样在二级缓存就有了一个B的实例，然后进行依赖注入。</p>
+<p>3、B在依赖注入的时候会在二级缓存找到A，这时会直接获取A的实例注入B，这样就完成B的依赖注入。B完成创建后放入一级缓存，然后把B通过BeanFactory的方法返回给A，A就可以继续进行依赖注入。</p>
+<h3 id="Spring事务隔离级别"><a href="#Spring事务隔离级别" class="headerlink" title="Spring事务隔离级别"></a>Spring事务隔离级别</h3><p>同数据库的级别：读未提交、读已提交、可重复读、串行化</p>
+<h3 id="Spring事务传播级别"><a href="#Spring事务传播级别" class="headerlink" title="Spring事务传播级别"></a>Spring事务传播级别</h3><p>PROPAGATION_REQUIRED：有事务就加入，没有就创建</p>
+<p>PROPAGATION_SUPPORTS：有就加入，没有就不加事务</p>
+<p>PROPAGATION_MANDATORY：有就加入，没有就抛异常</p>
+<p>PROPAGATION_REQUIRES_NEW：永远创建一个新的事务执行</p>
+<p>PROPAGATION_NOT_SUPPORTED：永远不以事务执行</p>
+<p>PROPAGATION_NEVER：有事务就抛异常</p>
+<p>PROPAGATION_NESTED：有事务就创建嵌套事务，没有就创建</p>
+<h3 id="Spring事务实现"><a href="#Spring事务实现" class="headerlink" title="Spring事务实现"></a>Spring事务实现</h3><p>编程式事务、声明式事务。</p>
+<p>PlatformTransactionManager中定义了事务的开始、提交、回滚等操作。不同数据库会有不同实现。</p>
+<h3 id="Spring事务管理优点"><a href="#Spring事务管理优点" class="headerlink" title="Spring事务管理优点"></a>Spring事务管理优点</h3><p>抽象了统一的接口。支持声明式事务管理。</p>
+<p>可以和Spring多数据源结合。</p>
+<h3 id="事务三要素"><a href="#事务三要素" class="headerlink" title="事务三要素"></a>事务三要素</h3><p>数据源：事务的真正处理者。</p>
+<p>事务管理器：处理事务的打开、提交、回滚。</p>
+<p>事务应用和配置：表明哪些方法参与事务，事务的隔离级别，传播级别，超时时间。</p>
+<h3 id="事务注解的本质"><a href="#事务注解的本质" class="headerlink" title="事务注解的本质"></a>事务注解的本质</h3><p>@Transactional仅仅是一些元数据，这里通过AOP的方式，将元信息传递事务管理器，事务管理器再提交给数据源实现具体的事务。</p>
+<p>其实就相当于在方法前后加了一些事务的代码。</p>
+<h2 id="Spring-Boot篇"><a href="#Spring-Boot篇" class="headerlink" title="Spring Boot篇"></a>Spring Boot篇</h2><h3 id="为什么是Spring-Boot"><a href="#为什么是Spring-Boot" class="headerlink" title="为什么是Spring Boot"></a>为什么是Spring Boot</h3><p>独立运行：内嵌了tomcat、Jetty。不需要打成war包部署到容器。可以打成独立的Jar包运行。</p>
+<p>配置简化，自动装配：能根据当前路径下的类、jar来自动配置bean。</p>
+<p>无代码生成：配置过程中没有代码生成，没有xml配置文件，都是基于条件注解完成。</p>
+<p>监控：默认就提供了很多监控端点。</p>
+<p>Spring Boot大量使用了注解来驱动开发。</p>
+<h3 id="核心注解"><a href="#核心注解" class="headerlink" title="核心注解"></a>核心注解</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@SpringBootConfiguration</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@ComponentScan</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何理解starters"><a href="#如何理解starters" class="headerlink" title="如何理解starters"></a>如何理解starters</h3><p>一个把所有依赖都集成在一起的依赖包，简化引入的成本。</p>
+<h3 id="如何在启动时执行一些特殊的逻辑"><a href="#如何在启动时执行一些特殊的逻辑" class="headerlink" title="如何在启动时执行一些特殊的逻辑"></a>如何在启动时执行一些特殊的逻辑</h3><p>ApplicationRunner，CommandLineRunner。</p>
+<p>ApplicationRunner有一个实现，是在启动时把程序的pid打印到一个文件中，方便运维。</p>
+<h3 id="监视器-actuator"><a href="#监视器-actuator" class="headerlink" title="监视器 actuator"></a>监视器 actuator</h3><p>actuator会对外暴露一些端点，可以通过配置的方式管理这些端点（endpoint）。这是能让用户来访问和监控程序当前的运行状态。配合运维平台使用。</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>ControllerAdvice，可以用来处理所有的异常，封装为统一的异常信息返回。</p>
+<h3 id="配置加载顺序"><a href="#配置加载顺序" class="headerlink" title="配置加载顺序"></a>配置加载顺序</h3><p>Spring Boot的配置加载顺序和其优先级一致。</p>
+<p>1、命令行，–大于-D</p>
+<p>2、Java系统属性，System.getProperties。</p>
+<p>3、环境变量</p>
+<p>4、yml文件</p>
+<p>5、默认配置</p>
+<h3 id="application和bootstrap文件"><a href="#application和bootstrap文件" class="headerlink" title="application和bootstrap文件"></a>application和bootstrap文件</h3><p>老版本Spring Cloud Alibaba的Nacos只能使用bootstrap文件，后面版本修改了。</p>
+<h3 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h3><p>自动装配就是把第三方的Bean装载到Spring的容器里。以前是需要开发人员写xml才能把这些Bean装载到容器的。</p>
+<p>原理：第三方组件定义了Configuration类，在其中声明了需要装载的Bean对象，同时也在这个类里定义了一些自动装配的规则。Spring在启动时通过META-INF&#x2F;spring.factories文件找到对应的配置类，然后对这些配置类进行动态加载。</p>
+<h2 id="Spring-Cloud篇"><a href="#Spring-Cloud篇" class="headerlink" title="Spring Cloud篇"></a>Spring Cloud篇</h2><h3 id="为什么是Spring-Cloud"><a href="#为什么是Spring-Cloud" class="headerlink" title="为什么是Spring Cloud"></a>为什么是Spring Cloud</h3><p>是用于构建分布式应用的开源框架。基于Spring Boot，提供与外部系统集成的能力。国内有很多二开的框架，比如Spring Cloud Alibaba，TSF，Spring Cloud Huawei。</p>
+<h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>一种架构。将单一功能的应用程序划分为一组小的服务，每个服务独立运行，服务之间相互协调、配合，最终实现一个业务功能。</p>
+<p>服务之间使用轻量级的通讯机制（通常是http，但是dubbo之类的也可以）。</p>
+<p>需要有一个中心来集中化管理这些服务。</p>
+<h3 id="服务熔断和降级"><a href="#服务熔断和降级" class="headerlink" title="服务熔断和降级"></a>服务熔断和降级</h3><p>分布式的场景下，某个服务出现异常，当检测到这种情况后，可以切断对该服务的调用。等到服务正常以后，再恢复服务。这就是熔断。</p>
+<p>降级是是指服务熔断以后，如果还有对该服务的调用，直接失败。</p>
+<h3 id="eureka-zookeeper-nacos"><a href="#eureka-zookeeper-nacos" class="headerlink" title="eureka zookeeper nacos"></a>eureka zookeeper nacos</h3><p>Eureka的高可用机制比较完善，可以保证服务随时可用。</p>
+<p>zookeeper对于多节点的数据一致性处理比较完善，可以用于主从选举。zk其实为了分布式协调而设计的，比如分布式锁、选举都可以用zk来做。</p>
+<p>nacos提供了可视化界面，同时支持服务注册发现和配置下发，一个人干了两个人的活。</p>
+<h3 id="Spring-Boot-Spring-Cloud"><a href="#Spring-Boot-Spring-Cloud" class="headerlink" title="Spring Boot Spring Cloud"></a>Spring Boot Spring Cloud</h3><p>Spring Boot是专注于开发单个微服务。</p>
+<p>Spring Cloud是关注分布式系统的，分布式系统可以是多个Spring Boot开发的微服务的集合，Spring Cloud用于提供微服务之间调用、微服务的配置获取、服务注册、路由等。</p>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>某个服务可能有多个实例，调用该服务时，每个请求会分发到不同的实例处理，有助于提高服务的吞吐量。</p>
+<h3 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h3><p>Feign是一个HTTP请求客户端，提供了声明式的调用方式。主要是通过JDK动态代理实现。它整合了负载均衡的能力（Spring Cloud LoadBalance）</p>
+]]></content>
+      <tags>
+        <tag>【工作】面试</tag>
+        <tag>【工作】Spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面试笔记-网络协议</title>
     <url>/2024/10/14/13-41-52/</url>
     <content><![CDATA[<p>这里记录一下面试的准备过程中关于网络协议的笔记。</p>
@@ -982,154 +1142,6 @@
       <tags>
         <tag>【工作】面试</tag>
         <tag>【工作】网络协议</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我为什么选择去留学</title>
-    <url>/2023/09/28/19-55-01/</url>
-    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
-<span id="more"></span>
-
-<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
-<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
-<p>但最后各方面原因，还是没有去。</p>
-<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
-<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
-<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
-<p>主要原因有三点。</p>
-<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
-<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
-<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
-<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
-<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
-<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
-<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
-<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
-<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
-<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
-<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>龙年第一天</title>
-    <url>/2024/02/18/13-22-14/</url>
-    <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
-<span id="more"></span>
-
-<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
-<p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
-<p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
-<p>去年确实是做了不少事。</p>
-<p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p>
-<p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p>
-<p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p>
-<p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p>
-<p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Unsafe的使用记录</title>
-    <url>/2024/01/07/11-15-32/</url>
-    <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
-<span id="more"></span>
-
-<h2 id="什么是Unsafe"><a href="#什么是Unsafe" class="headerlink" title="什么是Unsafe"></a>什么是Unsafe</h2><p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
-
-<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
-<p>为何如此？</p>
-<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
-<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
-<h2 id="使用Unsafe"><a href="#使用Unsafe" class="headerlink" title="使用Unsafe"></a>使用Unsafe</h2><p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是也不麻烦，我们可以使用如下代码获取到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
-<h2 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h2><p>要说Unsafe提供最大的能力，就是内存操作了。</p>
-<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
-<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
-<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
-<p>那么我们看一下实际怎么操作内存：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
-
-<p>这种操作，几乎和C++程序是一致的了。</p>
-<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
-<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
-<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
-
-<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
-<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
-<p>首先来看一个Java对象的内存结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
-
-<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
-<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
-<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
-<p>下面看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
-<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
-<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
-<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
-<p>下面简单看一个api：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
-
-<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
-<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
-<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
-<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>还是要额外提一下关于Unsafe的版本支持问题。</p>
-<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
-<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
-<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
-<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
-]]></content>
-      <tags>
-        <tag>【工作】Java底层原理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工作中印象最深刻的一件事</title>
-    <url>/2024/09/16/20-02-30/</url>
-    <content><![CDATA[<p>在准备秋招面试，看到这个常见的面试题，突然有感而发。工作之后，发现这个问题只从技术角度看，实在是有些肤浅，或许可以提出更多的东西。</p>
-<span id="more"></span>
-
-<h2 id="技术之外的东西"><a href="#技术之外的东西" class="headerlink" title="技术之外的东西"></a>技术之外的东西</h2><p>如果是放在还没参加工作时，看到这个问题“你在项目中遇到过的印象最深刻的一件事”，我大概率就是：胡诌一个很难的技术问题，然后说这问题解决的过程有些困难，但是经过我艰苦卓绝地努力，还是完成了，最后觉得自己很有成就感巴拉巴拉……</p>
-<p>但是放到今天，再看这问题，我就倾向于带一些技术之外的东西进去。</p>
-<p>这能聊的就多了。</p>
-<p>比如有个不怎么开窍的实习生，怎么教都教不会，最后是我自己帮他写了代码。我反思之后，觉得自己带人的方式有些问题，从此之后就换了一种方式教人。如果实习生能力差，就选取一些时间上限制不那么多的任务；如果愿意挑战，就分一些预研性质的任务，让他产出方案。<br>这样能说的就多多了，我相信也是大部分面试官可以感同身受的。</p>
-<p>当然上面只是个例子，最主要的一点就是，我觉得和同事相处的方式、选取某种技术的决断、一些任务优先级的取舍，这些都可以是印象深刻的事情。对于这些事情，技术固然包含在其中，但提升了这些事难度的、给人深刻印象的，恰恰就是技术之外的东西。</p>
-<h2 id="印象最深的一件事"><a href="#印象最深的一件事" class="headerlink" title="印象最深的一件事"></a>印象最深的一件事</h2><p>然后就提到我自己参加工作后印象最深的一件事，应该就是写公司业务协议序列化框架的纯Java版本了。</p>
-<p>准确说起来，这块的代码我没有写多少。我主要是负责这个任务的分配、监督和技术指导，编码由组内的一个同事负责。</p>
-<p>前期预研时，阅读了Protobuf的源码，然后实现时是参考了C++的实现。</p>
-<p>简单来说，就是参考C++的代码，从Protobuf中找到对应的可用代码，然后移植到我们的框架中。</p>
-<p>包体的解析逻辑有大量的可用实现，但是Java对象属性的获取和设置的逻辑，我们是用Unsafe重新写了一遍。</p>
-<p>整个过程顺利得不可思议，原计划两个月的任务，最后一个月就完成了。</p>
-<p>但是问题就出在这个完成之后，我们发现还有一些性能优化的空间。</p>
-<p>这个同事有些钻牛角尖，希望能把整个代码重构，然后做性能优化。但是我组织了他。</p>
-<p>这就是我印象最深的地方了，我经过了取舍，决定把重构和优化的工作往后无限期推迟，让他先基于目前的版本给出详细的文档。</p>
-<p>我们大部分同事都不具备给项目收尾的能力，就是一个模块，写到什么程度，我们就应该停止迭代，转而发布正式版。</p>
-<p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
-<p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
-<p>这就是我从这件事情里学到的。</p>
-]]></content>
-      <tags>
-        <tag>【工作】经验总结</tag>
       </tags>
   </entry>
 </search>
