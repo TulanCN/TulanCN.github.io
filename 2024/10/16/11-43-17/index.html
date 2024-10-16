@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tulancn.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这里记录一下面试的准备过程中关于Spring的笔记。 问Java不问Spring简直不可能好吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试笔记-Spring">
+<meta property="og:url" content="http://tulancn.github.io/2024/10/16/11-43-17/index.html">
+<meta property="og:site_name" content="涂蓝">
+<meta property="og:description" content="这里记录一下面试的准备过程中关于Spring的笔记。 问Java不问Spring简直不可能好吧。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-16T03:43:17.000Z">
+<meta property="article:modified_time" content="2024-10-16T07:03:46.511Z">
+<meta property="article:author" content="Tulan">
+<meta property="article:tag" content="【工作】面试">
+<meta property="article:tag" content="【工作】Spring">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://tulancn.github.io/2024/10/16/11-43-17/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>面试笔记-Spring | 涂蓝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">涂蓝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tulancn.github.io/2024/10/16/11-43-17/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/upload/avatar.jpeg">
+      <meta itemprop="name" content="Tulan">
+      <meta itemprop="description" content="分享 生活 工作">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="涂蓝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试笔记-Spring
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-10-16 11:43:17 / 修改时间：15:03:46" itemprop="dateCreated datePublished" datetime="2024-10-16T11:43:17+08:00">2024-10-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这里记录一下面试的准备过程中关于Spring的笔记。</p>
+<p>问Java不问Spring简直不可能好吧。</p>
+<span id="more"></span>
+
+<h2 id="Spring篇"><a href="#Spring篇" class="headerlink" title="Spring篇"></a>Spring篇</h2><p>Spring是一个Java开发框架，主要是解决企业级开发的一些痛点。一开始可能主要是用于Web应用的开发，但目前实践中它已经在国内Java后端开发这方面一统江湖。</p>
+<p>它把各种业务逻辑都抽象封装为Bean，Spring负责项目启动时把这些Bean创建出来，进行业务开发的时候只需要通过Spring提供的API或其他方式，获取到对应的Bean就可以执行各种复杂业务操作。</p>
+<h3 id="为什么是Spring"><a href="#为什么是Spring" class="headerlink" title="为什么是Spring"></a>为什么是Spring</h3><p>轻量。</p>
+<p>IOC，控制反转。业务开发不用关注对象创建之类的事情，只需要编码，并给出依赖，框架会自动帮你找到对应的实现类。</p>
+<p>AOP，面向切面编程。</p>
+<p>事务管理。</p>
+<p>异常处理。</p>
+<h3 id="Autowired和Resource的区别"><a href="#Autowired和Resource的区别" class="headerlink" title="Autowired和Resource的区别"></a>Autowired和Resource的区别</h3><p>Autowired是Spring提供的注解，Resource是javax的注解。Spring是支持了javax提供的标准注解，是标准的一个实现。</p>
+<p>假如换了框架（一般不会），Autowired必定不可用，Resource可能还能用。</p>
+<p>Autowired默认按照type类装配，默认要求对象必须存在且唯一。可以用Qualifier来指定BeanName。</p>
+<p>Resource注解提供了type和name两个注解字段。name的优先级高于type。</p>
+<h3 id="依赖注入的方式"><a href="#依赖注入的方式" class="headerlink" title="依赖注入的方式"></a>依赖注入的方式</h3><p>构造器、setter、接口。反射注入</p>
+<h3 id="Spring-MVC"><a href="#Spring-MVC" class="headerlink" title="Spring MVC"></a>Spring MVC</h3><p>Spring MVC是Spring的一个模块，针对web应用的场景。</p>
+<p>V不是普遍意义上的前端，而是用jsp或其他方式渲染的一个页面。</p>
+<p>M是逻辑层，做计算和数据库操作。C是控制层，负责接收网络请求。</p>
+<p>Spring在Servlet的基础上实现，定义了一个统一的请求接收入口：DispatcherServlet。DispatcherServlet会根据url和请求类型分发请求到用户编码的Controller中，然后执行用户的逻辑。</p>
+<p>常用注解：@RequestMapping、@RequestBody、@ResponseBody</p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>把一些业务无关，在系统层面共通的逻辑封装起来，从而减少代码冗余，有利于代码的扩展性和维护性。比如参数校验、日志采集、权限控制。</p>
+<p>Spring的AOP是基于动态代理实现的。对于已经实现了接口的，用JDK动态代理，创建一个接口的实现类然后代理。没有实现的，用CGlib，创建一个类的子类然后代理。</p>
+<p>也可以用AspectJ实现自己的AOP逻辑。</p>
+<p>Spring的AOP属于运行时增强，AspectJ的AOP是编译时增强。AspectJ是字节码操作，性能稍高。</p>
+<h3 id="关注点和横切关注点"><a href="#关注点和横切关注点" class="headerlink" title="关注点和横切关注点"></a>关注点和横切关注点</h3><p>关注点是某个特定的业务功能，横切关注点是多个业务都会用到的系统功能，比如日志、参数校验、权限。</p>
+<h3 id="什么是通知advice"><a href="#什么是通知advice" class="headerlink" title="什么是通知advice"></a>什么是通知advice</h3><p>方法执行前和后要做的逻辑处理。</p>
+<p>before</p>
+<p>after</p>
+<p>after-returning</p>
+<p>after-throwing</p>
+<p>around</p>
+<p>这个结果处理和Spring WebFlux中的回调很像。</p>
+<h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>控制反转，把创建对象的权利移交给框架。</p>
+<p>对象不需要程序自己去new，而是通过依赖注入从框架中获取。</p>
+<p>IOC让组件保持松散的耦合，从而创造了可以进行AOP编程的余地。</p>
+<h3 id="Spring-Bean生命周期"><a href="#Spring-Bean生命周期" class="headerlink" title="Spring Bean生命周期"></a>Spring Bean生命周期</h3><p>Servlet：实例化、初始化、接收请求、销毁。</p>
+<p>Bean：</p>
+<p>1、配置扫描，创建BeanDefinition，构建BeanFactory。</p>
+<p>2、实例化：启动时的第一步。当BeanFactory被请求一个未实例化的Bean时，会调用createBean方法实例化一个Bean。</p>
+<p>3、依赖注入：实例化之后的对象在BeanWrapper中，Spring通过BeanDefinition的配置进行依赖注入。这里会先找这个Bean的依赖所对应的BeanFactory，然后提供一个实例化Bean进行依赖注入。</p>
+<p>4、处理Aware接口：BeanNameAware、BeanFactoryAware、ApplicationContextAware</p>
+<p>5、BeanPostProcessor的postProcessBeforeInitialization方法</p>
+<p>6、InitializingBean的afterPropertiesSet</p>
+<p>7、BeanPostProcessor的postProcessAfterInitialization方法</p>
+<p>8、scope为singleton的缓存在容器，prototype的返回最开始请求的客户端。</p>
+<p>9、销毁，调用DisposableBean的afterPropertiesSet</p>
+<h3 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h3><p>1、singleton：单例</p>
+<p>2、prototype：每个Bean一个实例</p>
+<p>3、request：每个网络请求一个实例</p>
+<p>4、session：每个session一个实例</p>
+<p>5、globe-session</p>
+<h3 id="Spring的设计模式"><a href="#Spring的设计模式" class="headerlink" title="Spring的设计模式"></a>Spring的设计模式</h3><p>简单工厂模式：Bean的创建</p>
+<p>单例模式：单例的Bean</p>
+<p>代理模式：AOP的实现</p>
+<p>适配器：Adapter，Spring中以Adapter结尾的一般都是适配器模式。比如AdvisorAdapter</p>
+<p>观察者模式：Spring事件</p>
+<p>模版模式：JdbcTemplate</p>
+<h3 id="ApplicationContext和BeanFactory"><a href="#ApplicationContext和BeanFactory" class="headerlink" title="ApplicationContext和BeanFactory"></a>ApplicationContext和BeanFactory</h3><p>BeanFactory是基础接口，只提供最基础的Bean管理功能，在spring-beans包中。</p>
+<p>ApplicationContext继承了BeanFactory，并且扩展了事务管理、国际化、AOP。</p>
+<p>BeanFactory是延迟加载，而ApplicationContext是启动时实例化所有的Bean。</p>
+<h3 id="Spring的单例Bean是线程安全的吗"><a href="#Spring的单例Bean是线程安全的吗" class="headerlink" title="Spring的单例Bean是线程安全的吗"></a>Spring的单例Bean是线程安全的吗</h3><p>是否线程安全和单例无关。Spring本身没有对Bean做任何并发的保护，这也不是Spring应该关心的东西。是否线程安全由开发者来保证。</p>
+<h3 id="循环依赖怎么解决"><a href="#循环依赖怎么解决" class="headerlink" title="循环依赖怎么解决"></a>循环依赖怎么解决</h3><p>三级缓存</p>
+<p>第一级缓存是初始化完成的Bean；第二级是完成了实例化，但是没有完成依赖注入的Bean；第三级是没实例化的Bean，存放其BeanFactory。</p>
+<p>假设有两个Bean A、B，AB循环依赖</p>
+<p>1、Bean都是由BeanFactory创建，A的BeanFactory会先实例化A，放入二级缓存，随后进行依赖注入。</p>
+<p>2、A的BeanFactory通过依赖找到了B，先从一级缓存找，一路找到三级缓存，最后找到了B的BeanFactory。这时候B没有创建，所以用B的BeanFactory创建B。BeanFactory会先创建一个B的实例，这样在二级缓存就有了一个B的实例，然后进行依赖注入。</p>
+<p>3、B在依赖注入的时候会在二级缓存找到A，这时会直接获取A的实例注入B，这样就完成B的依赖注入。B完成创建后放入一级缓存，然后把B通过BeanFactory的方法返回给A，A就可以继续进行依赖注入。</p>
+<h3 id="Spring事务隔离级别"><a href="#Spring事务隔离级别" class="headerlink" title="Spring事务隔离级别"></a>Spring事务隔离级别</h3><p>同数据库的级别：读未提交、读已提交、可重复读、串行化</p>
+<h3 id="Spring事务传播级别"><a href="#Spring事务传播级别" class="headerlink" title="Spring事务传播级别"></a>Spring事务传播级别</h3><p>PROPAGATION_REQUIRED：有事务就加入，没有就创建</p>
+<p>PROPAGATION_SUPPORTS：有就加入，没有就不加事务</p>
+<p>PROPAGATION_MANDATORY：有就加入，没有就抛异常</p>
+<p>PROPAGATION_REQUIRES_NEW：永远创建一个新的事务执行</p>
+<p>PROPAGATION_NOT_SUPPORTED：永远不以事务执行</p>
+<p>PROPAGATION_NEVER：有事务就抛异常</p>
+<p>PROPAGATION_NESTED：有事务就创建嵌套事务，没有就创建</p>
+<h3 id="Spring事务实现"><a href="#Spring事务实现" class="headerlink" title="Spring事务实现"></a>Spring事务实现</h3><p>编程式事务、声明式事务。</p>
+<p>PlatformTransactionManager中定义了事务的开始、提交、回滚等操作。不同数据库会有不同实现。</p>
+<h3 id="Spring事务管理优点"><a href="#Spring事务管理优点" class="headerlink" title="Spring事务管理优点"></a>Spring事务管理优点</h3><p>抽象了统一的接口。支持声明式事务管理。</p>
+<p>可以和Spring多数据源结合。</p>
+<h3 id="事务三要素"><a href="#事务三要素" class="headerlink" title="事务三要素"></a>事务三要素</h3><p>数据源：事务的真正处理者。</p>
+<p>事务管理器：处理事务的打开、提交、回滚。</p>
+<p>事务应用和配置：表明哪些方法参与事务，事务的隔离级别，传播级别，超时时间。</p>
+<h3 id="事务注解的本质"><a href="#事务注解的本质" class="headerlink" title="事务注解的本质"></a>事务注解的本质</h3><p>@Transactional仅仅是一些元数据，这里通过AOP的方式，将元信息传递事务管理器，事务管理器再提交给数据源实现具体的事务。</p>
+<p>其实就相当于在方法前后加了一些事务的代码。</p>
+<h2 id="Spring-Boot篇"><a href="#Spring-Boot篇" class="headerlink" title="Spring Boot篇"></a>Spring Boot篇</h2><h3 id="为什么是Spring-Boot"><a href="#为什么是Spring-Boot" class="headerlink" title="为什么是Spring Boot"></a>为什么是Spring Boot</h3><p>独立运行：内嵌了tomcat、Jetty。不需要打成war包部署到容器。可以打成独立的Jar包运行。</p>
+<p>配置简化，自动装配：能根据当前路径下的类、jar来自动配置bean。</p>
+<p>无代码生成：配置过程中没有代码生成，没有xml配置文件，都是基于条件注解完成。</p>
+<p>监控：默认就提供了很多监控端点。</p>
+<p>Spring Boot大量使用了注解来驱动开发。</p>
+<h3 id="核心注解"><a href="#核心注解" class="headerlink" title="核心注解"></a>核心注解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@SpringBootConfiguration</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@ComponentScan</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何理解starters"><a href="#如何理解starters" class="headerlink" title="如何理解starters"></a>如何理解starters</h3><p>一个把所有依赖都集成在一起的依赖包，简化引入的成本。</p>
+<h3 id="如何在启动时执行一些特殊的逻辑"><a href="#如何在启动时执行一些特殊的逻辑" class="headerlink" title="如何在启动时执行一些特殊的逻辑"></a>如何在启动时执行一些特殊的逻辑</h3><p>ApplicationRunner，CommandLineRunner。</p>
+<p>ApplicationRunner有一个实现，是在启动时把程序的pid打印到一个文件中，方便运维。</p>
+<h3 id="监视器-actuator"><a href="#监视器-actuator" class="headerlink" title="监视器 actuator"></a>监视器 actuator</h3><p>actuator会对外暴露一些端点，可以通过配置的方式管理这些端点（endpoint）。这是能让用户来访问和监控程序当前的运行状态。配合运维平台使用。</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>ControllerAdvice，可以用来处理所有的异常，封装为统一的异常信息返回。</p>
+<h3 id="配置加载顺序"><a href="#配置加载顺序" class="headerlink" title="配置加载顺序"></a>配置加载顺序</h3><p>Spring Boot的配置加载顺序和其优先级一致。</p>
+<p>1、命令行，–大于-D</p>
+<p>2、Java系统属性，System.getProperties。</p>
+<p>3、环境变量</p>
+<p>4、yml文件</p>
+<p>5、默认配置</p>
+<h3 id="application和bootstrap文件"><a href="#application和bootstrap文件" class="headerlink" title="application和bootstrap文件"></a>application和bootstrap文件</h3><p>老版本Spring Cloud Alibaba的Nacos只能使用bootstrap文件，后面版本修改了。</p>
+<h2 id="Spring-Cloud篇"><a href="#Spring-Cloud篇" class="headerlink" title="Spring Cloud篇"></a>Spring Cloud篇</h2><h3 id="为什么是Spring-Cloud"><a href="#为什么是Spring-Cloud" class="headerlink" title="为什么是Spring Cloud"></a>为什么是Spring Cloud</h3><p>是用于构建分布式应用的开源框架。基于Spring Boot，提供与外部系统集成的能力。国内有很多二开的框架，比如Spring Cloud Alibaba，TSF，Spring Cloud Huawei。</p>
+<h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>一种架构。将单一功能的应用程序划分为一组小的服务，每个服务独立运行，服务之间相互协调、配合，最终实现一个业务功能。</p>
+<p>服务之间使用轻量级的通讯机制（通常是http，但是dubbo之类的也可以）。</p>
+<p>需要有一个中心来集中化管理这些服务。</p>
+<h3 id="服务熔断和降级"><a href="#服务熔断和降级" class="headerlink" title="服务熔断和降级"></a>服务熔断和降级</h3><p>分布式的场景下，某个服务出现异常，当检测到这种情况后，可以切断对该服务的调用。等到服务正常以后，再恢复服务。这就是熔断。</p>
+<p>降级是是指服务熔断以后，如果还有对该服务的调用，直接失败。</p>
+<h3 id="eureka-zookeeper-nacos"><a href="#eureka-zookeeper-nacos" class="headerlink" title="eureka zookeeper nacos"></a>eureka zookeeper nacos</h3><p>Eureka的高可用机制比较完善，可以保证服务随时可用。</p>
+<p>zookeeper对于多节点的数据一致性处理比较完善，可以用于主从选举。zk其实为了分布式协调而设计的，比如分布式锁、选举都可以用zk来做。</p>
+<p>nacos提供了可视化界面，同时支持服务注册发现和配置下发，一个人干了两个人的活。</p>
+<h3 id="Spring-Boot-Spring-Cloud"><a href="#Spring-Boot-Spring-Cloud" class="headerlink" title="Spring Boot Spring Cloud"></a>Spring Boot Spring Cloud</h3><p>Spring Boot是专注于开发单个微服务。</p>
+<p>Spring Cloud是关注分布式系统的，分布式系统可以是多个Spring Boot开发的微服务的集合，Spring Cloud用于提供微服务之间调用、微服务的配置获取、服务注册、路由等。</p>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>某个服务可能有多个实例，调用该服务时，每个请求会分发到不同的实例处理，有助于提高服务的吞吐量。</p>
+<h3 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h3><p>Feign是一个HTTP请求客户端，提供了声明式的调用方式。主要是通过JDK动态代理实现。它整合了负载均衡的能力（Spring Cloud LoadBalance）</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Tulan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://tulancn.github.io/2024/10/16/11-43-17/" title="面试笔记-Spring">http://tulancn.github.io/2024/10/16/11-43-17/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E3%80%90%E5%B7%A5%E4%BD%9C%E3%80%91%E9%9D%A2%E8%AF%95/" rel="tag"># 【工作】面试</a>
+              <a href="/tags/%E3%80%90%E5%B7%A5%E4%BD%9C%E3%80%91Spring/" rel="tag"># 【工作】Spring</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/10/14/13-48-06/" rel="prev" title="面试笔记-数据库">
+      <i class="fa fa-chevron-left"></i> 面试笔记-数据库
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">Spring篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFSpring"><span class="nav-number">1.1.</span> <span class="nav-text">为什么是Spring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired%E5%92%8CResource%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">Autowired和Resource的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">依赖注入的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-MVC"><span class="nav-number">1.4.</span> <span class="nav-text">Spring MVC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP"><span class="nav-number">1.5.</span> <span class="nav-text">AOP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E6%B3%A8%E7%82%B9%E5%92%8C%E6%A8%AA%E5%88%87%E5%85%B3%E6%B3%A8%E7%82%B9"><span class="nav-number">1.6.</span> <span class="nav-text">关注点和横切关注点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%80%9A%E7%9F%A5advice"><span class="nav-number">1.7.</span> <span class="nav-text">什么是通知advice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">1.8.</span> <span class="nav-text">IOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.9.</span> <span class="nav-text">Spring Bean生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.10.</span> <span class="nav-text">Bean的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.11.</span> <span class="nav-text">Spring的设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ApplicationContext%E5%92%8CBeanFactory"><span class="nav-number">1.12.</span> <span class="nav-text">ApplicationContext和BeanFactory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E7%9A%84%E5%8D%95%E4%BE%8BBean%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97"><span class="nav-number">1.13.</span> <span class="nav-text">Spring的单例Bean是线程安全的吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3"><span class="nav-number">1.14.</span> <span class="nav-text">循环依赖怎么解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.15.</span> <span class="nav-text">Spring事务隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E7%BA%A7%E5%88%AB"><span class="nav-number">1.16.</span> <span class="nav-text">Spring事务传播级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.17.</span> <span class="nav-text">Spring事务实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E4%BC%98%E7%82%B9"><span class="nav-number">1.18.</span> <span class="nav-text">Spring事务管理优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="nav-number">1.19.</span> <span class="nav-text">事务三要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E6%B3%A8%E8%A7%A3%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.20.</span> <span class="nav-text">事务注解的本质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot%E7%AF%87"><span class="nav-number">2.</span> <span class="nav-text">Spring Boot篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFSpring-Boot"><span class="nav-number">2.1.</span> <span class="nav-text">为什么是Spring Boot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.2.</span> <span class="nav-text">核心注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3starters"><span class="nav-number">2.3.</span> <span class="nav-text">如何理解starters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8%E5%90%AF%E5%8A%A8%E6%97%B6%E6%89%A7%E8%A1%8C%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%9A%84%E9%80%BB%E8%BE%91"><span class="nav-number">2.4.</span> <span class="nav-text">如何在启动时执行一些特殊的逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E8%A7%86%E5%99%A8-actuator"><span class="nav-number">2.5.</span> <span class="nav-text">监视器 actuator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">2.6.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.7.</span> <span class="nav-text">配置加载顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application%E5%92%8Cbootstrap%E6%96%87%E4%BB%B6"><span class="nav-number">2.8.</span> <span class="nav-text">application和bootstrap文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud%E7%AF%87"><span class="nav-number">3.</span> <span class="nav-text">Spring Cloud篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFSpring-Cloud"><span class="nav-number">3.1.</span> <span class="nav-text">为什么是Spring Cloud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.2.</span> <span class="nav-text">什么是微服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD%E5%92%8C%E9%99%8D%E7%BA%A7"><span class="nav-number">3.3.</span> <span class="nav-text">服务熔断和降级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-zookeeper-nacos"><span class="nav-number">3.4.</span> <span class="nav-text">eureka zookeeper nacos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot-Spring-Cloud"><span class="nav-number">3.5.</span> <span class="nav-text">Spring Boot Spring Cloud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">3.6.</span> <span class="nav-text">负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feign"><span class="nav-number">3.7.</span> <span class="nav-text">Feign</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tulan"
+      src="/upload/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Tulan</p>
+  <div class="site-description" itemprop="description">分享 生活 工作</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tulan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
