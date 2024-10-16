@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>我为什么选择去留学</title>
+    <url>/2023/09/28/19-55-01/</url>
+    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
+<span id="more"></span>
+
+<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
+<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
+<p>但最后各方面原因，还是没有去。</p>
+<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
+<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
+<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
+<p>主要原因有三点。</p>
+<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
+<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
+<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
+<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
+<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
+<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
+<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
+<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
+<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
+<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
+<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
+]]></content>
+      <tags>
+        <tag>【杂谈】学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>龙年第一天</title>
+    <url>/2024/02/18/13-22-14/</url>
+    <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
+<span id="more"></span>
+
+<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
+<p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
+<p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
+<p>去年确实是做了不少事。</p>
+<p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p>
+<p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p>
+<p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p>
+<p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p>
+<p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>
+]]></content>
+      <tags>
+        <tag>【杂谈】生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JNI调用的优化（第二版)</title>
     <url>/2024/08/08/10-28-13/</url>
     <content><![CDATA[<p>这一次验证了critical native调用。</p>
@@ -144,110 +195,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Netty的FastThreadLocal带来了什么？</title>
-    <url>/2024/09/13/14-49-51/</url>
-    <content><![CDATA[<p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
-<span id="more"></span>
-
-<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
-<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
-<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
-<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
-<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
-<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
-<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
-<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
-<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
-<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
-<p>然后再来聊聊其中的实现。</p>
-<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
-<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
-<p>它的get()过程是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
-
-<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
-<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
-<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
-
-<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
-<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
-<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
-<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
-<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
-<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
-<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
-]]></content>
-      <tags>
-        <tag>【工作】Netty</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>内存分析记录手册</title>
-    <url>/2023/06/12/13-46-18/</url>
-    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
-<span id="more"></span>
-
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><code>jps</code> jps命令，查看所有java程序</p>
-<p><code>jmap -heap &lt;pid&gt;</code> jmap命令，查看jvm内存分区，包括老年代、新生代等内存占用情况</p>
-<p><code>jmap -dump:live,format=b,file=/tmp/dump.hprof &lt;pid&gt;</code> jmap的dump命令</p>
-<p><code>jmap -histo &lt;pid&gt;</code> 和 <code>jmap -histo:live &lt;pid&gt;</code> 抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象</p>
-<p>arthus命令略，可借用arthus的IDEA插件生成command</p>
-<h2 id="什么是大对象"><a href="#什么是大对象" class="headerlink" title="什么是大对象"></a>什么是大对象</h2><p>都说大对象会进入老年代，那么什么才是大对象呢？</p>
-<p>假如一个对象A，内部引用了对象B，那么在计算对象大小的时候，是否会把对象B的大小也计入对象A呢？</p>
-<p>答案是不会，这个有很多的地方可以证明：每个对象其实都只是存了其他对象的指针；dump文件在分析时，对象大小需要先用工具进行计算；在代码中分析对象大小大家用的都是第三方工具。这些都从侧面说明了，JVM本身并没有去计算对象引用的实际大小。</p>
-<p>那么，JVM做垃圾回收时，其实垃圾收集器关心的只是对象本身的大小。所有对象的引用，都是一个内存地址，也就是指针。</p>
-<p>举例，假如B是一个大数组，B在老年代。假如A在B进入老年代之后，持有了B对象作为成员变量。</p>
-<p>在Java的垃圾回收机制中，对象进入老年代（Old Generation）通常需要满足以下条件：</p>
-<ol>
-<li>对象经过多次GC仍然存活。在Eden区进行Minor GC后，如果对象仍然存活，会被移动到Survivor区。在Survivor区进行GC后，如果对象仍然存活，会被移动到老年代。</li>
-<li>对象的大小超过了Survivor区的阈值。每个Survivor区都有一个固定的容量限制。如果新创建的对象太大，以至于在当前Survivor区容纳不下，那么这个对象就会被直接分配到老年代。</li>
-<li>对象被长期持有。一些被长时间持有的对象，比如长期存活或者被强引用的对象，可能会被直接分配到老年代。</li>
-</ol>
-<p>所以，如果对象A持有一个老年代对象B，并不意味着A自己会进入老年代。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>双重锁和CAS</title>
-    <url>/2024/02/18/13-47-01/</url>
-    <content><![CDATA[<p>这次来聊聊多线程场景的二次确认机制。</p>
-<span id="more"></span>
-
-<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>在做一些变量的初始化时，我会有如下的实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">private volatile Class&lt;?&gt; rowType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取缓存存储对象的类型</span><br><span class="line"> *</span><br><span class="line"> * @return 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">public Class&lt;?&gt; rowType() &#123;</span><br><span class="line">    if (rowType == null) &#123;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            if (rowType == null) &#123;</span><br><span class="line">                // todo 这里是初始化rowType的逻辑</span><br><span class="line">             </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return rowType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这种写法，我最初是在Protobuf生成的代码中看到的，后来查阅了一下，这种逻辑叫双重锁。</p>
-<p>或者说，叫双重检查模式，是一种软件的设计模式。</p>
-<p>而我在写一些其他的代码时，往往也会使用类似这种模式的方式。用多了以后，我觉得可以分析一下其中的道理。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>双重锁的逻辑是两次检查：首先验证锁定条件(第一次检查)，只有通过锁定条件验证才真正的进行加锁逻辑并再次验证条件(第二次检查)。</p>
-<p>那么，如果中间的锁定操作，我们改成一个计算过程，在最后赋值之前做二次检查，是否也是可以的呢？</p>
-<p>答案是肯定的。下面给个伪代码说明：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">int b = a;</span><br><span class="line">// 第一次检查</span><br><span class="line">if (a == b) &#123;</span><br><span class="line">  // 上锁</span><br><span class="line">  lock.lock();</span><br><span class="line">  // 第二次检查</span><br><span class="line">  if (a == b) &#123;</span><br><span class="line">  	// 计算操作</span><br><span class="line">		int c = b + 1；</span><br><span class="line">  	// 赋值</span><br><span class="line">  	a = c;</span><br><span class="line">  &#125;</span><br><span class="line">  lock.unLock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可是这样就太重了，要知道，有些时候，加锁的成本也很高。使用双重锁仅仅是能避免锁定中的操作多次重复，但是没有从根本上避免锁，所有的操作还是在锁中进行的，这就没有很好地发挥多线程的优势。</p>
-<p>那么优化一下，把这个锁去掉，只在计算结束后进行一次检查，是否可行呢？答案也是肯定的，这样就变成了乐观锁+自旋锁的结合。伪代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">// 自旋</span><br><span class="line">for (;;) &#123;</span><br><span class="line">	int b = a;</span><br><span class="line">	// 计算操作</span><br><span class="line">	int c = b + 1；</span><br><span class="line">	// 第一次检查</span><br><span class="line">	if (b == a) &#123;</span><br><span class="line">		// 赋值</span><br><span class="line">		a = c;</span><br><span class="line">		// 第二次检查</span><br><span class="line">		if (a == c) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到锁被去掉了，这样并发时性能会远优于加锁。这就是CAS机制。</p>
-<p>但是这里的CAS机制还不够，并不能保证极端情况下的线程安全。因为还有指令重排序的问题。</p>
-<p>为了解决指令重排序的问题，需要在特定的变量上添加volatile注解。</p>
-<p>在高性能场景下，CAS是一种非常优秀的机制，有以下优点：</p>
-<ol>
-<li>高效性：CAS 操作不需要加锁，因此可以避免加锁操作所带来的性能开销。</li>
-<li>原子性：CAS 操作是原子的，因此可以保证操作的一致性。</li>
-<li>无阻塞：CAS 操作不会阻塞线程，因此可以避免线程的切换和上下文切换带来的开销。</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>双重锁的方式，一般是用于初始化的场景，是用来避免某个代码块执行两次的。</p>
-<p>而在此基础上我们推演出自旋锁+乐观锁的方式，这样能实现无锁并发，这就是CAS机制。</p>
-]]></content>
-      <tags>
-        <tag>【工作】多线程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Unsafe的使用记录</title>
     <url>/2024/01/07/11-15-32/</url>
     <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
@@ -316,6 +263,34 @@
       </tags>
   </entry>
   <entry>
+    <title>内存分析记录手册</title>
+    <url>/2023/06/12/13-46-18/</url>
+    <content><![CDATA[<p>JVM内存问题的排查手册，先记录一些琐碎的东西，后续再归纳总结。</p>
+<span id="more"></span>
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><code>jps</code> jps命令，查看所有java程序</p>
+<p><code>jmap -heap &lt;pid&gt;</code> jmap命令，查看jvm内存分区，包括老年代、新生代等内存占用情况</p>
+<p><code>jmap -dump:live,format=b,file=/tmp/dump.hprof &lt;pid&gt;</code> jmap的dump命令</p>
+<p><code>jmap -histo &lt;pid&gt;</code> 和 <code>jmap -histo:live &lt;pid&gt;</code> 抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象</p>
+<p>arthus命令略，可借用arthus的IDEA插件生成command</p>
+<h2 id="什么是大对象"><a href="#什么是大对象" class="headerlink" title="什么是大对象"></a>什么是大对象</h2><p>都说大对象会进入老年代，那么什么才是大对象呢？</p>
+<p>假如一个对象A，内部引用了对象B，那么在计算对象大小的时候，是否会把对象B的大小也计入对象A呢？</p>
+<p>答案是不会，这个有很多的地方可以证明：每个对象其实都只是存了其他对象的指针；dump文件在分析时，对象大小需要先用工具进行计算；在代码中分析对象大小大家用的都是第三方工具。这些都从侧面说明了，JVM本身并没有去计算对象引用的实际大小。</p>
+<p>那么，JVM做垃圾回收时，其实垃圾收集器关心的只是对象本身的大小。所有对象的引用，都是一个内存地址，也就是指针。</p>
+<p>举例，假如B是一个大数组，B在老年代。假如A在B进入老年代之后，持有了B对象作为成员变量。</p>
+<p>在Java的垃圾回收机制中，对象进入老年代（Old Generation）通常需要满足以下条件：</p>
+<ol>
+<li>对象经过多次GC仍然存活。在Eden区进行Minor GC后，如果对象仍然存活，会被移动到Survivor区。在Survivor区进行GC后，如果对象仍然存活，会被移动到老年代。</li>
+<li>对象的大小超过了Survivor区的阈值。每个Survivor区都有一个固定的容量限制。如果新创建的对象太大，以至于在当前Survivor区容纳不下，那么这个对象就会被直接分配到老年代。</li>
+<li>对象被长期持有。一些被长时间持有的对象，比如长期存活或者被强引用的对象，可能会被直接分配到老年代。</li>
+</ol>
+<p>所以，如果对象A持有一个老年代对象B，并不意味着A自己会进入老年代。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在Java程序使用Grpc protobuf的动态加载及类型反射</title>
     <url>/2023/05/31/15-41-05/</url>
     <content><![CDATA[<p>对于各个公司负责的基础技术框架部门，接入gRPC往往是一个老大难问题。我也遇到了同样的问题。</p>
@@ -349,6 +324,43 @@
 ]]></content>
       <tags>
         <tag>【工作】gRPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>双重锁和CAS</title>
+    <url>/2024/02/18/13-47-01/</url>
+    <content><![CDATA[<p>这次来聊聊多线程场景的二次确认机制。</p>
+<span id="more"></span>
+
+<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>在做一些变量的初始化时，我会有如下的实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">private volatile Class&lt;?&gt; rowType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取缓存存储对象的类型</span><br><span class="line"> *</span><br><span class="line"> * @return 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">public Class&lt;?&gt; rowType() &#123;</span><br><span class="line">    if (rowType == null) &#123;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            if (rowType == null) &#123;</span><br><span class="line">                // todo 这里是初始化rowType的逻辑</span><br><span class="line">             </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return rowType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种写法，我最初是在Protobuf生成的代码中看到的，后来查阅了一下，这种逻辑叫双重锁。</p>
+<p>或者说，叫双重检查模式，是一种软件的设计模式。</p>
+<p>而我在写一些其他的代码时，往往也会使用类似这种模式的方式。用多了以后，我觉得可以分析一下其中的道理。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>双重锁的逻辑是两次检查：首先验证锁定条件(第一次检查)，只有通过锁定条件验证才真正的进行加锁逻辑并再次验证条件(第二次检查)。</p>
+<p>那么，如果中间的锁定操作，我们改成一个计算过程，在最后赋值之前做二次检查，是否也是可以的呢？</p>
+<p>答案是肯定的。下面给个伪代码说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">int b = a;</span><br><span class="line">// 第一次检查</span><br><span class="line">if (a == b) &#123;</span><br><span class="line">  // 上锁</span><br><span class="line">  lock.lock();</span><br><span class="line">  // 第二次检查</span><br><span class="line">  if (a == b) &#123;</span><br><span class="line">  	// 计算操作</span><br><span class="line">		int c = b + 1；</span><br><span class="line">  	// 赋值</span><br><span class="line">  	a = c;</span><br><span class="line">  &#125;</span><br><span class="line">  lock.unLock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可是这样就太重了，要知道，有些时候，加锁的成本也很高。使用双重锁仅仅是能避免锁定中的操作多次重复，但是没有从根本上避免锁，所有的操作还是在锁中进行的，这就没有很好地发挥多线程的优势。</p>
+<p>那么优化一下，把这个锁去掉，只在计算结束后进行一次检查，是否可行呢？答案也是肯定的，这样就变成了乐观锁+自旋锁的结合。伪代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">// 自旋</span><br><span class="line">for (;;) &#123;</span><br><span class="line">	int b = a;</span><br><span class="line">	// 计算操作</span><br><span class="line">	int c = b + 1；</span><br><span class="line">	// 第一次检查</span><br><span class="line">	if (b == a) &#123;</span><br><span class="line">		// 赋值</span><br><span class="line">		a = c;</span><br><span class="line">		// 第二次检查</span><br><span class="line">		if (a == c) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到锁被去掉了，这样并发时性能会远优于加锁。这就是CAS机制。</p>
+<p>但是这里的CAS机制还不够，并不能保证极端情况下的线程安全。因为还有指令重排序的问题。</p>
+<p>为了解决指令重排序的问题，需要在特定的变量上添加volatile注解。</p>
+<p>在高性能场景下，CAS是一种非常优秀的机制，有以下优点：</p>
+<ol>
+<li>高效性：CAS 操作不需要加锁，因此可以避免加锁操作所带来的性能开销。</li>
+<li>原子性：CAS 操作是原子的，因此可以保证操作的一致性。</li>
+<li>无阻塞：CAS 操作不会阻塞线程，因此可以避免线程的切换和上下文切换带来的开销。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>双重锁的方式，一般是用于初始化的场景，是用来避免某个代码块执行两次的。</p>
+<p>而在此基础上我们推演出自旋锁+乐观锁的方式，这样能实现无锁并发，这就是CAS机制。</p>
+]]></content>
+      <tags>
+        <tag>【工作】多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -569,57 +581,6 @@
       </tags>
   </entry>
   <entry>
-    <title>我为什么选择去留学</title>
-    <url>/2023/09/28/19-55-01/</url>
-    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
-<span id="more"></span>
-
-<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
-<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
-<p>但最后各方面原因，还是没有去。</p>
-<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
-<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
-<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
-<p>主要原因有三点。</p>
-<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
-<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
-<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
-<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
-<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
-<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
-<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
-<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
-<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
-<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
-<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>龙年第一天</title>
-    <url>/2024/02/18/13-22-14/</url>
-    <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
-<span id="more"></span>
-
-<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
-<p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
-<p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
-<p>去年确实是做了不少事。</p>
-<p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p>
-<p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p>
-<p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p>
-<p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p>
-<p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2023/03/29/18-22-38/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -639,7 +600,7 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
       <tags>
-        <tag>-【杂谈】博客</tag>
+        <tag>【杂谈】博客</tag>
       </tags>
   </entry>
   <entry>
@@ -661,36 +622,286 @@
 <p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
 ]]></content>
       <tags>
-        <tag>-【杂谈】博客</tag>
+        <tag>【杂谈】博客</tag>
       </tags>
   </entry>
   <entry>
-    <title>工作中印象最深刻的一件事</title>
-    <url>/2024/09/16/20-02-30/</url>
-    <content><![CDATA[<p>在准备秋招面试，看到这个常见的面试题，突然有感而发。工作之后，发现这个问题只从技术角度看，实在是有些肤浅，或许可以提出更多的东西。</p>
+    <title>面试笔记-Java基础</title>
+    <url>/2024/10/16/15-04-36/</url>
+    <content><![CDATA[<p>Java基础是纯纯的八股文了，但还是要过一遍。</p>
 <span id="more"></span>
-
-<h2 id="技术之外的东西"><a href="#技术之外的东西" class="headerlink" title="技术之外的东西"></a>技术之外的东西</h2><p>如果是放在还没参加工作时，看到这个问题“你在项目中遇到过的印象最深刻的一件事”，我大概率就是：胡诌一个很难的技术问题，然后说这问题解决的过程有些困难，但是经过我艰苦卓绝地努力，还是完成了，最后觉得自己很有成就感巴拉巴拉……</p>
-<p>但是放到今天，再看这问题，我就倾向于带一些技术之外的东西进去。</p>
-<p>这能聊的就多了。</p>
-<p>比如有个不怎么开窍的实习生，怎么教都教不会，最后是我自己帮他写了代码。我反思之后，觉得自己带人的方式有些问题，从此之后就换了一种方式教人。如果实习生能力差，就选取一些时间上限制不那么多的任务；如果愿意挑战，就分一些预研性质的任务，让他产出方案。<br>这样能说的就多多了，我相信也是大部分面试官可以感同身受的。</p>
-<p>当然上面只是个例子，最主要的一点就是，我觉得和同事相处的方式、选取某种技术的决断、一些任务优先级的取舍，这些都可以是印象深刻的事情。对于这些事情，技术固然包含在其中，但提升了这些事难度的、给人深刻印象的，恰恰就是技术之外的东西。</p>
-<h2 id="印象最深的一件事"><a href="#印象最深的一件事" class="headerlink" title="印象最深的一件事"></a>印象最深的一件事</h2><p>然后就提到我自己参加工作后印象最深的一件事，应该就是写公司业务协议序列化框架的纯Java版本了。</p>
-<p>准确说起来，这块的代码我没有写多少。我主要是负责这个任务的分配、监督和技术指导，编码由组内的一个同事负责。</p>
-<p>前期预研时，阅读了Protobuf的源码，然后实现时是参考了C++的实现。</p>
-<p>简单来说，就是参考C++的代码，从Protobuf中找到对应的可用代码，然后移植到我们的框架中。</p>
-<p>包体的解析逻辑有大量的可用实现，但是Java对象属性的获取和设置的逻辑，我们是用Unsafe重新写了一遍。</p>
-<p>整个过程顺利得不可思议，原计划两个月的任务，最后一个月就完成了。</p>
-<p>但是问题就出在这个完成之后，我们发现还有一些性能优化的空间。</p>
-<p>这个同事有些钻牛角尖，希望能把整个代码重构，然后做性能优化。但是我组织了他。</p>
-<p>这就是我印象最深的地方了，我经过了取舍，决定把重构和优化的工作往后无限期推迟，让他先基于目前的版本给出详细的文档。</p>
-<p>我们大部分同事都不具备给项目收尾的能力，就是一个模块，写到什么程度，我们就应该停止迭代，转而发布正式版。</p>
-<p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
-<p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
-<p>这就是我从这件事情里学到的。</p>
 ]]></content>
       <tags>
-        <tag>【工作】经验总结</tag>
+        <tag>【工作】面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-数据库</title>
+    <url>/2024/10/14/13-48-06/</url>
+    <content><![CDATA[<p>这里记录一下面试的准备过程中关于数据库的笔记。</p>
+<p>原先工作中对数据库的使用实在是太少了…</p>
+<p>不过还好大部分东西都还记得，复习一下就很快理解了。</p>
+<span id="more"></span>
+
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><h3 id="三范式"><a href="#三范式" class="headerlink" title="三范式"></a>三范式</h3><p>第一范式：列不可再分；</p>
+<p>第二范式：表中的每一行都可以唯一区分，通过主键实现；</p>
+<p>第三范式：（用于避免数据冗余，减少内存占用，实践中常被忽视）表的非主键字段不能依赖于其他非主键字段；比如学生表，里边有班级名称字段和辅导员名称字段，那么班级和辅导员会大量重复，应当拆分出班级表和辅导员表。</p>
+<h3 id="MySQL的存储引擎"><a href="#MySQL的存储引擎" class="headerlink" title="MySQL的存储引擎"></a>MySQL的存储引擎</h3><p>MyISAM、InnoDB、Memory</p>
+<p>MyISAM：全表锁，没有事务和外键，单表执行性能高，并发性能差，空间占用小。</p>
+<p>InnoDB：行锁，有事务，支持自增序列，支持外键，并发性能高，空间占用大。</p>
+<p>Memory：纯内存。</p>
+<h3 id="InnoDB和MyISAM"><a href="#InnoDB和MyISAM" class="headerlink" title="InnoDB和MyISAM"></a>InnoDB和MyISAM</h3><p>InnoDB支持事务，默认是每一条SQL都封装为一个事务。MyISAM没有事务。</p>
+<p>InnoDB有外键，MyISAM没有。</p>
+<p>InnoDB是行锁，MyISAM是表锁，InnoDB并发场景性能会好一些。</p>
+<p>InnoDB是聚集索引，必须有主键。在表上建立的其他索引，都是指向主键。通过其他索引查询时，先经过索引查到主键，再通过主键查找数据。MyISAM是非聚集索引，主键和索引都是直接指向数据指针，主键和索引相互独立。</p>
+<p>InnoDB不保存表的行数，计算行数时要全表扫描。MyISAM保存了表的行数。</p>
+<h3 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h3><p>ACID：atomic、consistency、isolation、durability</p>
+<p>原子性：一个事务内的多个操作可以看成一个原子操作，即要么成功要么失败。事务中任意一个操作失败了都会回滚到没有开始事务之前的状态。</p>
+<p>一致性：事务操作的结果和业务规则是一致的。即事务成功时，可以达成操作者目的。</p>
+<p>隔离性：多个事务之间互相数据隔离，彼此没有影响。</p>
+<p>持久性：事务完成后会持久化到数据库。</p>
+<h3 id="索引是什么"><a href="#索引是什么" class="headerlink" title="索引是什么"></a>索引是什么</h3><p>官方：一种帮助MySQL快速获取数据的数据结构。</p>
+<p>类似目录，默认是B+树实现。</p>
+<h3 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h3><p>优点：提升查询速度。</p>
+<p>缺点：索引也有空间占用，更新速度变慢，因为表更新的时候索引也要更新。</p>
+<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><p>原则：避免全表扫描，查询时尽量走索引。少于三张表的查询允许关联，关联不了就走子查询。</p>
+<p>1、尽量不要用select *</p>
+<p>2、减少子查询，用少于三张表的关联查询替代</p>
+<p>3、少用in和not in，因为绝对可以用exists和not exists替代</p>
+<p>4、where子句中慎用!&#x3D;，走不到索引</p>
+<p>5、少用or，走不到索引</p>
+<p>6、少用null判断，走不到索引</p>
+<h3 id="drop、delete和truncate"><a href="#drop、delete和truncate" class="headerlink" title="drop、delete和truncate"></a>drop、delete和truncate</h3><p>drop和truncate不能回滚，不在事务中。delete是在事务中，提交时才生效。</p>
+<p>drop删的最多，会删表结构，可以重新建同名表，及时生效不在事务中。</p>
+<p>truncate其次，对比drop是少删表结构，仅删除数据，还是不在事务中。</p>
+<p>delete再次，仅删除表数据，会在事务中，事务提交后才生效。</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>理解为虚拟表。类似函数封装的概念。</p>
+<p>可以封装复杂查询的结果。</p>
+<p>可以用来做权限隔离，比如仅展示某几个字段给特定用户。</p>
+<p>底层表有改动，比如拆分了，可以建一个视图，避免上层应用修改SQL。</p>
+<h3 id="并发事务的问题"><a href="#并发事务的问题" class="headerlink" title="并发事务的问题"></a>并发事务的问题</h3><p>脏读：一个事务读到了另一个事务修改了但未提交的数据。</p>
+<p>修改丢失：两个事务同时修改了同一个值，后一个覆盖了前一个。比如两个事务同时做x-1，先读x再减一，并发之后可能结果是x-1而不是x-2。</p>
+<p>不可重复读：一个事务未结束时，读到了另一个事务B修改了并提交的最新值。</p>
+<p>幻读：一个事务查询一批数据的过程中，这批数据被另一个事务新增或删除了一些数据（比如新增了几条数据），于是查询到了新的数据。</p>
+<p>不可重复读重点在修改，幻读重点在新增或删除。重点在行锁和表锁区别。</p>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>MySQL的InnoDB默认是可重复读</p>
+<p>读未提交：脏读，不可重复读，幻读</p>
+<p>读已提交：不可重复读，幻读</p>
+<p>可重复读：幻读（解决了单行的修改，但没解决表级别的增删）</p>
+<p>串行化：事务逐个执行，库锁</p>
+<p>大部分数据库是读已提交级别的事务（比如postgre）。</p>
+<p>mysql额外用了next key Lock，用行锁和间隙锁在可重复读的场景下避免了幻读。具体做法就是，锁了一行数据的前一条和后一条中间的范围。比如5、10、15三条数据，当10被事务读的时候，如果有一个事务插入一条数据8，则会触发间隙锁，插入8的事务会阻塞。这里和聚簇索引也有关系。</p>
+<h3 id="大表优化"><a href="#大表优化" class="headerlink" title="大表优化"></a>大表优化</h3><p>方向：单体变分布式-拆，限制结果数量</p>
+<p>1、查询时限制范围，分页</p>
+<p>2、读写分离，拆到多个机器上</p>
+<p>3、垂直拆分，把字段拆到不同的表中</p>
+<p>4、水平拆分，根据某些逻辑把数据分到不同的片区。比如地区信息做异地多活。</p>
+<h3 id="分库分表后的ID处理"><a href="#分库分表后的ID处理" class="headerlink" title="分库分表后的ID处理"></a>分库分表后的ID处理</h3><p>可转化为全局唯一ID问题：与消息中间件的消息防丢差不多。</p>
+<p>uuid、雪花、美团的leaf。</p>
+<h3 id="MySQL的一条查询SQL执行过程"><a href="#MySQL的一条查询SQL执行过程" class="headerlink" title="MySQL的一条查询SQL执行过程"></a>MySQL的一条查询SQL执行过程</h3><p>8.0没有查询缓存。</p>
+<p>1、语法分析：包括解析SQL语法的正确性，涉及到的表和字段是否存在</p>
+<p>2、准备阶段：会对查询进行逻辑优化，比如选择索引，去除不必要的子查询之类的。逻辑优化后还有物理优化，会根据统计信息和成本计算模型来确定具体的执行计划</p>
+<p>3、执行查询：由执行引擎和存储引擎交互产出查询结果</p>
+<p>4、结果返回：去重排序之类的处理，最终结果返回给客户端</p>
+<h3 id="varchar和char的区别"><a href="#varchar和char的区别" class="headerlink" title="varchar和char的区别"></a>varchar和char的区别</h3><p>varchar可变长度，char不可变，定长。</p>
+<p>比如varchar(30)的字段存一个字节长度为3的字符，实际空间占用可能为5或者6字节左右，因为有一定的空间用于存储其字段长度。</p>
+<p>char(30)的字段存同样的字符，那么固定占用30字节，后面空的会补零。</p>
+<p>char读写快，空间占用大。varchar省空间，读写慢。</p>
+<h3 id="int-11-的11含义"><a href="#int-11-的11含义" class="headerlink" title="int(11)的11含义"></a>int(11)的11含义</h3><p>不影响字段的存储范围，仅影响查询的展示效果。</p>
+<h3 id="MySQL的索引类型"><a href="#MySQL的索引类型" class="headerlink" title="MySQL的索引类型"></a>MySQL的索引类型</h3><p>主键索引：必须唯一，不可为空</p>
+<p>普通索引：允许重复和空</p>
+<p>唯一索引：值必须唯一，可以为空</p>
+<p>全文索引：只能在文本字段创建，用于加速like查询</p>
+<p>空间索引</p>
+<p>前缀索引</p>
+<p>单列和组合索引：最左匹配原则，优先用组合索引</p>
+<h3 id="什么场景不适合索引"><a href="#什么场景不适合索引" class="headerlink" title="什么场景不适合索引"></a>什么场景不适合索引</h3><p>1、经常更新的列</p>
+<p>2、内容大量重复的列</p>
+<p>3、表记录太少（不清楚具体是多少）</p>
+<p>4、写远大于读的表</p>
+<h3 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h3><p>多版本并发控制。用来解决读写冲突，是无锁并发。事务分配事务号（单向递增），每个修改保存一个版本。读只读老版本的数据，修改在新版本。可以同时避免脏读和不可重复读。</p>
+<p>实现：</p>
+<p>1、每行数据有一个版本链</p>
+<p>2、事务id，单调递增</p>
+<p>3、可见性判断，根据事务级别来判断是否可见</p>
+<p>4、过期数据清理</p>
+<p>级别和判断逻辑：</p>
+<p>读已提交：单行数据版本号小于当前事务版本号，并且此事务已提交，则可以看到</p>
+<p>可重复读：创建一致性视图，包含事务开始时所有可读的事务号。</p>
+<p>缺点，做不到串行化执行，在解决写冲突的时候还是要用锁或者重做</p>
+<h3 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h3><p>读锁和写锁（共享和排他）。</p>
+<p>按照粒度，可以划分为表锁和行锁。MyISAM是表级别的读写锁，InnoDB支持行锁。</p>
+<h3 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h3><p>行锁只能在索引上，没索引自动升级成表锁。</p>
+<p>没走索引时也会升级成表锁。比如非唯一索引相同的内容超过表的一半，优化器会选择不走索引。</p>
+<h3 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h3><p>悲观锁：倾向于一行数据总是会被同时修改，所以修改前加上排他锁</p>
+<p>乐观锁：倾向于一行数据不一定会被同时修改。加上版本号，类似MVCC，修改前读取版本号，修改后版本号+1，在更新版本号时做版本号检查，如果版本号和预期不符，说明此时有其他人修改了数据，否则就直接更新。乐观锁一般配合自旋，形成一个类似CAS的操作。</p>
+<h3 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h3><p>获取锁一定要加超时时间；</p>
+<p>按照固定顺序获取资源；</p>
+<p>事务尽量简短；</p>
+<p>事务隔离级别低一些；</p>
+<p>避免事务中的用户交叉；</p>
+<h3 id="索引注意事项"><a href="#索引注意事项" class="headerlink" title="索引注意事项"></a>索引注意事项</h3><p>1、where中使用!&#x3D;、&lt;&gt;、or会导致放弃使用索引</p>
+<p>2、符合索引要复合最左前缀原则</p>
+<p>3、where中进行字段表达式运算、函数运算可能导致索引失效</p>
+<p>4、Like使用是%不能在前，模糊匹配可以用全文索引</p>
+<p>5、字段是字符串类型，必须加引号，否则索引失效</p>
+<h3 id="主键-索引"><a href="#主键-索引" class="headerlink" title="主键 索引"></a>主键 索引</h3><p>主键是唯一索引，唯一索引不一定是主键</p>
+<p>主键不允许空，唯一索引可以为空</p>
+<p>一个表只能有一个主键，但可以有多个唯一索引</p>
+<p>主键是约束，而唯一索引是冗余的数据结构</p>
+<h3 id="MySQL的高可用"><a href="#MySQL的高可用" class="headerlink" title="MySQL的高可用"></a>MySQL的高可用</h3><p>MySQL分库分表。</p>
+<p>意义不是很大，一般是整个系统都做高可用。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MySQL的MVCC机制是一个非常标准的实现，可以和我之前做的缓存框架结合起来，很多道理都是共通的。</p>
+]]></content>
+      <tags>
+        <tag>【工作】面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用浏览器发送POST请求</title>
+    <url>/2023/09/27/15-25-40/</url>
+    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
+<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
+<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
+
+<p>表现如下：</p>
+<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
+
+<p>完事。</p>
+]]></content>
+      <tags>
+        <tag>【工作】优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-网络协议</title>
+    <url>/2024/10/14/13-41-52/</url>
+    <content><![CDATA[<p>这里记录一下面试的准备过程中关于网络协议的笔记。</p>
+<span id="more"></span>
+
+<h3 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h3><p>200 - 成功</p>
+<p>301 - 永久重定向    302 - 临时重定向</p>
+<p>4开头是客户端问题</p>
+<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
+<p>5开头是服务器问题</p>
+<p>500 - 服务器崩了  504 - badgateway</p>
+<h3 id="Forward和Redirect"><a href="#Forward和Redirect" class="headerlink" title="Forward和Redirect"></a>Forward和Redirect</h3><p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
+<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
+<h3 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h3><p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
+<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
+<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
+<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
+<p>UDP无连接，不可靠，传输性能高</p>
+<p>TCP是点对点，UDP支持广播</p>
+<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
+<h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><p>HTTP用80端口，HTTPS用443</p>
+<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
+<h3 id="HTTP、TCP和Socket"><a href="#HTTP、TCP和Socket" class="headerlink" title="HTTP、TCP和Socket"></a>HTTP、TCP和Socket</h3><p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
+<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
+<p>HTTP是应用层的协议，基于TCP来实现</p>
+<p>TCP是网络层协议</p>
+<h3 id="HTTP的长连接和短连接"><a href="#HTTP的长连接和短连接" class="headerlink" title="HTTP的长连接和短连接"></a>HTTP的长连接和短连接</h3><p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
+<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
+<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
+<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
+<p>第一次：客户端-&gt;服务端，syn&#x3D;1，seq&#x3D;x</p>
+<p>第二次：服务端-&gt;客户端，syn&#x3D;1，seq&#x3D;y，ack&#x3D;x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
+<p>第三次：客户端-&gt;服务端，seq&#x3D;x+1, ack&#x3D;y+1。告知服务端，你发送的消息我也能收到。</p>
+<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
+<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
+<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
+<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
+<h3 id="TCP粘包"><a href="#TCP粘包" class="headerlink" title="TCP粘包"></a>TCP粘包</h3><p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
+<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
+<p>TCP的分包是由滑动窗口来控制的。</p>
+<p>解决方式，都是在应用的协议层解决：</p>
+<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
+<p>2、把协议固定长度，所有协议包的长度都一致。</p>
+<p>3、特殊分隔符号。</p>
+<h3 id="TCP可靠性"><a href="#TCP可靠性" class="headerlink" title="TCP可靠性"></a>TCP可靠性</h3><p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
+<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
+<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
+<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
+<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
+<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>应用层：HTTP、FTP</p>
+<p>表示层：加解密</p>
+<p>会话层：RPC</p>
+<p>传输层：TCP、UDP</p>
+<p>网络层：IP、IPv6</p>
+<p>数据链路层：物理寻址层。交换机等</p>
+<p>物理层：硬件</p>
+<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
+<h3 id="浏览器输入一个网址后发生了什么"><a href="#浏览器输入一个网址后发生了什么" class="headerlink" title="浏览器输入一个网址后发生了什么"></a>浏览器输入一个网址后发生了什么</h3><p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
+<p>2、建立TCP连接</p>
+<p>3、发送HTTP的GET请求</p>
+<p>4、请求经过路由器转发到服务器</p>
+<p>5、服务器处理请求，返回网页文件（HTML）</p>
+<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
+<h3 id="如何跨域"><a href="#如何跨域" class="headerlink" title="如何跨域"></a>如何跨域</h3><p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
+<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
+<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
+<h3 id="HTTP-1-0-1-1-2-0-3-0"><a href="#HTTP-1-0-1-1-2-0-3-0" class="headerlink" title="HTTP 1.0 1.1 2.0 3.0"></a>HTTP 1.0 1.1 2.0 3.0</h3><p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
+<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
+<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
+<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
+<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
+<h3 id="HTTP与TCP-x2F-IP"><a href="#HTTP与TCP-x2F-IP" class="headerlink" title="HTTP与TCP&#x2F;IP"></a>HTTP与TCP&#x2F;IP</h3><p>HTTP是应用层的报文协议，一般数据传输是用TCP&#x2F;IP实现。</p>
+<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
+<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
+<h3 id="HTTP长连接短连接"><a href="#HTTP长连接短连接" class="headerlink" title="HTTP长连接短连接"></a>HTTP长连接短连接</h3><p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
+<h3 id="长连接和短连接的优缺点"><a href="#长连接和短连接的优缺点" class="headerlink" title="长连接和短连接的优缺点"></a>长连接和短连接的优缺点</h3><p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
+<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
+<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>从开销最小的地方开始找，没有就去更远的地方找。</p>
+<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
+<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
+<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
+<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
+]]></content>
+      <tags>
+        <tag>【工作】面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Netty的FastThreadLocal带来了什么？</title>
+    <url>/2024/09/13/14-49-51/</url>
+    <content><![CDATA[<p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
+<span id="more"></span>
+
+<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
+<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
+<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
+<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
+<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
+<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
+<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
+<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
+<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
+<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
+<p>然后再来聊聊其中的实现。</p>
+<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
+<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
+<p>它的get()过程是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
+
+<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
+<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
+<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
+
+<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
+<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
+<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
+<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
+<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
+<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
+]]></content>
+      <tags>
+        <tag>【工作】Netty</tag>
       </tags>
   </entry>
   <entry>
@@ -749,59 +960,6 @@
 ]]></content>
       <tags>
         <tag>【工作】经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JRE环境使用Arthas</title>
-    <url>/2024/09/20/19-12-39/</url>
-    <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
-<span id="more"></span>
-
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
-<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
-<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
-<p>这里提供一个脚本：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>最关键的就是脚本中最后的两句</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
-
-<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
-<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
-]]></content>
-      <tags>
-        <tag>【工作】优秀实践</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用浏览器发送POST请求</title>
-    <url>/2023/09/27/15-25-40/</url>
-    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
-<span id="more"></span>
-
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
-<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
-<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
-
-<p>表现如下：</p>
-<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
-
-<p>完事。</p>
-]]></content>
-      <tags>
-        <tag>【工作】优秀实践</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面试笔记-Java基础</title>
-    <url>/2024/10/16/15-04-36/</url>
-    <content><![CDATA[<p>Java基础是纯纯的八股文了，但还是要过一遍。</p>
-<span id="more"></span>
-]]></content>
-      <tags>
-        <tag>【工作】面试</tag>
       </tags>
   </entry>
   <entry>
@@ -932,213 +1090,55 @@
       </tags>
   </entry>
   <entry>
-    <title>面试笔记-数据库</title>
-    <url>/2024/10/14/13-48-06/</url>
-    <content><![CDATA[<p>这里记录一下面试的准备过程中关于数据库的笔记。</p>
-<p>原先工作中对数据库的使用实在是太少了…</p>
-<p>不过还好大部分东西都还记得，复习一下就很快理解了。</p>
+    <title>JRE环境使用Arthas</title>
+    <url>/2024/09/20/19-12-39/</url>
+    <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
 <span id="more"></span>
 
-<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><h3 id="三范式"><a href="#三范式" class="headerlink" title="三范式"></a>三范式</h3><p>第一范式：列不可再分；</p>
-<p>第二范式：表中的每一行都可以唯一区分，通过主键实现；</p>
-<p>第三范式：（用于避免数据冗余，减少内存占用，实践中常被忽视）表的非主键字段不能依赖于其他非主键字段；比如学生表，里边有班级名称字段和辅导员名称字段，那么班级和辅导员会大量重复，应当拆分出班级表和辅导员表。</p>
-<h3 id="MySQL的存储引擎"><a href="#MySQL的存储引擎" class="headerlink" title="MySQL的存储引擎"></a>MySQL的存储引擎</h3><p>MyISAM、InnoDB、Memory</p>
-<p>MyISAM：全表锁，没有事务和外键，单表执行性能高，并发性能差，空间占用小。</p>
-<p>InnoDB：行锁，有事务，支持自增序列，支持外键，并发性能高，空间占用大。</p>
-<p>Memory：纯内存。</p>
-<h3 id="InnoDB和MyISAM"><a href="#InnoDB和MyISAM" class="headerlink" title="InnoDB和MyISAM"></a>InnoDB和MyISAM</h3><p>InnoDB支持事务，默认是每一条SQL都封装为一个事务。MyISAM没有事务。</p>
-<p>InnoDB有外键，MyISAM没有。</p>
-<p>InnoDB是行锁，MyISAM是表锁，InnoDB并发场景性能会好一些。</p>
-<p>InnoDB是聚集索引，必须有主键。在表上建立的其他索引，都是指向主键。通过其他索引查询时，先经过索引查到主键，再通过主键查找数据。MyISAM是非聚集索引，主键和索引都是直接指向数据指针，主键和索引相互独立。</p>
-<p>InnoDB不保存表的行数，计算行数时要全表扫描。MyISAM保存了表的行数。</p>
-<h3 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h3><p>ACID：atomic、consistency、isolation、durability</p>
-<p>原子性：一个事务内的多个操作可以看成一个原子操作，即要么成功要么失败。事务中任意一个操作失败了都会回滚到没有开始事务之前的状态。</p>
-<p>一致性：事务操作的结果和业务规则是一致的。即事务成功时，可以达成操作者目的。</p>
-<p>隔离性：多个事务之间互相数据隔离，彼此没有影响。</p>
-<p>持久性：事务完成后会持久化到数据库。</p>
-<h3 id="索引是什么"><a href="#索引是什么" class="headerlink" title="索引是什么"></a>索引是什么</h3><p>官方：一种帮助MySQL快速获取数据的数据结构。</p>
-<p>类似目录，默认是B+树实现。</p>
-<h3 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h3><p>优点：提升查询速度。</p>
-<p>缺点：索引也有空间占用，更新速度变慢，因为表更新的时候索引也要更新。</p>
-<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><p>原则：避免全表扫描，查询时尽量走索引。少于三张表的查询允许关联，关联不了就走子查询。</p>
-<p>1、尽量不要用select *</p>
-<p>2、减少子查询，用少于三张表的关联查询替代</p>
-<p>3、少用in和not in，因为绝对可以用exists和not exists替代</p>
-<p>4、where子句中慎用!&#x3D;，走不到索引</p>
-<p>5、少用or，走不到索引</p>
-<p>6、少用null判断，走不到索引</p>
-<h3 id="drop、delete和truncate"><a href="#drop、delete和truncate" class="headerlink" title="drop、delete和truncate"></a>drop、delete和truncate</h3><p>drop和truncate不能回滚，不在事务中。delete是在事务中，提交时才生效。</p>
-<p>drop删的最多，会删表结构，可以重新建同名表，及时生效不在事务中。</p>
-<p>truncate其次，对比drop是少删表结构，仅删除数据，还是不在事务中。</p>
-<p>delete再次，仅删除表数据，会在事务中，事务提交后才生效。</p>
-<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>理解为虚拟表。类似函数封装的概念。</p>
-<p>可以封装复杂查询的结果。</p>
-<p>可以用来做权限隔离，比如仅展示某几个字段给特定用户。</p>
-<p>底层表有改动，比如拆分了，可以建一个视图，避免上层应用修改SQL。</p>
-<h3 id="并发事务的问题"><a href="#并发事务的问题" class="headerlink" title="并发事务的问题"></a>并发事务的问题</h3><p>脏读：一个事务读到了另一个事务修改了但未提交的数据。</p>
-<p>修改丢失：两个事务同时修改了同一个值，后一个覆盖了前一个。比如两个事务同时做x-1，先读x再减一，并发之后可能结果是x-1而不是x-2。</p>
-<p>不可重复读：一个事务未结束时，读到了另一个事务B修改了并提交的最新值。</p>
-<p>幻读：一个事务查询一批数据的过程中，这批数据被另一个事务新增或删除了一些数据（比如新增了几条数据），于是查询到了新的数据。</p>
-<p>不可重复读重点在修改，幻读重点在新增或删除。重点在行锁和表锁区别。</p>
-<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>MySQL的InnoDB默认是可重复读</p>
-<p>读未提交：脏读，不可重复读，幻读</p>
-<p>读已提交：不可重复读，幻读</p>
-<p>可重复读：幻读（解决了单行的修改，但没解决表级别的增删）</p>
-<p>串行化：事务逐个执行，库锁</p>
-<p>大部分数据库是读已提交级别的事务（比如postgre）。</p>
-<p>mysql额外用了next key Lock，用行锁和间隙锁在可重复读的场景下避免了幻读。具体做法就是，锁了一行数据的前一条和后一条中间的范围。比如5、10、15三条数据，当10被事务读的时候，如果有一个事务插入一条数据8，则会触发间隙锁，插入8的事务会阻塞。这里和聚簇索引也有关系。</p>
-<h3 id="大表优化"><a href="#大表优化" class="headerlink" title="大表优化"></a>大表优化</h3><p>方向：单体变分布式-拆，限制结果数量</p>
-<p>1、查询时限制范围，分页</p>
-<p>2、读写分离，拆到多个机器上</p>
-<p>3、垂直拆分，把字段拆到不同的表中</p>
-<p>4、水平拆分，根据某些逻辑把数据分到不同的片区。比如地区信息做异地多活。</p>
-<h3 id="分库分表后的ID处理"><a href="#分库分表后的ID处理" class="headerlink" title="分库分表后的ID处理"></a>分库分表后的ID处理</h3><p>可转化为全局唯一ID问题：与消息中间件的消息防丢差不多。</p>
-<p>uuid、雪花、美团的leaf。</p>
-<h3 id="MySQL的一条查询SQL执行过程"><a href="#MySQL的一条查询SQL执行过程" class="headerlink" title="MySQL的一条查询SQL执行过程"></a>MySQL的一条查询SQL执行过程</h3><p>8.0没有查询缓存。</p>
-<p>1、语法分析：包括解析SQL语法的正确性，涉及到的表和字段是否存在</p>
-<p>2、准备阶段：会对查询进行逻辑优化，比如选择索引，去除不必要的子查询之类的。逻辑优化后还有物理优化，会根据统计信息和成本计算模型来确定具体的执行计划</p>
-<p>3、执行查询：由执行引擎和存储引擎交互产出查询结果</p>
-<p>4、结果返回：去重排序之类的处理，最终结果返回给客户端</p>
-<h3 id="varchar和char的区别"><a href="#varchar和char的区别" class="headerlink" title="varchar和char的区别"></a>varchar和char的区别</h3><p>varchar可变长度，char不可变，定长。</p>
-<p>比如varchar(30)的字段存一个字节长度为3的字符，实际空间占用可能为5或者6字节左右，因为有一定的空间用于存储其字段长度。</p>
-<p>char(30)的字段存同样的字符，那么固定占用30字节，后面空的会补零。</p>
-<p>char读写快，空间占用大。varchar省空间，读写慢。</p>
-<h3 id="int-11-的11含义"><a href="#int-11-的11含义" class="headerlink" title="int(11)的11含义"></a>int(11)的11含义</h3><p>不影响字段的存储范围，仅影响查询的展示效果。</p>
-<h3 id="MySQL的索引类型"><a href="#MySQL的索引类型" class="headerlink" title="MySQL的索引类型"></a>MySQL的索引类型</h3><p>主键索引：必须唯一，不可为空</p>
-<p>普通索引：允许重复和空</p>
-<p>唯一索引：值必须唯一，可以为空</p>
-<p>全文索引：只能在文本字段创建，用于加速like查询</p>
-<p>空间索引</p>
-<p>前缀索引</p>
-<p>单列和组合索引：最左匹配原则，优先用组合索引</p>
-<h3 id="什么场景不适合索引"><a href="#什么场景不适合索引" class="headerlink" title="什么场景不适合索引"></a>什么场景不适合索引</h3><p>1、经常更新的列</p>
-<p>2、内容大量重复的列</p>
-<p>3、表记录太少（不清楚具体是多少）</p>
-<p>4、写远大于读的表</p>
-<h3 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h3><p>多版本并发控制。用来解决读写冲突，是无锁并发。事务分配事务号（单向递增），每个修改保存一个版本。读只读老版本的数据，修改在新版本。可以同时避免脏读和不可重复读。</p>
-<p>实现：</p>
-<p>1、每行数据有一个版本链</p>
-<p>2、事务id，单调递增</p>
-<p>3、可见性判断，根据事务级别来判断是否可见</p>
-<p>4、过期数据清理</p>
-<p>级别和判断逻辑：</p>
-<p>读已提交：单行数据版本号小于当前事务版本号，并且此事务已提交，则可以看到</p>
-<p>可重复读：创建一致性视图，包含事务开始时所有可读的事务号。</p>
-<p>缺点，做不到串行化执行，在解决写冲突的时候还是要用锁或者重做</p>
-<h3 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h3><p>读锁和写锁（共享和排他）。</p>
-<p>按照粒度，可以划分为表锁和行锁。MyISAM是表级别的读写锁，InnoDB支持行锁。</p>
-<h3 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h3><p>行锁只能在索引上，没索引自动升级成表锁。</p>
-<p>没走索引时也会升级成表锁。比如非唯一索引相同的内容超过表的一半，优化器会选择不走索引。</p>
-<h3 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h3><p>悲观锁：倾向于一行数据总是会被同时修改，所以修改前加上排他锁</p>
-<p>乐观锁：倾向于一行数据不一定会被同时修改。加上版本号，类似MVCC，修改前读取版本号，修改后版本号+1，在更新版本号时做版本号检查，如果版本号和预期不符，说明此时有其他人修改了数据，否则就直接更新。乐观锁一般配合自旋，形成一个类似CAS的操作。</p>
-<h3 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h3><p>获取锁一定要加超时时间；</p>
-<p>按照固定顺序获取资源；</p>
-<p>事务尽量简短；</p>
-<p>事务隔离级别低一些；</p>
-<p>避免事务中的用户交叉；</p>
-<h3 id="索引注意事项"><a href="#索引注意事项" class="headerlink" title="索引注意事项"></a>索引注意事项</h3><p>1、where中使用!&#x3D;、&lt;&gt;、or会导致放弃使用索引</p>
-<p>2、符合索引要复合最左前缀原则</p>
-<p>3、where中进行字段表达式运算、函数运算可能导致索引失效</p>
-<p>4、Like使用是%不能在前，模糊匹配可以用全文索引</p>
-<p>5、字段是字符串类型，必须加引号，否则索引失效</p>
-<h3 id="主键-索引"><a href="#主键-索引" class="headerlink" title="主键 索引"></a>主键 索引</h3><p>主键是唯一索引，唯一索引不一定是主键</p>
-<p>主键不允许空，唯一索引可以为空</p>
-<p>一个表只能有一个主键，但可以有多个唯一索引</p>
-<p>主键是约束，而唯一索引是冗余的数据结构</p>
-<h3 id="MySQL的高可用"><a href="#MySQL的高可用" class="headerlink" title="MySQL的高可用"></a>MySQL的高可用</h3><p>MySQL分库分表。</p>
-<p>意义不是很大，一般是整个系统都做高可用。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MySQL的MVCC机制是一个非常标准的实现，可以和我之前做的缓存框架结合起来，很多道理都是共通的。</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
+<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
+<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
+<p>这里提供一个脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最关键的就是脚本中最后的两句</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
+
+<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
+<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
 ]]></content>
       <tags>
-        <tag>【工作】面试</tag>
+        <tag>【工作】优秀实践</tag>
       </tags>
   </entry>
   <entry>
-    <title>面试笔记-网络协议</title>
-    <url>/2024/10/14/13-41-52/</url>
-    <content><![CDATA[<p>这里记录一下面试的准备过程中关于网络协议的笔记。</p>
+    <title>工作中印象最深刻的一件事</title>
+    <url>/2024/09/16/20-02-30/</url>
+    <content><![CDATA[<p>在准备秋招面试，看到这个常见的面试题，突然有感而发。工作之后，发现这个问题只从技术角度看，实在是有些肤浅，或许可以提出更多的东西。</p>
 <span id="more"></span>
 
-<h3 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h3><p>200 - 成功</p>
-<p>301 - 永久重定向    302 - 临时重定向</p>
-<p>4开头是客户端问题</p>
-<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
-<p>5开头是服务器问题</p>
-<p>500 - 服务器崩了  504 - badgateway</p>
-<h3 id="Forward和Redirect"><a href="#Forward和Redirect" class="headerlink" title="Forward和Redirect"></a>Forward和Redirect</h3><p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
-<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
-<h3 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h3><p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
-<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
-<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
-<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
-<p>UDP无连接，不可靠，传输性能高</p>
-<p>TCP是点对点，UDP支持广播</p>
-<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
-<h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><p>HTTP用80端口，HTTPS用443</p>
-<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
-<h3 id="HTTP、TCP和Socket"><a href="#HTTP、TCP和Socket" class="headerlink" title="HTTP、TCP和Socket"></a>HTTP、TCP和Socket</h3><p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
-<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
-<p>HTTP是应用层的协议，基于TCP来实现</p>
-<p>TCP是网络层协议</p>
-<h3 id="HTTP的长连接和短连接"><a href="#HTTP的长连接和短连接" class="headerlink" title="HTTP的长连接和短连接"></a>HTTP的长连接和短连接</h3><p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
-<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
-<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
-<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
-<p>第一次：客户端-&gt;服务端，syn&#x3D;1，seq&#x3D;x</p>
-<p>第二次：服务端-&gt;客户端，syn&#x3D;1，seq&#x3D;y，ack&#x3D;x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
-<p>第三次：客户端-&gt;服务端，seq&#x3D;x+1, ack&#x3D;y+1。告知服务端，你发送的消息我也能收到。</p>
-<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
-<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
-<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
-<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
-<h3 id="TCP粘包"><a href="#TCP粘包" class="headerlink" title="TCP粘包"></a>TCP粘包</h3><p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
-<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
-<p>TCP的分包是由滑动窗口来控制的。</p>
-<p>解决方式，都是在应用的协议层解决：</p>
-<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
-<p>2、把协议固定长度，所有协议包的长度都一致。</p>
-<p>3、特殊分隔符号。</p>
-<h3 id="TCP可靠性"><a href="#TCP可靠性" class="headerlink" title="TCP可靠性"></a>TCP可靠性</h3><p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
-<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
-<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
-<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
-<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
-<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>应用层：HTTP、FTP</p>
-<p>表示层：加解密</p>
-<p>会话层：RPC</p>
-<p>传输层：TCP、UDP</p>
-<p>网络层：IP、IPv6</p>
-<p>数据链路层：物理寻址层。交换机等</p>
-<p>物理层：硬件</p>
-<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
-<h3 id="浏览器输入一个网址后发生了什么"><a href="#浏览器输入一个网址后发生了什么" class="headerlink" title="浏览器输入一个网址后发生了什么"></a>浏览器输入一个网址后发生了什么</h3><p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
-<p>2、建立TCP连接</p>
-<p>3、发送HTTP的GET请求</p>
-<p>4、请求经过路由器转发到服务器</p>
-<p>5、服务器处理请求，返回网页文件（HTML）</p>
-<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
-<h3 id="如何跨域"><a href="#如何跨域" class="headerlink" title="如何跨域"></a>如何跨域</h3><p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
-<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
-<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
-<h3 id="HTTP-1-0-1-1-2-0-3-0"><a href="#HTTP-1-0-1-1-2-0-3-0" class="headerlink" title="HTTP 1.0 1.1 2.0 3.0"></a>HTTP 1.0 1.1 2.0 3.0</h3><p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
-<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
-<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
-<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
-<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
-<h3 id="HTTP与TCP-x2F-IP"><a href="#HTTP与TCP-x2F-IP" class="headerlink" title="HTTP与TCP&#x2F;IP"></a>HTTP与TCP&#x2F;IP</h3><p>HTTP是应用层的报文协议，一般数据传输是用TCP&#x2F;IP实现。</p>
-<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
-<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
-<h3 id="HTTP长连接短连接"><a href="#HTTP长连接短连接" class="headerlink" title="HTTP长连接短连接"></a>HTTP长连接短连接</h3><p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
-<h3 id="长连接和短连接的优缺点"><a href="#长连接和短连接的优缺点" class="headerlink" title="长连接和短连接的优缺点"></a>长连接和短连接的优缺点</h3><p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
-<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
-<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>从开销最小的地方开始找，没有就去更远的地方找。</p>
-<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
-<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
-<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
-<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
+<h2 id="技术之外的东西"><a href="#技术之外的东西" class="headerlink" title="技术之外的东西"></a>技术之外的东西</h2><p>如果是放在还没参加工作时，看到这个问题“你在项目中遇到过的印象最深刻的一件事”，我大概率就是：胡诌一个很难的技术问题，然后说这问题解决的过程有些困难，但是经过我艰苦卓绝地努力，还是完成了，最后觉得自己很有成就感巴拉巴拉……</p>
+<p>但是放到今天，再看这问题，我就倾向于带一些技术之外的东西进去。</p>
+<p>这能聊的就多了。</p>
+<p>比如有个不怎么开窍的实习生，怎么教都教不会，最后是我自己帮他写了代码。我反思之后，觉得自己带人的方式有些问题，从此之后就换了一种方式教人。如果实习生能力差，就选取一些时间上限制不那么多的任务；如果愿意挑战，就分一些预研性质的任务，让他产出方案。<br>这样能说的就多多了，我相信也是大部分面试官可以感同身受的。</p>
+<p>当然上面只是个例子，最主要的一点就是，我觉得和同事相处的方式、选取某种技术的决断、一些任务优先级的取舍，这些都可以是印象深刻的事情。对于这些事情，技术固然包含在其中，但提升了这些事难度的、给人深刻印象的，恰恰就是技术之外的东西。</p>
+<h2 id="印象最深的一件事"><a href="#印象最深的一件事" class="headerlink" title="印象最深的一件事"></a>印象最深的一件事</h2><p>然后就提到我自己参加工作后印象最深的一件事，应该就是写公司业务协议序列化框架的纯Java版本了。</p>
+<p>准确说起来，这块的代码我没有写多少。我主要是负责这个任务的分配、监督和技术指导，编码由组内的一个同事负责。</p>
+<p>前期预研时，阅读了Protobuf的源码，然后实现时是参考了C++的实现。</p>
+<p>简单来说，就是参考C++的代码，从Protobuf中找到对应的可用代码，然后移植到我们的框架中。</p>
+<p>包体的解析逻辑有大量的可用实现，但是Java对象属性的获取和设置的逻辑，我们是用Unsafe重新写了一遍。</p>
+<p>整个过程顺利得不可思议，原计划两个月的任务，最后一个月就完成了。</p>
+<p>但是问题就出在这个完成之后，我们发现还有一些性能优化的空间。</p>
+<p>这个同事有些钻牛角尖，希望能把整个代码重构，然后做性能优化。但是我组织了他。</p>
+<p>这就是我印象最深的地方了，我经过了取舍，决定把重构和优化的工作往后无限期推迟，让他先基于目前的版本给出详细的文档。</p>
+<p>我们大部分同事都不具备给项目收尾的能力，就是一个模块，写到什么程度，我们就应该停止迭代，转而发布正式版。</p>
+<p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
+<p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
+<p>这就是我从这件事情里学到的。</p>
 ]]></content>
       <tags>
-        <tag>【工作】面试</tag>
+        <tag>【工作】经验总结</tag>
       </tags>
   </entry>
 </search>
