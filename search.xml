@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JNI调用的优化（第二版)</title>
+    <url>/2024/08/08/10-28-13/</url>
+    <content><![CDATA[<p>这一次验证了critical native调用。</p>
+<span id="more"></span>
+
+<p>源头是这篇博客：<a href="http://blog.hakugyokurou.net/?p=1758">http://blog.hakugyokurou.net/?p=1758</a></p>
+<p>讲到了最正式的文档也就是bug系统中的一条记录：<a href="https://bugs.openjdk.org/browse/JDK-7013347">https://bugs.openjdk.org/browse/JDK-7013347</a></p>
+<p>另外在stackoverflow上有人爆料了这个能力：<a href="https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652">https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652</a></p>
+<p>处于验证的目的，我写了jmh对其进行测试。</p>
+<p>不过测试结果倒是有提升，但也仅仅是20ns。</p>
+<p>聊胜于无，就目前的场景（单次调用800ns）来看，并没有必要做这个优化。</p>
+<p>带来的不稳定因素反而是更大的问题。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JNI调用的优化</title>
     <url>/2023/12/19/17-55-26/</url>
     <content><![CDATA[<p>在今年11月，我接到一个封装JNI的task。这次对接的是C++实现的内存数据库，性能要求实在太高了，只能采取一些不同寻常的方式来做JNI层调用优化。这里记录一下我的优化思路。</p>
@@ -47,24 +65,6 @@
 <p>字符串在Java中的使用实在是过于频繁了，毕竟好用嘛。在C++中字符串用起来比Java要麻烦很多，这也导致在JNI优化的时候，字符串不得不单独拎出来优化。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在特定场景下，使用Unsafe能显著提高Java程序与C++的交互性能。</p>
 <p>但我觉得更重要的是，使用Unsafe使得Java具有了直接去操作内存的能力，这就解放了JNI调用的束缚，可以直接通过指针的方式来交互。这在异构系统的层次划分和接口设计上是会有相当大的影响的。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JNI调用的优化（第二版)</title>
-    <url>/2024/08/08/10-28-13/</url>
-    <content><![CDATA[<p>这一次验证了critical native调用。</p>
-<span id="more"></span>
-
-<p>源头是这篇博客：<a href="http://blog.hakugyokurou.net/?p=1758">http://blog.hakugyokurou.net/?p=1758</a></p>
-<p>讲到了最正式的文档也就是bug系统中的一条记录：<a href="https://bugs.openjdk.org/browse/JDK-7013347">https://bugs.openjdk.org/browse/JDK-7013347</a></p>
-<p>另外在stackoverflow上有人爆料了这个能力：<a href="https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652">https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652</a></p>
-<p>处于验证的目的，我写了jmh对其进行测试。</p>
-<p>不过测试结果倒是有提升，但也仅仅是20ns。</p>
-<p>聊胜于无，就目前的场景（单次调用800ns）来看，并没有必要做这个优化。</p>
-<p>带来的不稳定因素反而是更大的问题。</p>
 ]]></content>
       <tags>
         <tag>【工作】性能调优</tag>
@@ -180,74 +180,6 @@
 ]]></content>
       <tags>
         <tag>【工作】Netty</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Unsafe的使用记录</title>
-    <url>/2024/01/07/11-15-32/</url>
-    <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
-<span id="more"></span>
-
-<h2 id="什么是Unsafe"><a href="#什么是Unsafe" class="headerlink" title="什么是Unsafe"></a>什么是Unsafe</h2><p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
-
-<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
-<p>为何如此？</p>
-<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
-<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
-<h2 id="使用Unsafe"><a href="#使用Unsafe" class="headerlink" title="使用Unsafe"></a>使用Unsafe</h2><p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是也不麻烦，我们可以使用如下代码获取到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
-<h2 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h2><p>要说Unsafe提供最大的能力，就是内存操作了。</p>
-<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
-<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
-<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
-<p>那么我们看一下实际怎么操作内存：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
-
-<p>这种操作，几乎和C++程序是一致的了。</p>
-<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
-<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
-<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
-
-<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
-<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
-<p>首先来看一个Java对象的内存结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
-
-<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
-<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
-<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
-<p>下面看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
-<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
-<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
-<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
-<p>下面简单看一个api：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
-
-<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
-<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
-<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
-<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>还是要额外提一下关于Unsafe的版本支持问题。</p>
-<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
-<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
-<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
-<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
       </tags>
   </entry>
   <entry>
@@ -503,6 +435,74 @@
       </tags>
   </entry>
   <entry>
+    <title>Unsafe的使用记录</title>
+    <url>/2024/01/07/11-15-32/</url>
+    <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
+<span id="more"></span>
+
+<h2 id="什么是Unsafe"><a href="#什么是Unsafe" class="headerlink" title="什么是Unsafe"></a>什么是Unsafe</h2><p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
+
+<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
+<p>为何如此？</p>
+<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
+<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
+<h2 id="使用Unsafe"><a href="#使用Unsafe" class="headerlink" title="使用Unsafe"></a>使用Unsafe</h2><p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是也不麻烦，我们可以使用如下代码获取到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
+<h2 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h2><p>要说Unsafe提供最大的能力，就是内存操作了。</p>
+<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
+<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
+<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
+<p>那么我们看一下实际怎么操作内存：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
+
+<p>这种操作，几乎和C++程序是一致的了。</p>
+<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
+<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
+<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
+<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
+<p>首先来看一个Java对象的内存结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
+
+<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
+<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
+<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
+<p>下面看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
+<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
+<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
+<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
+<p>下面简单看一个api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
+
+<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
+<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
+<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
+<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>还是要额外提一下关于Unsafe的版本支持问题。</p>
+<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
+<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
+<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
+<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>老年代大对象的问题排查</title>
     <url>/2023/05/05/10-26-55/</url>
     <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
@@ -600,26 +600,6 @@
       </tags>
   </entry>
   <entry>
-    <title>龙年第一天</title>
-    <url>/2024/02/18/13-22-14/</url>
-    <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
-<span id="more"></span>
-
-<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
-<p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
-<p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
-<p>去年确实是做了不少事。</p>
-<p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p>
-<p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p>
-<p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p>
-<p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p>
-<p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2023/03/29/18-22-38/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -643,28 +623,6 @@
       </tags>
   </entry>
   <entry>
-    <title>第一篇博客，聊聊这个博客本身</title>
-    <url>/2023/03/29/20-26-12/</url>
-    <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
-<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
-<p>为了解决文档的管理问题，我就建了一个博客。</p>
-<h2 id="还有更多的想法么？"><a href="#还有更多的想法么？" class="headerlink" title="还有更多的想法么？"></a>还有更多的想法么？</h2><p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
-<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
-<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
-<h2 id="博客的内容会有哪些？"><a href="#博客的内容会有哪些？" class="headerlink" title="博客的内容会有哪些？"></a>博客的内容会有哪些？</h2><p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
-<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
-<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
-<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
-<h2 id="后续规划？"><a href="#后续规划？" class="headerlink" title="后续规划？"></a>后续规划？</h2><p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
-<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
-<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
-<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
-]]></content>
-      <tags>
-        <tag>-【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JRE环境使用Arthas</title>
     <url>/2024/09/20/19-12-39/</url>
     <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
@@ -682,6 +640,46 @@
 
 <p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
 <p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
+]]></content>
+      <tags>
+        <tag>【工作】优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>龙年第一天</title>
+    <url>/2024/02/18/13-22-14/</url>
+    <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
+<span id="more"></span>
+
+<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
+<p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
+<p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
+<p>去年确实是做了不少事。</p>
+<p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p>
+<p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p>
+<p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p>
+<p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p>
+<p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>
+]]></content>
+      <tags>
+        <tag>-【杂谈】生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用浏览器发送POST请求</title>
+    <url>/2023/09/27/15-25-40/</url>
+    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
+<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
+<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
+
+<p>表现如下：</p>
+<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
+
+<p>完事。</p>
 ]]></content>
       <tags>
         <tag>【工作】优秀实践</tag>
@@ -1066,33 +1064,6 @@
       </tags>
   </entry>
   <entry>
-    <title>聊聊管理</title>
-    <url>/2024/04/29/14-42-33/</url>
-    <content><![CDATA[<p>想起来写这个事情，是正好从上海出差回家的时候，回想起这两年的经历，让我深有感触。</p>
-<span id="more"></span>
-
-<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><p>从我工作以来，我一直在和管理打交道。</p>
-<p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
-<p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p>
-<p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p>
-<p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p>
-<p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p>
-<p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p>
-<p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p>
-<p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p>
-<h2 id="领导力的来源是什么？"><a href="#领导力的来源是什么？" class="headerlink" title="领导力的来源是什么？"></a>领导力的来源是什么？</h2><p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p>
-<p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p>
-<p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p>
-<p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p>
-<p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p>
-<p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p>
-<p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>
-]]></content>
-      <tags>
-        <tag>【工作】经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>工作中印象最深刻的一件事</title>
     <url>/2024/09/16/20-02-30/</url>
     <content><![CDATA[<p>在准备秋招面试，看到这个常见的面试题，突然有感而发。工作之后，发现这个问题只从技术角度看，实在是有些肤浅，或许可以提出更多的东西。</p>
@@ -1122,23 +1093,52 @@
       </tags>
   </entry>
   <entry>
-    <title>用浏览器发送POST请求</title>
-    <url>/2023/09/27/15-25-40/</url>
-    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
-<span id="more"></span>
-
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
-<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
-<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
-
-<p>表现如下：</p>
-<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
-
-<p>完事。</p>
+    <title>第一篇博客，聊聊这个博客本身</title>
+    <url>/2023/03/29/20-26-12/</url>
+    <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
+<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
+<p>为了解决文档的管理问题，我就建了一个博客。</p>
+<h2 id="还有更多的想法么？"><a href="#还有更多的想法么？" class="headerlink" title="还有更多的想法么？"></a>还有更多的想法么？</h2><p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
+<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
+<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
+<h2 id="博客的内容会有哪些？"><a href="#博客的内容会有哪些？" class="headerlink" title="博客的内容会有哪些？"></a>博客的内容会有哪些？</h2><p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
+<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
+<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
+<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
+<h2 id="后续规划？"><a href="#后续规划？" class="headerlink" title="后续规划？"></a>后续规划？</h2><p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
+<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
+<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
+<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
 ]]></content>
       <tags>
-        <tag>【工作】优秀实践</tag>
+        <tag>-【杂谈】博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>聊聊管理</title>
+    <url>/2024/04/29/14-42-33/</url>
+    <content><![CDATA[<p>想起来写这个事情，是正好从上海出差回家的时候，回想起这两年的经历，让我深有感触。</p>
+<span id="more"></span>
+
+<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><p>从我工作以来，我一直在和管理打交道。</p>
+<p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
+<p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p>
+<p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p>
+<p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p>
+<p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p>
+<p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p>
+<p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p>
+<p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p>
+<h2 id="领导力的来源是什么？"><a href="#领导力的来源是什么？" class="headerlink" title="领导力的来源是什么？"></a>领导力的来源是什么？</h2><p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p>
+<p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p>
+<p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p>
+<p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p>
+<p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p>
+<p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p>
+<p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>
+]]></content>
+      <tags>
+        <tag>【工作】经验总结</tag>
       </tags>
   </entry>
 </search>
