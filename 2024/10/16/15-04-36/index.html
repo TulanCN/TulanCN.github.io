@@ -28,7 +28,7 @@
 <meta property="og:description" content="Java基础是纯纯的八股文了，但还是要过一遍。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-16T07:04:36.000Z">
-<meta property="article:modified_time" content="2024-10-18T07:23:03.372Z">
+<meta property="article:modified_time" content="2024-10-18T12:27:13.726Z">
 <meta property="article:author" content="Tulan">
 <meta property="article:tag" content="【工作】面试">
 <meta name="twitter:card" content="summary">
@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-10-18 15:23:03" itemprop="dateModified" datetime="2024-10-18T15:23:03+08:00">2024-10-18</time>
+                <time title="修改时间：2024-10-18 20:27:13" itemprop="dateModified" datetime="2024-10-18T20:27:13+08:00">2024-10-18</time>
               </span>
 
           
@@ -234,7 +234,39 @@
 <p>用了大小堆的priority queue</p>
 <p>阻塞队列的锁就是线程池的锁。所以阻塞队列的性能也一定程度上决定了线程池的性能。举例：Disruptor、参考Disruptor实现了自己的阻塞队列。</p>
 <p>阻塞队列可以当做对象池来用。</p>
-<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2>
+<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><p>线程独占的：栈，本地方法栈，程序计数器</p>
+<p>线程共享的：堆，方法区</p>
+<p>栈：存储局部变量，操作栈，动态链接，方法出口。调用一个方法时入栈，方法返回出栈。</p>
+<p>本地方法栈：Native方法的栈</p>
+<p>程序计数器：当前程序执行的字节码位置。也就是打印异常堆栈时看到的执行到第几行出错。执行到native方法时，程序计数器清空，因为不是在执行字节码了。</p>
+<p>堆：存储对象实例，线程共享。会垃圾回收。</p>
+<p>方法区：虚拟机加载的类信息，常量，静态变量，JIT优化后的代码。总之就是些全局的信息。</p>
+<h3 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h3><p>也就是为什么要volatile关键字。</p>
+<p>线程执行时，会拷贝一份线程间的共享变量至线程的工作内存。拷贝的数据可能已经被其他线程修改了，导致执行结果错误。</p>
+<p>volatile会在共享变量修改时，强制同步一份副本至所有涉及到的线程的工作空间。</p>
+<h3 id="类加载和卸载"><a href="#类加载和卸载" class="headerlink" title="类加载和卸载"></a>类加载和卸载</h3><p>加载字节码文件到内存-&gt;验证并解析为Class类，创建静态变量执行静态代码块-&gt;实例化-&gt;GC</p>
+<h3 id="三种加载器"><a href="#三种加载器" class="headerlink" title="三种加载器"></a>三种加载器</h3><p>JAVA_HOME&#x2F;lib: Bootstrap ClassLoader</p>
+<p>JAVA_HOME&#x2F;lib&#x2F;ext: Extension ClassLoader</p>
+<p>Application ClassLoader</p>
+<h3 id="双亲委派"><a href="#双亲委派" class="headerlink" title="双亲委派"></a>双亲委派</h3><p>加载器加载一个类时，先委托给父类加载器。父类无法加载才会自己加载。</p>
+<p>主要是为了避免同一个类被多个加载器重复加载。已经避免Java的核心类被修改。</p>
+<h3 id="回收算法G1"><a href="#回收算法G1" class="headerlink" title="回收算法G1"></a>回收算法G1</h3><p>高频率回收，减少每次的停顿。</p>
+<p>分老年代和年轻代。分块region，年轻代和老年代都由若干个分块组成。</p>
+<p>年轻代使用并行的复制和收集算法。</p>
+<p>mix-GC会回收一部分老年代。</p>
+<p>标记清除算法：STW进行初始标记，确实GC root可直达的对象，伴随一次young GC。然后GC线程和应用线程并行进行并发标记，尽可能标记出存活对象，使用SATB记录对象的引用关系。最终标记，STW，修改并发标记的错误。然后多线程进行GC。</p>
+<h3 id="ZGC"><a href="#ZGC" class="headerlink" title="ZGC"></a>ZGC</h3><p>低延时垃圾收集器。</p>
+<h3 id="Full-GC"><a href="#Full-GC" class="headerlink" title="Full GC"></a>Full GC</h3><p>当老年代满时会进行，耗时长。需要避免。</p>
+<h3 id="对象分配原则"><a href="#对象分配原则" class="headerlink" title="对象分配原则"></a>对象分配原则</h3><p>新对象优先在eden区，如果大于survivor的二分之一就认定为大对象，直接晋升老年代。</p>
+<p>对象没存活过一次young GC，年龄+1，到达一定年龄（默认15）就晋升老年代。</p>
+<p>Survivor区中同年龄对象的总和大小超过一半，这个年龄以及这个年龄以上的对象进入老年代。</p>
+<h3 id="对象的创建过程"><a href="#对象的创建过程" class="headerlink" title="对象的创建过程"></a>对象的创建过程</h3><p>先去常量池找类信息，然后加载类信息，找不到就报ClassNotFound。</p>
+<p>为对象分配内存，将除了对象头之外的内存块初始化为0。</p>
+<p>设置对象头。</p>
+<h3 id="对象结构"><a href="#对象结构" class="headerlink" title="对象结构"></a>对象结构</h3><p>对象头12字节，数组16字节。</p>
+<p>对象信息，基础类型直接在对象内存存储。</p>
+<p>Java会自动排列对象中的Field顺序以更好地满足8字节对齐。</p>
+
     </div>
 
     
@@ -272,7 +304,10 @@
     <a href="/2024/10/16/11-43-17/" rel="prev" title="面试笔记-Spring">
       <i class="fa fa-chevron-left"></i> 面试笔记-Spring
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/10/19/16-33-05/" rel="next" title="大模型技术到底带来了什么">
+      大模型技术到底带来了什么 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -331,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">语法基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">Java语言特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">基本类型和包装类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instance-of"><span class="nav-number">1.3.</span> <span class="nav-text">instance of</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD"><span class="nav-number">1.4.</span> <span class="nav-text">重写和重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals%E5%92%8C-x3D-x3D"><span class="nav-number">1.5.</span> <span class="nav-text">equals和&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8"><span class="nav-number">1.6.</span> <span class="nav-text">四种引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cleaner"><span class="nav-number">1.7.</span> <span class="nav-text">Cleaner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exception%E5%92%8CError"><span class="nav-number">1.8.</span> <span class="nav-text">Exception和Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.9.</span> <span class="nav-text">怎么创建线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">2.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList"><span class="nav-number">2.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="nav-number">2.3.</span> <span class="nav-text">阻塞队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">3.</span> <span class="nav-text">JVM</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">语法基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">Java语言特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">基本类型和包装类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instance-of"><span class="nav-number">1.3.</span> <span class="nav-text">instance of</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD"><span class="nav-number">1.4.</span> <span class="nav-text">重写和重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals%E5%92%8C-x3D-x3D"><span class="nav-number">1.5.</span> <span class="nav-text">equals和&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8"><span class="nav-number">1.6.</span> <span class="nav-text">四种引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cleaner"><span class="nav-number">1.7.</span> <span class="nav-text">Cleaner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exception%E5%92%8CError"><span class="nav-number">1.8.</span> <span class="nav-text">Exception和Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.9.</span> <span class="nav-text">怎么创建线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">2.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList"><span class="nav-number">2.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="nav-number">2.3.</span> <span class="nav-text">阻塞队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">3.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">JVM内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="nav-number">3.2.</span> <span class="nav-text">内存可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%8D%B8%E8%BD%BD"><span class="nav-number">3.3.</span> <span class="nav-text">类加载和卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">三种加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE"><span class="nav-number">3.5.</span> <span class="nav-text">双亲委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95G1"><span class="nav-number">3.6.</span> <span class="nav-text">回收算法G1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZGC"><span class="nav-number">3.7.</span> <span class="nav-text">ZGC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-GC"><span class="nav-number">3.8.</span> <span class="nav-text">Full GC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E5%8E%9F%E5%88%99"><span class="nav-number">3.9.</span> <span class="nav-text">对象分配原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">3.10.</span> <span class="nav-text">对象的创建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84"><span class="nav-number">3.11.</span> <span class="nav-text">对象结构</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -347,7 +382,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
