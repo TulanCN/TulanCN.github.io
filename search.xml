@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>回炉重造是种什么样的感觉？</title>
+    <url>/2024/11/20/13-32-12/</url>
+    <content><![CDATA[<p>港硕第一学期即将结束，赶due的期间摸鱼写个博客。</p>
+<span id="more"></span>
+
+<h2 id="就读体验"><a href="#就读体验" class="headerlink" title="就读体验"></a>就读体验</h2><p>整体来说，在polyu的就读体验还算不错。</p>
+<p>各种流程都会有较为详细的指引。比如入学、选课、课程的考试之类的日常流程，都有邮件会提醒，邮件中会有很详细的说明，足够每个人完成这些。</p>
+<p>每个学生也都会收到不少附赠的资源，比如学生的云电脑有两块免费的4090ti可用。在学校想训练自己的大模型，或是做一些微调都足够用了。</p>
+<p>同学倒是也都挺实在的。毕竟排名是港三之外吧，挺少见到本科985的同学，遇到的985也大多是转方向来读计算机的。像我这种工作4年再来读书的确实是少数的少数。这也导致了遇到的同学大多很佛系，不太在意成绩，大多是一个能过就行的态度。某种意义上倒也挺符合对港留子的刻板印象的。</p>
+<p>虽说绝大部分人都是抱着一个拿到学位就算成功的态度，但同学中也有少数比较卷的，大部分是local，目标都是继续深造读博。</p>
+<p>学校的课也不算太水，NLP、AI concept和Big Data都会介绍目前最前沿的技术。对于我这种没接触过AI算法的人来说，确实有点头大。不过也算学到了新东西，倒也不亏。</p>
+<p>本科毕业之后，可能大家都已经有了自己的规划。对于读书这事，目的也各不相同。</p>
+<p>这港硕的一年，就像是把一群各有自己想法的人聚集到了一块儿，每次遇到陌生同学，聊几句就会发现对方过着和你截然不同的人生。</p>
+<p>从我个人角度，满分100，我给港理工打90。10分扣在不是港三，但这事也怨我，早点申请可能也就到港三去了。</p>
+<h2 id="回炉重造的成果"><a href="#回炉重造的成果" class="headerlink" title="回炉重造的成果"></a>回炉重造的成果</h2><p>挨过了社会的毒打，重新回到校园，以为会是狼入羊群嘎嘎乱杀，结果是发现牛混到了羊群里，居然要重新学怎么吃草。</p>
+<p>技术栈差别很大，真的很大。我原本是搞工程方向的人，但是研究生也不得不去学算法，学AI的技术了。</p>
+<p>大模型的风确实刮到了各种地方，现在是个学科只要挂上机器学习的名头就能变成一个新学科，一个新方向。</p>
+<p>风来了，那么也只能顺着风的方向去飞。借着学校的课程，我也开始在AI这块入了个门。</p>
+<p>到NLP的小组作业，也算是小小地喷发了一会儿。</p>
+<p>我久违地写了点代码，然后把服务部署到了阿里云的云服务器上，最后接入通义千问大模型。搞出来的效果让同组的人都惊呆了。</p>
+<p>其他组大多是在大模型的上层做了RAG，但我的思路是在RAG之外要给模型提供插件来获取实时信息，否则这个项目的成果完全不可用。</p>
+<img src="/2024/11/20/13-32-12/image-20241121203740450.png" class="" title="image-20241121203740450">
+
+<p>做完的时候有种感觉，就是自己好像确实学了不少新玩意儿。</p>
+<p>这次回炉重造，最初的目标就是能开拓一些新的知识点，希望能学python，学数据分析，学AI训练，学会写前端。</p>
+<p>我觉得还是有些进步的，至少python会写了，数分也入门了，大模型的训练、微调也会了。目前还差点前端，打算是考试期间学点微信小程序的前端，先入门一下。</p>
+<p>也慢慢明白自己擅长和不擅长的地方，对未来的规划也更加明确了。</p>
+<p>回炉重造初显成效。</p>
+<h2 id="看过猪跑很重要"><a href="#看过猪跑很重要" class="headerlink" title="看过猪跑很重要"></a>看过猪跑很重要</h2><p>我当时下定决心要读研究生，这句话对我影响很大：”看过猪跑很重要”。</p>
+<p>应该是阿里的毕玄在一次采访中说的。大概意思是公司的业务发展中，总会随着业务量出现各种新的问题。这时候能了解其他人的解法，是非常有参考价值的。</p>
+<p>拿阿里来说，当时国内没有什么公司能作为参考，他们会去找谷歌的案例。但是找到的案例可能是10年前的，对于当时的业务量，足以够用。</p>
+<p>而业务快速成长，遇到的困难也越来越多。到某一天，突然发现谷歌也没处理过现在阿里遇到的问题了。那这时候怎么办？</p>
+<p>唯有自己解决了？</p>
+<p>非也。这时候，答案在学术界。</p>
+<p>时代变化，公司可能已经成长为巨头，此时不能直接照抄人家的答案，你也得作为开拓者参与最前沿的技术。</p>
+<p>这时候各种国际会议、学术论文会进入你的视野，从学术角度找方案来落地才是最切实可行的。为什么说”看过猪跑很重要”，学习的知识来源是实践，而模仿是实践中效率最高的方式。</p>
+<p>公司的业务变化，模仿的对象也要变化。当接近了金字塔的顶尖，所有人都不得不参与到名为学术的圈子里。</p>
+<p>而这时候，你也得产出一些成果，可能是学术会议上的论文、各种分享会上的演讲，你也会变成别人眼中奔跑的猪。</p>
+<p>我想读研究生，就是希望能先打个基础，以后做到这个程度的时候不会有短板。</p>
+<h2 id="回炉重造的感受"><a href="#回炉重造的感受" class="headerlink" title="回炉重造的感受"></a>回炉重造的感受</h2><p>自由、时间充裕、需要自控力。这三点是我最大的想法。</p>
+<p>不用上班之后确实时间很多，也很自由，但是想做些什么有意义的事情，得靠自控力。</p>
+<p>我每年都有立个目标和年末总结的习惯。</p>
+<p>今年的目标，有两个：上学和变全栈。上学算是完成了，全栈还需要一点点时间，不过我相信我绝对没什么问题。</p>
+<p>当时脑袋里萌发出读研的想法，我觉得这个决定可能会影响我一生，于是我马上订了去广州的高铁去找中介，并且立马签了合同。</p>
+<p>现在已经初现倪端，我接触的技术范围大大超过了工作时。</p>
+<p>我始终觉得方法比实际的努力更重要，因此我学习更注重学会学习方法，走通学习新知识的路，而不是学会这个知识本身。</p>
+<p>在这方面，研究生读得还挺值得的。</p>
+]]></content>
+      <tags>
+        <tag>【杂谈】生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我为什么选择去留学</title>
+    <url>/2023/09/28/19-55-01/</url>
+    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
+<span id="more"></span>
+
+<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
+<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
+<p>但最后各方面原因，还是没有去。</p>
+<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
+<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
+<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
+<p>主要原因有三点。</p>
+<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
+<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
+<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
+<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
+<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
+<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
+<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
+<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
+<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
+<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
+<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
+]]></content>
+      <tags>
+        <tag>【杂谈】学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>龙年第一天</title>
     <url>/2024/02/18/13-22-14/</url>
     <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
@@ -41,37 +125,6 @@
 ]]></content>
       <tags>
         <tag>【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我为什么选择去留学</title>
-    <url>/2023/09/28/19-55-01/</url>
-    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
-<span id="more"></span>
-
-<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
-<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
-<p>但最后各方面原因，还是没有去。</p>
-<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
-<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
-<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
-<p>主要原因有三点。</p>
-<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
-<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
-<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
-<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
-<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
-<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
-<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
-<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
-<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
-<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
-<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
-]]></content>
-      <tags>
-        <tag>【杂谈】学习</tag>
       </tags>
   </entry>
   <entry>
@@ -120,41 +173,6 @@
 <p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
 <p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
 <p>这就是我从这件事情里学到的。</p>
-]]></content>
-      <tags>
-        <tag>【工作】经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>大模型技术到底带来了什么</title>
-    <url>/2024/10/19/16-33-05/</url>
-    <content><![CDATA[<p>实质今日，LLM对我日常的工作和学习已经产生的极大的影响。</p>
-<p>聊聊我的思考。</p>
-<span id="more"></span>
-
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>时间到2024年，以LLM为首的AI热潮似乎开始冷却。但是工具已经开始普及，大部分人已经开始尝试和AI一起工作。</p>
-<p>我首先想提的是国内大模型的水平。目前接触下来，国产的AI在下限方面基本已经满足了我们的日常生活需要。也就是说，平时一些简单的任务已经可以让AI去完成，大部分问题都能收到一个令人满意的回答。对于大部分人的日常工作来说，已经足够。</p>
-<p>如果要用一个角色来形容AI目前的水平，我觉得是一个知识面很广，能力很强，在经过适当调教能很好地完成任务的实习生。</p>
-<p>这其实已经对我的日常工作方式有相当强烈地冲击了。举例来说，平日有些费时费力的总结报告，现在可以让AI来填写。一些技术文档全篇很长，而我需要知道的又只是其中的一个小点，那就可以让AI快速阅读之后我对其提问来获取答案。这种场景下，我的需求和问题都很明确，答案也有现成的，只是让AI在特定范围内进行一个快速的搜索，像是把LLM当做一个非常强大的搜索引擎，这种时候就非常好用。</p>
-<p>还有种场景是内容的格式改写，比如数据改写为JSON格式。人工做很费力，但是AI能听懂指令快速生成结果。这就很好用。</p>
-<p>那么工作的重点就变了。以前我的重点是把任务人工完成，要出力；现在我的重点是理清思路，转化为AI可以完成的任务，然后让AI先做一遍，我再检查一遍。这种思路确实就和分配任务给实习生是一样的。</p>
-<p>所以，这就引出了LLM最适合的工作场景之一：<strong>重复性的、有明确工作规范和成果验收的工作</strong>。</p>
-<p>另外，与AI协作的时候，很多人会感觉自己的能力也提高了。有一种场景，比如需要写一些自己平时不擅长的代码，像是后端程序员刚开始接触一门新的语言。这时候程序员可能是知道要做什么，但是苦于不知道怎么实现，因此需要一些额外的时间去学习。有了AI之后，这个学习成本降低了非常多，并且没有让人排斥的搜寻资料的过程。很多时候，我们要做的就是打开LLM输入界面，然后写出需求，等到LLM的回答，然后开始干活。得益于技术水平的提高，现在的LLM基本都很聪明，它们的回答大多数时候都是有用的。</p>
-<p>感觉自己能力的提高后，会让人变得自信，然后就愿意去做一些以前不能做的事情。</p>
-<p>但究其根本，不是人的能力提高了，而是<strong>学习的成本降低</strong>了。</p>
-<p>这就是LLM最适合的第二个工作场景：<strong>快速让人在一个知识领域达到入门水平</strong>。</p>
-<p>经过一些调教，我相信LLM在教育这方面大有可为。</p>
-<p>然后我就要提GitHub Copilot。作为代码提示工具，有了LLM加持后，它聪明得让人欣喜。有人评价是，有了Copilot之后，编码的方式就变成了：写好注释，写好框架代码，然后停下来，等待Copilot填充。这确实是我的真实写照。</p>
-<p>我觉得这就是大模型带来的最大影响：<strong>评价一个问题的难易程度，是取决于它有多少的部分能被LLM执行</strong>。</p>
-<p>在一个任务中，我们总是倾向于让LLM做更多，而自己做更少。为什么这么说？第一个原因，LLM执行任务非常快，快到人类无法比拟的程度了；第二个原因，LLM执行任务的成本极低，几乎相当于没有成本。</p>
-<p>但我们遇到的问题在最初往往并不是LLM可以直接解决的问题，因此我们要把问题转化为一个个LLM可以执行的最小单元。这考验了一个人思考问题、拆解问题和描述问题的能力，而显而易见的结论就是，这种能力越强的人，与LLM协作的能力也越强。</p>
-<p>反过来，这其实也让我们每个人先专注于分析问题，而不是埋头就做。某种意义上来说，也算是反哺自身，让人去思考得更深入。</p>
-<p>那么，我可以抛出一个命题：<strong>与大模型协作的能力越强，这个人的工作能力就越强</strong>。就像上文说的，一个人只有能分析拆解好问题，才能更好地让LLM完成工作。巧合的是，你把前面这句话中的LLM换成同事、下属也是一样成立的。原先AI部的同事就和我说过，常带实习生，或者手下有几个人的技术骨干，往往用Copilot也特别顺手。</p>
-<p>在肉眼可见的未来，大家的工作中必定绕不开LLM，那么今早培养好自己相关的能力，可能也是条出路吧。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>目前在工作和学习中，与大模型协作是非常常见的场景。</p>
-<p>LLM的工作成本低，工作速度快，因此很适合进行一些重复性强、严格控制输入输出的工作。</p>
-<p>LLM的语料资源丰富，能有效降低知识的学习门槛。</p>
-<p>未来，人的工作能力可能很大程度上取决于他和AI配合能力的高低。</p>
 ]]></content>
       <tags>
         <tag>【工作】经验总结</tag>
@@ -274,162 +292,38 @@
       </tags>
   </entry>
   <entry>
-    <title>用浏览器发送POST请求</title>
-    <url>/2023/09/27/15-25-40/</url>
-    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
+    <title>大模型技术到底带来了什么</title>
+    <url>/2024/10/19/16-33-05/</url>
+    <content><![CDATA[<p>实质今日，LLM对我日常的工作和学习已经产生的极大的影响。</p>
+<p>聊聊我的思考。</p>
 <span id="more"></span>
 
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
-<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
-<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
-
-<p>表现如下：</p>
-<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
-
-<p>完事。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>时间到2024年，以LLM为首的AI热潮似乎开始冷却。但是工具已经开始普及，大部分人已经开始尝试和AI一起工作。</p>
+<p>我首先想提的是国内大模型的水平。目前接触下来，国产的AI在下限方面基本已经满足了我们的日常生活需要。也就是说，平时一些简单的任务已经可以让AI去完成，大部分问题都能收到一个令人满意的回答。对于大部分人的日常工作来说，已经足够。</p>
+<p>如果要用一个角色来形容AI目前的水平，我觉得是一个知识面很广，能力很强，在经过适当调教能很好地完成任务的实习生。</p>
+<p>这其实已经对我的日常工作方式有相当强烈地冲击了。举例来说，平日有些费时费力的总结报告，现在可以让AI来填写。一些技术文档全篇很长，而我需要知道的又只是其中的一个小点，那就可以让AI快速阅读之后我对其提问来获取答案。这种场景下，我的需求和问题都很明确，答案也有现成的，只是让AI在特定范围内进行一个快速的搜索，像是把LLM当做一个非常强大的搜索引擎，这种时候就非常好用。</p>
+<p>还有种场景是内容的格式改写，比如数据改写为JSON格式。人工做很费力，但是AI能听懂指令快速生成结果。这就很好用。</p>
+<p>那么工作的重点就变了。以前我的重点是把任务人工完成，要出力；现在我的重点是理清思路，转化为AI可以完成的任务，然后让AI先做一遍，我再检查一遍。这种思路确实就和分配任务给实习生是一样的。</p>
+<p>所以，这就引出了LLM最适合的工作场景之一：<strong>重复性的、有明确工作规范和成果验收的工作</strong>。</p>
+<p>另外，与AI协作的时候，很多人会感觉自己的能力也提高了。有一种场景，比如需要写一些自己平时不擅长的代码，像是后端程序员刚开始接触一门新的语言。这时候程序员可能是知道要做什么，但是苦于不知道怎么实现，因此需要一些额外的时间去学习。有了AI之后，这个学习成本降低了非常多，并且没有让人排斥的搜寻资料的过程。很多时候，我们要做的就是打开LLM输入界面，然后写出需求，等到LLM的回答，然后开始干活。得益于技术水平的提高，现在的LLM基本都很聪明，它们的回答大多数时候都是有用的。</p>
+<p>感觉自己能力的提高后，会让人变得自信，然后就愿意去做一些以前不能做的事情。</p>
+<p>但究其根本，不是人的能力提高了，而是<strong>学习的成本降低</strong>了。</p>
+<p>这就是LLM最适合的第二个工作场景：<strong>快速让人在一个知识领域达到入门水平</strong>。</p>
+<p>经过一些调教，我相信LLM在教育这方面大有可为。</p>
+<p>然后我就要提GitHub Copilot。作为代码提示工具，有了LLM加持后，它聪明得让人欣喜。有人评价是，有了Copilot之后，编码的方式就变成了：写好注释，写好框架代码，然后停下来，等待Copilot填充。这确实是我的真实写照。</p>
+<p>我觉得这就是大模型带来的最大影响：<strong>评价一个问题的难易程度，是取决于它有多少的部分能被LLM执行</strong>。</p>
+<p>在一个任务中，我们总是倾向于让LLM做更多，而自己做更少。为什么这么说？第一个原因，LLM执行任务非常快，快到人类无法比拟的程度了；第二个原因，LLM执行任务的成本极低，几乎相当于没有成本。</p>
+<p>但我们遇到的问题在最初往往并不是LLM可以直接解决的问题，因此我们要把问题转化为一个个LLM可以执行的最小单元。这考验了一个人思考问题、拆解问题和描述问题的能力，而显而易见的结论就是，这种能力越强的人，与LLM协作的能力也越强。</p>
+<p>反过来，这其实也让我们每个人先专注于分析问题，而不是埋头就做。某种意义上来说，也算是反哺自身，让人去思考得更深入。</p>
+<p>那么，我可以抛出一个命题：<strong>与大模型协作的能力越强，这个人的工作能力就越强</strong>。就像上文说的，一个人只有能分析拆解好问题，才能更好地让LLM完成工作。巧合的是，你把前面这句话中的LLM换成同事、下属也是一样成立的。原先AI部的同事就和我说过，常带实习生，或者手下有几个人的技术骨干，往往用Copilot也特别顺手。</p>
+<p>在肉眼可见的未来，大家的工作中必定绕不开LLM，那么今早培养好自己相关的能力，可能也是条出路吧。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>目前在工作和学习中，与大模型协作是非常常见的场景。</p>
+<p>LLM的工作成本低，工作速度快，因此很适合进行一些重复性强、严格控制输入输出的工作。</p>
+<p>LLM的语料资源丰富，能有效降低知识的学习门槛。</p>
+<p>未来，人的工作能力可能很大程度上取决于他和AI配合能力的高低。</p>
 ]]></content>
       <tags>
-        <tag>【工作】优秀实践</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JRE环境使用Arthas</title>
-    <url>/2024/09/20/19-12-39/</url>
-    <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
-<span id="more"></span>
-
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
-<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
-<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
-<p>这里提供一个脚本：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>最关键的就是脚本中最后的两句</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
-
-<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
-<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
-]]></content>
-      <tags>
-        <tag>【工作】优秀实践</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面试笔记-Java基础</title>
-    <url>/2024/10/16/15-04-36/</url>
-    <content><![CDATA[<p>Java基础是纯纯的八股文了，但还是要过一遍。</p>
-<span id="more"></span>
-
-<h2 id="语法基础"><a href="#语法基础" class="headerlink" title="语法基础"></a>语法基础</h2><h3 id="Java语言特点"><a href="#Java语言特点" class="headerlink" title="Java语言特点"></a>Java语言特点</h3><p>一次编译处处运行，天然具有跨平台的能力。只要不用JNI。</p>
-<p>开源社区资源丰富，活跃。</p>
-<p>适合企业级开发，多方面：有Spring为主流的开源框架，大型项目的构建和维护的成本较低。语言的规范性强。</p>
-<h3 id="基本类型和包装类型"><a href="#基本类型和包装类型" class="headerlink" title="基本类型和包装类型"></a>基本类型和包装类型</h3><p>byte、char、boolean、short、int、float、long、double</p>
-<p>基本类型不是对象，包装类型是对象。使用时有自动的拆装箱机制。但编码过程中如果可以用基本类型的建议还是用基本类型。</p>
-<p>区别在于对象是有对应的Class类，这些类信息会记录在JVM的ClassLoader中。对象有对象头。</p>
-<p>字节码的方法签名，基本类型是BCJFI之类的大写字母，对象是L加全限定类名。</p>
-<h3 id="instance-of"><a href="#instance-of" class="headerlink" title="instance of"></a>instance of</h3><p>检测对象是否是某个类型的实例。可以用来检测对象是否实现了某个接口。</p>
-<p>HashMap中有使用到，用来检测当前节点的实现是链表还是红黑树。</p>
-<h3 id="重写和重载"><a href="#重写和重载" class="headerlink" title="重写和重载"></a>重写和重载</h3><p>重写建议加@Override注解，标明该方法是重写方法。</p>
-<p>重写发生在子类重写了父类的同名且参数完全一致的方法，或者是实现了某个接口的方法。有重写就一定是有extend或者impliment。</p>
-<p>重载是同名方法用不同的参数实现。同名方法的方法签名是不一样的。</p>
-<h3 id="equals和-x3D-x3D"><a href="#equals和-x3D-x3D" class="headerlink" title="equals和&#x3D;&#x3D;"></a>equals和&#x3D;&#x3D;</h3><p>&#x3D;&#x3D;是比较两个变量所指向的内存地址是否相同，其实是个指针操作。基本类型就相当于值比较。</p>
-<p>equals是Object类的一个方法，Object类中的实现就是&#x3D;&#x3D;。一般不同的类会有不同的实现，String的实现就是逐个比较字符值是否相等。</p>
-<h3 id="四种引用"><a href="#四种引用" class="headerlink" title="四种引用"></a>四种引用</h3><p>强引用：使用最多的引用，默认就是强引用。</p>
-<p>软引用：缓存会用。可能会被回收，优先级在弱引用之后。</p>
-<p>弱引用：young GC时必定会回收。</p>
-<p>虚引用：这个引用不会影响GC，需要有其他引用方式指向这个对象。</p>
-<h3 id="Cleaner"><a href="#Cleaner" class="headerlink" title="Cleaner"></a>Cleaner</h3><p>Cleaner机制用到了虚引用。Cleaner继承了虚引用，GC后，所有的cleaner会被回收到一个pending队列，reference handler线程会调用这个pending队列中的对象，会检测下是不是Cleaner对象，是的话就直接调用Cleaner的clean方法。</p>
-<h3 id="Exception和Error"><a href="#Exception和Error" class="headerlink" title="Exception和Error"></a>Exception和Error</h3><p>都是Throwable的实现类。</p>
-<p>运行时异常不用显式地catch。被检查异常需要catch或向上抛出。</p>
-<p>Error是非常严重的错误，可能宕机。但是不需要显式抛出。</p>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>线程不安全。</p>
-<p>put：hash之后找到数组中的对应位置，如果为空直接塞；不为空说明哈希冲突，检查一下当前的数据结构，按照数据结构来添加这个对象，可能是替换也可能是新增。</p>
-<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>双向链表，线程不安全。</p>
-<h3 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h3><p>阻塞队列的经典实现：ArrayBlockQueue，LinkedBlockQueue</p>
-<p>用了大小堆的priority queue</p>
-<p>阻塞队列的锁就是线程池的锁。所以阻塞队列的性能也一定程度上决定了线程池的性能。举例：Disruptor、参考Disruptor实现了自己的阻塞队列。</p>
-<p>阻塞队列可以当做对象池来用。</p>
-<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><p>线程独占的：栈，本地方法栈，程序计数器</p>
-<p>线程共享的：堆，方法区</p>
-<p>栈：存储局部变量，操作栈，动态链接，方法出口。调用一个方法时入栈，方法返回出栈。</p>
-<p>本地方法栈：Native方法的栈</p>
-<p>程序计数器：当前程序执行的字节码位置。也就是打印异常堆栈时看到的执行到第几行出错。执行到native方法时，程序计数器清空，因为不是在执行字节码了。</p>
-<p>堆：存储对象实例，线程共享。会垃圾回收。</p>
-<p>方法区：虚拟机加载的类信息，常量，静态变量，JIT优化后的代码。总之就是些全局的信息。</p>
-<h3 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h3><p>也就是为什么要volatile关键字。</p>
-<p>线程执行时，会拷贝一份线程间的共享变量至线程的工作内存。拷贝的数据可能已经被其他线程修改了，导致执行结果错误。</p>
-<p>volatile会在共享变量修改时，强制同步一份副本至所有涉及到的线程的工作空间。</p>
-<h3 id="类加载和卸载"><a href="#类加载和卸载" class="headerlink" title="类加载和卸载"></a>类加载和卸载</h3><p>加载字节码文件到内存-&gt;验证并解析为Class类，创建静态变量执行静态代码块-&gt;实例化-&gt;GC</p>
-<h3 id="三种加载器"><a href="#三种加载器" class="headerlink" title="三种加载器"></a>三种加载器</h3><p>JAVA_HOME&#x2F;lib: Bootstrap ClassLoader</p>
-<p>JAVA_HOME&#x2F;lib&#x2F;ext: Extension ClassLoader</p>
-<p>Application ClassLoader</p>
-<h3 id="双亲委派"><a href="#双亲委派" class="headerlink" title="双亲委派"></a>双亲委派</h3><p>加载器加载一个类时，先委托给父类加载器。父类无法加载才会自己加载。</p>
-<p>主要是为了避免同一个类被多个加载器重复加载。已经避免Java的核心类被修改。</p>
-<h3 id="回收算法G1"><a href="#回收算法G1" class="headerlink" title="回收算法G1"></a>回收算法G1</h3><p>高频率回收，减少每次的停顿。</p>
-<p>分老年代和年轻代。分块region，年轻代和老年代都由若干个分块组成。</p>
-<p>年轻代使用并行的复制和收集算法。</p>
-<p>mix-GC会回收一部分老年代。</p>
-<p>标记清除算法：STW进行初始标记，确实GC root可直达的对象，伴随一次young GC。然后GC线程和应用线程并行进行并发标记，尽可能标记出存活对象，使用SATB记录对象的引用关系。最终标记，STW，修改并发标记的错误。然后多线程进行GC。</p>
-<h3 id="ZGC"><a href="#ZGC" class="headerlink" title="ZGC"></a>ZGC</h3><p>低延时垃圾收集器。</p>
-<h3 id="Full-GC"><a href="#Full-GC" class="headerlink" title="Full GC"></a>Full GC</h3><p>当老年代满时会进行，耗时长。需要避免。</p>
-<h3 id="对象分配原则"><a href="#对象分配原则" class="headerlink" title="对象分配原则"></a>对象分配原则</h3><p>新对象优先在eden区，如果大于survivor的二分之一就认定为大对象，直接晋升老年代。</p>
-<p>对象没存活过一次young GC，年龄+1，到达一定年龄（默认15）就晋升老年代。</p>
-<p>Survivor区中同年龄对象的总和大小超过一半，这个年龄以及这个年龄以上的对象进入老年代。</p>
-<h3 id="对象的创建过程"><a href="#对象的创建过程" class="headerlink" title="对象的创建过程"></a>对象的创建过程</h3><p>先去常量池找类信息，然后加载类信息，找不到就报ClassNotFound。</p>
-<p>为对象分配内存，将除了对象头之外的内存块初始化为0。</p>
-<p>设置对象头。</p>
-<h3 id="对象结构"><a href="#对象结构" class="headerlink" title="对象结构"></a>对象结构</h3><p>对象头12字节，数组16字节。</p>
-<p>对象信息，基础类型直接在对象内存存储。</p>
-<p>Java会自动排列对象中的Field顺序以更好地满足8字节对齐。</p>
-<h3 id="对象头的内容"><a href="#对象头的内容" class="headerlink" title="对象头的内容"></a>对象头的内容</h3><p>4字节的hashcode</p>
-<p>2字节的分代年龄</p>
-<p>1字节偏向锁</p>
-<p>1字节锁标志</p>
-<p>4字节的对象类型指针，指向Class类信息</p>
-<p>数组的话还有4字节的数组长度</p>
-<h3 id="常见的调优工具"><a href="#常见的调优工具" class="headerlink" title="常见的调优工具"></a>常见的调优工具</h3><p>jps：展示所有的java进程</p>
-<p>jstat：查看虚拟机运行状态</p>
-<p>jmap：主要用于dump</p>
-<p>jstack：生成线程快照</p>
-<p>jinfo：实时查看和修改JVM参数</p>
-<p>MAT：dump文件分析</p>
-<p>visualVM：自带可视化界面</p>
-<p>arthas：阿里开源的运行时诊断工具</p>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="怎么创建线程"><a href="#怎么创建线程" class="headerlink" title="怎么创建线程"></a>怎么创建线程</h3><p>只有new Thread()才算创建了一个新线程。其他的方式比如实现Runnable接口Callable接口之类的都没有新线程产生。</p>
-<p>Runnable接口Callable接口本质是一个task，需要提交给线程才能执行。</p>
-<h3 id="如何停止一个线程"><a href="#如何停止一个线程" class="headerlink" title="如何停止一个线程"></a>如何停止一个线程</h3><p>最佳是用退出标志，完成当前方法后当前线程终止。</p>
-<p>推荐调用interrupt，会抛出interrupt异常。</p>
-<p>stop可以强行终止，不推荐。</p>
-<h3 id="notify和notifyAll有什么区别"><a href="#notify和notifyAll有什么区别" class="headerlink" title="notify和notifyAll有什么区别"></a>notify和notifyAll有什么区别</h3><p>notify可能死锁，notifyAll不会。</p>
-<p>假如有多个线程正在wait，会要求notify唤醒的任意一个线程可以处理接下来的逻辑，否则就会死锁。</p>
-<p>如果无法正确处理，则应该继续notify下一个，并让自己进入wait状态。</p>
-<p>notifyAll唤醒所有线程，但是争抢锁还是无序的。</p>
-<h3 id="sleep和wait有什么区别"><a href="#sleep和wait有什么区别" class="headerlink" title="sleep和wait有什么区别"></a>sleep和wait有什么区别</h3><p>sleep在线程类中，wait在Object类。</p>
-<p>sleep不释放锁，会让出cpu。</p>
-<p>wait会释放锁，并且让出cpu。调用wait后，会释放线程持有的所有对象锁，然后进入对象的等待区。只有针对此对象调用notify或notifyAll后，才会获取对象锁进入运行状态。</p>
-<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3>]]></content>
-      <tags>
-        <tag>【工作】面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JNI调用的优化（第二版)</title>
-    <url>/2024/08/08/10-28-13/</url>
-    <content><![CDATA[<p>这一次验证了critical native调用。</p>
-<span id="more"></span>
-
-<p>源头是这篇博客：<a href="http://blog.hakugyokurou.net/?p=1758">http://blog.hakugyokurou.net/?p=1758</a></p>
-<p>讲到了最正式的文档也就是bug系统中的一条记录：<a href="https://bugs.openjdk.org/browse/JDK-7013347">https://bugs.openjdk.org/browse/JDK-7013347</a></p>
-<p>另外在stackoverflow上有人爆料了这个能力：<a href="https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652">https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652</a></p>
-<p>处于验证的目的，我写了jmh对其进行测试。</p>
-<p>不过测试结果倒是有提升，但也仅仅是20ns。</p>
-<p>聊胜于无，就目前的场景（单次调用800ns）来看，并没有必要做这个优化。</p>
-<p>带来的不稳定因素反而是更大的问题。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
+        <tag>【工作】经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -558,91 +452,21 @@
       </tags>
   </entry>
   <entry>
-    <title>面试笔记-网络协议</title>
-    <url>/2024/10/14/13-41-52/</url>
-    <content><![CDATA[<p>这里记录一下面试的准备过程中关于网络协议的笔记。</p>
+    <title>JNI调用的优化（第二版)</title>
+    <url>/2024/08/08/10-28-13/</url>
+    <content><![CDATA[<p>这一次验证了critical native调用。</p>
 <span id="more"></span>
 
-<h3 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h3><p>200 - 成功</p>
-<p>301 - 永久重定向    302 - 临时重定向</p>
-<p>4开头是客户端问题</p>
-<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
-<p>5开头是服务器问题</p>
-<p>500 - 服务器崩了  504 - badgateway</p>
-<h3 id="Forward和Redirect"><a href="#Forward和Redirect" class="headerlink" title="Forward和Redirect"></a>Forward和Redirect</h3><p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
-<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
-<h3 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h3><p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
-<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
-<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
-<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
-<p>UDP无连接，不可靠，传输性能高</p>
-<p>TCP是点对点，UDP支持广播</p>
-<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
-<h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><p>HTTP用80端口，HTTPS用443</p>
-<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
-<h3 id="HTTP、TCP和Socket"><a href="#HTTP、TCP和Socket" class="headerlink" title="HTTP、TCP和Socket"></a>HTTP、TCP和Socket</h3><p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
-<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
-<p>HTTP是应用层的协议，基于TCP来实现</p>
-<p>TCP是网络层协议</p>
-<h3 id="HTTP的长连接和短连接"><a href="#HTTP的长连接和短连接" class="headerlink" title="HTTP的长连接和短连接"></a>HTTP的长连接和短连接</h3><p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
-<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
-<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
-<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
-<p>第一次：客户端-&gt;服务端，syn&#x3D;1，seq&#x3D;x</p>
-<p>第二次：服务端-&gt;客户端，syn&#x3D;1，seq&#x3D;y，ack&#x3D;x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
-<p>第三次：客户端-&gt;服务端，seq&#x3D;x+1, ack&#x3D;y+1。告知服务端，你发送的消息我也能收到。</p>
-<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
-<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
-<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
-<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
-<h3 id="TCP粘包"><a href="#TCP粘包" class="headerlink" title="TCP粘包"></a>TCP粘包</h3><p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
-<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
-<p>TCP的分包是由滑动窗口来控制的。</p>
-<p>解决方式，都是在应用的协议层解决：</p>
-<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
-<p>2、把协议固定长度，所有协议包的长度都一致。</p>
-<p>3、特殊分隔符号。</p>
-<h3 id="TCP可靠性"><a href="#TCP可靠性" class="headerlink" title="TCP可靠性"></a>TCP可靠性</h3><p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
-<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
-<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
-<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
-<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
-<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>应用层：HTTP、FTP</p>
-<p>表示层：加解密</p>
-<p>会话层：RPC</p>
-<p>传输层：TCP、UDP</p>
-<p>网络层：IP、IPv6</p>
-<p>数据链路层：物理寻址层。交换机等</p>
-<p>物理层：硬件</p>
-<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
-<h3 id="浏览器输入一个网址后发生了什么"><a href="#浏览器输入一个网址后发生了什么" class="headerlink" title="浏览器输入一个网址后发生了什么"></a>浏览器输入一个网址后发生了什么</h3><p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
-<p>2、建立TCP连接</p>
-<p>3、发送HTTP的GET请求</p>
-<p>4、请求经过路由器转发到服务器</p>
-<p>5、服务器处理请求，返回网页文件（HTML）</p>
-<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
-<h3 id="如何跨域"><a href="#如何跨域" class="headerlink" title="如何跨域"></a>如何跨域</h3><p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
-<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
-<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
-<h3 id="HTTP-1-0-1-1-2-0-3-0"><a href="#HTTP-1-0-1-1-2-0-3-0" class="headerlink" title="HTTP 1.0 1.1 2.0 3.0"></a>HTTP 1.0 1.1 2.0 3.0</h3><p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
-<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
-<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
-<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
-<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
-<h3 id="HTTP与TCP-x2F-IP"><a href="#HTTP与TCP-x2F-IP" class="headerlink" title="HTTP与TCP&#x2F;IP"></a>HTTP与TCP&#x2F;IP</h3><p>HTTP是应用层的报文协议，一般数据传输是用TCP&#x2F;IP实现。</p>
-<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
-<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
-<h3 id="HTTP长连接短连接"><a href="#HTTP长连接短连接" class="headerlink" title="HTTP长连接短连接"></a>HTTP长连接短连接</h3><p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
-<h3 id="长连接和短连接的优缺点"><a href="#长连接和短连接的优缺点" class="headerlink" title="长连接和短连接的优缺点"></a>长连接和短连接的优缺点</h3><p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
-<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
-<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>从开销最小的地方开始找，没有就去更远的地方找。</p>
-<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
-<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
-<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
-<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
+<p>源头是这篇博客：<a href="http://blog.hakugyokurou.net/?p=1758">http://blog.hakugyokurou.net/?p=1758</a></p>
+<p>讲到了最正式的文档也就是bug系统中的一条记录：<a href="https://bugs.openjdk.org/browse/JDK-7013347">https://bugs.openjdk.org/browse/JDK-7013347</a></p>
+<p>另外在stackoverflow上有人爆料了这个能力：<a href="https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652">https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652</a></p>
+<p>处于验证的目的，我写了jmh对其进行测试。</p>
+<p>不过测试结果倒是有提升，但也仅仅是20ns。</p>
+<p>聊胜于无，就目前的场景（单次调用800ns）来看，并没有必要做这个优化。</p>
+<p>带来的不稳定因素反而是更大的问题。</p>
 ]]></content>
       <tags>
-        <tag>【工作】面试</tag>
+        <tag>【工作】性能调优</tag>
       </tags>
   </entry>
   <entry>
@@ -711,123 +535,411 @@
       </tags>
   </entry>
   <entry>
-    <title>面试笔记-数据库</title>
-    <url>/2024/10/14/13-48-06/</url>
-    <content><![CDATA[<p>这里记录一下面试的准备过程中关于数据库的笔记。</p>
-<p>原先工作中对数据库的使用实在是太少了…</p>
-<p>不过还好大部分东西都还记得，复习一下就很快理解了。</p>
+    <title>在Java程序使用Grpc protobuf的动态加载及类型反射</title>
+    <url>/2023/05/31/15-41-05/</url>
+    <content><![CDATA[<p>对于各个公司负责的基础技术框架部门，接入gRPC往往是一个老大难问题。我也遇到了同样的问题。</p>
+<p>很遗憾，在查阅资料的过程中，我发现中文博客中极少有gRPC反射（更确切的说是Protobuf反射）的资料。而反射恰恰是解决框架对gRPC兼容的一种手段。</p>
 <span id="more"></span>
 
-<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><h3 id="三范式"><a href="#三范式" class="headerlink" title="三范式"></a>三范式</h3><p>第一范式：列不可再分；</p>
-<p>第二范式：表中的每一行都可以唯一区分，通过主键实现；</p>
-<p>第三范式：（用于避免数据冗余，减少内存占用，实践中常被忽视）表的非主键字段不能依赖于其他非主键字段；比如学生表，里边有班级名称字段和辅导员名称字段，那么班级和辅导员会大量重复，应当拆分出班级表和辅导员表。</p>
-<h3 id="MySQL的存储引擎"><a href="#MySQL的存储引擎" class="headerlink" title="MySQL的存储引擎"></a>MySQL的存储引擎</h3><p>MyISAM、InnoDB、Memory</p>
-<p>MyISAM：全表锁，没有事务和外键，单表执行性能高，并发性能差，空间占用小。</p>
-<p>InnoDB：行锁，有事务，支持自增序列，支持外键，并发性能高，空间占用大。</p>
-<p>Memory：纯内存。</p>
-<h3 id="InnoDB和MyISAM"><a href="#InnoDB和MyISAM" class="headerlink" title="InnoDB和MyISAM"></a>InnoDB和MyISAM</h3><p>InnoDB支持事务，默认是每一条SQL都封装为一个事务。MyISAM没有事务。</p>
-<p>InnoDB有外键，MyISAM没有。</p>
-<p>InnoDB是行锁，MyISAM是表锁，InnoDB并发场景性能会好一些。</p>
-<p>InnoDB是聚集索引，必须有主键。在表上建立的其他索引，都是指向主键。通过其他索引查询时，先经过索引查到主键，再通过主键查找数据。MyISAM是非聚集索引，主键和索引都是直接指向数据指针，主键和索引相互独立。</p>
-<p>InnoDB不保存表的行数，计算行数时要全表扫描。MyISAM保存了表的行数。</p>
-<h3 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h3><p>ACID：atomic、consistency、isolation、durability</p>
-<p>原子性：一个事务内的多个操作可以看成一个原子操作，即要么成功要么失败。事务中任意一个操作失败了都会回滚到没有开始事务之前的状态。</p>
-<p>一致性：事务操作的结果和业务规则是一致的。即事务成功时，可以达成操作者目的。</p>
-<p>隔离性：多个事务之间互相数据隔离，彼此没有影响。</p>
-<p>持久性：事务完成后会持久化到数据库。</p>
-<h3 id="索引是什么"><a href="#索引是什么" class="headerlink" title="索引是什么"></a>索引是什么</h3><p>官方：一种帮助MySQL快速获取数据的数据结构。</p>
-<p>类似目录，默认是B+树实现。</p>
-<h3 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h3><p>优点：提升查询速度。</p>
-<p>缺点：索引也有空间占用，更新速度变慢，因为表更新的时候索引也要更新。</p>
-<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><p>原则：避免全表扫描，查询时尽量走索引。少于三张表的查询允许关联，关联不了就走子查询。</p>
-<p>1、尽量不要用select *</p>
-<p>2、减少子查询，用少于三张表的关联查询替代</p>
-<p>3、少用in和not in，因为绝对可以用exists和not exists替代</p>
-<p>4、where子句中慎用!&#x3D;，走不到索引</p>
-<p>5、少用or，走不到索引</p>
-<p>6、少用null判断，走不到索引</p>
-<h3 id="drop、delete和truncate"><a href="#drop、delete和truncate" class="headerlink" title="drop、delete和truncate"></a>drop、delete和truncate</h3><p>drop和truncate不能回滚，不在事务中。delete是在事务中，提交时才生效。</p>
-<p>drop删的最多，会删表结构，可以重新建同名表，及时生效不在事务中。</p>
-<p>truncate其次，对比drop是少删表结构，仅删除数据，还是不在事务中。</p>
-<p>delete再次，仅删除表数据，会在事务中，事务提交后才生效。</p>
-<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>理解为虚拟表。类似函数封装的概念。</p>
-<p>可以封装复杂查询的结果。</p>
-<p>可以用来做权限隔离，比如仅展示某几个字段给特定用户。</p>
-<p>底层表有改动，比如拆分了，可以建一个视图，避免上层应用修改SQL。</p>
-<h3 id="并发事务的问题"><a href="#并发事务的问题" class="headerlink" title="并发事务的问题"></a>并发事务的问题</h3><p>脏读：一个事务读到了另一个事务修改了但未提交的数据。</p>
-<p>修改丢失：两个事务同时修改了同一个值，后一个覆盖了前一个。比如两个事务同时做x-1，先读x再减一，并发之后可能结果是x-1而不是x-2。</p>
-<p>不可重复读：一个事务未结束时，读到了另一个事务B修改了并提交的最新值。</p>
-<p>幻读：一个事务查询一批数据的过程中，这批数据被另一个事务新增或删除了一些数据（比如新增了几条数据），于是查询到了新的数据。</p>
-<p>不可重复读重点在修改，幻读重点在新增或删除。重点在行锁和表锁区别。</p>
-<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>MySQL的InnoDB默认是可重复读</p>
-<p>读未提交：脏读，不可重复读，幻读</p>
-<p>读已提交：不可重复读，幻读</p>
-<p>可重复读：幻读（解决了单行的修改，但没解决表级别的增删）</p>
-<p>串行化：事务逐个执行，库锁</p>
-<p>大部分数据库是读已提交级别的事务（比如postgre）。</p>
-<p>mysql额外用了next key Lock，用行锁和间隙锁在可重复读的场景下避免了幻读。具体做法就是，锁了一行数据的前一条和后一条中间的范围。比如5、10、15三条数据，当10被事务读的时候，如果有一个事务插入一条数据8，则会触发间隙锁，插入8的事务会阻塞。这里和聚簇索引也有关系。</p>
-<h3 id="大表优化"><a href="#大表优化" class="headerlink" title="大表优化"></a>大表优化</h3><p>方向：单体变分布式-拆，限制结果数量</p>
-<p>1、查询时限制范围，分页</p>
-<p>2、读写分离，拆到多个机器上</p>
-<p>3、垂直拆分，把字段拆到不同的表中</p>
-<p>4、水平拆分，根据某些逻辑把数据分到不同的片区。比如地区信息做异地多活。</p>
-<h3 id="分库分表后的ID处理"><a href="#分库分表后的ID处理" class="headerlink" title="分库分表后的ID处理"></a>分库分表后的ID处理</h3><p>可转化为全局唯一ID问题：与消息中间件的消息防丢差不多。</p>
-<p>uuid、雪花、美团的leaf。</p>
-<h3 id="MySQL的一条查询SQL执行过程"><a href="#MySQL的一条查询SQL执行过程" class="headerlink" title="MySQL的一条查询SQL执行过程"></a>MySQL的一条查询SQL执行过程</h3><p>8.0没有查询缓存。</p>
-<p>1、语法分析：包括解析SQL语法的正确性，涉及到的表和字段是否存在</p>
-<p>2、准备阶段：会对查询进行逻辑优化，比如选择索引，去除不必要的子查询之类的。逻辑优化后还有物理优化，会根据统计信息和成本计算模型来确定具体的执行计划</p>
-<p>3、执行查询：由执行引擎和存储引擎交互产出查询结果</p>
-<p>4、结果返回：去重排序之类的处理，最终结果返回给客户端</p>
-<h3 id="varchar和char的区别"><a href="#varchar和char的区别" class="headerlink" title="varchar和char的区别"></a>varchar和char的区别</h3><p>varchar可变长度，char不可变，定长。</p>
-<p>比如varchar(30)的字段存一个字节长度为3的字符，实际空间占用可能为5或者6字节左右，因为有一定的空间用于存储其字段长度。</p>
-<p>char(30)的字段存同样的字符，那么固定占用30字节，后面空的会补零。</p>
-<p>char读写快，空间占用大。varchar省空间，读写慢。</p>
-<h3 id="int-11-的11含义"><a href="#int-11-的11含义" class="headerlink" title="int(11)的11含义"></a>int(11)的11含义</h3><p>不影响字段的存储范围，仅影响查询的展示效果。</p>
-<h3 id="MySQL的索引类型"><a href="#MySQL的索引类型" class="headerlink" title="MySQL的索引类型"></a>MySQL的索引类型</h3><p>主键索引：必须唯一，不可为空</p>
-<p>普通索引：允许重复和空</p>
-<p>唯一索引：值必须唯一，可以为空</p>
-<p>全文索引：只能在文本字段创建，用于加速like查询</p>
-<p>空间索引</p>
-<p>前缀索引</p>
-<p>单列和组合索引：最左匹配原则，优先用组合索引</p>
-<h3 id="什么场景不适合索引"><a href="#什么场景不适合索引" class="headerlink" title="什么场景不适合索引"></a>什么场景不适合索引</h3><p>1、经常更新的列</p>
-<p>2、内容大量重复的列</p>
-<p>3、表记录太少（不清楚具体是多少）</p>
-<p>4、写远大于读的表</p>
-<h3 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h3><p>多版本并发控制。用来解决读写冲突，是无锁并发。事务分配事务号（单向递增），每个修改保存一个版本。读只读老版本的数据，修改在新版本。可以同时避免脏读和不可重复读。</p>
-<p>实现：</p>
-<p>1、每行数据有一个版本链</p>
-<p>2、事务id，单调递增</p>
-<p>3、可见性判断，根据事务级别来判断是否可见</p>
-<p>4、过期数据清理</p>
-<p>级别和判断逻辑：</p>
-<p>读已提交：单行数据版本号小于当前事务版本号，并且此事务已提交，则可以看到</p>
-<p>可重复读：创建一致性视图，包含事务开始时所有可读的事务号。</p>
-<p>缺点，做不到串行化执行，在解决写冲突的时候还是要用锁或者重做</p>
-<h3 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h3><p>读锁和写锁（共享和排他）。</p>
-<p>按照粒度，可以划分为表锁和行锁。MyISAM是表级别的读写锁，InnoDB支持行锁。</p>
-<h3 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h3><p>行锁只能在索引上，没索引自动升级成表锁。</p>
-<p>没走索引时也会升级成表锁。比如非唯一索引相同的内容超过表的一半，优化器会选择不走索引。</p>
-<h3 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h3><p>悲观锁：倾向于一行数据总是会被同时修改，所以修改前加上排他锁</p>
-<p>乐观锁：倾向于一行数据不一定会被同时修改。加上版本号，类似MVCC，修改前读取版本号，修改后版本号+1，在更新版本号时做版本号检查，如果版本号和预期不符，说明此时有其他人修改了数据，否则就直接更新。乐观锁一般配合自旋，形成一个类似CAS的操作。</p>
-<h3 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h3><p>获取锁一定要加超时时间；</p>
-<p>按照固定顺序获取资源；</p>
-<p>事务尽量简短；</p>
-<p>事务隔离级别低一些；</p>
-<p>避免事务中的用户交叉；</p>
-<h3 id="索引注意事项"><a href="#索引注意事项" class="headerlink" title="索引注意事项"></a>索引注意事项</h3><p>1、where中使用!&#x3D;、&lt;&gt;、or会导致放弃使用索引</p>
-<p>2、符合索引要复合最左前缀原则</p>
-<p>3、where中进行字段表达式运算、函数运算可能导致索引失效</p>
-<p>4、Like使用是%不能在前，模糊匹配可以用全文索引</p>
-<p>5、字段是字符串类型，必须加引号，否则索引失效</p>
-<h3 id="主键-索引"><a href="#主键-索引" class="headerlink" title="主键 索引"></a>主键 索引</h3><p>主键是唯一索引，唯一索引不一定是主键</p>
-<p>主键不允许空，唯一索引可以为空</p>
-<p>一个表只能有一个主键，但可以有多个唯一索引</p>
-<p>主键是约束，而唯一索引是冗余的数据结构</p>
-<h3 id="MySQL的高可用"><a href="#MySQL的高可用" class="headerlink" title="MySQL的高可用"></a>MySQL的高可用</h3><p>MySQL分库分表。</p>
-<p>意义不是很大，一般是整个系统都做高可用。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MySQL的MVCC机制是一个非常标准的实现，可以和我之前做的缓存框架结合起来，很多道理都是共通的。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>在阅读下面的文章之前，读者需要懂得gRPC的服务端、调用端的基本使用方式。否则可能无法理解文章中出现的部分概念。</p>
+<h2 id="区分Protobuf和gRPC"><a href="#区分Protobuf和gRPC" class="headerlink" title="区分Protobuf和gRPC"></a>区分Protobuf和gRPC</h2><p>我发现很多人会把Protobuf和gRPC混为一谈，这是不对的。</p>
+<p>我这里直接引用Protobuf官网文档中的一段话来说明：</p>
+<blockquote>
+<p>The most straightforward RPC system to use with protocol buffers is <a href="https://grpc.io/">gRPC</a>: a language- and platform-neutral open source RPC system developed at Google. gRPC works particularly well with protocol buffers and lets you generate the relevant RPC code directly from your <code>.proto</code> files using a special protocol buffer compiler plugin.</p>
+<p>If you don’t want to use gRPC, it’s also possible to use protocol buffers with your own RPC implementation. You can find out more about this in the <a href="https://protobuf.dev/programming-guides/proto#services">Proto2 Language Guide</a>.</p>
+<p>There are also a number of ongoing third-party projects to develop RPC implementations for Protocol Buffers. For a list of links to projects we know about, see the <a href="https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md">third-party add-ons wiki page</a>.</p>
+</blockquote>
+<p>gRPC是一种RPC通讯的方式，而Protobuf是一种用于序列化和反序列化结构化数据的二进制编码格式。gRPC在通讯时将传输的数据转变为Protobuf格式。</p>
+<p>如果不使用gRPC，完全可以基于Protobuf的api实现一套自己的RPC通讯框架。</p>
+<h2 id="Protobuf的Descriptor"><a href="#Protobuf的Descriptor" class="headerlink" title="Protobuf的Descriptor"></a>Protobuf的Descriptor</h2><p>在百度中查询关于gRPC反射的资料，得到的信息大多牛头不对马嘴。但是查询Protobuf的反射，则可以获得一些案例。</p>
+<p>这其实也说明了Protobuf和gRPC并不是同一个玩意儿。</p>
+<p>Protobuf封装了Descriptor对象，提供了反射构建Protobuf消息对象的能力。所有Protobuf消息对象都要实现Message接口。</p>
+<p>但是Descriptor对象的来源还是proto文件，为了使用反射的能力，我们需要一种特殊的二进制文件。</p>
+<p>可以通过在maven编译插件中添加如下配置来生成这种二进制文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;protobuf.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;protocArtifact&gt;com.google.protobuf:protoc:$&#123;protoc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/protocArtifact&gt;</span><br><span class="line">                &lt;pluginId&gt;grpc-java&lt;/pluginId&gt;</span><br><span class="line">                &lt;pluginArtifact&gt;io.grpc:protoc-gen-grpc-java:$&#123;grpc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/pluginArtifact&gt;</span><br><span class="line">                &lt;writeDescriptorSet&gt;true&lt;/writeDescriptorSet&gt;</span><br><span class="line">                &lt;descriptorSetOutputDirectory&gt;src/main/resources/desc&lt;/descriptorSetOutputDirectory&gt;</span><br><span class="line">                &lt;descriptorSetFileName&gt;descriptor.pb&lt;/descriptorSetFileName&gt;</span><br><span class="line">                &lt;descriptorSetClassifier&gt;descriptor&lt;/descriptorSetClassifier&gt;</span><br><span class="line">                &lt;clearOutputDirectory&gt;false&lt;/clearOutputDirectory&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;compile&lt;/goal&gt;</span><br><span class="line">                        &lt;goal&gt;compile-custom&lt;/goal&gt;</span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                &lt;/execution&gt;</span><br><span class="line">            &lt;/executions&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br><span class="line">    &lt;extensions&gt;</span><br><span class="line">        &lt;extension&gt;</span><br><span class="line">            &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;</span><br><span class="line">            &lt;!--引入操作系统os设置的属性插件,否则$&#123;os.detected.classifier&#125; 操作系统版本会找不到 --&gt;</span><br><span class="line">            &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;os.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/extension&gt;</span><br><span class="line">    &lt;/extensions&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在protobuf的maven编译插件中添加了生成<code>descriptor.pb</code>文件的配置，这个文件中包含了所有proto文件中的信息。</p>
+<p>然后，我们开始加载这份文件，这里使用的是Protobuf的api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PathMatchingResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();</span><br><span class="line">Resource[] descriptorFiles = new Resource[0];</span><br><span class="line">try &#123;</span><br><span class="line">    descriptorFiles = resourceLoader.getResources(&quot;classpath*:**/*.pb&quot;);</span><br><span class="line"></span><br><span class="line">    if (descriptorFiles.length == 0) &#123;</span><br><span class="line">        logger.info(&quot;No pb file found!&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (Resource descriptorFile : descriptorFiles) &#123;</span><br><span class="line">        logger.log(Level.INFO, &quot;正在加载pb文件: &quot; + descriptorFile.getURL());</span><br><span class="line">        // 使用Protobuf提供的api，加载文件</span><br><span class="line">        DescriptorProtos.FileDescriptorSet fileSet =</span><br><span class="line">            DescriptorProtos.FileDescriptorSet.parseFrom(descriptorFile.getInputStream());</span><br><span class="line">    &#125;</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    throw new RuntimeException(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>待续…</p>
 ]]></content>
+      <tags>
+        <tag>【工作】gRPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串编解码的特殊处理</title>
+    <url>/2024/01/28/11-39-06/</url>
+    <content><![CDATA[<p>FastJSON2中，对于字符串做了特殊的优化，这里分析记录一下。</p>
+<span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>起因是在做内存数据库时，遇到了序列化的问题。其中，Java的字符串最是重量级，转化时怎么搞都有很大的性能问题。</p>
+<p>后来搜寻了资料，FastJSON2的作者高铁在阿里开发者的公众号分享了一篇文章，阅读后受益匪浅，决定改动之后运用到自己的项目中。</p>
+<p>高铁对String对象转化字节数组的优化主要有两方面：</p>
+<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
+<p>2、重写unicode到utf8的转换逻辑。</p>
+<p>而字节数组转化为String对象，使用的是：</p>
+<p>1、重写utf8到unicode的转换逻辑。</p>
+<p>2、通过零拷贝构造器构建String对象。</p>
+<p>说白了，就是通过一些旁门左道（比如Lambda表达式工厂替代反射，Unsafe操作）来绕过String对象本身的一些限制，从而重写其编解码逻辑。</p>
+<p>但是话又说回来，结合实际场景分析后，字节数组转化为String对象似乎并没有太多的提升。后文会解释为什么提升有限。</p>
+<p>实际运用到自己项目中时，我也进行了一些改造，从而适配项目本身的情况。</p>
+<h2 id="String转byte"><a href="#String转byte" class="headerlink" title="String转byte[]"></a>String转byte[]</h2><p>Java的String，本质是一个封装好的不可变char数组对象。</p>
+<p>Java的char类型，底层编码是unicode，每个char占两位字节。而UTF-8使用可变长度的编码，不同字符所占的字节数不同。</p>
+<p>FastJSON2的优化就如上文所述，分两步：</p>
+<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
+<p>2、重写unicode到utf8的转换逻辑。</p>
+<p>我们先开看第一步，以下是核心代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 当前优化仅在Java8有效</span><br><span class="line">// Java9修改了String的字符串实现，因此无法使用以下的方式初始化</span><br><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	Field field = null;</span><br><span class="line">	long fieldOffset = -1;</span><br><span class="line">	if (!ANDROID) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			field = String.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">			field.setAccessible(true);</span><br><span class="line">			fieldOffset = UNSAFE.objectFieldOffset(field);</span><br><span class="line">		&#125; catch (Exception ignored) &#123;</span><br><span class="line">			FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	FIELD_STRING_VALUE = field;</span><br><span class="line">	FIELD_STRING_VALUE_OFFSET = fieldOffset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用反射和Unsafe获取了value对象的偏移量，缓存到了一个静态变量汇总。</p>
+<p>后续是使用Unsafe，通过缓存的静态变量来获取char数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static char[] getCharArray(String str) &#123;</span><br><span class="line">    // GraalVM not support</span><br><span class="line">    // Android not support</span><br><span class="line">    if (!FIELD_STRING_VALUE_ERROR) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return (char[]) UNSAFE.getObject(str, FIELD_STRING_VALUE_OFFSET);</span><br><span class="line">        &#125; catch (Exception ignored) &#123;</span><br><span class="line">            FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return str.toCharArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而编码逻辑，则是参考了JDK原来的实现，进行了一定的修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    public static int encodeUTF8(char[] src, int offset, int len, byte[] dst, int dp) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        int dlASCII = dp + Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            dst[dp++] = (byte) src[offset++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                dst[dp++] = (byte) c;</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                dst[dp] = (byte) (0xc0 | (c &gt;&gt; 6));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) + (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">//                            throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                            dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                    continue;</span><br><span class="line">//                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (byte) (0xf0 | ((uc &gt;&gt; 18)));</span><br><span class="line">                    dst[dp + 1] = (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 2] = (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 3] = (byte) (0x80 | (uc &amp; 0x3f));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                dst[dp] = (byte) (0xe0 | ((c &gt;&gt; 12)));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | ((c &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                dst[dp + 2] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里有个很抽象的逻辑需要解释一下。</p>
+<p>上述编码的方法入参有个名为dst的byte数组，它的意思是最终要写入的目标数组。在序列化框架中，有的时候就是要在一个已经提前创建好的byte[]数组里，从某个位置开始把转换后的结果append进去。这个方法就是为了兼容这种情况，所以还额外提供了dp这一入参，用来标识是从dst[]的第几位开始写数据。</p>
+<h2 id="byte-转String"><a href="#byte-转String" class="headerlink" title="byte[]转String"></a>byte[]转String</h2><p>FastJSON2在处理此类场景时，也是进行了优化，分两步：</p>
+<p>1、重写utf8到unicode的转换逻辑。</p>
+<p>2、通过零拷贝构造器构建String对象。</p>
+<p>重写后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">public static int decodeUTF8(byte[] src, int off, int len, char[] dst) &#123;</span><br><span class="line">    final int sl = off + len;</span><br><span class="line">    int dp = 0;</span><br><span class="line">    int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">    // ASCII only optimized loop</span><br><span class="line">    while (dp &lt; dlASCII &amp;&amp; src[off] &gt;= 0) &#123;</span><br><span class="line">        dst[dp++] = (char) src[off++];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while (off &lt; sl) &#123;</span><br><span class="line">        int b1 = src[off++];</span><br><span class="line">        if (b1 &gt;= 0) &#123;</span><br><span class="line">            // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">            dst[dp++] = (char) b1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">            // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">            if (off &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off++];</span><br><span class="line">                if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^</span><br><span class="line">                            (((byte) 0xC0 &lt;&lt; 6) ^</span><br><span class="line">                                    ((byte) 0x80)));</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">            // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 1 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                off += 2;</span><br><span class="line">                if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    char c = (char) ((b1 &lt;&lt; 12) ^</span><br><span class="line">                            (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^</span><br><span class="line">                                    (((byte) 0xE0 &lt;&lt; 12) ^</span><br><span class="line">                                            ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                            ((byte) 0x80))));</span><br><span class="line">                    boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                    if (isSurrogate) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = c;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">            // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 2 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                int b4 = src[off + 2];</span><br><span class="line">                off += 3;</span><br><span class="line">                int uc = ((b1 &lt;&lt; 18) ^</span><br><span class="line">                        (b2 &lt;&lt; 12) ^</span><br><span class="line">                        (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^</span><br><span class="line">                                (((byte) 0xF0 &lt;&lt; 18) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 12) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                        ((byte) 0x80))));</span><br><span class="line">                if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                ) &#123;</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                    dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                    dp += 2;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至于零拷贝的构造器，是使用了Lambda工厂来实现的，这里不多提，就看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	MethodHandles.Lookup lookup = trustedLookup(String.class);</span><br><span class="line"></span><br><span class="line">	MethodHandle handle = lookup.findConstructor(</span><br><span class="line">				String.class, methodType(void.class, char[].class, boolean.class)</span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">	CallSite callSite = LambdaMetafactory.metafactory(</span><br><span class="line">				lookup,</span><br><span class="line">				&quot;apply&quot;,</span><br><span class="line">				methodType(BiFunction.class),</span><br><span class="line">				methodType(Object.class, Object.class, Object.class),</span><br><span class="line">				handle,</span><br><span class="line">				methodType(String.class, char[].class, boolean.class)</span><br><span class="line">	);</span><br><span class="line">	stringCreatorJDK8 = (BiFunction&lt;char[], Boolean, String&gt;) callSite.getTarget().invokeExact();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要还是讲下为什么这个零拷贝构造器实际用的时候发现很鸡肋。</p>
+<p>首先，这个零拷贝构造器是要求传入一个<code>char[]</code>，传的<code>char[]</code>是什么它就用什么。</p>
+<p>那么这个<code>char[]</code>哪里来？通过<code>decodeUTF8</code>方法构建的。</p>
+<p>但是，在编码这一步，我们不能保证获得一个正确的<code>char[]</code>。这问题是UTF-8和Unicode的编码长度差异带来的。</p>
+<p>我简单用代码举个例子。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 假设我们已经有了一个固定长度的byte[]</span><br><span class="line">public String getString(byte[] src) &#123;</span><br><span class="line">		// 首先得创建一个dst，才能decode</span><br><span class="line">		char[] dst = new char[src.length / 3];</span><br><span class="line">		int dp = StringUtils.decodeUTF8(src, 0, src.length, dst);</span><br><span class="line">		// 后续代码略……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，必须先创建好dst对象，才能做decode。但是由于UTF-8和Unicode编码长度的差异，初始化的dst长度可能过长了，也就是dst可能最后几位是<code>\u0000</code>。</p>
+<p>如果不清理最后这几位，直接用零拷贝的方法去构建String，就会导致字符串在其他地方展示的时候最后有乱码或空白。</p>
+<p>但是Java中又没有办法零拷贝截断数组。所有的截断方式本质都是通过创建一个新的数组，然后把原来数组的数据拷贝过去。</p>
+<p>所以，用零拷贝的方式去构建，就必须在外部显式地拷贝一次。那既然如此，和直接使用String本身提供的方法又有什么区别呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public String(char value[], int offset, int count) &#123;</span><br><span class="line">        if (offset &lt; 0) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset);</span><br><span class="line">        &#125;</span><br><span class="line">        if (count &lt;= 0) &#123;</span><br><span class="line">            if (count &lt; 0) &#123;</span><br><span class="line">                throw new StringIndexOutOfBoundsException(count);</span><br><span class="line">            &#125;</span><br><span class="line">            if (offset &lt;= value.length) &#123;</span><br><span class="line">                this.value = &quot;&quot;.value;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // Note: offset or count might be near -1&gt;&gt;&gt;1.</span><br><span class="line">        if (offset &gt; value.length - count) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset + count);</span><br><span class="line">        &#125;</span><br><span class="line">        this.value = Arrays.copyOfRange(value, offset, offset+count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到String本来就是拷贝一次然后创建对象的。</p>
+<p>所以这种零拷贝的方式就很鸡肋。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>最后简单聊聊我在项目的使用。</p>
+<p>我的项目是需要把String的数据转换为UTF-8编码，然后通过Unsafe写到一个内存块上。同时也有从内存块读取的需求。</p>
+<p>很可惜现在提供的api，最终都是落到byte[]。因此我修改了这两个方法，重写了其中对于dst的操作，变更为直接操作内存块。</p>
+<p>修改后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    private static int getStringUTF8JDK8(long off, int len, char[] dst) &#123;</span><br><span class="line">        final long sl = off + len;</span><br><span class="line">        int dp = 0;</span><br><span class="line">        int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; UNSAFE.getByte(off) &gt; 0) &#123;</span><br><span class="line">            dst[dp++] = (char) UNSAFE.getByte(off++);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (off &lt; sl) &#123;</span><br><span class="line">            int b1 = UNSAFE.getByte(off++);</span><br><span class="line">            if (b1 == 0) &#123;</span><br><span class="line">            // 读到0直接返回，不需要继续读取</span><br><span class="line">                return dp;</span><br><span class="line">            &#125; else if (b1 &gt; 0) &#123;</span><br><span class="line">                // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">                dst[dp++] = (char) b1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">                // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">                if (off &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off++);</span><br><span class="line">                    if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^ (((byte) 0xC0 &lt;&lt; 6) ^ ((byte) 0x80)));</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">                // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 1 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    off += 2;</span><br><span class="line">                    if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char c = (char) ((b1 &lt;&lt; 12) ^ (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^ (((byte) 0xE0 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                        boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                        if (isSurrogate) &#123;</span><br><span class="line">                            return -1;</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            dst[dp++] = c;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">                // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 2 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    int b4 = UNSAFE.getByte(off + 2);</span><br><span class="line">                    off += 3;</span><br><span class="line">                    int uc = ((b1 &lt;&lt; 18) ^ (b2 &lt;&lt; 12) ^ (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^ (((byte) 0xF0 &lt;&lt; 18) ^ ((byte) 0x80 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                    if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                    ) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                        dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                        dp += 2;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">private static long putStringUTF8JDK8(char[] src, int offset, int len, long dp, int size) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        long dlASCII = dp + Math.min(len, size);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            UNSAFE.putByte(dp++, (byte) src[offset++]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                UNSAFE.putByte(dp++, (byte) c);</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xc0 | (c &gt;&gt; 6)));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (c &amp; 0x3f)));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) +</span><br><span class="line">                                (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            //                            throw new JSONException(&quot;encodeUTF8 error&quot;, new</span><br><span class="line">                            //                            MalformedInputException(1));</span><br><span class="line">                            UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                    continue;</span><br><span class="line">                    //                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException</span><br><span class="line">                    //                        (1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    UNSAFE.putByte(dp, (byte) (0xf0 | ((uc &gt;&gt; 18))));</span><br><span class="line">                    UNSAFE.putByte(dp + 1, (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 2, (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 3, (byte) (0x80 | (uc &amp; 0x3f)));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xe0 | ((c &gt;&gt; 12))));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (((c &gt;&gt; 6) &amp; 0x3f))));</span><br><span class="line">                UNSAFE.putByte(dp + 2, (byte) (0x80 | ((c &amp; 0x3f))));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，从内存块读取字节时，读到<code>0x00</code>就可以停止了，这个逻辑我也加了进去。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>还是得例行总结一下。</p>
+<p>阅读开源代码确实能快速提升个人能力，我觉得以后这种事情应该多做。</p>
+<p>使用开源代码，不仅仅是引入人家的包，为了追求技术可控性，我们也应当了解开源代码中的实现。而且追求极致性能的场景，还是得改改人家的代码，拿过来直接能用的概率还是挺小的。</p>
+<p>再说远点的话，读到高铁的分享时，我确实觉得是受益匪浅。程序员中有一类很特殊的人，自己写了个很牛逼的东西，希望全世界都能知道我写了个很牛逼的玩意儿，让大家都用起来。就是有着这类人，才让软件行业一往无前地汹涌发展吧。</p>
+<p>我尊敬，并希望也能成为那样的人。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我是怎么使用线程池的</title>
+    <url>/2023/09/25/17-37-38/</url>
+    <content><![CDATA[<p>这是一份线程池的使用说明文档。</p>
+<p>我会举例我在实际项目对线程池的用法，来说明我是如何使用线程池来达成目的。</p>
+<span id="more"></span>
+
+<h2 id="简单的说明"><a href="#简单的说明" class="headerlink" title="简单的说明"></a>简单的说明</h2><p>首先给出声明的方法，也就是线程池的构造器。</p>
+<img src="/2023/09/25/17-37-38/image-20230926151418320.png" class="" title="image-20230926151418320">
+
+<ul>
+<li><p>corePoolSize：线程池中一直存活的线程数量</p>
+</li>
+<li><p>maximunPoolSize：线程池中最多存活的线程数量</p>
+</li>
+<li><p>keepAliveTime：当存活线程数量大于核心线程数量时，多余线程的存活时间，空闲时间超过这个数值则销毁线程</p>
+</li>
+<li><p>unit：时间单位</p>
+</li>
+<li><p>workQueue：工作队列，必须是阻塞的</p>
+</li>
+<li><p>threadFactory：线程工厂，用于新建线程时给线程添加一些配置。最常用的就是设置线程名。</p>
+</li>
+<li><p>handler：当任务被拒绝时的后续处理。默认实现是任务被拒绝时会抛出一个异常。</p>
+</li>
+</ul>
+<p>线程池还有很多构造器，其他构造器大多是封装了一些默认实现，比如给了默认的threadFactory或者handler。</p>
+<hr>
+<p>线程池有一个很反直觉的逻辑：只有任务队列满之后，才会创建新线程。</p>
+<p>为什么这么设计？我们只需要记住：创建线程、销毁线程是一个性能开销很大的工作，我们应该尽量复用线程。</p>
+<p>因此，<strong>除非任务队列已满，否则都不会创建线程</strong>。</p>
+<p>下面来看一个实际使用时线程池的声明。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 10, TimeUnit.SECONDS, new ArrayBlockingQueue(1), r -&gt; new Thread(r, &quot;cache-clean-thread&quot;), new ThreadPoolExecutor.DiscardOldestPolicy());</span><br></pre></td></tr></table></figure>
+
+<p>我们来模拟一下这个线程池的处理逻辑，假设有耗时很长的任务：</p>
+<ul>
+<li><p>第一个任务来到线程池，任务直接由核心线程执行。</p>
+</li>
+<li><p>第二个任务来到线程池，没有空闲线程，进入任务队列。</p>
+</li>
+<li><p>第三个任务来到线程池，没有空闲线程，任务队列也满了。这时候假如最大线程数大于核心线程数，则应该要创建一个新线程来执行任务，而当前任务则进入任务队列。但是我们不允许创建更多的线程，于是这个任务会被拒绝，进入handler的后置处理逻辑。我们直接使用了<code>new ThreadPoolExecutor.DiscardOldestPolicy()</code>作为后置处理逻辑，这个方法会移除最老的任务，然后把当前任务放到队列末尾。于是这个任务进入队列，最老的任务被移除，由于刚好我们队列为1，所以结果就是正在等待的任务被新来的任务替换了。</p>
+</li>
+</ul>
+<p>可以看到，线程池处理的关键是workQueue，threadFactory和handler这三个参数，通过设定这三个参数，我们可以把线程池玩出各种花样来。</p>
+<p>接下来的章节，就主要针对线程池的使用了。</p>
+<h2 id="线程池的使用"><a href="#线程池的使用" class="headerlink" title="线程池的使用"></a>线程池的使用</h2><h3 id="命名规定"><a href="#命名规定" class="headerlink" title="命名规定"></a>命名规定</h3><p>我们要求使用线程池时必须重写threadFactory来命名线程。在命名线程时说明线程大概要处理的任务，可以有效提高后续通过日志排查问题的效率。</p>
+<p>以下是命名的示例</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 创建读线程池</span><br><span class="line"> */</span><br><span class="line">private static final ThreadPoolExecutor READ_EXECUTOR = </span><br><span class="line">	new ThreadPoolExecutor(4, 4, 30, TimeUnit.SECONDS, </span><br><span class="line">		new LinkedBlockingQueue(400), </span><br><span class="line">		new ThreadFactory() &#123;</span><br><span class="line">			private final AtomicInteger threadNumber = new AtomicInteger(1);</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			public Thread newThread(Runnable r) &#123;</span><br><span class="line">				return new Thread(r, &quot;cache-read-thread-&quot; + threadNumber.getAndIncrement());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h3><p>有两个方法：excuse和submit</p>
+<p>区别在于submit之后可以获得一个Future，在后续逻辑中监控任务是否执行完，并获得其堆栈。</p>
+<p>excuse方法执行完之后当前线程就无法感知这个任务是否执行完了，这在大多数情况下是不可接受的。</p>
+<p>一般是建议使用submit。</p>
+<p>案例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Runnable writeTask1 = () -&gt; &#123;</span><br><span class="line">// do something</span><br><span class="line">&#125;;</span><br><span class="line">Runnable writeTask2 = () -&gt; &#123;</span><br><span class="line">// do something</span><br><span class="line">&#125;;</span><br><span class="line">int writeThreadCount = 4;</span><br><span class="line">Future[] writeFutures = new Future[writeThreadCount];</span><br><span class="line">// 提交任务到线程池</span><br><span class="line">for (int i = 0; i &lt; writeThreadCount; i++) &#123;</span><br><span class="line">	writeFutures[i] = WRITE_EXECUTOR.submit(i % 2 == 0 ? writeTask1 : writeTask2);</span><br><span class="line">&#125;        </span><br><span class="line">// 等待所有线程执行完毕</span><br><span class="line">for (Future future : writeFutures) &#123;</span><br><span class="line">	future.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h3><p>一般来说，拒绝策略可以通过设置workQueue和handler两种方式来修改。</p>
+<p>ThreadPoolExecutor中已提供了四种内置策略，已经覆盖了绝大部分场景</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 在当前线程执行任务</span><br><span class="line">new ThreadPoolExecutor.CallerRunsPolicy()</span><br><span class="line">// 抛出任务被拒绝的异常</span><br><span class="line">new ThreadPoolExecutor.AbortPolicy()</span><br><span class="line">// 忽略最新提交的任务</span><br><span class="line">new ThreadPoolExecutor.DiscardPolicy()</span><br><span class="line">// 忽略最老提交的任务</span><br><span class="line">new ThreadPoolExecutor.DiscardOldestPolicy()</span><br></pre></td></tr></table></figure>
+
+<p>以下列举两种特殊的策略</p>
+<h4 id="不拒绝任何任务"><a href="#不拒绝任何任务" class="headerlink" title="不拒绝任何任务"></a>不拒绝任何任务</h4><p>不希望有任何任务被拒绝，需要设置workQueue为LinkedBlockingQueue，并且不设置长度限制。但要注意人物堆积时可能导致内存溢出。</p>
+<p>同时，由于线程池的创建线程只发生在任务队列已满时，这种用链表作为workQueue的线程池将不会创建任何新的线程。</p>
+<p>以下是示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final ThreadPoolExecutor notifyExecutor =</span><br><span class="line">        new ThreadPoolExecutor(5, 5, 10, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(),</span><br><span class="line">            new ThreadPoolExecutor.AbortPolicy());</span><br></pre></td></tr></table></figure>
+
+<p>由于没有任何任务被拒绝，handler其实也没有什么用了。</p>
+<h4 id="任务溢出时让工作线程参与任务，且保证顺序"><a href="#任务溢出时让工作线程参与任务，且保证顺序" class="headerlink" title="任务溢出时让工作线程参与任务，且保证顺序"></a>任务溢出时让工作线程参与任务，且保证顺序</h4><p>这是一种特殊情况下出现的需求，要求任务能保持一个大概的顺序（有时间戳），且数据不能丢失。</p>
+<p>下面是代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final ThreadPoolExecutor NOTIFY_EXECUTOR =</span><br><span class="line">    new ThreadPoolExecutor(1, 1, 10, TimeUnit.SECONDS, new ArrayBlockingQueue&lt;&gt;(5000),</span><br><span class="line">        r -&gt; new Thread(r, &quot;cache-tx-notify-thread&quot;), (r, e) -&gt; &#123;</span><br><span class="line">        // 把最老的任务拿出来在当前线程执行，把新任务放到队列里</span><br><span class="line">        // 用来保证任务的顺序性</span><br><span class="line">        if (!e.isShutdown()) &#123;</span><br><span class="line">            Runnable oldTask = e.getQueue().poll();</span><br><span class="line">            e.execute(r);</span><br><span class="line">            oldTask.run();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>【工作】多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>老年代大对象的问题排查</title>
+    <url>/2023/05/05/10-26-55/</url>
+    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
+<span id="more"></span>
+
+<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
+<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
+<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
+<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
+<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
+<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
+<blockquote>
+<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
+</blockquote>
+<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
+<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
+<blockquote>
+<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
+<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
+</blockquote>
+<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
+<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
+<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
+<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
+<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
+<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>远程调试案例</title>
+    <url>/2023/07/10/15-08-11/</url>
+    <content><![CDATA[<p>在开发过程中，总是会遇到本地无法重现服务器端报错的问题，这时候远程调试（remote debug）就是很好的应对方法。</p>
+<span id="more"></span>
+
+<p>下面我们来看一下怎么使用jvm的远程调试能力。</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>本地需要有源码，有源码才可以敲断点调试。</p>
+<h2 id="编写启动脚本"><a href="#编写启动脚本" class="headerlink" title="编写启动脚本"></a>编写启动脚本</h2><p>在实际项目中我们往往是通过脚本来启动Java程序，我们需要在启动命令上添加参数来开启远程debug模式。</p>
+<p>需要添加的命令如下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y</span><br></pre></td></tr></table></figure>
+
+<p>以下是一份常见的启动脚本示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get current folder.</span></span><br><span class="line">CMD_DIR=$(cd $(dirname $0); pwd)</span><br><span class="line">cd &quot;$CMD_DIR/..&quot;</span><br><span class="line">CURRENT_DIR=$(pwd)</span><br><span class="line">echo User dir: &quot;$CURRENT_DIR&quot;</span><br><span class="line">CONF_DIR=&quot;$CURRENT_DIR/conf&quot;</span><br><span class="line">STATIC_DIR=&quot;$CURRENT_DIR/static&quot;</span><br><span class="line">ARGS=$*</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get file name.</span></span><br><span class="line">FILE_PATH=&quot;$CURRENT_DIR/lib&quot;</span><br><span class="line">files=$(ls &quot;$FILE_PATH&quot;)</span><br><span class="line">for filename in $files</span><br><span class="line">do</span><br><span class="line">   echo Main Jar: $filename</span><br><span class="line">done</span><br><span class="line">if [[  -f &quot;$CONF_DIR/application.yml&quot; || -f &quot;$CONF_DIR/bootstrap.yml&quot; ]]; then</span><br><span class="line">    echo &quot;Startup app $filename with parameter: $ARGS &quot;</span><br><span class="line">    nohup java \</span><br><span class="line">    -server \</span><br><span class="line">    -Dspring.web.resources.static-locations=&quot;$STATIC_DIR/&quot; \</span><br><span class="line">    -Dspring.config.location=&quot;$CONF_DIR/&quot; \</span><br><span class="line">    -Dkoca.config.location=&quot;config&quot; \</span><br><span class="line">    -Dkoca.lcp.dump.location=&quot;$CURRENT_DIR/&quot; \</span><br><span class="line">    -Dlogging.config=&quot;$CONF_DIR/logback-spring.xml&quot; \</span><br><span class="line">    -Dspring.banner.location=&quot;file:$CONF_DIR/banner.txt&quot; \</span><br><span class="line">    -Duser.timezone=GMT+08 \</span><br><span class="line">    -Xdebug \</span><br><span class="line">    -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y \</span><br><span class="line">    -jar &quot;$CURRENT_DIR/lib/$filename&quot; \</span><br><span class="line">    $ARGS \</span><br><span class="line">    &gt;./nohup.log 2&gt;&amp;1 &amp;</span><br><span class="line">else</span><br><span class="line">    echo &quot;Configuration folder or files is not exist.&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="运行启动脚本"><a href="#运行启动脚本" class="headerlink" title="运行启动脚本"></a>运行启动脚本</h2><p>我们修改脚本后，将这份脚本上传到服务器。</p>
+<p>正常启动时，程序会有一大堆运行日志。但是使用这份脚本启动后，程序启动时会卡住，等待其他客户端连接debug端口。</p>
+<p>这个debug端口就是命令中设置的5005。</p>
+<h2 id="本地创建客户端"><a href="#本地创建客户端" class="headerlink" title="本地创建客户端"></a>本地创建客户端</h2><p>本地使用IDEA创建客户端。</p>
+<img src="/2023/07/10/15-08-11/image-20230630174009789.png" class="" title="image-20230630174009789">
+
+<p>修改host为服务器地址</p>
+<img src="/2023/07/10/15-08-11/image-20230630174033683.png" class="" title="image-20230630174033683">
+
+<p>创建完毕后运行该客户端，运行时该客户端会和服务端建立连接。</p>
+<p>可以看到原本卡住的服务端开始正常运行。</p>
+<p>在本地的代码中敲断点，就可以进行debug了，和平时在本地debug没什么差别。</p>
+]]></content>
+      <tags>
+        <tag>【工作】运维部署</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Netty的FastThreadLocal带来了什么？</title>
+    <url>/2024/09/13/14-49-51/</url>
+    <content><![CDATA[<p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
+<span id="more"></span>
+
+<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
+<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
+<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
+<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
+<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
+<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
+<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
+<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
+<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
+<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
+<p>然后再来聊聊其中的实现。</p>
+<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
+<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
+<p>它的get()过程是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
+
+<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
+<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
+<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
+
+<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
+<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
+<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
+<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
+<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
+<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
+]]></content>
+      <tags>
+        <tag>【工作】Netty</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用浏览器发送POST请求</title>
+    <url>/2023/09/27/15-25-40/</url>
+    <content><![CDATA[<p>一个没什么卵用的小技巧，用chorme等浏览器发送POST请求</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
+<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
+<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><p>打开浏览器的console，写入js代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
+
+<p>表现如下：</p>
+<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
+
+<p>完事。</p>
+]]></content>
+      <tags>
+        <tag>【工作】优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-Java基础</title>
+    <url>/2024/10/16/15-04-36/</url>
+    <content><![CDATA[<p>Java基础是纯纯的八股文了，但还是要过一遍。</p>
+<span id="more"></span>
+
+<h2 id="语法基础"><a href="#语法基础" class="headerlink" title="语法基础"></a>语法基础</h2><h3 id="Java语言特点"><a href="#Java语言特点" class="headerlink" title="Java语言特点"></a>Java语言特点</h3><p>一次编译处处运行，天然具有跨平台的能力。只要不用JNI。</p>
+<p>开源社区资源丰富，活跃。</p>
+<p>适合企业级开发，多方面：有Spring为主流的开源框架，大型项目的构建和维护的成本较低。语言的规范性强。</p>
+<h3 id="基本类型和包装类型"><a href="#基本类型和包装类型" class="headerlink" title="基本类型和包装类型"></a>基本类型和包装类型</h3><p>byte、char、boolean、short、int、float、long、double</p>
+<p>基本类型不是对象，包装类型是对象。使用时有自动的拆装箱机制。但编码过程中如果可以用基本类型的建议还是用基本类型。</p>
+<p>区别在于对象是有对应的Class类，这些类信息会记录在JVM的ClassLoader中。对象有对象头。</p>
+<p>字节码的方法签名，基本类型是BCJFI之类的大写字母，对象是L加全限定类名。</p>
+<h3 id="instance-of"><a href="#instance-of" class="headerlink" title="instance of"></a>instance of</h3><p>检测对象是否是某个类型的实例。可以用来检测对象是否实现了某个接口。</p>
+<p>HashMap中有使用到，用来检测当前节点的实现是链表还是红黑树。</p>
+<h3 id="重写和重载"><a href="#重写和重载" class="headerlink" title="重写和重载"></a>重写和重载</h3><p>重写建议加@Override注解，标明该方法是重写方法。</p>
+<p>重写发生在子类重写了父类的同名且参数完全一致的方法，或者是实现了某个接口的方法。有重写就一定是有extend或者impliment。</p>
+<p>重载是同名方法用不同的参数实现。同名方法的方法签名是不一样的。</p>
+<h3 id="equals和-x3D-x3D"><a href="#equals和-x3D-x3D" class="headerlink" title="equals和&#x3D;&#x3D;"></a>equals和&#x3D;&#x3D;</h3><p>&#x3D;&#x3D;是比较两个变量所指向的内存地址是否相同，其实是个指针操作。基本类型就相当于值比较。</p>
+<p>equals是Object类的一个方法，Object类中的实现就是&#x3D;&#x3D;。一般不同的类会有不同的实现，String的实现就是逐个比较字符值是否相等。</p>
+<h3 id="四种引用"><a href="#四种引用" class="headerlink" title="四种引用"></a>四种引用</h3><p>强引用：使用最多的引用，默认就是强引用。</p>
+<p>软引用：缓存会用。可能会被回收，优先级在弱引用之后。</p>
+<p>弱引用：young GC时必定会回收。</p>
+<p>虚引用：这个引用不会影响GC，需要有其他引用方式指向这个对象。</p>
+<h3 id="Cleaner"><a href="#Cleaner" class="headerlink" title="Cleaner"></a>Cleaner</h3><p>Cleaner机制用到了虚引用。Cleaner继承了虚引用，GC后，所有的cleaner会被回收到一个pending队列，reference handler线程会调用这个pending队列中的对象，会检测下是不是Cleaner对象，是的话就直接调用Cleaner的clean方法。</p>
+<h3 id="Exception和Error"><a href="#Exception和Error" class="headerlink" title="Exception和Error"></a>Exception和Error</h3><p>都是Throwable的实现类。</p>
+<p>运行时异常不用显式地catch。被检查异常需要catch或向上抛出。</p>
+<p>Error是非常严重的错误，可能宕机。但是不需要显式抛出。</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>线程不安全。</p>
+<p>put：hash之后找到数组中的对应位置，如果为空直接塞；不为空说明哈希冲突，检查一下当前的数据结构，按照数据结构来添加这个对象，可能是替换也可能是新增。</p>
+<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>双向链表，线程不安全。</p>
+<h3 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h3><p>阻塞队列的经典实现：ArrayBlockQueue，LinkedBlockQueue</p>
+<p>用了大小堆的priority queue</p>
+<p>阻塞队列的锁就是线程池的锁。所以阻塞队列的性能也一定程度上决定了线程池的性能。举例：Disruptor、参考Disruptor实现了自己的阻塞队列。</p>
+<p>阻塞队列可以当做对象池来用。</p>
+<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><p>线程独占的：栈，本地方法栈，程序计数器</p>
+<p>线程共享的：堆，方法区</p>
+<p>栈：存储局部变量，操作栈，动态链接，方法出口。调用一个方法时入栈，方法返回出栈。</p>
+<p>本地方法栈：Native方法的栈</p>
+<p>程序计数器：当前程序执行的字节码位置。也就是打印异常堆栈时看到的执行到第几行出错。执行到native方法时，程序计数器清空，因为不是在执行字节码了。</p>
+<p>堆：存储对象实例，线程共享。会垃圾回收。</p>
+<p>方法区：虚拟机加载的类信息，常量，静态变量，JIT优化后的代码。总之就是些全局的信息。</p>
+<h3 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h3><p>也就是为什么要volatile关键字。</p>
+<p>线程执行时，会拷贝一份线程间的共享变量至线程的工作内存。拷贝的数据可能已经被其他线程修改了，导致执行结果错误。</p>
+<p>volatile会在共享变量修改时，强制同步一份副本至所有涉及到的线程的工作空间。</p>
+<h3 id="类加载和卸载"><a href="#类加载和卸载" class="headerlink" title="类加载和卸载"></a>类加载和卸载</h3><p>加载字节码文件到内存-&gt;验证并解析为Class类，创建静态变量执行静态代码块-&gt;实例化-&gt;GC</p>
+<h3 id="三种加载器"><a href="#三种加载器" class="headerlink" title="三种加载器"></a>三种加载器</h3><p>JAVA_HOME&#x2F;lib: Bootstrap ClassLoader</p>
+<p>JAVA_HOME&#x2F;lib&#x2F;ext: Extension ClassLoader</p>
+<p>Application ClassLoader</p>
+<h3 id="双亲委派"><a href="#双亲委派" class="headerlink" title="双亲委派"></a>双亲委派</h3><p>加载器加载一个类时，先委托给父类加载器。父类无法加载才会自己加载。</p>
+<p>主要是为了避免同一个类被多个加载器重复加载。已经避免Java的核心类被修改。</p>
+<h3 id="回收算法G1"><a href="#回收算法G1" class="headerlink" title="回收算法G1"></a>回收算法G1</h3><p>高频率回收，减少每次的停顿。</p>
+<p>分老年代和年轻代。分块region，年轻代和老年代都由若干个分块组成。</p>
+<p>年轻代使用并行的复制和收集算法。</p>
+<p>mix-GC会回收一部分老年代。</p>
+<p>标记清除算法：STW进行初始标记，确实GC root可直达的对象，伴随一次young GC。然后GC线程和应用线程并行进行并发标记，尽可能标记出存活对象，使用SATB记录对象的引用关系。最终标记，STW，修改并发标记的错误。然后多线程进行GC。</p>
+<h3 id="ZGC"><a href="#ZGC" class="headerlink" title="ZGC"></a>ZGC</h3><p>低延时垃圾收集器。</p>
+<h3 id="Full-GC"><a href="#Full-GC" class="headerlink" title="Full GC"></a>Full GC</h3><p>当老年代满时会进行，耗时长。需要避免。</p>
+<h3 id="对象分配原则"><a href="#对象分配原则" class="headerlink" title="对象分配原则"></a>对象分配原则</h3><p>新对象优先在eden区，如果大于survivor的二分之一就认定为大对象，直接晋升老年代。</p>
+<p>对象没存活过一次young GC，年龄+1，到达一定年龄（默认15）就晋升老年代。</p>
+<p>Survivor区中同年龄对象的总和大小超过一半，这个年龄以及这个年龄以上的对象进入老年代。</p>
+<h3 id="对象的创建过程"><a href="#对象的创建过程" class="headerlink" title="对象的创建过程"></a>对象的创建过程</h3><p>先去常量池找类信息，然后加载类信息，找不到就报ClassNotFound。</p>
+<p>为对象分配内存，将除了对象头之外的内存块初始化为0。</p>
+<p>设置对象头。</p>
+<h3 id="对象结构"><a href="#对象结构" class="headerlink" title="对象结构"></a>对象结构</h3><p>对象头12字节，数组16字节。</p>
+<p>对象信息，基础类型直接在对象内存存储。</p>
+<p>Java会自动排列对象中的Field顺序以更好地满足8字节对齐。</p>
+<h3 id="对象头的内容"><a href="#对象头的内容" class="headerlink" title="对象头的内容"></a>对象头的内容</h3><p>4字节的hashcode</p>
+<p>2字节的分代年龄</p>
+<p>1字节偏向锁</p>
+<p>1字节锁标志</p>
+<p>4字节的对象类型指针，指向Class类信息</p>
+<p>数组的话还有4字节的数组长度</p>
+<h3 id="常见的调优工具"><a href="#常见的调优工具" class="headerlink" title="常见的调优工具"></a>常见的调优工具</h3><p>jps：展示所有的java进程</p>
+<p>jstat：查看虚拟机运行状态</p>
+<p>jmap：主要用于dump</p>
+<p>jstack：生成线程快照</p>
+<p>jinfo：实时查看和修改JVM参数</p>
+<p>MAT：dump文件分析</p>
+<p>visualVM：自带可视化界面</p>
+<p>arthas：阿里开源的运行时诊断工具</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="怎么创建线程"><a href="#怎么创建线程" class="headerlink" title="怎么创建线程"></a>怎么创建线程</h3><p>只有new Thread()才算创建了一个新线程。其他的方式比如实现Runnable接口Callable接口之类的都没有新线程产生。</p>
+<p>Runnable接口Callable接口本质是一个task，需要提交给线程才能执行。</p>
+<h3 id="如何停止一个线程"><a href="#如何停止一个线程" class="headerlink" title="如何停止一个线程"></a>如何停止一个线程</h3><p>最佳是用退出标志，完成当前方法后当前线程终止。</p>
+<p>推荐调用interrupt，会抛出interrupt异常。</p>
+<p>stop可以强行终止，不推荐。</p>
+<h3 id="notify和notifyAll有什么区别"><a href="#notify和notifyAll有什么区别" class="headerlink" title="notify和notifyAll有什么区别"></a>notify和notifyAll有什么区别</h3><p>notify可能死锁，notifyAll不会。</p>
+<p>假如有多个线程正在wait，会要求notify唤醒的任意一个线程可以处理接下来的逻辑，否则就会死锁。</p>
+<p>如果无法正确处理，则应该继续notify下一个，并让自己进入wait状态。</p>
+<p>notifyAll唤醒所有线程，但是争抢锁还是无序的。</p>
+<h3 id="sleep和wait有什么区别"><a href="#sleep和wait有什么区别" class="headerlink" title="sleep和wait有什么区别"></a>sleep和wait有什么区别</h3><p>sleep在线程类中，wait在Object类。</p>
+<p>sleep不释放锁，会让出cpu。</p>
+<p>wait会释放锁，并且让出cpu。调用wait后，会释放线程持有的所有对象锁，然后进入对象的等待区。只有针对此对象调用notify或notifyAll后，才会获取对象锁进入运行状态。</p>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3>]]></content>
       <tags>
         <tag>【工作】面试</tag>
       </tags>
@@ -960,298 +1072,6 @@
       </tags>
   </entry>
   <entry>
-    <title>字符串编解码的特殊处理</title>
-    <url>/2024/01/28/11-39-06/</url>
-    <content><![CDATA[<p>FastJSON2中，对于字符串做了特殊的优化，这里分析记录一下。</p>
-<span id="more"></span>
-
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>起因是在做内存数据库时，遇到了序列化的问题。其中，Java的字符串最是重量级，转化时怎么搞都有很大的性能问题。</p>
-<p>后来搜寻了资料，FastJSON2的作者高铁在阿里开发者的公众号分享了一篇文章，阅读后受益匪浅，决定改动之后运用到自己的项目中。</p>
-<p>高铁对String对象转化字节数组的优化主要有两方面：</p>
-<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
-<p>2、重写unicode到utf8的转换逻辑。</p>
-<p>而字节数组转化为String对象，使用的是：</p>
-<p>1、重写utf8到unicode的转换逻辑。</p>
-<p>2、通过零拷贝构造器构建String对象。</p>
-<p>说白了，就是通过一些旁门左道（比如Lambda表达式工厂替代反射，Unsafe操作）来绕过String对象本身的一些限制，从而重写其编解码逻辑。</p>
-<p>但是话又说回来，结合实际场景分析后，字节数组转化为String对象似乎并没有太多的提升。后文会解释为什么提升有限。</p>
-<p>实际运用到自己项目中时，我也进行了一些改造，从而适配项目本身的情况。</p>
-<h2 id="String转byte"><a href="#String转byte" class="headerlink" title="String转byte[]"></a>String转byte[]</h2><p>Java的String，本质是一个封装好的不可变char数组对象。</p>
-<p>Java的char类型，底层编码是unicode，每个char占两位字节。而UTF-8使用可变长度的编码，不同字符所占的字节数不同。</p>
-<p>FastJSON2的优化就如上文所述，分两步：</p>
-<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
-<p>2、重写unicode到utf8的转换逻辑。</p>
-<p>我们先开看第一步，以下是核心代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 当前优化仅在Java8有效</span><br><span class="line">// Java9修改了String的字符串实现，因此无法使用以下的方式初始化</span><br><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	Field field = null;</span><br><span class="line">	long fieldOffset = -1;</span><br><span class="line">	if (!ANDROID) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			field = String.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">			field.setAccessible(true);</span><br><span class="line">			fieldOffset = UNSAFE.objectFieldOffset(field);</span><br><span class="line">		&#125; catch (Exception ignored) &#123;</span><br><span class="line">			FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	FIELD_STRING_VALUE = field;</span><br><span class="line">	FIELD_STRING_VALUE_OFFSET = fieldOffset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用反射和Unsafe获取了value对象的偏移量，缓存到了一个静态变量汇总。</p>
-<p>后续是使用Unsafe，通过缓存的静态变量来获取char数组：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static char[] getCharArray(String str) &#123;</span><br><span class="line">    // GraalVM not support</span><br><span class="line">    // Android not support</span><br><span class="line">    if (!FIELD_STRING_VALUE_ERROR) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return (char[]) UNSAFE.getObject(str, FIELD_STRING_VALUE_OFFSET);</span><br><span class="line">        &#125; catch (Exception ignored) &#123;</span><br><span class="line">            FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return str.toCharArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而编码逻辑，则是参考了JDK原来的实现，进行了一定的修改：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    public static int encodeUTF8(char[] src, int offset, int len, byte[] dst, int dp) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        int dlASCII = dp + Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            dst[dp++] = (byte) src[offset++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                dst[dp++] = (byte) c;</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                dst[dp] = (byte) (0xc0 | (c &gt;&gt; 6));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) + (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">//                            throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                            dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                    continue;</span><br><span class="line">//                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (byte) (0xf0 | ((uc &gt;&gt; 18)));</span><br><span class="line">                    dst[dp + 1] = (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 2] = (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 3] = (byte) (0x80 | (uc &amp; 0x3f));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                dst[dp] = (byte) (0xe0 | ((c &gt;&gt; 12)));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | ((c &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                dst[dp + 2] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里有个很抽象的逻辑需要解释一下。</p>
-<p>上述编码的方法入参有个名为dst的byte数组，它的意思是最终要写入的目标数组。在序列化框架中，有的时候就是要在一个已经提前创建好的byte[]数组里，从某个位置开始把转换后的结果append进去。这个方法就是为了兼容这种情况，所以还额外提供了dp这一入参，用来标识是从dst[]的第几位开始写数据。</p>
-<h2 id="byte-转String"><a href="#byte-转String" class="headerlink" title="byte[]转String"></a>byte[]转String</h2><p>FastJSON2在处理此类场景时，也是进行了优化，分两步：</p>
-<p>1、重写utf8到unicode的转换逻辑。</p>
-<p>2、通过零拷贝构造器构建String对象。</p>
-<p>重写后的代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">public static int decodeUTF8(byte[] src, int off, int len, char[] dst) &#123;</span><br><span class="line">    final int sl = off + len;</span><br><span class="line">    int dp = 0;</span><br><span class="line">    int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">    // ASCII only optimized loop</span><br><span class="line">    while (dp &lt; dlASCII &amp;&amp; src[off] &gt;= 0) &#123;</span><br><span class="line">        dst[dp++] = (char) src[off++];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while (off &lt; sl) &#123;</span><br><span class="line">        int b1 = src[off++];</span><br><span class="line">        if (b1 &gt;= 0) &#123;</span><br><span class="line">            // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">            dst[dp++] = (char) b1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">            // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">            if (off &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off++];</span><br><span class="line">                if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^</span><br><span class="line">                            (((byte) 0xC0 &lt;&lt; 6) ^</span><br><span class="line">                                    ((byte) 0x80)));</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">            // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 1 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                off += 2;</span><br><span class="line">                if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    char c = (char) ((b1 &lt;&lt; 12) ^</span><br><span class="line">                            (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^</span><br><span class="line">                                    (((byte) 0xE0 &lt;&lt; 12) ^</span><br><span class="line">                                            ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                            ((byte) 0x80))));</span><br><span class="line">                    boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                    if (isSurrogate) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = c;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">            // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 2 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                int b4 = src[off + 2];</span><br><span class="line">                off += 3;</span><br><span class="line">                int uc = ((b1 &lt;&lt; 18) ^</span><br><span class="line">                        (b2 &lt;&lt; 12) ^</span><br><span class="line">                        (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^</span><br><span class="line">                                (((byte) 0xF0 &lt;&lt; 18) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 12) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                        ((byte) 0x80))));</span><br><span class="line">                if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                ) &#123;</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                    dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                    dp += 2;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>至于零拷贝的构造器，是使用了Lambda工厂来实现的，这里不多提，就看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	MethodHandles.Lookup lookup = trustedLookup(String.class);</span><br><span class="line"></span><br><span class="line">	MethodHandle handle = lookup.findConstructor(</span><br><span class="line">				String.class, methodType(void.class, char[].class, boolean.class)</span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">	CallSite callSite = LambdaMetafactory.metafactory(</span><br><span class="line">				lookup,</span><br><span class="line">				&quot;apply&quot;,</span><br><span class="line">				methodType(BiFunction.class),</span><br><span class="line">				methodType(Object.class, Object.class, Object.class),</span><br><span class="line">				handle,</span><br><span class="line">				methodType(String.class, char[].class, boolean.class)</span><br><span class="line">	);</span><br><span class="line">	stringCreatorJDK8 = (BiFunction&lt;char[], Boolean, String&gt;) callSite.getTarget().invokeExact();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>主要还是讲下为什么这个零拷贝构造器实际用的时候发现很鸡肋。</p>
-<p>首先，这个零拷贝构造器是要求传入一个<code>char[]</code>，传的<code>char[]</code>是什么它就用什么。</p>
-<p>那么这个<code>char[]</code>哪里来？通过<code>decodeUTF8</code>方法构建的。</p>
-<p>但是，在编码这一步，我们不能保证获得一个正确的<code>char[]</code>。这问题是UTF-8和Unicode的编码长度差异带来的。</p>
-<p>我简单用代码举个例子。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 假设我们已经有了一个固定长度的byte[]</span><br><span class="line">public String getString(byte[] src) &#123;</span><br><span class="line">		// 首先得创建一个dst，才能decode</span><br><span class="line">		char[] dst = new char[src.length / 3];</span><br><span class="line">		int dp = StringUtils.decodeUTF8(src, 0, src.length, dst);</span><br><span class="line">		// 后续代码略……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，必须先创建好dst对象，才能做decode。但是由于UTF-8和Unicode编码长度的差异，初始化的dst长度可能过长了，也就是dst可能最后几位是<code>\u0000</code>。</p>
-<p>如果不清理最后这几位，直接用零拷贝的方法去构建String，就会导致字符串在其他地方展示的时候最后有乱码或空白。</p>
-<p>但是Java中又没有办法零拷贝截断数组。所有的截断方式本质都是通过创建一个新的数组，然后把原来数组的数据拷贝过去。</p>
-<p>所以，用零拷贝的方式去构建，就必须在外部显式地拷贝一次。那既然如此，和直接使用String本身提供的方法又有什么区别呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public String(char value[], int offset, int count) &#123;</span><br><span class="line">        if (offset &lt; 0) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset);</span><br><span class="line">        &#125;</span><br><span class="line">        if (count &lt;= 0) &#123;</span><br><span class="line">            if (count &lt; 0) &#123;</span><br><span class="line">                throw new StringIndexOutOfBoundsException(count);</span><br><span class="line">            &#125;</span><br><span class="line">            if (offset &lt;= value.length) &#123;</span><br><span class="line">                this.value = &quot;&quot;.value;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // Note: offset or count might be near -1&gt;&gt;&gt;1.</span><br><span class="line">        if (offset &gt; value.length - count) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset + count);</span><br><span class="line">        &#125;</span><br><span class="line">        this.value = Arrays.copyOfRange(value, offset, offset+count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到String本来就是拷贝一次然后创建对象的。</p>
-<p>所以这种零拷贝的方式就很鸡肋。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>最后简单聊聊我在项目的使用。</p>
-<p>我的项目是需要把String的数据转换为UTF-8编码，然后通过Unsafe写到一个内存块上。同时也有从内存块读取的需求。</p>
-<p>很可惜现在提供的api，最终都是落到byte[]。因此我修改了这两个方法，重写了其中对于dst的操作，变更为直接操作内存块。</p>
-<p>修改后的代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    private static int getStringUTF8JDK8(long off, int len, char[] dst) &#123;</span><br><span class="line">        final long sl = off + len;</span><br><span class="line">        int dp = 0;</span><br><span class="line">        int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; UNSAFE.getByte(off) &gt; 0) &#123;</span><br><span class="line">            dst[dp++] = (char) UNSAFE.getByte(off++);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (off &lt; sl) &#123;</span><br><span class="line">            int b1 = UNSAFE.getByte(off++);</span><br><span class="line">            if (b1 == 0) &#123;</span><br><span class="line">            // 读到0直接返回，不需要继续读取</span><br><span class="line">                return dp;</span><br><span class="line">            &#125; else if (b1 &gt; 0) &#123;</span><br><span class="line">                // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">                dst[dp++] = (char) b1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">                // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">                if (off &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off++);</span><br><span class="line">                    if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^ (((byte) 0xC0 &lt;&lt; 6) ^ ((byte) 0x80)));</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">                // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 1 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    off += 2;</span><br><span class="line">                    if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char c = (char) ((b1 &lt;&lt; 12) ^ (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^ (((byte) 0xE0 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                        boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                        if (isSurrogate) &#123;</span><br><span class="line">                            return -1;</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            dst[dp++] = c;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">                // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 2 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    int b4 = UNSAFE.getByte(off + 2);</span><br><span class="line">                    off += 3;</span><br><span class="line">                    int uc = ((b1 &lt;&lt; 18) ^ (b2 &lt;&lt; 12) ^ (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^ (((byte) 0xF0 &lt;&lt; 18) ^ ((byte) 0x80 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                    if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                    ) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                        dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                        dp += 2;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">private static long putStringUTF8JDK8(char[] src, int offset, int len, long dp, int size) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        long dlASCII = dp + Math.min(len, size);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            UNSAFE.putByte(dp++, (byte) src[offset++]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                UNSAFE.putByte(dp++, (byte) c);</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xc0 | (c &gt;&gt; 6)));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (c &amp; 0x3f)));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) +</span><br><span class="line">                                (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            //                            throw new JSONException(&quot;encodeUTF8 error&quot;, new</span><br><span class="line">                            //                            MalformedInputException(1));</span><br><span class="line">                            UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                    continue;</span><br><span class="line">                    //                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException</span><br><span class="line">                    //                        (1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    UNSAFE.putByte(dp, (byte) (0xf0 | ((uc &gt;&gt; 18))));</span><br><span class="line">                    UNSAFE.putByte(dp + 1, (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 2, (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 3, (byte) (0x80 | (uc &amp; 0x3f)));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xe0 | ((c &gt;&gt; 12))));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (((c &gt;&gt; 6) &amp; 0x3f))));</span><br><span class="line">                UNSAFE.putByte(dp + 2, (byte) (0x80 | ((c &amp; 0x3f))));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>另外，从内存块读取字节时，读到<code>0x00</code>就可以停止了，这个逻辑我也加了进去。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>还是得例行总结一下。</p>
-<p>阅读开源代码确实能快速提升个人能力，我觉得以后这种事情应该多做。</p>
-<p>使用开源代码，不仅仅是引入人家的包，为了追求技术可控性，我们也应当了解开源代码中的实现。而且追求极致性能的场景，还是得改改人家的代码，拿过来直接能用的概率还是挺小的。</p>
-<p>再说远点的话，读到高铁的分享时，我确实觉得是受益匪浅。程序员中有一类很特殊的人，自己写了个很牛逼的东西，希望全世界都能知道我写了个很牛逼的玩意儿，让大家都用起来。就是有着这类人，才让软件行业一往无前地汹涌发展吧。</p>
-<p>我尊敬，并希望也能成为那样的人。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>远程调试案例</title>
-    <url>/2023/07/10/15-08-11/</url>
-    <content><![CDATA[<p>在开发过程中，总是会遇到本地无法重现服务器端报错的问题，这时候远程调试（remote debug）就是很好的应对方法。</p>
-<span id="more"></span>
-
-<p>下面我们来看一下怎么使用jvm的远程调试能力。</p>
-<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>本地需要有源码，有源码才可以敲断点调试。</p>
-<h2 id="编写启动脚本"><a href="#编写启动脚本" class="headerlink" title="编写启动脚本"></a>编写启动脚本</h2><p>在实际项目中我们往往是通过脚本来启动Java程序，我们需要在启动命令上添加参数来开启远程debug模式。</p>
-<p>需要添加的命令如下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y</span><br></pre></td></tr></table></figure>
-
-<p>以下是一份常见的启动脚本示例</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get current folder.</span></span><br><span class="line">CMD_DIR=$(cd $(dirname $0); pwd)</span><br><span class="line">cd &quot;$CMD_DIR/..&quot;</span><br><span class="line">CURRENT_DIR=$(pwd)</span><br><span class="line">echo User dir: &quot;$CURRENT_DIR&quot;</span><br><span class="line">CONF_DIR=&quot;$CURRENT_DIR/conf&quot;</span><br><span class="line">STATIC_DIR=&quot;$CURRENT_DIR/static&quot;</span><br><span class="line">ARGS=$*</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">get file name.</span></span><br><span class="line">FILE_PATH=&quot;$CURRENT_DIR/lib&quot;</span><br><span class="line">files=$(ls &quot;$FILE_PATH&quot;)</span><br><span class="line">for filename in $files</span><br><span class="line">do</span><br><span class="line">   echo Main Jar: $filename</span><br><span class="line">done</span><br><span class="line">if [[  -f &quot;$CONF_DIR/application.yml&quot; || -f &quot;$CONF_DIR/bootstrap.yml&quot; ]]; then</span><br><span class="line">    echo &quot;Startup app $filename with parameter: $ARGS &quot;</span><br><span class="line">    nohup java \</span><br><span class="line">    -server \</span><br><span class="line">    -Dspring.web.resources.static-locations=&quot;$STATIC_DIR/&quot; \</span><br><span class="line">    -Dspring.config.location=&quot;$CONF_DIR/&quot; \</span><br><span class="line">    -Dkoca.config.location=&quot;config&quot; \</span><br><span class="line">    -Dkoca.lcp.dump.location=&quot;$CURRENT_DIR/&quot; \</span><br><span class="line">    -Dlogging.config=&quot;$CONF_DIR/logback-spring.xml&quot; \</span><br><span class="line">    -Dspring.banner.location=&quot;file:$CONF_DIR/banner.txt&quot; \</span><br><span class="line">    -Duser.timezone=GMT+08 \</span><br><span class="line">    -Xdebug \</span><br><span class="line">    -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y \</span><br><span class="line">    -jar &quot;$CURRENT_DIR/lib/$filename&quot; \</span><br><span class="line">    $ARGS \</span><br><span class="line">    &gt;./nohup.log 2&gt;&amp;1 &amp;</span><br><span class="line">else</span><br><span class="line">    echo &quot;Configuration folder or files is not exist.&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="运行启动脚本"><a href="#运行启动脚本" class="headerlink" title="运行启动脚本"></a>运行启动脚本</h2><p>我们修改脚本后，将这份脚本上传到服务器。</p>
-<p>正常启动时，程序会有一大堆运行日志。但是使用这份脚本启动后，程序启动时会卡住，等待其他客户端连接debug端口。</p>
-<p>这个debug端口就是命令中设置的5005。</p>
-<h2 id="本地创建客户端"><a href="#本地创建客户端" class="headerlink" title="本地创建客户端"></a>本地创建客户端</h2><p>本地使用IDEA创建客户端。</p>
-<img src="/2023/07/10/15-08-11/image-20230630174009789.png" class="" title="image-20230630174009789">
-
-<p>修改host为服务器地址</p>
-<img src="/2023/07/10/15-08-11/image-20230630174033683.png" class="" title="image-20230630174033683">
-
-<p>创建完毕后运行该客户端，运行时该客户端会和服务端建立连接。</p>
-<p>可以看到原本卡住的服务端开始正常运行。</p>
-<p>在本地的代码中敲断点，就可以进行debug了，和平时在本地debug没什么差别。</p>
-]]></content>
-      <tags>
-        <tag>【工作】运维部署</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>老年代大对象的问题排查</title>
-    <url>/2023/05/05/10-26-55/</url>
-    <content><![CDATA[<p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
-<span id="more"></span>
-
-<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
-<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
-<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
-<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
-<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
-<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
-<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
-<blockquote>
-<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
-</blockquote>
-<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
-<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
-<blockquote>
-<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
-<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
-</blockquote>
-<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
-<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
-<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
-<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
-<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
-<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Netty的FastThreadLocal带来了什么？</title>
-    <url>/2024/09/13/14-49-51/</url>
-    <content><![CDATA[<p>在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</p>
-<span id="more"></span>
-
-<h2 id="和Netty的缘分"><a href="#和Netty的缘分" class="headerlink" title="和Netty的缘分"></a>和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p>
-<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
-<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
-<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
-<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
-<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
-<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
-<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
-<h2 id="FastThreadLocal快在哪？"><a href="#FastThreadLocal快在哪？" class="headerlink" title="FastThreadLocal快在哪？"></a>FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p>
-<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
-<p>然后再来聊聊其中的实现。</p>
-<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
-<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
-<p>它的get()过程是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
-
-<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
-<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
-<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
-
-<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
-<h2 id="带来了什么？"><a href="#带来了什么？" class="headerlink" title="带来了什么？"></a>带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
-<p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
-<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
-<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
-<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
-<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
-]]></content>
-      <tags>
-        <tag>【工作】Netty</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我是怎么使用线程池的</title>
-    <url>/2023/09/25/17-37-38/</url>
-    <content><![CDATA[<p>这是一份线程池的使用说明文档。</p>
-<p>我会举例我在实际项目对线程池的用法，来说明我是如何使用线程池来达成目的。</p>
-<span id="more"></span>
-
-<h2 id="简单的说明"><a href="#简单的说明" class="headerlink" title="简单的说明"></a>简单的说明</h2><p>首先给出声明的方法，也就是线程池的构造器。</p>
-<img src="/2023/09/25/17-37-38/image-20230926151418320.png" class="" title="image-20230926151418320">
-
-<ul>
-<li><p>corePoolSize：线程池中一直存活的线程数量</p>
-</li>
-<li><p>maximunPoolSize：线程池中最多存活的线程数量</p>
-</li>
-<li><p>keepAliveTime：当存活线程数量大于核心线程数量时，多余线程的存活时间，空闲时间超过这个数值则销毁线程</p>
-</li>
-<li><p>unit：时间单位</p>
-</li>
-<li><p>workQueue：工作队列，必须是阻塞的</p>
-</li>
-<li><p>threadFactory：线程工厂，用于新建线程时给线程添加一些配置。最常用的就是设置线程名。</p>
-</li>
-<li><p>handler：当任务被拒绝时的后续处理。默认实现是任务被拒绝时会抛出一个异常。</p>
-</li>
-</ul>
-<p>线程池还有很多构造器，其他构造器大多是封装了一些默认实现，比如给了默认的threadFactory或者handler。</p>
-<hr>
-<p>线程池有一个很反直觉的逻辑：只有任务队列满之后，才会创建新线程。</p>
-<p>为什么这么设计？我们只需要记住：创建线程、销毁线程是一个性能开销很大的工作，我们应该尽量复用线程。</p>
-<p>因此，<strong>除非任务队列已满，否则都不会创建线程</strong>。</p>
-<p>下面来看一个实际使用时线程池的声明。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 10, TimeUnit.SECONDS, new ArrayBlockingQueue(1), r -&gt; new Thread(r, &quot;cache-clean-thread&quot;), new ThreadPoolExecutor.DiscardOldestPolicy());</span><br></pre></td></tr></table></figure>
-
-<p>我们来模拟一下这个线程池的处理逻辑，假设有耗时很长的任务：</p>
-<ul>
-<li><p>第一个任务来到线程池，任务直接由核心线程执行。</p>
-</li>
-<li><p>第二个任务来到线程池，没有空闲线程，进入任务队列。</p>
-</li>
-<li><p>第三个任务来到线程池，没有空闲线程，任务队列也满了。这时候假如最大线程数大于核心线程数，则应该要创建一个新线程来执行任务，而当前任务则进入任务队列。但是我们不允许创建更多的线程，于是这个任务会被拒绝，进入handler的后置处理逻辑。我们直接使用了<code>new ThreadPoolExecutor.DiscardOldestPolicy()</code>作为后置处理逻辑，这个方法会移除最老的任务，然后把当前任务放到队列末尾。于是这个任务进入队列，最老的任务被移除，由于刚好我们队列为1，所以结果就是正在等待的任务被新来的任务替换了。</p>
-</li>
-</ul>
-<p>可以看到，线程池处理的关键是workQueue，threadFactory和handler这三个参数，通过设定这三个参数，我们可以把线程池玩出各种花样来。</p>
-<p>接下来的章节，就主要针对线程池的使用了。</p>
-<h2 id="线程池的使用"><a href="#线程池的使用" class="headerlink" title="线程池的使用"></a>线程池的使用</h2><h3 id="命名规定"><a href="#命名规定" class="headerlink" title="命名规定"></a>命名规定</h3><p>我们要求使用线程池时必须重写threadFactory来命名线程。在命名线程时说明线程大概要处理的任务，可以有效提高后续通过日志排查问题的效率。</p>
-<p>以下是命名的示例</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 创建读线程池</span><br><span class="line"> */</span><br><span class="line">private static final ThreadPoolExecutor READ_EXECUTOR = </span><br><span class="line">	new ThreadPoolExecutor(4, 4, 30, TimeUnit.SECONDS, </span><br><span class="line">		new LinkedBlockingQueue(400), </span><br><span class="line">		new ThreadFactory() &#123;</span><br><span class="line">			private final AtomicInteger threadNumber = new AtomicInteger(1);</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			public Thread newThread(Runnable r) &#123;</span><br><span class="line">				return new Thread(r, &quot;cache-read-thread-&quot; + threadNumber.getAndIncrement());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h3><p>有两个方法：excuse和submit</p>
-<p>区别在于submit之后可以获得一个Future，在后续逻辑中监控任务是否执行完，并获得其堆栈。</p>
-<p>excuse方法执行完之后当前线程就无法感知这个任务是否执行完了，这在大多数情况下是不可接受的。</p>
-<p>一般是建议使用submit。</p>
-<p>案例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Runnable writeTask1 = () -&gt; &#123;</span><br><span class="line">// do something</span><br><span class="line">&#125;;</span><br><span class="line">Runnable writeTask2 = () -&gt; &#123;</span><br><span class="line">// do something</span><br><span class="line">&#125;;</span><br><span class="line">int writeThreadCount = 4;</span><br><span class="line">Future[] writeFutures = new Future[writeThreadCount];</span><br><span class="line">// 提交任务到线程池</span><br><span class="line">for (int i = 0; i &lt; writeThreadCount; i++) &#123;</span><br><span class="line">	writeFutures[i] = WRITE_EXECUTOR.submit(i % 2 == 0 ? writeTask1 : writeTask2);</span><br><span class="line">&#125;        </span><br><span class="line">// 等待所有线程执行完毕</span><br><span class="line">for (Future future : writeFutures) &#123;</span><br><span class="line">	future.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h3><p>一般来说，拒绝策略可以通过设置workQueue和handler两种方式来修改。</p>
-<p>ThreadPoolExecutor中已提供了四种内置策略，已经覆盖了绝大部分场景</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 在当前线程执行任务</span><br><span class="line">new ThreadPoolExecutor.CallerRunsPolicy()</span><br><span class="line">// 抛出任务被拒绝的异常</span><br><span class="line">new ThreadPoolExecutor.AbortPolicy()</span><br><span class="line">// 忽略最新提交的任务</span><br><span class="line">new ThreadPoolExecutor.DiscardPolicy()</span><br><span class="line">// 忽略最老提交的任务</span><br><span class="line">new ThreadPoolExecutor.DiscardOldestPolicy()</span><br></pre></td></tr></table></figure>
-
-<p>以下列举两种特殊的策略</p>
-<h4 id="不拒绝任何任务"><a href="#不拒绝任何任务" class="headerlink" title="不拒绝任何任务"></a>不拒绝任何任务</h4><p>不希望有任何任务被拒绝，需要设置workQueue为LinkedBlockingQueue，并且不设置长度限制。但要注意人物堆积时可能导致内存溢出。</p>
-<p>同时，由于线程池的创建线程只发生在任务队列已满时，这种用链表作为workQueue的线程池将不会创建任何新的线程。</p>
-<p>以下是示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final ThreadPoolExecutor notifyExecutor =</span><br><span class="line">        new ThreadPoolExecutor(5, 5, 10, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(),</span><br><span class="line">            new ThreadPoolExecutor.AbortPolicy());</span><br></pre></td></tr></table></figure>
-
-<p>由于没有任何任务被拒绝，handler其实也没有什么用了。</p>
-<h4 id="任务溢出时让工作线程参与任务，且保证顺序"><a href="#任务溢出时让工作线程参与任务，且保证顺序" class="headerlink" title="任务溢出时让工作线程参与任务，且保证顺序"></a>任务溢出时让工作线程参与任务，且保证顺序</h4><p>这是一种特殊情况下出现的需求，要求任务能保持一个大概的顺序（有时间戳），且数据不能丢失。</p>
-<p>下面是代码示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final ThreadPoolExecutor NOTIFY_EXECUTOR =</span><br><span class="line">    new ThreadPoolExecutor(1, 1, 10, TimeUnit.SECONDS, new ArrayBlockingQueue&lt;&gt;(5000),</span><br><span class="line">        r -&gt; new Thread(r, &quot;cache-tx-notify-thread&quot;), (r, e) -&gt; &#123;</span><br><span class="line">        // 把最老的任务拿出来在当前线程执行，把新任务放到队列里</span><br><span class="line">        // 用来保证任务的顺序性</span><br><span class="line">        if (!e.isShutdown()) &#123;</span><br><span class="line">            Runnable oldTask = e.getQueue().poll();</span><br><span class="line">            e.execute(r);</span><br><span class="line">            oldTask.run();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>【工作】多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Java程序使用Grpc protobuf的动态加载及类型反射</title>
-    <url>/2023/05/31/15-41-05/</url>
-    <content><![CDATA[<p>对于各个公司负责的基础技术框架部门，接入gRPC往往是一个老大难问题。我也遇到了同样的问题。</p>
-<p>很遗憾，在查阅资料的过程中，我发现中文博客中极少有gRPC反射（更确切的说是Protobuf反射）的资料。而反射恰恰是解决框架对gRPC兼容的一种手段。</p>
-<span id="more"></span>
-
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>在阅读下面的文章之前，读者需要懂得gRPC的服务端、调用端的基本使用方式。否则可能无法理解文章中出现的部分概念。</p>
-<h2 id="区分Protobuf和gRPC"><a href="#区分Protobuf和gRPC" class="headerlink" title="区分Protobuf和gRPC"></a>区分Protobuf和gRPC</h2><p>我发现很多人会把Protobuf和gRPC混为一谈，这是不对的。</p>
-<p>我这里直接引用Protobuf官网文档中的一段话来说明：</p>
-<blockquote>
-<p>The most straightforward RPC system to use with protocol buffers is <a href="https://grpc.io/">gRPC</a>: a language- and platform-neutral open source RPC system developed at Google. gRPC works particularly well with protocol buffers and lets you generate the relevant RPC code directly from your <code>.proto</code> files using a special protocol buffer compiler plugin.</p>
-<p>If you don’t want to use gRPC, it’s also possible to use protocol buffers with your own RPC implementation. You can find out more about this in the <a href="https://protobuf.dev/programming-guides/proto#services">Proto2 Language Guide</a>.</p>
-<p>There are also a number of ongoing third-party projects to develop RPC implementations for Protocol Buffers. For a list of links to projects we know about, see the <a href="https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md">third-party add-ons wiki page</a>.</p>
-</blockquote>
-<p>gRPC是一种RPC通讯的方式，而Protobuf是一种用于序列化和反序列化结构化数据的二进制编码格式。gRPC在通讯时将传输的数据转变为Protobuf格式。</p>
-<p>如果不使用gRPC，完全可以基于Protobuf的api实现一套自己的RPC通讯框架。</p>
-<h2 id="Protobuf的Descriptor"><a href="#Protobuf的Descriptor" class="headerlink" title="Protobuf的Descriptor"></a>Protobuf的Descriptor</h2><p>在百度中查询关于gRPC反射的资料，得到的信息大多牛头不对马嘴。但是查询Protobuf的反射，则可以获得一些案例。</p>
-<p>这其实也说明了Protobuf和gRPC并不是同一个玩意儿。</p>
-<p>Protobuf封装了Descriptor对象，提供了反射构建Protobuf消息对象的能力。所有Protobuf消息对象都要实现Message接口。</p>
-<p>但是Descriptor对象的来源还是proto文件，为了使用反射的能力，我们需要一种特殊的二进制文件。</p>
-<p>可以通过在maven编译插件中添加如下配置来生成这种二进制文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;protobuf.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;protocArtifact&gt;com.google.protobuf:protoc:$&#123;protoc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/protocArtifact&gt;</span><br><span class="line">                &lt;pluginId&gt;grpc-java&lt;/pluginId&gt;</span><br><span class="line">                &lt;pluginArtifact&gt;io.grpc:protoc-gen-grpc-java:$&#123;grpc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/pluginArtifact&gt;</span><br><span class="line">                &lt;writeDescriptorSet&gt;true&lt;/writeDescriptorSet&gt;</span><br><span class="line">                &lt;descriptorSetOutputDirectory&gt;src/main/resources/desc&lt;/descriptorSetOutputDirectory&gt;</span><br><span class="line">                &lt;descriptorSetFileName&gt;descriptor.pb&lt;/descriptorSetFileName&gt;</span><br><span class="line">                &lt;descriptorSetClassifier&gt;descriptor&lt;/descriptorSetClassifier&gt;</span><br><span class="line">                &lt;clearOutputDirectory&gt;false&lt;/clearOutputDirectory&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;compile&lt;/goal&gt;</span><br><span class="line">                        &lt;goal&gt;compile-custom&lt;/goal&gt;</span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                &lt;/execution&gt;</span><br><span class="line">            &lt;/executions&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br><span class="line">    &lt;extensions&gt;</span><br><span class="line">        &lt;extension&gt;</span><br><span class="line">            &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;</span><br><span class="line">            &lt;!--引入操作系统os设置的属性插件,否则$&#123;os.detected.classifier&#125; 操作系统版本会找不到 --&gt;</span><br><span class="line">            &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;os.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/extension&gt;</span><br><span class="line">    &lt;/extensions&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
-
-<p>在protobuf的maven编译插件中添加了生成<code>descriptor.pb</code>文件的配置，这个文件中包含了所有proto文件中的信息。</p>
-<p>然后，我们开始加载这份文件，这里使用的是Protobuf的api：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PathMatchingResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();</span><br><span class="line">Resource[] descriptorFiles = new Resource[0];</span><br><span class="line">try &#123;</span><br><span class="line">    descriptorFiles = resourceLoader.getResources(&quot;classpath*:**/*.pb&quot;);</span><br><span class="line"></span><br><span class="line">    if (descriptorFiles.length == 0) &#123;</span><br><span class="line">        logger.info(&quot;No pb file found!&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (Resource descriptorFile : descriptorFiles) &#123;</span><br><span class="line">        logger.log(Level.INFO, &quot;正在加载pb文件: &quot; + descriptorFile.getURL());</span><br><span class="line">        // 使用Protobuf提供的api，加载文件</span><br><span class="line">        DescriptorProtos.FileDescriptorSet fileSet =</span><br><span class="line">            DescriptorProtos.FileDescriptorSet.parseFrom(descriptorFile.getInputStream());</span><br><span class="line">    &#125;</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    throw new RuntimeException(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>待续…</p>
-]]></content>
-      <tags>
-        <tag>【工作】gRPC</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Unsafe的使用记录</title>
     <url>/2024/01/07/11-15-32/</url>
     <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
@@ -1317,6 +1137,239 @@
 ]]></content>
       <tags>
         <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-数据库</title>
+    <url>/2024/10/14/13-48-06/</url>
+    <content><![CDATA[<p>这里记录一下面试的准备过程中关于数据库的笔记。</p>
+<p>原先工作中对数据库的使用实在是太少了…</p>
+<p>不过还好大部分东西都还记得，复习一下就很快理解了。</p>
+<span id="more"></span>
+
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><h3 id="三范式"><a href="#三范式" class="headerlink" title="三范式"></a>三范式</h3><p>第一范式：列不可再分；</p>
+<p>第二范式：表中的每一行都可以唯一区分，通过主键实现；</p>
+<p>第三范式：（用于避免数据冗余，减少内存占用，实践中常被忽视）表的非主键字段不能依赖于其他非主键字段；比如学生表，里边有班级名称字段和辅导员名称字段，那么班级和辅导员会大量重复，应当拆分出班级表和辅导员表。</p>
+<h3 id="MySQL的存储引擎"><a href="#MySQL的存储引擎" class="headerlink" title="MySQL的存储引擎"></a>MySQL的存储引擎</h3><p>MyISAM、InnoDB、Memory</p>
+<p>MyISAM：全表锁，没有事务和外键，单表执行性能高，并发性能差，空间占用小。</p>
+<p>InnoDB：行锁，有事务，支持自增序列，支持外键，并发性能高，空间占用大。</p>
+<p>Memory：纯内存。</p>
+<h3 id="InnoDB和MyISAM"><a href="#InnoDB和MyISAM" class="headerlink" title="InnoDB和MyISAM"></a>InnoDB和MyISAM</h3><p>InnoDB支持事务，默认是每一条SQL都封装为一个事务。MyISAM没有事务。</p>
+<p>InnoDB有外键，MyISAM没有。</p>
+<p>InnoDB是行锁，MyISAM是表锁，InnoDB并发场景性能会好一些。</p>
+<p>InnoDB是聚集索引，必须有主键。在表上建立的其他索引，都是指向主键。通过其他索引查询时，先经过索引查到主键，再通过主键查找数据。MyISAM是非聚集索引，主键和索引都是直接指向数据指针，主键和索引相互独立。</p>
+<p>InnoDB不保存表的行数，计算行数时要全表扫描。MyISAM保存了表的行数。</p>
+<h3 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h3><p>ACID：atomic、consistency、isolation、durability</p>
+<p>原子性：一个事务内的多个操作可以看成一个原子操作，即要么成功要么失败。事务中任意一个操作失败了都会回滚到没有开始事务之前的状态。</p>
+<p>一致性：事务操作的结果和业务规则是一致的。即事务成功时，可以达成操作者目的。</p>
+<p>隔离性：多个事务之间互相数据隔离，彼此没有影响。</p>
+<p>持久性：事务完成后会持久化到数据库。</p>
+<h3 id="索引是什么"><a href="#索引是什么" class="headerlink" title="索引是什么"></a>索引是什么</h3><p>官方：一种帮助MySQL快速获取数据的数据结构。</p>
+<p>类似目录，默认是B+树实现。</p>
+<h3 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h3><p>优点：提升查询速度。</p>
+<p>缺点：索引也有空间占用，更新速度变慢，因为表更新的时候索引也要更新。</p>
+<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><p>原则：避免全表扫描，查询时尽量走索引。少于三张表的查询允许关联，关联不了就走子查询。</p>
+<p>1、尽量不要用select *</p>
+<p>2、减少子查询，用少于三张表的关联查询替代</p>
+<p>3、少用in和not in，因为绝对可以用exists和not exists替代</p>
+<p>4、where子句中慎用!&#x3D;，走不到索引</p>
+<p>5、少用or，走不到索引</p>
+<p>6、少用null判断，走不到索引</p>
+<h3 id="drop、delete和truncate"><a href="#drop、delete和truncate" class="headerlink" title="drop、delete和truncate"></a>drop、delete和truncate</h3><p>drop和truncate不能回滚，不在事务中。delete是在事务中，提交时才生效。</p>
+<p>drop删的最多，会删表结构，可以重新建同名表，及时生效不在事务中。</p>
+<p>truncate其次，对比drop是少删表结构，仅删除数据，还是不在事务中。</p>
+<p>delete再次，仅删除表数据，会在事务中，事务提交后才生效。</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>理解为虚拟表。类似函数封装的概念。</p>
+<p>可以封装复杂查询的结果。</p>
+<p>可以用来做权限隔离，比如仅展示某几个字段给特定用户。</p>
+<p>底层表有改动，比如拆分了，可以建一个视图，避免上层应用修改SQL。</p>
+<h3 id="并发事务的问题"><a href="#并发事务的问题" class="headerlink" title="并发事务的问题"></a>并发事务的问题</h3><p>脏读：一个事务读到了另一个事务修改了但未提交的数据。</p>
+<p>修改丢失：两个事务同时修改了同一个值，后一个覆盖了前一个。比如两个事务同时做x-1，先读x再减一，并发之后可能结果是x-1而不是x-2。</p>
+<p>不可重复读：一个事务未结束时，读到了另一个事务B修改了并提交的最新值。</p>
+<p>幻读：一个事务查询一批数据的过程中，这批数据被另一个事务新增或删除了一些数据（比如新增了几条数据），于是查询到了新的数据。</p>
+<p>不可重复读重点在修改，幻读重点在新增或删除。重点在行锁和表锁区别。</p>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><p>MySQL的InnoDB默认是可重复读</p>
+<p>读未提交：脏读，不可重复读，幻读</p>
+<p>读已提交：不可重复读，幻读</p>
+<p>可重复读：幻读（解决了单行的修改，但没解决表级别的增删）</p>
+<p>串行化：事务逐个执行，库锁</p>
+<p>大部分数据库是读已提交级别的事务（比如postgre）。</p>
+<p>mysql额外用了next key Lock，用行锁和间隙锁在可重复读的场景下避免了幻读。具体做法就是，锁了一行数据的前一条和后一条中间的范围。比如5、10、15三条数据，当10被事务读的时候，如果有一个事务插入一条数据8，则会触发间隙锁，插入8的事务会阻塞。这里和聚簇索引也有关系。</p>
+<h3 id="大表优化"><a href="#大表优化" class="headerlink" title="大表优化"></a>大表优化</h3><p>方向：单体变分布式-拆，限制结果数量</p>
+<p>1、查询时限制范围，分页</p>
+<p>2、读写分离，拆到多个机器上</p>
+<p>3、垂直拆分，把字段拆到不同的表中</p>
+<p>4、水平拆分，根据某些逻辑把数据分到不同的片区。比如地区信息做异地多活。</p>
+<h3 id="分库分表后的ID处理"><a href="#分库分表后的ID处理" class="headerlink" title="分库分表后的ID处理"></a>分库分表后的ID处理</h3><p>可转化为全局唯一ID问题：与消息中间件的消息防丢差不多。</p>
+<p>uuid、雪花、美团的leaf。</p>
+<h3 id="MySQL的一条查询SQL执行过程"><a href="#MySQL的一条查询SQL执行过程" class="headerlink" title="MySQL的一条查询SQL执行过程"></a>MySQL的一条查询SQL执行过程</h3><p>8.0没有查询缓存。</p>
+<p>1、语法分析：包括解析SQL语法的正确性，涉及到的表和字段是否存在</p>
+<p>2、准备阶段：会对查询进行逻辑优化，比如选择索引，去除不必要的子查询之类的。逻辑优化后还有物理优化，会根据统计信息和成本计算模型来确定具体的执行计划</p>
+<p>3、执行查询：由执行引擎和存储引擎交互产出查询结果</p>
+<p>4、结果返回：去重排序之类的处理，最终结果返回给客户端</p>
+<h3 id="varchar和char的区别"><a href="#varchar和char的区别" class="headerlink" title="varchar和char的区别"></a>varchar和char的区别</h3><p>varchar可变长度，char不可变，定长。</p>
+<p>比如varchar(30)的字段存一个字节长度为3的字符，实际空间占用可能为5或者6字节左右，因为有一定的空间用于存储其字段长度。</p>
+<p>char(30)的字段存同样的字符，那么固定占用30字节，后面空的会补零。</p>
+<p>char读写快，空间占用大。varchar省空间，读写慢。</p>
+<h3 id="int-11-的11含义"><a href="#int-11-的11含义" class="headerlink" title="int(11)的11含义"></a>int(11)的11含义</h3><p>不影响字段的存储范围，仅影响查询的展示效果。</p>
+<h3 id="MySQL的索引类型"><a href="#MySQL的索引类型" class="headerlink" title="MySQL的索引类型"></a>MySQL的索引类型</h3><p>主键索引：必须唯一，不可为空</p>
+<p>普通索引：允许重复和空</p>
+<p>唯一索引：值必须唯一，可以为空</p>
+<p>全文索引：只能在文本字段创建，用于加速like查询</p>
+<p>空间索引</p>
+<p>前缀索引</p>
+<p>单列和组合索引：最左匹配原则，优先用组合索引</p>
+<h3 id="什么场景不适合索引"><a href="#什么场景不适合索引" class="headerlink" title="什么场景不适合索引"></a>什么场景不适合索引</h3><p>1、经常更新的列</p>
+<p>2、内容大量重复的列</p>
+<p>3、表记录太少（不清楚具体是多少）</p>
+<p>4、写远大于读的表</p>
+<h3 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h3><p>多版本并发控制。用来解决读写冲突，是无锁并发。事务分配事务号（单向递增），每个修改保存一个版本。读只读老版本的数据，修改在新版本。可以同时避免脏读和不可重复读。</p>
+<p>实现：</p>
+<p>1、每行数据有一个版本链</p>
+<p>2、事务id，单调递增</p>
+<p>3、可见性判断，根据事务级别来判断是否可见</p>
+<p>4、过期数据清理</p>
+<p>级别和判断逻辑：</p>
+<p>读已提交：单行数据版本号小于当前事务版本号，并且此事务已提交，则可以看到</p>
+<p>可重复读：创建一致性视图，包含事务开始时所有可读的事务号。</p>
+<p>缺点，做不到串行化执行，在解决写冲突的时候还是要用锁或者重做</p>
+<h3 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h3><p>读锁和写锁（共享和排他）。</p>
+<p>按照粒度，可以划分为表锁和行锁。MyISAM是表级别的读写锁，InnoDB支持行锁。</p>
+<h3 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h3><p>行锁只能在索引上，没索引自动升级成表锁。</p>
+<p>没走索引时也会升级成表锁。比如非唯一索引相同的内容超过表的一半，优化器会选择不走索引。</p>
+<h3 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h3><p>悲观锁：倾向于一行数据总是会被同时修改，所以修改前加上排他锁</p>
+<p>乐观锁：倾向于一行数据不一定会被同时修改。加上版本号，类似MVCC，修改前读取版本号，修改后版本号+1，在更新版本号时做版本号检查，如果版本号和预期不符，说明此时有其他人修改了数据，否则就直接更新。乐观锁一般配合自旋，形成一个类似CAS的操作。</p>
+<h3 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h3><p>获取锁一定要加超时时间；</p>
+<p>按照固定顺序获取资源；</p>
+<p>事务尽量简短；</p>
+<p>事务隔离级别低一些；</p>
+<p>避免事务中的用户交叉；</p>
+<h3 id="索引注意事项"><a href="#索引注意事项" class="headerlink" title="索引注意事项"></a>索引注意事项</h3><p>1、where中使用!&#x3D;、&lt;&gt;、or会导致放弃使用索引</p>
+<p>2、符合索引要复合最左前缀原则</p>
+<p>3、where中进行字段表达式运算、函数运算可能导致索引失效</p>
+<p>4、Like使用是%不能在前，模糊匹配可以用全文索引</p>
+<p>5、字段是字符串类型，必须加引号，否则索引失效</p>
+<h3 id="主键-索引"><a href="#主键-索引" class="headerlink" title="主键 索引"></a>主键 索引</h3><p>主键是唯一索引，唯一索引不一定是主键</p>
+<p>主键不允许空，唯一索引可以为空</p>
+<p>一个表只能有一个主键，但可以有多个唯一索引</p>
+<p>主键是约束，而唯一索引是冗余的数据结构</p>
+<h3 id="MySQL的高可用"><a href="#MySQL的高可用" class="headerlink" title="MySQL的高可用"></a>MySQL的高可用</h3><p>MySQL分库分表。</p>
+<p>意义不是很大，一般是整个系统都做高可用。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MySQL的MVCC机制是一个非常标准的实现，可以和我之前做的缓存框架结合起来，很多道理都是共通的。</p>
+]]></content>
+      <tags>
+        <tag>【工作】面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-网络协议</title>
+    <url>/2024/10/14/13-41-52/</url>
+    <content><![CDATA[<p>这里记录一下面试的准备过程中关于网络协议的笔记。</p>
+<span id="more"></span>
+
+<h3 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h3><p>200 - 成功</p>
+<p>301 - 永久重定向    302 - 临时重定向</p>
+<p>4开头是客户端问题</p>
+<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
+<p>5开头是服务器问题</p>
+<p>500 - 服务器崩了  504 - badgateway</p>
+<h3 id="Forward和Redirect"><a href="#Forward和Redirect" class="headerlink" title="Forward和Redirect"></a>Forward和Redirect</h3><p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
+<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
+<h3 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h3><p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
+<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
+<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
+<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
+<p>UDP无连接，不可靠，传输性能高</p>
+<p>TCP是点对点，UDP支持广播</p>
+<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
+<h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><p>HTTP用80端口，HTTPS用443</p>
+<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
+<h3 id="HTTP、TCP和Socket"><a href="#HTTP、TCP和Socket" class="headerlink" title="HTTP、TCP和Socket"></a>HTTP、TCP和Socket</h3><p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
+<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
+<p>HTTP是应用层的协议，基于TCP来实现</p>
+<p>TCP是网络层协议</p>
+<h3 id="HTTP的长连接和短连接"><a href="#HTTP的长连接和短连接" class="headerlink" title="HTTP的长连接和短连接"></a>HTTP的长连接和短连接</h3><p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
+<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
+<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
+<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
+<p>第一次：客户端-&gt;服务端，syn&#x3D;1，seq&#x3D;x</p>
+<p>第二次：服务端-&gt;客户端，syn&#x3D;1，seq&#x3D;y，ack&#x3D;x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
+<p>第三次：客户端-&gt;服务端，seq&#x3D;x+1, ack&#x3D;y+1。告知服务端，你发送的消息我也能收到。</p>
+<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
+<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
+<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
+<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
+<h3 id="TCP粘包"><a href="#TCP粘包" class="headerlink" title="TCP粘包"></a>TCP粘包</h3><p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
+<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
+<p>TCP的分包是由滑动窗口来控制的。</p>
+<p>解决方式，都是在应用的协议层解决：</p>
+<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
+<p>2、把协议固定长度，所有协议包的长度都一致。</p>
+<p>3、特殊分隔符号。</p>
+<h3 id="TCP可靠性"><a href="#TCP可靠性" class="headerlink" title="TCP可靠性"></a>TCP可靠性</h3><p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
+<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
+<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
+<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
+<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
+<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>应用层：HTTP、FTP</p>
+<p>表示层：加解密</p>
+<p>会话层：RPC</p>
+<p>传输层：TCP、UDP</p>
+<p>网络层：IP、IPv6</p>
+<p>数据链路层：物理寻址层。交换机等</p>
+<p>物理层：硬件</p>
+<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
+<h3 id="浏览器输入一个网址后发生了什么"><a href="#浏览器输入一个网址后发生了什么" class="headerlink" title="浏览器输入一个网址后发生了什么"></a>浏览器输入一个网址后发生了什么</h3><p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
+<p>2、建立TCP连接</p>
+<p>3、发送HTTP的GET请求</p>
+<p>4、请求经过路由器转发到服务器</p>
+<p>5、服务器处理请求，返回网页文件（HTML）</p>
+<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
+<h3 id="如何跨域"><a href="#如何跨域" class="headerlink" title="如何跨域"></a>如何跨域</h3><p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
+<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
+<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
+<h3 id="HTTP-1-0-1-1-2-0-3-0"><a href="#HTTP-1-0-1-1-2-0-3-0" class="headerlink" title="HTTP 1.0 1.1 2.0 3.0"></a>HTTP 1.0 1.1 2.0 3.0</h3><p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
+<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
+<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
+<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
+<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
+<h3 id="HTTP与TCP-x2F-IP"><a href="#HTTP与TCP-x2F-IP" class="headerlink" title="HTTP与TCP&#x2F;IP"></a>HTTP与TCP&#x2F;IP</h3><p>HTTP是应用层的报文协议，一般数据传输是用TCP&#x2F;IP实现。</p>
+<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
+<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
+<h3 id="HTTP长连接短连接"><a href="#HTTP长连接短连接" class="headerlink" title="HTTP长连接短连接"></a>HTTP长连接短连接</h3><p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
+<h3 id="长连接和短连接的优缺点"><a href="#长连接和短连接的优缺点" class="headerlink" title="长连接和短连接的优缺点"></a>长连接和短连接的优缺点</h3><p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
+<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
+<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>从开销最小的地方开始找，没有就去更远的地方找。</p>
+<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
+<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
+<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
+<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
+]]></content>
+      <tags>
+        <tag>【工作】面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JRE环境使用Arthas</title>
+    <url>/2024/09/20/19-12-39/</url>
+    <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
+<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
+<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
+<p>这里提供一个脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最关键的就是脚本中最后的两句</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
+
+<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
+<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
+]]></content>
+      <tags>
+        <tag>【工作】优秀实践</tag>
       </tags>
   </entry>
 </search>
