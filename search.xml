@@ -1,6 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>NLP的project复盘</title>
+    <url>/2024/11/22/14-57-31/</url>
+    <content><![CDATA[<p>管理亦是一门妥协的艺术。不要以企业的标准来要求学生。</p>
+<span id="more"></span>
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这是第一门需要协作的大作业，过程中着实暴露了很多问题。我觉得是需要复盘来明确这些问题，以免在下次的作业中再有类似的情况发生。</p>
+<p>项目要求是利用大模型的技术，结合课上所学的NLP相关知识，来开发一个对话模型。最终这个系统能做到让用户通过自然语言来查询某个领域的数据。</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><h3 id="第一次会议"><a href="#第一次会议" class="headerlink" title="第一次会议"></a>第一次会议</h3><p>一开始可能是大家还不熟，我作为脸皮最厚的主动出来破冰。</p>
+<p>这就像无领导小组讨论第一件事就是选领导；分布式等价节点一致性算法第一件事就是选主节点；Project第一个跳出来的人也会成为组织的核心。</p>
+<p>之后就基本围绕着我的思路，开始选题，分配预研任务。我确定了一下开会的频率和任务的大致分配方向，以及日常的沟通方式，代码提交的仓库，保证这个项目推进必要的一些因素都已具备，第一次会议就算结束。</p>
+<p>打算是分三周，第一周预研，第二周产出第一个demo，第三周产出最终的。</p>
+<h3 id="第二次会议之前"><a href="#第二次会议之前" class="headerlink" title="第二次会议之前"></a>第二次会议之前</h3><p>我这边主要是要预研RAG的基础框架和前端界面。</p>
+<p>说实在的我也没多上心，粗看了一下AnythingLLM，跑了下本地模型发现展示的效果还可以。然后接入本地模型、通义千问和其他的一些模型试了下，认为这个框架基本可用，就算完事了。</p>
+<p>数据爬取的任务倒是做得还可以，能拉到三个网站的数据。</p>
+<p>需求分析决定了后续的提示词怎么写，这部分最终产出不是很标准，但也算有模有样，可以列入工作内容的一部分。</p>
+<h3 id="第二次会议"><a href="#第二次会议" class="headerlink" title="第二次会议"></a>第二次会议</h3><p>原先预订是第二次会议前要有产出的demo，所以第二次的会议上我就展示了一下AnythingLLM。其他的一些沟通已经没多少印象了，大概就是确定要做什么之后，直接进入模型微调的阶段了。</p>
+<h3 id="第三次会议"><a href="#第三次会议" class="headerlink" title="第三次会议"></a>第三次会议</h3><p>原先预定是在第二周产出一个demo，但是用AnythingLLM这个demo产出比我想得要快太多了…</p>
+<p>然后第二周的目标在周二就算提前完成，摸了会儿鱼一直拖到第三周才进行第三次会议。</p>
+<p>这第三次会议上演示了一下纯使用AnythingLLM的成果，客观来说包装一下作为汇报用的结果还真可以。</p>
+<p>不过还是想着再做些事情，于是会后我又花了点时间去写了下插件。</p>
+<h3 id="第三次会议后"><a href="#第三次会议后" class="headerlink" title="第三次会议后"></a>第三次会议后</h3><p>由于我也没怎么写过python的工程，先花了点时间看了下python的工程结构。</p>
+<p>插件开发需要模型支持，就想着先把模型从AnythingLLM搬到了阿里云的百炼平台上，花了一个小时吧。</p>
+<p>看了下模型怎么自定义插件的文档，本来还想找找阿里云有没有提供案例，结果发现没有。</p>
+<p>那没辙，先理解再说。</p>
+<p>翻了下就是自己部署一个web服务，然后提供OpenAPI 3.0的接口文档和一个告知模型在什么情况下需要调用插件的prompt。那就简单了，实际的功能代码有现成的，我只需要把这些能力集成到web服务里就行。</p>
+<p>于是开始翻怎么用python写web服务，发现有个quart的框架，快速写了demo，结论是可行。</p>
+<p>找了下阿里云有免费的试用服务器，租了一个4核8G的服务器，ping了它的公网IP，通了。那这服务器也好说。</p>
+<p>部署服务到云服务器，一调用发现不通。怀疑是权限问题，去控制台找了下权限控制的功能，开通端口，再调用通了。这部署也算完成。</p>
+<p>用AI生成了OpenAPI 3.0的接口文档，接着写prompt，最后在百炼上创建一个插件，这样就算集成了。</p>
+<p>调试了一下大模型调用插件的效果，发现还不错，至此完成了插件的功能。</p>
+<p>最终的效果给同组的同学展示了一下，都说很可以。给他们开通了子账号的权限，每个人都能调整模型的prompt和看到最终的效果。</p>
+<p>随后的时间就是准备pre和最终的report。</p>
+<h2 id="复盘"><a href="#复盘" class="headerlink" title="复盘"></a>复盘</h2><h3 id="问题分析暴露了思维的差异"><a href="#问题分析暴露了思维的差异" class="headerlink" title="问题分析暴露了思维的差异"></a>问题分析暴露了思维的差异</h3><p>简单分析一下，在模型侧，要通过一些手段来让模型了解某个领域的数据。那么很自然就会想到专家模型，想到微调，接着答案就呼之欲出——RAG。</p>
+<p>对，其实能做到RAG，这个项目基本已经完成了。</p>
+<p>那么就涉及到数据来源的问题，这里就出现了第一次的思维差异。我倾向于额外添加插件的能力，能让模型获取到更具有时效性的信息。而其他人似乎并没有意识到这个能力的必要性，认为这个能力优先级不高，能先处理好RAG就可以了。</p>
+<p>其次就是这个选题的方向是什么，大家一开始都没什么点子，于是我提出用头脑风暴的方式来发散思维。最终确定是做一个关于招聘信息的助手。</p>
+<p>到最后，我干脆直接拉出日程表，列了下整个工作的日程和计划，也拟定了一些里程碑目标出来。大家也没多说什么，一下子就同意了。</p>
+<h3 id="工作方式的妥协"><a href="#工作方式的妥协" class="headerlink" title="工作方式的妥协"></a>工作方式的妥协</h3><p>如果是企业中接到一个项目，可能我第一反应是确定好日程计划，然后拉人开会，对齐拉通保证大家思维的一致性，留好联系方式，有什么问题及时调整。</p>
+<p>但是实际在这个project的执行过程中，一来大家都挺陌生，不知道对方几斤几两；二来工具不齐，想做项目管理多多少少有些麻烦。最后只能妥协，用腾讯文档作为项目管理的一环，github作为配置库，以及任务分配全靠自觉。</p>
+<p>所幸大家都还算给面子，仗着年纪大脸皮厚大家还算愿意听我讲话。</p>
+<p>还有就是远程办公，在微信群沟通确实效率过于低下了，我个人会更喜欢用远程会议的方式来快速沟通。而且大家也不是集中在一处专心做这个project，互相之间配合和协调也是个问题。</p>
+<p>最终妥协的成果，就是把任务提前分隔成较为独立的子任务，每个人认领其中一部分。然后我作为最终的统筹，收集各个成员的产出，并拼凑为一个较为合理的产物。</p>
+<p>就我个人而言，这些都不算什么工作量，但是对于其他人而言可能会有些困难，毕竟没什么管理经验。所以我来担任也算是比较合理的。</p>
+<h3 id="留好成长的空间"><a href="#留好成长的空间" class="headerlink" title="留好成长的空间"></a>留好成长的空间</h3><p>整个过程中一直在强调要沟通，每个人的提交都能让其他人在本地运行。本意是想让每个人都参与进来，能看到project的当前的效果。</p>
+<p>但第一个迭代这个事情做得不是很好。所以第二个迭代我就全面上云，让每个人都能参与进来。</p>
+<p>我觉得一个项目的推进过程中，项目中的每个人都应该是有所成长的。作为领导，一定会注意经验的复用和下属的培养。</p>
+<p>对于这个project来说，就是要给愿意学的人，留好空间，把想学的东西放在每个人随时都能够得到的地方。</p>
+]]></content>
+      <tags>
+        <tag>【学习】复盘总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我为什么选择去留学</title>
+    <url>/2023/09/28/19-55-01/</url>
+    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
+<span id="more"></span>
+
+<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
+<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
+<p>但最后各方面原因，还是没有去。</p>
+<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
+<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
+<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
+<p>主要原因有三点。</p>
+<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
+<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
+<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
+<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
+<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
+<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
+<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
+<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
+<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
+<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
+<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
+]]></content>
+      <tags>
+        <tag>【杂谈】学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一篇博客，聊聊这个博客本身</title>
+    <url>/2023/03/29/20-26-12/</url>
+    <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
+<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
+<p>为了解决文档的管理问题，我就建了一个博客。</p>
+<h2 id="还有更多的想法么？"><a href="#还有更多的想法么？" class="headerlink" title="还有更多的想法么？"></a>还有更多的想法么？</h2><p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
+<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
+<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
+<h2 id="博客的内容会有哪些？"><a href="#博客的内容会有哪些？" class="headerlink" title="博客的内容会有哪些？"></a>博客的内容会有哪些？</h2><p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
+<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
+<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
+<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
+<h2 id="后续规划？"><a href="#后续规划？" class="headerlink" title="后续规划？"></a>后续规划？</h2><p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
+<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
+<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
+<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
+]]></content>
+      <tags>
+        <tag>【杂谈】博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>龙年第一天</title>
+    <url>/2024/02/18/13-22-14/</url>
+    <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
+<span id="more"></span>
+
+<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
+<p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
+<p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
+<p>去年确实是做了不少事。</p>
+<p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p>
+<p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p>
+<p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p>
+<p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p>
+<p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>
+]]></content>
+      <tags>
+        <tag>【杂谈】生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>聊聊低时延</title>
+    <url>/2024/05/19/14-26-55/</url>
+    <content><![CDATA[<p>低时延平台作为公司的战略产品，一直是交易系统中核心的核心。在对接低时延平台的过程中，我也有了一些想法。</p>
+<span id="more"></span>
+
+<h2 id="关于开发语言"><a href="#关于开发语言" class="headerlink" title="关于开发语言"></a>关于开发语言</h2><p>市面上绝大多数低时延相关的产品，都会选择C++作为开发语言。不得不说，C++在处理这种场景有天然的优势，接近底层的好处就是可以做到硬件级别的优化。</p>
+<p>我们公司的消息总线就更为离谱了，全面使用C语言进行开发，性能快到极致。</p>
+<p>在Java这层，想利用硬件的优化，只能使用JNI的技术来调用C函数了。这会导致Java“一次编译处处运行”的能力不再生效，部署时要考虑的事情也会相应增多。</p>
+<p>话又说回来，为了解决不同场景下要加载不同JNI的问题，我也是专门写了一个JNI加载框架。</p>
+<p>同时，也经常会提到的一件事，就是Java的内存管理问题。JVM垃圾回收的随机性，会导致低时延业务可能随时中断，这是不可接受的。</p>
+<p>市面上，对于Java的GC，最好的解决方式是使用ZingJDK。可惜是商业收费的，一般用不了。</p>
+<h2 id="关于架构"><a href="#关于架构" class="headerlink" title="关于架构"></a>关于架构</h2><p>公司对于低时延场景，做的架构我觉得并没有特别优秀。或者说并没有到让人有眼前一亮的感觉的那种地步。</p>
+<p>我们的架构还是分了各种通道，把用户隔离到各个通道中。每个通道享有各自的CPU、线程以及内存数据库等信息。</p>
+<p>通道本质是个数据隔离。</p>
+<p>这种做法下，每个通道内的消息永远由一个线程来执行。那么这个通道内所有的操作，其实都可以做到无锁化了，因为自始至终都仅有一个线程进行读写操作。</p>
+<p>这种方式下，运行时扩容几乎就是不可能的事情。同时，也对数据的分布有了一定的要求，假如某一个通道的用户成交数量特别多，也会影响到整个系统的吞吐量。理想状态下，用户应该是均匀分布在各个通道的。</p>
+<h2 id="关于技术"><a href="#关于技术" class="headerlink" title="关于技术"></a>关于技术</h2><p>低时延的技术栈中，最重要的一点就是无锁化。有锁就快不起来。</p>
+<p>另外，内存技术也是挺重要的。Java就需要去操作堆外内存了，这确实是一般人接触不到的部分。</p>
+<p>我专门写了一个给开发者的文档放在了公司的仓库里，大概整理了一些技术要点。</p>
+<p>想了想，主要就三块：</p>
+<p>1、内存技术。包括堆内堆外，CPU缓存，GC调优等。</p>
+<p>2、序列化技术。包括Java对象的快速访问，协议编解码等。</p>
+<p>3、并发技术。包括原子操作、disruptor、无锁队列等。</p>
+<p>这些技术需要在构建低时延项目时时时刻刻关注，并写到代码中。</p>
+<p>当然还有一个，就是测试框架和性能分析工具。比如Arthus、JMH等，这些也是需要掌握的技术点。</p>
+]]></content>
+      <tags>
+        <tag>【工作】经验总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/03/29/18-22-38/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d </span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>【杂谈】博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>回炉重造是种什么样的感觉？</title>
     <url>/2024/11/20/13-32-12/</url>
     <content><![CDATA[<p>港硕第一学期即将结束，赶due的期间摸鱼写个博客。</p>
@@ -54,99 +234,30 @@
       </tags>
   </entry>
   <entry>
-    <title>我为什么选择去留学</title>
-    <url>/2023/09/28/19-55-01/</url>
-    <content><![CDATA[<p>今天有点时间，仔细思考了一下为什么我要去留学。</p>
+    <title>聊聊管理</title>
+    <url>/2024/04/29/14-42-33/</url>
+    <content><![CDATA[<p>想起来写这个事情，是正好从上海出差回家的时候，回想起这两年的经历，让我深有感触。</p>
 <span id="more"></span>
 
-<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
-<p>留学确实会轻松不少，不用和考研的人一起卷了。我当时想法是去香港，既不会太远太贵又能有留学的待遇。而且香港只需要一年，后续毕业证书大家也认。</p>
-<p>但最后各方面原因，还是没有去。</p>
-<p>工作了以后，老爸每次和我打电话，都要问我：”你现在这样一个本科文凭，你觉得够用么？“ 我心里也没数，只是一直说着：”三年之后再看吧。“ 那时候觉得工作本身对学历的要求并不高，也就没想着需要去读研究生。</p>
-<p>眼看就是第三年了，我也得做个决定。这得感谢我的女朋友，是她坚定了我去读书的信念，也给了我支持。</p>
-<h2 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h2><p>这三年，我看了MBA和其他的途径，比较之下，去香港读书就是我最后的选择。</p>
-<p>主要原因有三点。</p>
-<p>第一，时间应该尽量短。考虑我是已经有工作经验的状况，再去读三年书说实话会与社会有一定的脱节。而且从业经历说明我本身的能力已经足够进行工作，那么读书其实并没有太多的提升。刚好香港的授课型硕士是一年，那么不会挤占太多工作时间。</p>
-<p>第二，门槛不能太高。工作之后时间宝贵，我不能抽出太多的时间花在申请上，为了读一个研究生平时也得花费大量的精力去申请或者去准备，也是有点得不偿失。我本科是985，走考研的话这个优势就没了，所以还是得走申请制的。香港是申请制，我只需要准备好雅思，剩下大部分问题都不是问题。</p>
-<p>第三，学校要有一定的知名度，毕业证得是大陆认的。英国的水硕已经被行业拉黑了，但香港意外的风评还可以。再加上考公、国企都认可这个学历，那么香港的一年制硕士确实是性价比比较高的选择。</p>
-<p>如果还说有别的，那么就是香港的学费相对来说不高。比起出国留学的花费，香港的大学所需费用并不算特别高，一年下来也就是二十万左右，加上生活费大约三十万，属于大部分人可以承受的范围。</p>
-<p>还有就是家人的支持，我觉得也很重要。毕竟留学的费用不是一笔小数目，很多时候还是得靠家里人。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>时间到了12月，雅思的进度不是很理想，最坏的情况可能是明年才能开始申请。</p>
-<p>到现在这个时候，我感觉继续去读书更多的是为了让我能有一个时间去学习、去整理一直以来接触到的这些琐碎知识。</p>
-<p>从北京出来回来之后，我开始整理另一个内存数据库的项目。虽说本质是对接JNI，但是通讯方式上还是有不少文章可以做。进程间通讯目前最快的方式就是共享内存，内存数据库就是用的这个技术。但是JVM外部的数据，怎么同步到JVM内部呢？之前Google的思路是用Binder，实现了单次拷贝的内存共享。我觉得这很不错。</p>
-<p>在这个项目的预研过程中，我觉得自己对以前自己所学的知识有了更深入的了解。我开始思考是不是应该复习一下原来学的一些知识，然后重新去学一些更深入、更有趣的玩意儿。</p>
-<p>同时，我也发现，国内的技术文档、技术博客之类的普遍质量一般。或许是和观念、想法、成长时间有关，目前国内的人，大多是半路出家开始接触计算机，在计算机的基础知识上，大多数人都很薄弱。尤其是现在各种框架、高级编程语言大行其道，大家都更贴近业务，而不会去考虑做更深入、更底层的代码实现了。这其实就导致了，我在查阅资料的过程中，很多时候还是得去看外网的英文资料。</p>
-<p>还有一点，在国内纯粹的技术人员说实话并不讨好，毕竟公司赚钱还得靠业务。纯粹的技术人，是赚不到钱的。赚不到钱，在公司里就很难有话语权。而且纯粹的技术部门容易养出深闺大将军，这也是当时阿里拆分中台之后，我的第一想法。时代在进步，技术和业务的边界并没有那么大，或者说，现在对技术人有了更高的要求。你要懂业务，懂各种的业务，然后才能抽象业务模型，提供最切实好用的技术中间件。</p>
-<p>出于这些想法，我觉得留学可能也是一个不错的机会。一方面可以远离这些项目的是是非非，好好学一些东西，整理沉淀自己这几年来的所学。另一方面，也可以去看看更大的世界，看看外面那些小崽子到底有多不做人，也算是师夷长技以制夷嘛。</p>
+<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><p>从我工作以来，我一直在和管理打交道。</p>
+<p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
+<p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p>
+<p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p>
+<p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p>
+<p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p>
+<p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p>
+<p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p>
+<p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p>
+<h2 id="领导力的来源是什么？"><a href="#领导力的来源是什么？" class="headerlink" title="领导力的来源是什么？"></a>领导力的来源是什么？</h2><p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p>
+<p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p>
+<p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p>
+<p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p>
+<p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p>
+<p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p>
+<p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>
 ]]></content>
       <tags>
-        <tag>【杂谈】学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>龙年第一天</title>
-    <url>/2024/02/18/13-22-14/</url>
-    <content><![CDATA[<p>今天是龙年上班的第一天，正月初九。</p>
-<span id="more"></span>
-
-<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
-<p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
-<p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
-<p>去年确实是做了不少事。</p>
-<p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p>
-<p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p>
-<p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p>
-<p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p>
-<p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>
-]]></content>
-      <tags>
-        <tag>【杂谈】生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/03/29/18-22-38/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d </span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <tags>
-        <tag>【杂谈】博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第一篇博客，聊聊这个博客本身</title>
-    <url>/2023/03/29/20-26-12/</url>
-    <content><![CDATA[<p>算了算，自己做开发也快三年了。<span id="more"></span>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
-<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
-<p>为了解决文档的管理问题，我就建了一个博客。</p>
-<h2 id="还有更多的想法么？"><a href="#还有更多的想法么？" class="headerlink" title="还有更多的想法么？"></a>还有更多的想法么？</h2><p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
-<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
-<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
-<h2 id="博客的内容会有哪些？"><a href="#博客的内容会有哪些？" class="headerlink" title="博客的内容会有哪些？"></a>博客的内容会有哪些？</h2><p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
-<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
-<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
-<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
-<h2 id="后续规划？"><a href="#后续规划？" class="headerlink" title="后续规划？"></a>后续规划？</h2><p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
-<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
-<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
-<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
-]]></content>
-      <tags>
-        <tag>【杂谈】博客</tag>
+        <tag>【工作】经验总结</tag>
       </tags>
   </entry>
   <entry>
@@ -173,64 +284,6 @@
 <p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
 <p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
 <p>这就是我从这件事情里学到的。</p>
-]]></content>
-      <tags>
-        <tag>【工作】经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>聊聊低时延</title>
-    <url>/2024/05/19/14-26-55/</url>
-    <content><![CDATA[<p>低时延平台作为公司的战略产品，一直是交易系统中核心的核心。在对接低时延平台的过程中，我也有了一些想法。</p>
-<span id="more"></span>
-
-<h2 id="关于开发语言"><a href="#关于开发语言" class="headerlink" title="关于开发语言"></a>关于开发语言</h2><p>市面上绝大多数低时延相关的产品，都会选择C++作为开发语言。不得不说，C++在处理这种场景有天然的优势，接近底层的好处就是可以做到硬件级别的优化。</p>
-<p>我们公司的消息总线就更为离谱了，全面使用C语言进行开发，性能快到极致。</p>
-<p>在Java这层，想利用硬件的优化，只能使用JNI的技术来调用C函数了。这会导致Java“一次编译处处运行”的能力不再生效，部署时要考虑的事情也会相应增多。</p>
-<p>话又说回来，为了解决不同场景下要加载不同JNI的问题，我也是专门写了一个JNI加载框架。</p>
-<p>同时，也经常会提到的一件事，就是Java的内存管理问题。JVM垃圾回收的随机性，会导致低时延业务可能随时中断，这是不可接受的。</p>
-<p>市面上，对于Java的GC，最好的解决方式是使用ZingJDK。可惜是商业收费的，一般用不了。</p>
-<h2 id="关于架构"><a href="#关于架构" class="headerlink" title="关于架构"></a>关于架构</h2><p>公司对于低时延场景，做的架构我觉得并没有特别优秀。或者说并没有到让人有眼前一亮的感觉的那种地步。</p>
-<p>我们的架构还是分了各种通道，把用户隔离到各个通道中。每个通道享有各自的CPU、线程以及内存数据库等信息。</p>
-<p>通道本质是个数据隔离。</p>
-<p>这种做法下，每个通道内的消息永远由一个线程来执行。那么这个通道内所有的操作，其实都可以做到无锁化了，因为自始至终都仅有一个线程进行读写操作。</p>
-<p>这种方式下，运行时扩容几乎就是不可能的事情。同时，也对数据的分布有了一定的要求，假如某一个通道的用户成交数量特别多，也会影响到整个系统的吞吐量。理想状态下，用户应该是均匀分布在各个通道的。</p>
-<h2 id="关于技术"><a href="#关于技术" class="headerlink" title="关于技术"></a>关于技术</h2><p>低时延的技术栈中，最重要的一点就是无锁化。有锁就快不起来。</p>
-<p>另外，内存技术也是挺重要的。Java就需要去操作堆外内存了，这确实是一般人接触不到的部分。</p>
-<p>我专门写了一个给开发者的文档放在了公司的仓库里，大概整理了一些技术要点。</p>
-<p>想了想，主要就三块：</p>
-<p>1、内存技术。包括堆内堆外，CPU缓存，GC调优等。</p>
-<p>2、序列化技术。包括Java对象的快速访问，协议编解码等。</p>
-<p>3、并发技术。包括原子操作、disruptor、无锁队列等。</p>
-<p>这些技术需要在构建低时延项目时时时刻刻关注，并写到代码中。</p>
-<p>当然还有一个，就是测试框架和性能分析工具。比如Arthus、JMH等，这些也是需要掌握的技术点。</p>
-]]></content>
-      <tags>
-        <tag>【工作】经验总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>聊聊管理</title>
-    <url>/2024/04/29/14-42-33/</url>
-    <content><![CDATA[<p>想起来写这个事情，是正好从上海出差回家的时候，回想起这两年的经历，让我深有感触。</p>
-<span id="more"></span>
-
-<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><p>从我工作以来，我一直在和管理打交道。</p>
-<p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
-<p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p>
-<p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p>
-<p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p>
-<p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p>
-<p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p>
-<p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p>
-<p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p>
-<h2 id="领导力的来源是什么？"><a href="#领导力的来源是什么？" class="headerlink" title="领导力的来源是什么？"></a>领导力的来源是什么？</h2><p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p>
-<p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p>
-<p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p>
-<p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p>
-<p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p>
-<p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p>
-<p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>
 ]]></content>
       <tags>
         <tag>【工作】经验总结</tag>
@@ -379,79 +432,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java反射调用的优化</title>
-    <url>/2023/05/04/10-44-04/</url>
-    <content><![CDATA[<p>effective java中曾言，避免反射的最好方式是定义接口。但反射是orm框架中不得不使用的能力，这次对反射的操作做了一次性能优化。</p>
-<span id="more"></span>
-
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在公司内部的缓存框架中，需要实现类似数据库的能力：比如主键、索引，还有条件查询等。</p>
-<p>这些能力不可避免的需要从一个对象中，通过反射的方式来取参数的值。且目前没有办法通过定义接口的方式来优化。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>以前的方式大多是建立Method对象的缓存，但是在查阅资料之后，我使用了一个新的方式。</p>
-<p>这里我先给出一个原本的实现: </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  private static final Map&lt;String, Method&gt; methodsCache = new ConcurrentHashMap&lt;&gt;(256);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">   * 获取Object对象中指定属性的值。</span><br><span class="line">   * @param instance instance</span><br><span class="line">   * @param fieldName fieldName</span><br><span class="line">   * @return Object</span><br><span class="line">   */</span><br><span class="line">  public static Object getFieldValue(Class&lt;?&gt; clazz, Object instance, String fieldName) &#123;</span><br><span class="line">      Method method = findMethod(clazz, fieldName);</span><br><span class="line">      if (!Objects.isNull(method)) &#123;</span><br><span class="line">          try &#123;</span><br><span class="line">              return method.invoke(instance);</span><br><span class="line">          &#125; catch (IllegalAccessException | InvocationTargetException e) &#123;</span><br><span class="line">              throw new RuntimeException(e);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  private static Method findMethod(Class&lt;?&gt; clazz, String fieldName) &#123;</span><br><span class="line">      String methodName = &quot;get&quot; + changeFirstCharacterCase(fieldName, true);</span><br><span class="line">      // 优先从缓存获取</span><br><span class="line">      Method method = methodsCache.get(clazz.getName() + &quot;#&quot; + methodName);</span><br><span class="line">      if (!Objects.isNull(method)) &#123;</span><br><span class="line">          return method;</span><br><span class="line">      &#125;</span><br><span class="line">      // 缓存中未找到，从clazz中获取</span><br><span class="line">      try &#123;</span><br><span class="line">          method =  clazz.getMethod(methodName);</span><br><span class="line">          methodsCache.put(clazz.getName() + &quot;#&quot; + methodName, method);</span><br><span class="line">          return method;</span><br><span class="line">      &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">          logger.error(&quot;在&#123;&#125;中未找到名为&#123;&#125;的方法名。&quot;, clazz.getName(), methodName);</span><br><span class="line">      &#125; catch (Exception e) &#123;</span><br><span class="line">          logger.error(e.getMessage(), e);</span><br><span class="line">      &#125;</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这逻辑不难理解，缓存了Method对象，避免每次都要进行查找。一般来说这可以很大程度的提升性能。</p>
-<p>不过我随后进行了jmh的测试，发现了一些问题。</p>
-<table>
-<thead>
-<tr>
-<th>Benchmark</th>
-<th>Mode</th>
-<th>Cnt</th>
-<th>Score</th>
-<th>Score</th>
-<th>Units</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>testNormal</td>
-<td>avgt</td>
-<td>10</td>
-<td>0.338</td>
-<td>±   0.003</td>
-<td>ns&#x2F;op</td>
-</tr>
-<tr>
-<td>testRef</td>
-<td>avgt</td>
-<td>10</td>
-<td>4.423</td>
-<td>±   0.174</td>
-<td>ns&#x2F;op</td>
-</tr>
-<tr>
-<td>testRefBuild</td>
-<td>avgt</td>
-<td>10</td>
-<td>181.405</td>
-<td>±  21.063</td>
-<td>ns&#x2F;op</td>
-</tr>
-</tbody></table>
-<p>表格中，第一行数据是通过get方法取值；第二行是通过从缓存中获取Method然后调用取值；第三行是构建Method方法并取值。</p>
-<p>不难看出：哪怕是通过缓存的方式来取值，也会导致性能下降大约十倍。</p>
-<p>在查阅资料时，我发现了这篇文章：</p>
-<p>[1]: <a href="https://dzone.com/articles/java-reflection-but-faster">https://dzone.com/articles/java-reflection-but-faster</a>	“java-reflection-but-faster”</p>
-<p>这里提供了一个思路：通过LambdaMetafactory构建lambda表达式，在构建的lambda表达式中调用对应的方法。</p>
-<p>最后的实现如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 对象访问器</span><br><span class="line"> *</span><br><span class="line"> * @author daizheli</span><br><span class="line"> * @since 4.2.0 2023/4/13 </span><br><span class="line"> */</span><br><span class="line">public class ObjGetter &#123;</span><br><span class="line"></span><br><span class="line">    private final Function getterFunction;</span><br><span class="line"></span><br><span class="line">    public ObjGetter(Method method) &#123;</span><br><span class="line">        MethodHandles.Lookup lookup = MethodHandles.lookup();</span><br><span class="line">        try &#123;</span><br><span class="line">            MethodHandle methodHandle = lookup.unreflect(method);</span><br><span class="line">            CallSite site = LambdaMetafactory.metafactory(lookup, &quot;apply&quot;, MethodType.methodType(Function.class),</span><br><span class="line">                MethodType.methodType(Object.class, Object.class), methodHandle, methodHandle.type());</span><br><span class="line">            getterFunction = (Function) site.getTarget().invokeExact();</span><br><span class="line">        &#125; catch (Throwable e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Object executeGetter(Object bean) &#123;</span><br><span class="line">        return getterFunction.apply(bean);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 对象设置器</span><br><span class="line"> *</span><br><span class="line"> * @author daizheli</span><br><span class="line"> * @since 4.2.0 2023/4/13 </span><br><span class="line"> */</span><br><span class="line">public class ObjSetter &#123;</span><br><span class="line"></span><br><span class="line">    private final BiConsumer function;</span><br><span class="line"></span><br><span class="line">    public ObjSetter(Method method) &#123;</span><br><span class="line">        MethodHandles.Lookup lookup = MethodHandles.lookup();</span><br><span class="line">        try &#123;</span><br><span class="line">            MethodHandle methodHandle = lookup.unreflect(method);</span><br><span class="line">            CallSite site = LambdaMetafactory.metafactory(lookup, &quot;accept&quot;, MethodType.methodType(BiConsumer.class),</span><br><span class="line">                MethodType.methodType(void.class, Object.class, Object.class), methodHandle, methodHandle.type());</span><br><span class="line">            function = (BiConsumer) site.getTarget().invokeExact();</span><br><span class="line">        &#125; catch (Throwable e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void executeSetter(Object bean, Object value) &#123;</span><br><span class="line">        function.accept(bean, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>也跑了一下jmh，测试结果是</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Benchmark                           Mode  Cnt      Score     Error  Units</span><br><span class="line">ObjGetterBatchTest.testLambda       avgt   10      0.692 ±   0.037  ns/op</span><br><span class="line">ObjGetterBatchTest.testLambdaBuild  avgt   10  25439.081 ± 956.824  ns/op</span><br><span class="line">ObjGetterBatchTest.testNormal       avgt   10      0.338 ±   0.003  ns/op</span><br><span class="line">ObjGetterBatchTest.testRef          avgt   10      4.423 ±   0.174  ns/op</span><br><span class="line">ObjGetterBatchTest.testRefBuild     avgt   10    181.405 ±  21.063  ns/op</span><br></pre></td></tr></table></figure>
-
-<p>构建的速度有明显下降，但是每次调用的速度也有明显的提升。</p>
-<p>在我们内部的场景下，会有启动时从数据库加载数据创建索引的步骤，因此启动时就会构建好这部分缓存，从而提高运行时的速度。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>每次反射都去查询Method是不可接受的。在缓存的基础上，通过MethodHandles其实可以提高一部分调用的性能。</p>
-<p>但是综合考虑之后，还是使用LambdaMetafactory在运行时构建lambda表达式更适合当前的场景。</p>
-<p>可惜的是LambdaMetafactory的案例和解析在中文网站上几乎找不到，哪怕是英文资料也很少。</p>
-]]></content>
-      <tags>
-        <tag>【工作】性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JNI调用的优化（第二版)</title>
     <url>/2024/08/08/10-28-13/</url>
     <content><![CDATA[<p>这一次验证了critical native调用。</p>
@@ -535,42 +515,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在Java程序使用Grpc protobuf的动态加载及类型反射</title>
-    <url>/2023/05/31/15-41-05/</url>
-    <content><![CDATA[<p>对于各个公司负责的基础技术框架部门，接入gRPC往往是一个老大难问题。我也遇到了同样的问题。</p>
-<p>很遗憾，在查阅资料的过程中，我发现中文博客中极少有gRPC反射（更确切的说是Protobuf反射）的资料。而反射恰恰是解决框架对gRPC兼容的一种手段。</p>
-<span id="more"></span>
-
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>在阅读下面的文章之前，读者需要懂得gRPC的服务端、调用端的基本使用方式。否则可能无法理解文章中出现的部分概念。</p>
-<h2 id="区分Protobuf和gRPC"><a href="#区分Protobuf和gRPC" class="headerlink" title="区分Protobuf和gRPC"></a>区分Protobuf和gRPC</h2><p>我发现很多人会把Protobuf和gRPC混为一谈，这是不对的。</p>
-<p>我这里直接引用Protobuf官网文档中的一段话来说明：</p>
-<blockquote>
-<p>The most straightforward RPC system to use with protocol buffers is <a href="https://grpc.io/">gRPC</a>: a language- and platform-neutral open source RPC system developed at Google. gRPC works particularly well with protocol buffers and lets you generate the relevant RPC code directly from your <code>.proto</code> files using a special protocol buffer compiler plugin.</p>
-<p>If you don’t want to use gRPC, it’s also possible to use protocol buffers with your own RPC implementation. You can find out more about this in the <a href="https://protobuf.dev/programming-guides/proto#services">Proto2 Language Guide</a>.</p>
-<p>There are also a number of ongoing third-party projects to develop RPC implementations for Protocol Buffers. For a list of links to projects we know about, see the <a href="https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md">third-party add-ons wiki page</a>.</p>
-</blockquote>
-<p>gRPC是一种RPC通讯的方式，而Protobuf是一种用于序列化和反序列化结构化数据的二进制编码格式。gRPC在通讯时将传输的数据转变为Protobuf格式。</p>
-<p>如果不使用gRPC，完全可以基于Protobuf的api实现一套自己的RPC通讯框架。</p>
-<h2 id="Protobuf的Descriptor"><a href="#Protobuf的Descriptor" class="headerlink" title="Protobuf的Descriptor"></a>Protobuf的Descriptor</h2><p>在百度中查询关于gRPC反射的资料，得到的信息大多牛头不对马嘴。但是查询Protobuf的反射，则可以获得一些案例。</p>
-<p>这其实也说明了Protobuf和gRPC并不是同一个玩意儿。</p>
-<p>Protobuf封装了Descriptor对象，提供了反射构建Protobuf消息对象的能力。所有Protobuf消息对象都要实现Message接口。</p>
-<p>但是Descriptor对象的来源还是proto文件，为了使用反射的能力，我们需要一种特殊的二进制文件。</p>
-<p>可以通过在maven编译插件中添加如下配置来生成这种二进制文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;protobuf.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;protocArtifact&gt;com.google.protobuf:protoc:$&#123;protoc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/protocArtifact&gt;</span><br><span class="line">                &lt;pluginId&gt;grpc-java&lt;/pluginId&gt;</span><br><span class="line">                &lt;pluginArtifact&gt;io.grpc:protoc-gen-grpc-java:$&#123;grpc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/pluginArtifact&gt;</span><br><span class="line">                &lt;writeDescriptorSet&gt;true&lt;/writeDescriptorSet&gt;</span><br><span class="line">                &lt;descriptorSetOutputDirectory&gt;src/main/resources/desc&lt;/descriptorSetOutputDirectory&gt;</span><br><span class="line">                &lt;descriptorSetFileName&gt;descriptor.pb&lt;/descriptorSetFileName&gt;</span><br><span class="line">                &lt;descriptorSetClassifier&gt;descriptor&lt;/descriptorSetClassifier&gt;</span><br><span class="line">                &lt;clearOutputDirectory&gt;false&lt;/clearOutputDirectory&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;compile&lt;/goal&gt;</span><br><span class="line">                        &lt;goal&gt;compile-custom&lt;/goal&gt;</span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                &lt;/execution&gt;</span><br><span class="line">            &lt;/executions&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br><span class="line">    &lt;extensions&gt;</span><br><span class="line">        &lt;extension&gt;</span><br><span class="line">            &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;</span><br><span class="line">            &lt;!--引入操作系统os设置的属性插件,否则$&#123;os.detected.classifier&#125; 操作系统版本会找不到 --&gt;</span><br><span class="line">            &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;os.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/extension&gt;</span><br><span class="line">    &lt;/extensions&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
-
-<p>在protobuf的maven编译插件中添加了生成<code>descriptor.pb</code>文件的配置，这个文件中包含了所有proto文件中的信息。</p>
-<p>然后，我们开始加载这份文件，这里使用的是Protobuf的api：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PathMatchingResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();</span><br><span class="line">Resource[] descriptorFiles = new Resource[0];</span><br><span class="line">try &#123;</span><br><span class="line">    descriptorFiles = resourceLoader.getResources(&quot;classpath*:**/*.pb&quot;);</span><br><span class="line"></span><br><span class="line">    if (descriptorFiles.length == 0) &#123;</span><br><span class="line">        logger.info(&quot;No pb file found!&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (Resource descriptorFile : descriptorFiles) &#123;</span><br><span class="line">        logger.log(Level.INFO, &quot;正在加载pb文件: &quot; + descriptorFile.getURL());</span><br><span class="line">        // 使用Protobuf提供的api，加载文件</span><br><span class="line">        DescriptorProtos.FileDescriptorSet fileSet =</span><br><span class="line">            DescriptorProtos.FileDescriptorSet.parseFrom(descriptorFile.getInputStream());</span><br><span class="line">    &#125;</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    throw new RuntimeException(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>待续…</p>
-]]></content>
-      <tags>
-        <tag>【工作】gRPC</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>字符串编解码的特殊处理</title>
     <url>/2024/01/28/11-39-06/</url>
     <content><![CDATA[<p>FastJSON2中，对于字符串做了特殊的优化，这里分析记录一下。</p>
@@ -643,6 +587,42 @@
 ]]></content>
       <tags>
         <tag>【工作】性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Java程序使用Grpc protobuf的动态加载及类型反射</title>
+    <url>/2023/05/31/15-41-05/</url>
+    <content><![CDATA[<p>对于各个公司负责的基础技术框架部门，接入gRPC往往是一个老大难问题。我也遇到了同样的问题。</p>
+<p>很遗憾，在查阅资料的过程中，我发现中文博客中极少有gRPC反射（更确切的说是Protobuf反射）的资料。而反射恰恰是解决框架对gRPC兼容的一种手段。</p>
+<span id="more"></span>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>在阅读下面的文章之前，读者需要懂得gRPC的服务端、调用端的基本使用方式。否则可能无法理解文章中出现的部分概念。</p>
+<h2 id="区分Protobuf和gRPC"><a href="#区分Protobuf和gRPC" class="headerlink" title="区分Protobuf和gRPC"></a>区分Protobuf和gRPC</h2><p>我发现很多人会把Protobuf和gRPC混为一谈，这是不对的。</p>
+<p>我这里直接引用Protobuf官网文档中的一段话来说明：</p>
+<blockquote>
+<p>The most straightforward RPC system to use with protocol buffers is <a href="https://grpc.io/">gRPC</a>: a language- and platform-neutral open source RPC system developed at Google. gRPC works particularly well with protocol buffers and lets you generate the relevant RPC code directly from your <code>.proto</code> files using a special protocol buffer compiler plugin.</p>
+<p>If you don’t want to use gRPC, it’s also possible to use protocol buffers with your own RPC implementation. You can find out more about this in the <a href="https://protobuf.dev/programming-guides/proto#services">Proto2 Language Guide</a>.</p>
+<p>There are also a number of ongoing third-party projects to develop RPC implementations for Protocol Buffers. For a list of links to projects we know about, see the <a href="https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md">third-party add-ons wiki page</a>.</p>
+</blockquote>
+<p>gRPC是一种RPC通讯的方式，而Protobuf是一种用于序列化和反序列化结构化数据的二进制编码格式。gRPC在通讯时将传输的数据转变为Protobuf格式。</p>
+<p>如果不使用gRPC，完全可以基于Protobuf的api实现一套自己的RPC通讯框架。</p>
+<h2 id="Protobuf的Descriptor"><a href="#Protobuf的Descriptor" class="headerlink" title="Protobuf的Descriptor"></a>Protobuf的Descriptor</h2><p>在百度中查询关于gRPC反射的资料，得到的信息大多牛头不对马嘴。但是查询Protobuf的反射，则可以获得一些案例。</p>
+<p>这其实也说明了Protobuf和gRPC并不是同一个玩意儿。</p>
+<p>Protobuf封装了Descriptor对象，提供了反射构建Protobuf消息对象的能力。所有Protobuf消息对象都要实现Message接口。</p>
+<p>但是Descriptor对象的来源还是proto文件，为了使用反射的能力，我们需要一种特殊的二进制文件。</p>
+<p>可以通过在maven编译插件中添加如下配置来生成这种二进制文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;protobuf.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;protocArtifact&gt;com.google.protobuf:protoc:$&#123;protoc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/protocArtifact&gt;</span><br><span class="line">                &lt;pluginId&gt;grpc-java&lt;/pluginId&gt;</span><br><span class="line">                &lt;pluginArtifact&gt;io.grpc:protoc-gen-grpc-java:$&#123;grpc.version&#125;:exe:$&#123;os.detected.classifier&#125;</span><br><span class="line">                &lt;/pluginArtifact&gt;</span><br><span class="line">                &lt;writeDescriptorSet&gt;true&lt;/writeDescriptorSet&gt;</span><br><span class="line">                &lt;descriptorSetOutputDirectory&gt;src/main/resources/desc&lt;/descriptorSetOutputDirectory&gt;</span><br><span class="line">                &lt;descriptorSetFileName&gt;descriptor.pb&lt;/descriptorSetFileName&gt;</span><br><span class="line">                &lt;descriptorSetClassifier&gt;descriptor&lt;/descriptorSetClassifier&gt;</span><br><span class="line">                &lt;clearOutputDirectory&gt;false&lt;/clearOutputDirectory&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;compile&lt;/goal&gt;</span><br><span class="line">                        &lt;goal&gt;compile-custom&lt;/goal&gt;</span><br><span class="line">                    &lt;/goals&gt;</span><br><span class="line">                &lt;/execution&gt;</span><br><span class="line">            &lt;/executions&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br><span class="line">    &lt;extensions&gt;</span><br><span class="line">        &lt;extension&gt;</span><br><span class="line">            &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;</span><br><span class="line">            &lt;!--引入操作系统os设置的属性插件,否则$&#123;os.detected.classifier&#125; 操作系统版本会找不到 --&gt;</span><br><span class="line">            &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;os.plugin.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/extension&gt;</span><br><span class="line">    &lt;/extensions&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在protobuf的maven编译插件中添加了生成<code>descriptor.pb</code>文件的配置，这个文件中包含了所有proto文件中的信息。</p>
+<p>然后，我们开始加载这份文件，这里使用的是Protobuf的api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PathMatchingResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();</span><br><span class="line">Resource[] descriptorFiles = new Resource[0];</span><br><span class="line">try &#123;</span><br><span class="line">    descriptorFiles = resourceLoader.getResources(&quot;classpath*:**/*.pb&quot;);</span><br><span class="line"></span><br><span class="line">    if (descriptorFiles.length == 0) &#123;</span><br><span class="line">        logger.info(&quot;No pb file found!&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (Resource descriptorFile : descriptorFiles) &#123;</span><br><span class="line">        logger.log(Level.INFO, &quot;正在加载pb文件: &quot; + descriptorFile.getURL());</span><br><span class="line">        // 使用Protobuf提供的api，加载文件</span><br><span class="line">        DescriptorProtos.FileDescriptorSet fileSet =</span><br><span class="line">            DescriptorProtos.FileDescriptorSet.parseFrom(descriptorFile.getInputStream());</span><br><span class="line">    &#125;</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    throw new RuntimeException(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>待续…</p>
+]]></content>
+      <tags>
+        <tag>【工作】gRPC</tag>
       </tags>
   </entry>
   <entry>
@@ -719,6 +699,79 @@
 ]]></content>
       <tags>
         <tag>【工作】多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java反射调用的优化</title>
+    <url>/2023/05/04/10-44-04/</url>
+    <content><![CDATA[<p>effective java中曾言，避免反射的最好方式是定义接口。但反射是orm框架中不得不使用的能力，这次对反射的操作做了一次性能优化。</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>在公司内部的缓存框架中，需要实现类似数据库的能力：比如主键、索引，还有条件查询等。</p>
+<p>这些能力不可避免的需要从一个对象中，通过反射的方式来取参数的值。且目前没有办法通过定义接口的方式来优化。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>以前的方式大多是建立Method对象的缓存，但是在查阅资料之后，我使用了一个新的方式。</p>
+<p>这里我先给出一个原本的实现: </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  private static final Map&lt;String, Method&gt; methodsCache = new ConcurrentHashMap&lt;&gt;(256);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">   * 获取Object对象中指定属性的值。</span><br><span class="line">   * @param instance instance</span><br><span class="line">   * @param fieldName fieldName</span><br><span class="line">   * @return Object</span><br><span class="line">   */</span><br><span class="line">  public static Object getFieldValue(Class&lt;?&gt; clazz, Object instance, String fieldName) &#123;</span><br><span class="line">      Method method = findMethod(clazz, fieldName);</span><br><span class="line">      if (!Objects.isNull(method)) &#123;</span><br><span class="line">          try &#123;</span><br><span class="line">              return method.invoke(instance);</span><br><span class="line">          &#125; catch (IllegalAccessException | InvocationTargetException e) &#123;</span><br><span class="line">              throw new RuntimeException(e);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  private static Method findMethod(Class&lt;?&gt; clazz, String fieldName) &#123;</span><br><span class="line">      String methodName = &quot;get&quot; + changeFirstCharacterCase(fieldName, true);</span><br><span class="line">      // 优先从缓存获取</span><br><span class="line">      Method method = methodsCache.get(clazz.getName() + &quot;#&quot; + methodName);</span><br><span class="line">      if (!Objects.isNull(method)) &#123;</span><br><span class="line">          return method;</span><br><span class="line">      &#125;</span><br><span class="line">      // 缓存中未找到，从clazz中获取</span><br><span class="line">      try &#123;</span><br><span class="line">          method =  clazz.getMethod(methodName);</span><br><span class="line">          methodsCache.put(clazz.getName() + &quot;#&quot; + methodName, method);</span><br><span class="line">          return method;</span><br><span class="line">      &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">          logger.error(&quot;在&#123;&#125;中未找到名为&#123;&#125;的方法名。&quot;, clazz.getName(), methodName);</span><br><span class="line">      &#125; catch (Exception e) &#123;</span><br><span class="line">          logger.error(e.getMessage(), e);</span><br><span class="line">      &#125;</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这逻辑不难理解，缓存了Method对象，避免每次都要进行查找。一般来说这可以很大程度的提升性能。</p>
+<p>不过我随后进行了jmh的测试，发现了一些问题。</p>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>Mode</th>
+<th>Cnt</th>
+<th>Score</th>
+<th>Score</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>testNormal</td>
+<td>avgt</td>
+<td>10</td>
+<td>0.338</td>
+<td>±   0.003</td>
+<td>ns&#x2F;op</td>
+</tr>
+<tr>
+<td>testRef</td>
+<td>avgt</td>
+<td>10</td>
+<td>4.423</td>
+<td>±   0.174</td>
+<td>ns&#x2F;op</td>
+</tr>
+<tr>
+<td>testRefBuild</td>
+<td>avgt</td>
+<td>10</td>
+<td>181.405</td>
+<td>±  21.063</td>
+<td>ns&#x2F;op</td>
+</tr>
+</tbody></table>
+<p>表格中，第一行数据是通过get方法取值；第二行是通过从缓存中获取Method然后调用取值；第三行是构建Method方法并取值。</p>
+<p>不难看出：哪怕是通过缓存的方式来取值，也会导致性能下降大约十倍。</p>
+<p>在查阅资料时，我发现了这篇文章：</p>
+<p>[1]: <a href="https://dzone.com/articles/java-reflection-but-faster">https://dzone.com/articles/java-reflection-but-faster</a>	“java-reflection-but-faster”</p>
+<p>这里提供了一个思路：通过LambdaMetafactory构建lambda表达式，在构建的lambda表达式中调用对应的方法。</p>
+<p>最后的实现如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 对象访问器</span><br><span class="line"> *</span><br><span class="line"> * @author daizheli</span><br><span class="line"> * @since 4.2.0 2023/4/13 </span><br><span class="line"> */</span><br><span class="line">public class ObjGetter &#123;</span><br><span class="line"></span><br><span class="line">    private final Function getterFunction;</span><br><span class="line"></span><br><span class="line">    public ObjGetter(Method method) &#123;</span><br><span class="line">        MethodHandles.Lookup lookup = MethodHandles.lookup();</span><br><span class="line">        try &#123;</span><br><span class="line">            MethodHandle methodHandle = lookup.unreflect(method);</span><br><span class="line">            CallSite site = LambdaMetafactory.metafactory(lookup, &quot;apply&quot;, MethodType.methodType(Function.class),</span><br><span class="line">                MethodType.methodType(Object.class, Object.class), methodHandle, methodHandle.type());</span><br><span class="line">            getterFunction = (Function) site.getTarget().invokeExact();</span><br><span class="line">        &#125; catch (Throwable e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Object executeGetter(Object bean) &#123;</span><br><span class="line">        return getterFunction.apply(bean);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 对象设置器</span><br><span class="line"> *</span><br><span class="line"> * @author daizheli</span><br><span class="line"> * @since 4.2.0 2023/4/13 </span><br><span class="line"> */</span><br><span class="line">public class ObjSetter &#123;</span><br><span class="line"></span><br><span class="line">    private final BiConsumer function;</span><br><span class="line"></span><br><span class="line">    public ObjSetter(Method method) &#123;</span><br><span class="line">        MethodHandles.Lookup lookup = MethodHandles.lookup();</span><br><span class="line">        try &#123;</span><br><span class="line">            MethodHandle methodHandle = lookup.unreflect(method);</span><br><span class="line">            CallSite site = LambdaMetafactory.metafactory(lookup, &quot;accept&quot;, MethodType.methodType(BiConsumer.class),</span><br><span class="line">                MethodType.methodType(void.class, Object.class, Object.class), methodHandle, methodHandle.type());</span><br><span class="line">            function = (BiConsumer) site.getTarget().invokeExact();</span><br><span class="line">        &#125; catch (Throwable e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void executeSetter(Object bean, Object value) &#123;</span><br><span class="line">        function.accept(bean, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也跑了一下jmh，测试结果是</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Benchmark                           Mode  Cnt      Score     Error  Units</span><br><span class="line">ObjGetterBatchTest.testLambda       avgt   10      0.692 ±   0.037  ns/op</span><br><span class="line">ObjGetterBatchTest.testLambdaBuild  avgt   10  25439.081 ± 956.824  ns/op</span><br><span class="line">ObjGetterBatchTest.testNormal       avgt   10      0.338 ±   0.003  ns/op</span><br><span class="line">ObjGetterBatchTest.testRef          avgt   10      4.423 ±   0.174  ns/op</span><br><span class="line">ObjGetterBatchTest.testRefBuild     avgt   10    181.405 ±  21.063  ns/op</span><br></pre></td></tr></table></figure>
+
+<p>构建的速度有明显下降，但是每次调用的速度也有明显的提升。</p>
+<p>在我们内部的场景下，会有启动时从数据库加载数据创建索引的步骤，因此启动时就会构建好这部分缓存，从而提高运行时的速度。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>每次反射都去查询Method是不可接受的。在缓存的基础上，通过MethodHandles其实可以提高一部分调用的性能。</p>
+<p>但是综合考虑之后，还是使用LambdaMetafactory在运行时构建lambda表达式更适合当前的场景。</p>
+<p>可惜的是LambdaMetafactory的案例和解析在中文网站上几乎找不到，哪怕是英文资料也很少。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
       </tags>
   </entry>
   <entry>
@@ -844,6 +897,74 @@
 ]]></content>
       <tags>
         <tag>【工作】优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Unsafe的使用记录</title>
+    <url>/2024/01/07/11-15-32/</url>
+    <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
+<span id="more"></span>
+
+<h2 id="什么是Unsafe"><a href="#什么是Unsafe" class="headerlink" title="什么是Unsafe"></a>什么是Unsafe</h2><p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
+
+<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
+<p>为何如此？</p>
+<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
+<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
+<h2 id="使用Unsafe"><a href="#使用Unsafe" class="headerlink" title="使用Unsafe"></a>使用Unsafe</h2><p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是也不麻烦，我们可以使用如下代码获取到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
+<h2 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h2><p>要说Unsafe提供最大的能力，就是内存操作了。</p>
+<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
+<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
+<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
+<p>那么我们看一下实际怎么操作内存：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
+
+<p>这种操作，几乎和C++程序是一致的了。</p>
+<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
+<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
+<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
+<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
+<p>首先来看一个Java对象的内存结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
+
+<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
+<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
+<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
+<p>下面看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
+<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
+<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
+<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
+<p>下面简单看一个api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
+
+<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
+<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
+<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
+<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>还是要额外提一下关于Unsafe的版本支持问题。</p>
+<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
+<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
+<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
+<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
+]]></content>
+      <tags>
+        <tag>【工作】性能调优</tag>
       </tags>
   </entry>
   <entry>
@@ -1072,71 +1193,114 @@
       </tags>
   </entry>
   <entry>
-    <title>Unsafe的使用记录</title>
-    <url>/2024/01/07/11-15-32/</url>
-    <content><![CDATA[<p>在项目中使用了Unsafe作为一些高性能中间件的底层实现，这里做个记录。</p>
+    <title>面试笔记-网络协议</title>
+    <url>/2024/10/14/13-41-52/</url>
+    <content><![CDATA[<p>这里记录一下面试的准备过程中关于网络协议的笔记。</p>
 <span id="more"></span>
 
-<h2 id="什么是Unsafe"><a href="#什么是Unsafe" class="headerlink" title="什么是Unsafe"></a>什么是Unsafe</h2><p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
-
-<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
-<p>为何如此？</p>
-<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
-<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
-<h2 id="使用Unsafe"><a href="#使用Unsafe" class="headerlink" title="使用Unsafe"></a>使用Unsafe</h2><p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是也不麻烦，我们可以使用如下代码获取到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
-<h2 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h2><p>要说Unsafe提供最大的能力，就是内存操作了。</p>
-<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
-<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
-<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
-<p>那么我们看一下实际怎么操作内存：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
-
-<p>这种操作，几乎和C++程序是一致的了。</p>
-<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
-<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
-<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
-
-<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
-<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
-<p>首先来看一个Java对象的内存结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
-
-<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
-<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
-<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
-<p>下面看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
-<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
-<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
-<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
-<p>下面简单看一个api：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
-
-<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
-<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
-<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
-<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>还是要额外提一下关于Unsafe的版本支持问题。</p>
-<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
-<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
-<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
-<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
+<h3 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h3><p>200 - 成功</p>
+<p>301 - 永久重定向    302 - 临时重定向</p>
+<p>4开头是客户端问题</p>
+<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
+<p>5开头是服务器问题</p>
+<p>500 - 服务器崩了  504 - badgateway</p>
+<h3 id="Forward和Redirect"><a href="#Forward和Redirect" class="headerlink" title="Forward和Redirect"></a>Forward和Redirect</h3><p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
+<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
+<h3 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h3><p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
+<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
+<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
+<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
+<p>UDP无连接，不可靠，传输性能高</p>
+<p>TCP是点对点，UDP支持广播</p>
+<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
+<h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><p>HTTP用80端口，HTTPS用443</p>
+<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
+<h3 id="HTTP、TCP和Socket"><a href="#HTTP、TCP和Socket" class="headerlink" title="HTTP、TCP和Socket"></a>HTTP、TCP和Socket</h3><p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
+<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
+<p>HTTP是应用层的协议，基于TCP来实现</p>
+<p>TCP是网络层协议</p>
+<h3 id="HTTP的长连接和短连接"><a href="#HTTP的长连接和短连接" class="headerlink" title="HTTP的长连接和短连接"></a>HTTP的长连接和短连接</h3><p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
+<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
+<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
+<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
+<p>第一次：客户端-&gt;服务端，syn&#x3D;1，seq&#x3D;x</p>
+<p>第二次：服务端-&gt;客户端，syn&#x3D;1，seq&#x3D;y，ack&#x3D;x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
+<p>第三次：客户端-&gt;服务端，seq&#x3D;x+1, ack&#x3D;y+1。告知服务端，你发送的消息我也能收到。</p>
+<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
+<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
+<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
+<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
+<h3 id="TCP粘包"><a href="#TCP粘包" class="headerlink" title="TCP粘包"></a>TCP粘包</h3><p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
+<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
+<p>TCP的分包是由滑动窗口来控制的。</p>
+<p>解决方式，都是在应用的协议层解决：</p>
+<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
+<p>2、把协议固定长度，所有协议包的长度都一致。</p>
+<p>3、特殊分隔符号。</p>
+<h3 id="TCP可靠性"><a href="#TCP可靠性" class="headerlink" title="TCP可靠性"></a>TCP可靠性</h3><p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
+<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
+<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
+<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
+<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
+<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>应用层：HTTP、FTP</p>
+<p>表示层：加解密</p>
+<p>会话层：RPC</p>
+<p>传输层：TCP、UDP</p>
+<p>网络层：IP、IPv6</p>
+<p>数据链路层：物理寻址层。交换机等</p>
+<p>物理层：硬件</p>
+<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
+<h3 id="浏览器输入一个网址后发生了什么"><a href="#浏览器输入一个网址后发生了什么" class="headerlink" title="浏览器输入一个网址后发生了什么"></a>浏览器输入一个网址后发生了什么</h3><p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
+<p>2、建立TCP连接</p>
+<p>3、发送HTTP的GET请求</p>
+<p>4、请求经过路由器转发到服务器</p>
+<p>5、服务器处理请求，返回网页文件（HTML）</p>
+<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
+<h3 id="如何跨域"><a href="#如何跨域" class="headerlink" title="如何跨域"></a>如何跨域</h3><p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
+<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
+<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
+<h3 id="HTTP-1-0-1-1-2-0-3-0"><a href="#HTTP-1-0-1-1-2-0-3-0" class="headerlink" title="HTTP 1.0 1.1 2.0 3.0"></a>HTTP 1.0 1.1 2.0 3.0</h3><p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
+<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
+<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
+<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
+<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
+<h3 id="HTTP与TCP-x2F-IP"><a href="#HTTP与TCP-x2F-IP" class="headerlink" title="HTTP与TCP&#x2F;IP"></a>HTTP与TCP&#x2F;IP</h3><p>HTTP是应用层的报文协议，一般数据传输是用TCP&#x2F;IP实现。</p>
+<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
+<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
+<h3 id="HTTP长连接短连接"><a href="#HTTP长连接短连接" class="headerlink" title="HTTP长连接短连接"></a>HTTP长连接短连接</h3><p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
+<h3 id="长连接和短连接的优缺点"><a href="#长连接和短连接的优缺点" class="headerlink" title="长连接和短连接的优缺点"></a>长连接和短连接的优缺点</h3><p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
+<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
+<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>从开销最小的地方开始找，没有就去更远的地方找。</p>
+<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
+<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
+<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
+<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
 ]]></content>
       <tags>
-        <tag>【工作】性能调优</tag>
+        <tag>【工作】面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JRE环境使用Arthas</title>
+    <url>/2024/09/20/19-12-39/</url>
+    <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
+<span id="more"></span>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
+<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
+<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
+<p>这里提供一个脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最关键的就是脚本中最后的两句</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
+
+<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
+<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
+]]></content>
+      <tags>
+        <tag>【工作】优秀实践</tag>
       </tags>
   </entry>
   <entry>
@@ -1259,117 +1423,6 @@
 ]]></content>
       <tags>
         <tag>【工作】面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面试笔记-网络协议</title>
-    <url>/2024/10/14/13-41-52/</url>
-    <content><![CDATA[<p>这里记录一下面试的准备过程中关于网络协议的笔记。</p>
-<span id="more"></span>
-
-<h3 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h3><p>200 - 成功</p>
-<p>301 - 永久重定向    302 - 临时重定向</p>
-<p>4开头是客户端问题</p>
-<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
-<p>5开头是服务器问题</p>
-<p>500 - 服务器崩了  504 - badgateway</p>
-<h3 id="Forward和Redirect"><a href="#Forward和Redirect" class="headerlink" title="Forward和Redirect"></a>Forward和Redirect</h3><p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
-<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
-<h3 id="GET和POST"><a href="#GET和POST" class="headerlink" title="GET和POST"></a>GET和POST</h3><p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
-<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
-<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
-<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
-<p>UDP无连接，不可靠，传输性能高</p>
-<p>TCP是点对点，UDP支持广播</p>
-<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
-<h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><p>HTTP用80端口，HTTPS用443</p>
-<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
-<h3 id="HTTP、TCP和Socket"><a href="#HTTP、TCP和Socket" class="headerlink" title="HTTP、TCP和Socket"></a>HTTP、TCP和Socket</h3><p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
-<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
-<p>HTTP是应用层的协议，基于TCP来实现</p>
-<p>TCP是网络层协议</p>
-<h3 id="HTTP的长连接和短连接"><a href="#HTTP的长连接和短连接" class="headerlink" title="HTTP的长连接和短连接"></a>HTTP的长连接和短连接</h3><p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
-<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
-<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
-<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
-<p>第一次：客户端-&gt;服务端，syn&#x3D;1，seq&#x3D;x</p>
-<p>第二次：服务端-&gt;客户端，syn&#x3D;1，seq&#x3D;y，ack&#x3D;x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
-<p>第三次：客户端-&gt;服务端，seq&#x3D;x+1, ack&#x3D;y+1。告知服务端，你发送的消息我也能收到。</p>
-<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
-<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
-<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
-<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
-<h3 id="TCP粘包"><a href="#TCP粘包" class="headerlink" title="TCP粘包"></a>TCP粘包</h3><p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
-<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
-<p>TCP的分包是由滑动窗口来控制的。</p>
-<p>解决方式，都是在应用的协议层解决：</p>
-<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
-<p>2、把协议固定长度，所有协议包的长度都一致。</p>
-<p>3、特殊分隔符号。</p>
-<h3 id="TCP可靠性"><a href="#TCP可靠性" class="headerlink" title="TCP可靠性"></a>TCP可靠性</h3><p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
-<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
-<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
-<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
-<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
-<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>应用层：HTTP、FTP</p>
-<p>表示层：加解密</p>
-<p>会话层：RPC</p>
-<p>传输层：TCP、UDP</p>
-<p>网络层：IP、IPv6</p>
-<p>数据链路层：物理寻址层。交换机等</p>
-<p>物理层：硬件</p>
-<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
-<h3 id="浏览器输入一个网址后发生了什么"><a href="#浏览器输入一个网址后发生了什么" class="headerlink" title="浏览器输入一个网址后发生了什么"></a>浏览器输入一个网址后发生了什么</h3><p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
-<p>2、建立TCP连接</p>
-<p>3、发送HTTP的GET请求</p>
-<p>4、请求经过路由器转发到服务器</p>
-<p>5、服务器处理请求，返回网页文件（HTML）</p>
-<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
-<h3 id="如何跨域"><a href="#如何跨域" class="headerlink" title="如何跨域"></a>如何跨域</h3><p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
-<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
-<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
-<h3 id="HTTP-1-0-1-1-2-0-3-0"><a href="#HTTP-1-0-1-1-2-0-3-0" class="headerlink" title="HTTP 1.0 1.1 2.0 3.0"></a>HTTP 1.0 1.1 2.0 3.0</h3><p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
-<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
-<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
-<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
-<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
-<h3 id="HTTP与TCP-x2F-IP"><a href="#HTTP与TCP-x2F-IP" class="headerlink" title="HTTP与TCP&#x2F;IP"></a>HTTP与TCP&#x2F;IP</h3><p>HTTP是应用层的报文协议，一般数据传输是用TCP&#x2F;IP实现。</p>
-<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
-<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
-<h3 id="HTTP长连接短连接"><a href="#HTTP长连接短连接" class="headerlink" title="HTTP长连接短连接"></a>HTTP长连接短连接</h3><p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
-<h3 id="长连接和短连接的优缺点"><a href="#长连接和短连接的优缺点" class="headerlink" title="长连接和短连接的优缺点"></a>长连接和短连接的优缺点</h3><p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
-<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
-<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p>从开销最小的地方开始找，没有就去更远的地方找。</p>
-<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
-<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
-<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
-<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
-]]></content>
-      <tags>
-        <tag>【工作】面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JRE环境使用Arthas</title>
-    <url>/2024/09/20/19-12-39/</url>
-    <content><![CDATA[<p>Arthas是线上故障排查、性能调优常用的工具。这里提供一个在JRE环境也可以使用Arthas的方式。</p>
-<span id="more"></span>
-
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
-<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
-<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
-<p>这里提供一个脚本：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>最关键的就是脚本中最后的两句</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
-
-<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
-<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
-]]></content>
-      <tags>
-        <tag>【工作】优秀实践</tag>
       </tags>
   </entry>
 </search>
