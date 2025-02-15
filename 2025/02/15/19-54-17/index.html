@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"tulancn.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。">
+  <meta name="description" content="最近在跟着老师做项目，尝试梳理下自己的一些想法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="老年代大对象的问题排查">
-<meta property="og:url" content="http://tulancn.github.io/2023/05/05/10-26-55/index.html">
+<meta property="og:title" content="聊聊AI工具和学习">
+<meta property="og:url" content="http://tulancn.github.io/2025/02/15/19-54-17/index.html">
 <meta property="og:site_name" content="涂蓝">
-<meta property="og:description" content="在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。">
+<meta property="og:description" content="最近在跟着老师做项目，尝试梳理下自己的一些想法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-05T02:26:55.000Z">
-<meta property="article:modified_time" content="2023-05-05T03:18:04.370Z">
+<meta property="article:published_time" content="2025-02-15T11:54:17.000Z">
+<meta property="article:modified_time" content="2025-02-15T12:34:55.100Z">
 <meta property="article:author" content="Tulan">
-<meta property="article:tag" content="【工作】性能调优">
+<meta property="article:tag" content="【学习】复盘总结">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://tulancn.github.io/2023/05/05/10-26-55/">
+<link rel="canonical" href="http://tulancn.github.io/2025/02/15/19-54-17/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>老年代大对象的问题排查 | 涂蓝</title>
+  <title>聊聊AI工具和学习 | 涂蓝</title>
   
 
 
@@ -156,7 +156,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tulancn.github.io/2023/05/05/10-26-55/">
+    <link itemprop="mainEntityOfPage" href="http://tulancn.github.io/2025/02/15/19-54-17/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/upload/avatar.jpeg">
@@ -169,7 +169,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          老年代大对象的问题排查
+          聊聊AI工具和学习
         </h1>
 
         <div class="post-meta">
@@ -180,7 +180,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-05-05 10:26:55 / 修改时间：11:18:04" itemprop="dateCreated datePublished" datetime="2023-05-05T10:26:55+08:00">2023-05-05</time>
+              <time title="创建时间：2025-02-15 19:54:17 / 修改时间：20:34:55" itemprop="dateCreated datePublished" datetime="2025-02-15T19:54:17+08:00">2025-02-15</time>
             </span>
 
           
@@ -201,32 +201,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在实现缓存框架的过程中遇到了一个大对象的问题，这里做个问题排查的记录。</p>
+        <p>最近在跟着老师做项目，尝试梳理下自己的一些想法。</p>
 <span id="more"></span>
 
-<h2 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h2><p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
-<p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
-<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>我们目前遇到的情况是，启动时耗费了大量的内存空间，导致项目起不来。目前唯一能让项目起来的方式是把内存加到18G。业务希望能避免这种情况，尽量不要有太多的内存占用。</p>
-<p>在我们的缓存框架中，启动时会加载数据库中的数据至内存。后续所有操作都是在内存中进行，而不会去直接操作数据库。数据库只是一个持久化的方式，这里的实现是后台异步入库。</p>
-<p>那么，根据堆内存的基础知识，不难发现：启动时加载的数据会放到缓存对象中，而缓存对象在运行时会一直存在，因此它必定会存在于老年代中。</p>
-<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><p>在排查的过程中用到了各种内存分析的工具。主要有三个：arthus、jmap、VisualVM。</p>
-<p>实际用arthus应该也可以做到类似jmap的能力，但是我个人还是更喜欢直接用jmap命令行来做简单的内存分析，毕竟不用额外起个arthus。</p>
-<blockquote>
-<p>jmap -histo pid 和 jmap -histo:live pid，抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象的，结合这两个命令的输出，进行比对，能够快速找出垃圾对象信息。关键是，这个命令速度很快，可以快速进行多次操作。</p>
-</blockquote>
-<p>当然直接用jmap pid的命令也可以，可以快速查看堆内存信息。</p>
-<p>然后是dump文件，通过dump文件可以很细致地进行内存对象的分析。arthus可以生成dump文件。</p>
-<blockquote>
-<p>jmap -dump:live,format&#x3D;b,file&#x3D;&#x2F;tmp&#x2F;dump.hprof pid</p>
-<p> 使用jmap产生一个dump，运用jvisualVM进行后续分析</p>
-</blockquote>
-<p>我在分析时，首先使用jmap查看了堆内存信息，发现老年代极大。当内存不够时，按理来说会进行full gc从而回收老年代中的对象，但实际这些老年代的对象并没有被回收。</p>
-<p>那么是不是启动的过程中没有及时的把这些对象的引用释放呢？</p>
-<p>为了验证这个猜想，我加大了内存，保证可以正常启动。启动后，直接查看堆内存，发现老年代是12G。通过 jmap -histo:live pid命令，手动触发一次GC，随后再查看堆内存，发现老年代只有6G了。很显然，就是在启动的过程中出现了一直被人持有的大对象。</p>
-<p>于是开始翻代码，果然在数据加载的逻辑中找到了问题的原因。</p>
-<p>在加载一个数据库表的数据时，代码中直接把sql的执行结果拿了出来做putAll，并且这是个并发的加载操作。如果表数据非常大，那么就同时会有很多大对象被创建出来，而这些大对象会直接进入老年代，只在full gc时回收。如果这些对象用完了内存，而数据还没有加载完，这些对象一直被其他对象持有，自然就会出现大对象无法回收的问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>解决方式也很简单，通过jdbc的流式api，做成类似分页查询的操作，避免直接将所有数据查询出来加载到内存。</p>
-<p>修改代码后，启动时内存变为了匀速增长，虽然启动速度有所下降，但确实不会有内存溢出和大对象无法回收的情况出现了。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>上次nlp的project被同学宣传了一下，后来有人来交流，就被拉取给老师做项目了。</p>
+<p>名义上是当了student assistant，工资也是按照这个待遇来。80港币一小时，说实话还不少。</p>
+<p>项目是关于一个AI论文的平台，希望能借用AI工具来对论文进行编写、修改和润色。功能倒是挺简单的，我觉得主要难点还是在设计和实现上。</p>
+<h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><p>我觉得第一个难点是人力的缺失，更准确地说是协作的方式。虽说我后来又找了3个人来，组成了6人小队，但还是觉得人手不够，做事不够快。</p>
+<p>从数量上来说，这点人肯定是够了，但我觉得暂时没找到很好的协作方式。换句话说，也就是没能把这6个人的能力全部发挥出来。</p>
+<p>这也是很痛苦，没什么办法的事情，毕竟项目管理本就是一个很困难的事情。</p>
+<p>第二个难点应该是设计的问题。目前没有产品经理的角色，实际上很多功能的设计上是缺失了有人把关。甚至更严重的是，我们所有人都是身兼多职，既要看产品怎么样，又要看怎么实现。</p>
+<p>这种体验倒是和初创团队差不多了。</p>
+<p>没有专业的设计团队，难免会导致功能上可能少东少西，甚至交互上也会很反人类。</p>
+<p>第三个难点在于测试和验收。目前也没有测试人员，功能的验收是没有人把关的。做得怎么样，怎样算好，有没有bug，这些大家在做完之后都没有反馈的渠道。</p>
+<p>没有结果的反馈，也就很难进一步提高了。</p>
+<p>第四个难点在于缺少标准的制定。管理团队最重要的就是制定标准，标准是协作的基础。人并不可靠，但完善的标准可以让人变可靠。这话对AI也同理。目前我们后台日志打印的方式、异常的抛出、前端的请求方式都没有统一的标准制定出来。这些得尽快解决了。</p>
+<h2 id="预期"><a href="#预期" class="headerlink" title="预期"></a>预期</h2><p>聊完难点，不妨畅想一下预期。</p>
+<p>我理想中的团队，应该是抱有热情、持续产出、愿意钻研的。他们每天都能提交一定的代码，推进一定的工作。定时上线开会，有问题及时沟通。大胆指出目前工作中不合逻辑的地方，并且提出改进意见。</p>
+<p>显然目前还达不到。</p>
+<h2 id="使用AI工具开发"><a href="#使用AI工具开发" class="headerlink" title="使用AI工具开发"></a>使用AI工具开发</h2><p>前面感觉都扯远了，这里回到正题，再聊聊AI工具和学习。</p>
+<p>这里的AI工具，应该说特指cursor这类编程工具了。</p>
+<p>比较好笑的是，我居然是这次项目中负责写前端的人。可实际上我并不懂前端，ts基础语法都没认真学过。</p>
+<p>但目前看下来，我甚至都不算是拖后腿的那个人。</p>
+<p>感谢cursor，让我有了这种体验。</p>
+<p>前端我也不是没学，也花了点时间看了下尚硅谷的Vue3前端入门教程。只不过暂时还没看完罢了。</p>
+<p>我觉得过段时间可以把尚硅谷的项目完整做一下，还是挺有意义的。</p>
+<p>整体编写项目前端的过程，让我觉得最重要的还是知道目标，然后提出自己的需求。</p>
+<p>AI工具已经非常智能，只要在输入指令的时候带上那么一点点技术的关键词，基本上就可以帮你实现各种需求了。</p>
+<h2 id="使用AI工具学习"><a href="#使用AI工具学习" class="headerlink" title="使用AI工具学习"></a>使用AI工具学习</h2><p>但凡事皆有代价。使用AI工具来开发，其实很大程度上属于是用长期的提高和理解，换取暂时的成果。</p>
+<p>使用cursor我写了相当多的代码，但代价就是我还是觉得自己对Vue3一窍不懂，不能写代码。</p>
+<p>感觉是离了cursor不会写代码了。</p>
+<p>这种体验很差，短期看到有美观的页面生成确实让人多巴胺快速分泌，有满足感。</p>
+<p>这种感觉一旦过去，充斥心头的是一种迷茫和空虚。</p>
+<p>频繁使用AI只会让自己变得没有长进。你增长的只有使用AI的能力，而不是做事情的能力。</p>
+<p>这也让我觉得有些恐慌。</p>
+<p>也是第一次有了AI是不是会取代我的工作的焦虑感。</p>
+<p>最讽刺好笑的事情也是在这。如果现在想要快速学习新的知识，借助AI工具也是最快的。</p>
+<p><strong>如果你愿意在每次生成代码之后，让AI工具解释一下它为什么这么写，它会是最好的导师。</strong></p>
+<p>我觉得现在学一个新技术，最难的还是不知道roadmap。</p>
+<p>而AI打破了这个知识搜集的过程，大部分时候它是可以提供一些可靠的roadmap，让你知道自己应该先学什么，后学什么。</p>
+<p>我个人比较喜欢的路径是，先quick start看到成果，然后逐步深入其中的每一个步骤，理解其原理。</p>
+<p>凭借多年的技术直觉，我觉得很多时候自己还是可以问出一些很有用的问题，从而获得最合理的AI答复。</p>
+<p>动手学习确实比单纯听讲要好得多。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最近是接了一个项目，遇到了不少困难。</p>
+<p>然后我也开始写前端了，在编写的过层中我大量使用了AI。</p>
+<p>这让我思考为什么要用AI，AI的能力边界在哪。</p>
+<p>我决定以后要慎重使用AI，在使用完之后多问一句为什么，从而实现在实践的过程中提高自己的技术水平。</p>
 
     </div>
 
@@ -242,7 +262,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://tulancn.github.io/2023/05/05/10-26-55/" title="老年代大对象的问题排查">http://tulancn.github.io/2023/05/05/10-26-55/</a>
+    <a href="http://tulancn.github.io/2025/02/15/19-54-17/" title="聊聊AI工具和学习">http://tulancn.github.io/2025/02/15/19-54-17/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -253,7 +273,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E3%80%90%E5%B7%A5%E4%BD%9C%E3%80%91%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" rel="tag"># 【工作】性能调优</a>
+              <a href="/tags/%E3%80%90%E5%AD%A6%E4%B9%A0%E3%80%91%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/" rel="tag"># 【学习】复盘总结</a>
           </div>
 
         
@@ -262,13 +282,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/05/04/10-44-04/" rel="prev" title="Java反射调用的优化">
-      <i class="fa fa-chevron-left"></i> Java反射调用的优化
+    <a href="/2024/12/13/16-49-54/" rel="prev" title="股市投机的原则">
+      <i class="fa fa-chevron-left"></i> 股市投机的原则
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/05/31/15-41-05/" rel="next" title="在Java程序使用Grpc protobuf的动态加载及类型反射">
-      在Java程序使用Grpc protobuf的动态加载及类型反射 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -327,7 +344,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E5%86%85%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">堆内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">场景分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">排查过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">4.</span> <span class="nav-text">解决</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%BE%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">难点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E6%9C%9F"><span class="nav-number">3.</span> <span class="nav-text">预期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8AI%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">使用AI工具开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8AI%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0"><span class="nav-number">5.</span> <span class="nav-text">使用AI工具学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
