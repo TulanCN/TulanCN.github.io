@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>第一篇博客，聊聊这个博客本身</title>
+    <url>/2023/03/29/20-26-12/</url>
+    <content><![CDATA[<p>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
+<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
+<p>为了解决文档的管理问题，我就建了一个博客。</p>
+<h2 id="还有更多的想法么？">还有更多的想法么？</h2>
+<p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
+<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
+<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
+<h2 id="博客的内容会有哪些？">博客的内容会有哪些？</h2>
+<p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
+<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
+<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
+<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
+<h2 id="后续规划？">后续规划？</h2>
+<p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
+<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
+<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
+<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NLP的project复盘</title>
     <url>/2024/11/22/14-57-31/</url>
     <content><![CDATA[<h2 id="背景">背景</h2>
@@ -611,349 +639,6 @@
       </tags>
   </entry>
   <entry>
-    <title>第一篇博客，聊聊这个博客本身</title>
-    <url>/2023/03/29/20-26-12/</url>
-    <content><![CDATA[<p>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
-<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
-<p>为了解决文档的管理问题，我就建了一个博客。</p>
-<h2 id="还有更多的想法么？">还有更多的想法么？</h2>
-<p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
-<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
-<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
-<h2 id="博客的内容会有哪些？">博客的内容会有哪些？</h2>
-<p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
-<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
-<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
-<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
-<h2 id="后续规划？">后续规划？</h2>
-<p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
-<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
-<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
-<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用浏览器发送POST请求</title>
-    <url>/2023/09/27/15-25-40/</url>
-    <content><![CDATA[<h2 id="场景">场景</h2>
-<p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
-<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
-<h2 id="方式">方式</h2>
-<p>打开浏览器的console，写入js代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
-<p>表现如下：</p>
-<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
-<p>完事。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>优秀实践</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面试笔记-Spring</title>
-    <url>/2024/10/16/11-43-17/</url>
-    <content><![CDATA[<h2 id="Spring篇">Spring篇</h2>
-<p>Spring是一个Java开发框架，主要是解决企业级开发的一些痛点。一开始可能主要是用于Web应用的开发，但目前实践中它已经在国内Java后端开发这方面一统江湖。</p>
-<p>它把各种业务逻辑都抽象封装为Bean，Spring负责项目启动时把这些Bean创建出来，进行业务开发的时候只需要通过Spring提供的API或其他方式，获取到对应的Bean就可以执行各种复杂业务操作。</p>
-<h3 id="为什么是Spring">为什么是Spring</h3>
-<p>轻量。</p>
-<p>IOC，控制反转。业务开发不用关注对象创建之类的事情，只需要编码，并给出依赖，框架会自动帮你找到对应的实现类。</p>
-<p>AOP，面向切面编程。</p>
-<p>事务管理。</p>
-<p>异常处理。</p>
-<h3 id="Autowired和Resource的区别">Autowired和Resource的区别</h3>
-<p>Autowired是Spring提供的注解，Resource是javax的注解。Spring是支持了javax提供的标准注解，是标准的一个实现。</p>
-<p>假如换了框架（一般不会），Autowired必定不可用，Resource可能还能用。</p>
-<p>Autowired默认按照type类装配，默认要求对象必须存在且唯一。可以用Qualifier来指定BeanName。</p>
-<p>Resource注解提供了type和name两个注解字段。name的优先级高于type。</p>
-<h3 id="依赖注入的方式">依赖注入的方式</h3>
-<p>构造器、setter、接口。反射注入</p>
-<h3 id="Spring-MVC">Spring MVC</h3>
-<p>Spring MVC是Spring的一个模块，针对web应用的场景。</p>
-<p>V不是普遍意义上的前端，而是用jsp或其他方式渲染的一个页面。</p>
-<p>M是逻辑层，做计算和数据库操作。C是控制层，负责接收网络请求。</p>
-<p>Spring在Servlet的基础上实现，定义了一个统一的请求接收入口：DispatcherServlet。DispatcherServlet会根据url和请求类型分发请求到用户编码的Controller中，然后执行用户的逻辑。</p>
-<p>常用注解：@RequestMapping、@RequestBody、@ResponseBody</p>
-<h3 id="AOP">AOP</h3>
-<p>把一些业务无关，在系统层面共通的逻辑封装起来，从而减少代码冗余，有利于代码的扩展性和维护性。比如参数校验、日志采集、权限控制。</p>
-<p>Spring的AOP是基于动态代理实现的。对于已经实现了接口的，用JDK动态代理，创建一个接口的实现类然后代理。没有实现的，用CGlib，创建一个类的子类然后代理。</p>
-<p>也可以用AspectJ实现自己的AOP逻辑。</p>
-<p>Spring的AOP属于运行时增强，AspectJ的AOP是编译时增强。AspectJ是字节码操作，性能稍高。</p>
-<h3 id="关注点和横切关注点">关注点和横切关注点</h3>
-<p>关注点是某个特定的业务功能，横切关注点是多个业务都会用到的系统功能，比如日志、参数校验、权限。</p>
-<h3 id="什么是通知advice">什么是通知advice</h3>
-<p>方法执行前和后要做的逻辑处理。</p>
-<p>before</p>
-<p>after</p>
-<p>after-returning</p>
-<p>after-throwing</p>
-<p>around</p>
-<p>这个结果处理和Spring WebFlux中的回调很像。</p>
-<h3 id="IOC">IOC</h3>
-<p>控制反转，把创建对象的权利移交给框架。</p>
-<p>对象不需要程序自己去new，而是通过依赖注入从框架中获取。</p>
-<p>IOC让组件保持松散的耦合，从而创造了可以进行AOP编程的余地。</p>
-<h3 id="Spring-Bean生命周期">Spring Bean生命周期</h3>
-<p>Servlet：实例化、初始化、接收请求、销毁。</p>
-<p>Bean：</p>
-<p>1、配置扫描，创建BeanDefinition，构建BeanFactory。</p>
-<p>2、实例化：启动时的第一步。当BeanFactory被请求一个未实例化的Bean时，会调用createBean方法实例化一个Bean。</p>
-<p>3、依赖注入：实例化之后的对象在BeanWrapper中，Spring通过BeanDefinition的配置进行依赖注入。这里会先找这个Bean的依赖所对应的BeanFactory，然后提供一个实例化Bean进行依赖注入。</p>
-<p>4、处理Aware接口：BeanNameAware、BeanFactoryAware、ApplicationContextAware</p>
-<p>5、BeanPostProcessor的postProcessBeforeInitialization方法</p>
-<p>6、InitializingBean的afterPropertiesSet</p>
-<p>7、BeanPostProcessor的postProcessAfterInitialization方法</p>
-<p>8、scope为singleton的缓存在容器，prototype的返回最开始请求的客户端。</p>
-<p>9、销毁，调用DisposableBean的afterPropertiesSet</p>
-<h3 id="Bean的作用域">Bean的作用域</h3>
-<p>1、singleton：单例</p>
-<p>2、prototype：每个Bean一个实例</p>
-<p>3、request：每个网络请求一个实例</p>
-<p>4、session：每个session一个实例</p>
-<p>5、globe-session</p>
-<h3 id="Spring的设计模式">Spring的设计模式</h3>
-<p>简单工厂模式：Bean的创建</p>
-<p>单例模式：单例的Bean</p>
-<p>代理模式：AOP的实现</p>
-<p>适配器：Adapter，Spring中以Adapter结尾的一般都是适配器模式。比如AdvisorAdapter</p>
-<p>观察者模式：Spring事件</p>
-<p>模版模式：JdbcTemplate</p>
-<h3 id="ApplicationContext和BeanFactory">ApplicationContext和BeanFactory</h3>
-<p>BeanFactory是基础接口，只提供最基础的Bean管理功能，在spring-beans包中。</p>
-<p>ApplicationContext继承了BeanFactory，并且扩展了事务管理、国际化、AOP。</p>
-<p>BeanFactory是延迟加载，而ApplicationContext是启动时实例化所有的Bean。</p>
-<h3 id="Spring的单例Bean是线程安全的吗">Spring的单例Bean是线程安全的吗</h3>
-<p>是否线程安全和单例无关。Spring本身没有对Bean做任何并发的保护，这也不是Spring应该关心的东西。是否线程安全由开发者来保证。</p>
-<h3 id="循环依赖怎么解决">循环依赖怎么解决</h3>
-<p>三级缓存</p>
-<p>第一级缓存是初始化完成的Bean；第二级是完成了实例化，但是没有完成依赖注入的Bean；第三级是没实例化的Bean，存放其BeanFactory。</p>
-<p>假设有两个Bean A、B，AB循环依赖</p>
-<p>1、Bean都是由BeanFactory创建，A的BeanFactory会先实例化A，放入二级缓存，随后进行依赖注入。</p>
-<p>2、A的BeanFactory通过依赖找到了B，先从一级缓存找，一路找到三级缓存，最后找到了B的BeanFactory。这时候B没有创建，所以用B的BeanFactory创建B。BeanFactory会先创建一个B的实例，这样在二级缓存就有了一个B的实例，然后进行依赖注入。</p>
-<p>3、B在依赖注入的时候会在二级缓存找到A，这时会直接获取A的实例注入B，这样就完成B的依赖注入。B完成创建后放入一级缓存，然后把B通过BeanFactory的方法返回给A，A就可以继续进行依赖注入。</p>
-<h3 id="Spring事务隔离级别">Spring事务隔离级别</h3>
-<p>同数据库的级别：读未提交、读已提交、可重复读、串行化</p>
-<h3 id="Spring事务传播级别">Spring事务传播级别</h3>
-<p>PROPAGATION_REQUIRED：有事务就加入，没有就创建</p>
-<p>PROPAGATION_SUPPORTS：有就加入，没有就不加事务</p>
-<p>PROPAGATION_MANDATORY：有就加入，没有就抛异常</p>
-<p>PROPAGATION_REQUIRES_NEW：永远创建一个新的事务执行</p>
-<p>PROPAGATION_NOT_SUPPORTED：永远不以事务执行</p>
-<p>PROPAGATION_NEVER：有事务就抛异常</p>
-<p>PROPAGATION_NESTED：有事务就创建嵌套事务，没有就创建</p>
-<h3 id="Spring事务实现">Spring事务实现</h3>
-<p>编程式事务、声明式事务。</p>
-<p>PlatformTransactionManager中定义了事务的开始、提交、回滚等操作。不同数据库会有不同实现。</p>
-<h3 id="Spring事务管理优点">Spring事务管理优点</h3>
-<p>抽象了统一的接口。支持声明式事务管理。</p>
-<p>可以和Spring多数据源结合。</p>
-<h3 id="事务三要素">事务三要素</h3>
-<p>数据源：事务的真正处理者。</p>
-<p>事务管理器：处理事务的打开、提交、回滚。</p>
-<p>事务应用和配置：表明哪些方法参与事务，事务的隔离级别，传播级别，超时时间。</p>
-<h3 id="事务注解的本质">事务注解的本质</h3>
-<p>@Transactional仅仅是一些元数据，这里通过AOP的方式，将元信息传递事务管理器，事务管理器再提交给数据源实现具体的事务。</p>
-<p>其实就相当于在方法前后加了一些事务的代码。</p>
-<h2 id="Spring-Boot篇">Spring Boot篇</h2>
-<h3 id="为什么是Spring-Boot">为什么是Spring Boot</h3>
-<p>独立运行：内嵌了tomcat、Jetty。不需要打成war包部署到容器。可以打成独立的Jar包运行。</p>
-<p>配置简化，自动装配：能根据当前路径下的类、jar来自动配置bean。</p>
-<p>无代码生成：配置过程中没有代码生成，没有xml配置文件，都是基于条件注解完成。</p>
-<p>监控：默认就提供了很多监控端点。</p>
-<p>Spring Boot大量使用了注解来驱动开发。</p>
-<h3 id="核心注解">核心注解</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@SpringBootConfiguration</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@ComponentScan</span><br></pre></td></tr></table></figure>
-<h3 id="如何理解starters">如何理解starters</h3>
-<p>一个把所有依赖都集成在一起的依赖包，简化引入的成本。</p>
-<h3 id="如何在启动时执行一些特殊的逻辑">如何在启动时执行一些特殊的逻辑</h3>
-<p>ApplicationRunner，CommandLineRunner。</p>
-<p>ApplicationRunner有一个实现，是在启动时把程序的pid打印到一个文件中，方便运维。</p>
-<h3 id="监视器-actuator">监视器 actuator</h3>
-<p>actuator会对外暴露一些端点，可以通过配置的方式管理这些端点（endpoint）。这是能让用户来访问和监控程序当前的运行状态。配合运维平台使用。</p>
-<h3 id="异常处理">异常处理</h3>
-<p>ControllerAdvice，可以用来处理所有的异常，封装为统一的异常信息返回。</p>
-<h3 id="配置加载顺序">配置加载顺序</h3>
-<p>Spring Boot的配置加载顺序和其优先级一致。</p>
-<p>1、命令行，–大于-D</p>
-<p>2、Java系统属性，System.getProperties。</p>
-<p>3、环境变量</p>
-<p>4、yml文件</p>
-<p>5、默认配置</p>
-<h3 id="application和bootstrap文件">application和bootstrap文件</h3>
-<p>老版本Spring Cloud Alibaba的Nacos只能使用bootstrap文件，后面版本修改了。</p>
-<h3 id="自动装配">自动装配</h3>
-<p>自动装配就是把第三方的Bean装载到Spring的容器里。以前是需要开发人员写xml才能把这些Bean装载到容器的。</p>
-<p>原理：第三方组件定义了Configuration类，在其中声明了需要装载的Bean对象，同时也在这个类里定义了一些自动装配的规则。Spring在启动时通过META-INF/spring.factories文件找到对应的配置类，然后对这些配置类进行动态加载。</p>
-<h2 id="Spring-Cloud篇">Spring Cloud篇</h2>
-<h3 id="为什么是Spring-Cloud">为什么是Spring Cloud</h3>
-<p>是用于构建分布式应用的开源框架。基于Spring Boot，提供与外部系统集成的能力。国内有很多二开的框架，比如Spring Cloud Alibaba，TSF，Spring Cloud Huawei。</p>
-<h3 id="什么是微服务">什么是微服务</h3>
-<p>一种架构。将单一功能的应用程序划分为一组小的服务，每个服务独立运行，服务之间相互协调、配合，最终实现一个业务功能。</p>
-<p>服务之间使用轻量级的通讯机制（通常是http，但是dubbo之类的也可以）。</p>
-<p>需要有一个中心来集中化管理这些服务。</p>
-<h3 id="服务熔断和降级">服务熔断和降级</h3>
-<p>分布式的场景下，某个服务出现异常，当检测到这种情况后，可以切断对该服务的调用。等到服务正常以后，再恢复服务。这就是熔断。</p>
-<p>降级是是指服务熔断以后，如果还有对该服务的调用，直接失败。</p>
-<h3 id="eureka-zookeeper-nacos">eureka zookeeper nacos</h3>
-<p>Eureka的高可用机制比较完善，可以保证服务随时可用。</p>
-<p>zookeeper对于多节点的数据一致性处理比较完善，可以用于主从选举。zk其实为了分布式协调而设计的，比如分布式锁、选举都可以用zk来做。</p>
-<p>nacos提供了可视化界面，同时支持服务注册发现和配置下发，一个人干了两个人的活。</p>
-<h3 id="Spring-Boot-Spring-Cloud">Spring Boot Spring Cloud</h3>
-<p>Spring Boot是专注于开发单个微服务。</p>
-<p>Spring Cloud是关注分布式系统的，分布式系统可以是多个Spring Boot开发的微服务的集合，Spring Cloud用于提供微服务之间调用、微服务的配置获取、服务注册、路由等。</p>
-<h3 id="负载均衡">负载均衡</h3>
-<p>某个服务可能有多个实例，调用该服务时，每个请求会分发到不同的实例处理，有助于提高服务的吞吐量。</p>
-<h3 id="Feign">Feign</h3>
-<p>Feign是一个HTTP请求客户端，提供了声明式的调用方式。主要是通过JDK动态代理实现。它整合了负载均衡的能力（Spring Cloud LoadBalance）</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面试笔记-Java基础</title>
-    <url>/2024/10/16/15-04-36/</url>
-    <content><![CDATA[<h2 id="语法基础">语法基础</h2>
-<h3 id="Java语言特点">Java语言特点</h3>
-<p>一次编译处处运行，天然具有跨平台的能力。只要不用JNI。</p>
-<p>开源社区资源丰富，活跃。</p>
-<p>适合企业级开发，多方面：有Spring为主流的开源框架，大型项目的构建和维护的成本较低。语言的规范性强。</p>
-<h3 id="基本类型和包装类型">基本类型和包装类型</h3>
-<p>byte、char、boolean、short、int、float、long、double</p>
-<p>基本类型不是对象，包装类型是对象。使用时有自动的拆装箱机制。但编码过程中如果可以用基本类型的建议还是用基本类型。</p>
-<p>区别在于对象是有对应的Class类，这些类信息会记录在JVM的ClassLoader中。对象有对象头。</p>
-<p>字节码的方法签名，基本类型是BCJFI之类的大写字母，对象是L加全限定类名。</p>
-<h3 id="instance-of">instance of</h3>
-<p>检测对象是否是某个类型的实例。可以用来检测对象是否实现了某个接口。</p>
-<p>HashMap中有使用到，用来检测当前节点的实现是链表还是红黑树。</p>
-<h3 id="重写和重载">重写和重载</h3>
-<p>重写建议加@Override注解，标明该方法是重写方法。</p>
-<p>重写发生在子类重写了父类的同名且参数完全一致的方法，或者是实现了某个接口的方法。有重写就一定是有extend或者impliment。</p>
-<p>重载是同名方法用不同的参数实现。同名方法的方法签名是不一样的。</p>
-<h3 id="equals和">equals和==</h3>
-<p>==是比较两个变量所指向的内存地址是否相同，其实是个指针操作。基本类型就相当于值比较。</p>
-<p>equals是Object类的一个方法，Object类中的实现就是==。一般不同的类会有不同的实现，String的实现就是逐个比较字符值是否相等。</p>
-<h3 id="四种引用">四种引用</h3>
-<p>强引用：使用最多的引用，默认就是强引用。</p>
-<p>软引用：缓存会用。可能会被回收，优先级在弱引用之后。</p>
-<p>弱引用：young GC时必定会回收。</p>
-<p>虚引用：这个引用不会影响GC，需要有其他引用方式指向这个对象。</p>
-<h3 id="Cleaner">Cleaner</h3>
-<p>Cleaner机制用到了虚引用。Cleaner继承了虚引用，GC后，所有的cleaner会被回收到一个pending队列，reference handler线程会调用这个pending队列中的对象，会检测下是不是Cleaner对象，是的话就直接调用Cleaner的clean方法。</p>
-<h3 id="Exception和Error">Exception和Error</h3>
-<p>都是Throwable的实现类。</p>
-<p>运行时异常不用显式地catch。被检查异常需要catch或向上抛出。</p>
-<p>Error是非常严重的错误，可能宕机。但是不需要显式抛出。</p>
-<h2 id="数据结构">数据结构</h2>
-<h3 id="HashMap">HashMap</h3>
-<p>线程不安全。</p>
-<p>put：hash之后找到数组中的对应位置，如果为空直接塞；不为空说明哈希冲突，检查一下当前的数据结构，按照数据结构来添加这个对象，可能是替换也可能是新增。</p>
-<h3 id="LinkedList">LinkedList</h3>
-<p>双向链表，线程不安全。</p>
-<h3 id="阻塞队列">阻塞队列</h3>
-<p>阻塞队列的经典实现：ArrayBlockQueue，LinkedBlockQueue</p>
-<p>用了大小堆的priority queue</p>
-<p>阻塞队列的锁就是线程池的锁。所以阻塞队列的性能也一定程度上决定了线程池的性能。举例：Disruptor、参考Disruptor实现了自己的阻塞队列。</p>
-<p>阻塞队列可以当做对象池来用。</p>
-<h2 id="JVM">JVM</h2>
-<h3 id="JVM内存模型">JVM内存模型</h3>
-<p>线程独占的：栈，本地方法栈，程序计数器</p>
-<p>线程共享的：堆，方法区</p>
-<p>栈：存储局部变量，操作栈，动态链接，方法出口。调用一个方法时入栈，方法返回出栈。</p>
-<p>本地方法栈：Native方法的栈</p>
-<p>程序计数器：当前程序执行的字节码位置。也就是打印异常堆栈时看到的执行到第几行出错。执行到native方法时，程序计数器清空，因为不是在执行字节码了。</p>
-<p>堆：存储对象实例，线程共享。会垃圾回收。</p>
-<p>方法区：虚拟机加载的类信息，常量，静态变量，JIT优化后的代码。总之就是些全局的信息。</p>
-<h3 id="内存可见性">内存可见性</h3>
-<p>也就是为什么要volatile关键字。</p>
-<p>线程执行时，会拷贝一份线程间的共享变量至线程的工作内存。拷贝的数据可能已经被其他线程修改了，导致执行结果错误。</p>
-<p>volatile会在共享变量修改时，强制同步一份副本至所有涉及到的线程的工作空间。</p>
-<h3 id="类加载和卸载">类加载和卸载</h3>
-<p>加载字节码文件到内存-&gt;验证并解析为Class类，创建静态变量执行静态代码块-&gt;实例化-&gt;GC</p>
-<h3 id="三种加载器">三种加载器</h3>
-<p>JAVA_HOME/lib: Bootstrap ClassLoader</p>
-<p>JAVA_HOME/lib/ext: Extension ClassLoader</p>
-<p>Application ClassLoader</p>
-<h3 id="双亲委派">双亲委派</h3>
-<p>加载器加载一个类时，先委托给父类加载器。父类无法加载才会自己加载。</p>
-<p>主要是为了避免同一个类被多个加载器重复加载。已经避免Java的核心类被修改。</p>
-<h3 id="回收算法G1">回收算法G1</h3>
-<p>高频率回收，减少每次的停顿。</p>
-<p>分老年代和年轻代。分块region，年轻代和老年代都由若干个分块组成。</p>
-<p>年轻代使用并行的复制和收集算法。</p>
-<p>mix-GC会回收一部分老年代。</p>
-<p>标记清除算法：STW进行初始标记，确实GC root可直达的对象，伴随一次young GC。然后GC线程和应用线程并行进行并发标记，尽可能标记出存活对象，使用SATB记录对象的引用关系。最终标记，STW，修改并发标记的错误。然后多线程进行GC。</p>
-<h3 id="ZGC">ZGC</h3>
-<p>低延时垃圾收集器。</p>
-<h3 id="Full-GC">Full GC</h3>
-<p>当老年代满时会进行，耗时长。需要避免。</p>
-<h3 id="对象分配原则">对象分配原则</h3>
-<p>新对象优先在eden区，如果大于survivor的二分之一就认定为大对象，直接晋升老年代。</p>
-<p>对象没存活过一次young GC，年龄+1，到达一定年龄（默认15）就晋升老年代。</p>
-<p>Survivor区中同年龄对象的总和大小超过一半，这个年龄以及这个年龄以上的对象进入老年代。</p>
-<h3 id="对象的创建过程">对象的创建过程</h3>
-<p>先去常量池找类信息，然后加载类信息，找不到就报ClassNotFound。</p>
-<p>为对象分配内存，将除了对象头之外的内存块初始化为0。</p>
-<p>设置对象头。</p>
-<h3 id="对象结构">对象结构</h3>
-<p>对象头12字节，数组16字节。</p>
-<p>对象信息，基础类型直接在对象内存存储。</p>
-<p>Java会自动排列对象中的Field顺序以更好地满足8字节对齐。</p>
-<h3 id="对象头的内容">对象头的内容</h3>
-<p>4字节的hashcode</p>
-<p>2字节的分代年龄</p>
-<p>1字节偏向锁</p>
-<p>1字节锁标志</p>
-<p>4字节的对象类型指针，指向Class类信息</p>
-<p>数组的话还有4字节的数组长度</p>
-<h3 id="常见的调优工具">常见的调优工具</h3>
-<p>jps：展示所有的java进程</p>
-<p>jstat：查看虚拟机运行状态</p>
-<p>jmap：主要用于dump</p>
-<p>jstack：生成线程快照</p>
-<p>jinfo：实时查看和修改JVM参数</p>
-<p>MAT：dump文件分析</p>
-<p>visualVM：自带可视化界面</p>
-<p>arthas：阿里开源的运行时诊断工具</p>
-<h2 id="多线程">多线程</h2>
-<h3 id="怎么创建线程">怎么创建线程</h3>
-<p>只有new Thread()才算创建了一个新线程。其他的方式比如实现Runnable接口Callable接口之类的都没有新线程产生。</p>
-<p>Runnable接口Callable接口本质是一个task，需要提交给线程才能执行。</p>
-<h3 id="如何停止一个线程">如何停止一个线程</h3>
-<p>最佳是用退出标志，完成当前方法后当前线程终止。</p>
-<p>推荐调用interrupt，会抛出interrupt异常。</p>
-<p>stop可以强行终止，不推荐。</p>
-<h3 id="notify和notifyAll有什么区别">notify和notifyAll有什么区别</h3>
-<p>notify可能死锁，notifyAll不会。</p>
-<p>假如有多个线程正在wait，会要求notify唤醒的任意一个线程可以处理接下来的逻辑，否则就会死锁。</p>
-<p>如果无法正确处理，则应该继续notify下一个，并让自己进入wait状态。</p>
-<p>notifyAll唤醒所有线程，但是争抢锁还是无序的。</p>
-<h3 id="sleep和wait有什么区别">sleep和wait有什么区别</h3>
-<p>sleep在线程类中，wait在Object类。</p>
-<p>sleep不释放锁，会让出cpu。</p>
-<p>wait会释放锁，并且让出cpu。调用wait后，会释放线程持有的所有对象锁，然后进入对象的等待区。只有针对此对象调用notify或notifyAll后，才会获取对象锁进入运行状态。</p>
-<h3 id="volatile">volatile</h3>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JNI调用的优化</title>
     <url>/2023/12/19/17-55-26/</url>
     <content><![CDATA[<h2 id="传统的优化方式">传统的优化方式</h2>
@@ -1021,29 +706,6 @@
       </categories>
       <tags>
         <tag>性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JRE环境使用Arthas</title>
-    <url>/2024/09/20/19-12-39/</url>
-    <content><![CDATA[<h2 id="场景">场景</h2>
-<p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
-<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
-<h2 id="解决方案">解决方案</h2>
-<p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
-<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
-<p>这里提供一个脚本：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>最关键的就是脚本中最后的两句</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
-<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
-<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>优秀实践</tag>
       </tags>
   </entry>
   <entry>
@@ -1120,151 +782,116 @@
       </tags>
   </entry>
   <entry>
-    <title>面试笔记-数据库</title>
-    <url>/2024/10/14/13-48-06/</url>
-    <content><![CDATA[<h2 id="知识点">知识点</h2>
-<h3 id="三范式">三范式</h3>
-<p>第一范式：列不可再分；</p>
-<p>第二范式：表中的每一行都可以唯一区分，通过主键实现；</p>
-<p>第三范式：（用于避免数据冗余，减少内存占用，实践中常被忽视）表的非主键字段不能依赖于其他非主键字段；比如学生表，里边有班级名称字段和辅导员名称字段，那么班级和辅导员会大量重复，应当拆分出班级表和辅导员表。</p>
-<h3 id="MySQL的存储引擎">MySQL的存储引擎</h3>
-<p>MyISAM、InnoDB、Memory</p>
-<p>MyISAM：全表锁，没有事务和外键，单表执行性能高，并发性能差，空间占用小。</p>
-<p>InnoDB：行锁，有事务，支持自增序列，支持外键，并发性能高，空间占用大。</p>
-<p>Memory：纯内存。</p>
-<h3 id="InnoDB和MyISAM">InnoDB和MyISAM</h3>
-<p>InnoDB支持事务，默认是每一条SQL都封装为一个事务。MyISAM没有事务。</p>
-<p>InnoDB有外键，MyISAM没有。</p>
-<p>InnoDB是行锁，MyISAM是表锁，InnoDB并发场景性能会好一些。</p>
-<p>InnoDB是聚集索引，必须有主键。在表上建立的其他索引，都是指向主键。通过其他索引查询时，先经过索引查到主键，再通过主键查找数据。MyISAM是非聚集索引，主键和索引都是直接指向数据指针，主键和索引相互独立。</p>
-<p>InnoDB不保存表的行数，计算行数时要全表扫描。MyISAM保存了表的行数。</p>
-<h3 id="数据库事务">数据库事务</h3>
-<p>ACID：atomic、consistency、isolation、durability</p>
-<p>原子性：一个事务内的多个操作可以看成一个原子操作，即要么成功要么失败。事务中任意一个操作失败了都会回滚到没有开始事务之前的状态。</p>
-<p>一致性：事务操作的结果和业务规则是一致的。即事务成功时，可以达成操作者目的。</p>
-<p>隔离性：多个事务之间互相数据隔离，彼此没有影响。</p>
-<p>持久性：事务完成后会持久化到数据库。</p>
-<h3 id="索引是什么">索引是什么</h3>
-<p>官方：一种帮助MySQL快速获取数据的数据结构。</p>
-<p>类似目录，默认是B+树实现。</p>
-<h3 id="索引的优缺点">索引的优缺点</h3>
-<p>优点：提升查询速度。</p>
-<p>缺点：索引也有空间占用，更新速度变慢，因为表更新的时候索引也要更新。</p>
-<h3 id="SQL优化">SQL优化</h3>
-<p>原则：避免全表扫描，查询时尽量走索引。少于三张表的查询允许关联，关联不了就走子查询。</p>
-<p>1、尽量不要用select *</p>
-<p>2、减少子查询，用少于三张表的关联查询替代</p>
-<p>3、少用in和not in，因为绝对可以用exists和not exists替代</p>
-<p>4、where子句中慎用!=，走不到索引</p>
-<p>5、少用or，走不到索引</p>
-<p>6、少用null判断，走不到索引</p>
-<h3 id="drop、delete和truncate">drop、delete和truncate</h3>
-<p>drop和truncate不能回滚，不在事务中。delete是在事务中，提交时才生效。</p>
-<p>drop删的最多，会删表结构，可以重新建同名表，及时生效不在事务中。</p>
-<p>truncate其次，对比drop是少删表结构，仅删除数据，还是不在事务中。</p>
-<p>delete再次，仅删除表数据，会在事务中，事务提交后才生效。</p>
-<h3 id="视图">视图</h3>
-<p>理解为虚拟表。类似函数封装的概念。</p>
-<p>可以封装复杂查询的结果。</p>
-<p>可以用来做权限隔离，比如仅展示某几个字段给特定用户。</p>
-<p>底层表有改动，比如拆分了，可以建一个视图，避免上层应用修改SQL。</p>
-<h3 id="并发事务的问题">并发事务的问题</h3>
-<p>脏读：一个事务读到了另一个事务修改了但未提交的数据。</p>
-<p>修改丢失：两个事务同时修改了同一个值，后一个覆盖了前一个。比如两个事务同时做x-1，先读x再减一，并发之后可能结果是x-1而不是x-2。</p>
-<p>不可重复读：一个事务未结束时，读到了另一个事务B修改了并提交的最新值。</p>
-<p>幻读：一个事务查询一批数据的过程中，这批数据被另一个事务新增或删除了一些数据（比如新增了几条数据），于是查询到了新的数据。</p>
-<p>不可重复读重点在修改，幻读重点在新增或删除。重点在行锁和表锁区别。</p>
-<h3 id="事务隔离级别">事务隔离级别</h3>
-<p>MySQL的InnoDB默认是可重复读</p>
-<p>读未提交：脏读，不可重复读，幻读</p>
-<p>读已提交：不可重复读，幻读</p>
-<p>可重复读：幻读（解决了单行的修改，但没解决表级别的增删）</p>
-<p>串行化：事务逐个执行，库锁</p>
-<p>大部分数据库是读已提交级别的事务（比如postgre）。</p>
-<p>mysql额外用了next key Lock，用行锁和间隙锁在可重复读的场景下避免了幻读。具体做法就是，锁了一行数据的前一条和后一条中间的范围。比如5、10、15三条数据，当10被事务读的时候，如果有一个事务插入一条数据8，则会触发间隙锁，插入8的事务会阻塞。这里和聚簇索引也有关系。</p>
-<h3 id="大表优化">大表优化</h3>
-<p>方向：单体变分布式-拆，限制结果数量</p>
-<p>1、查询时限制范围，分页</p>
-<p>2、读写分离，拆到多个机器上</p>
-<p>3、垂直拆分，把字段拆到不同的表中</p>
-<p>4、水平拆分，根据某些逻辑把数据分到不同的片区。比如地区信息做异地多活。</p>
-<h3 id="分库分表后的ID处理">分库分表后的ID处理</h3>
-<p>可转化为全局唯一ID问题：与消息中间件的消息防丢差不多。</p>
-<p>uuid、雪花、美团的leaf。</p>
-<h3 id="MySQL的一条查询SQL执行过程">MySQL的一条查询SQL执行过程</h3>
-<p>8.0没有查询缓存。</p>
-<p>1、语法分析：包括解析SQL语法的正确性，涉及到的表和字段是否存在</p>
-<p>2、准备阶段：会对查询进行逻辑优化，比如选择索引，去除不必要的子查询之类的。逻辑优化后还有物理优化，会根据统计信息和成本计算模型来确定具体的执行计划</p>
-<p>3、执行查询：由执行引擎和存储引擎交互产出查询结果</p>
-<p>4、结果返回：去重排序之类的处理，最终结果返回给客户端</p>
-<h3 id="varchar和char的区别">varchar和char的区别</h3>
-<p>varchar可变长度，char不可变，定长。</p>
-<p>比如varchar(30)的字段存一个字节长度为3的字符，实际空间占用可能为5或者6字节左右，因为有一定的空间用于存储其字段长度。</p>
-<p>char(30)的字段存同样的字符，那么固定占用30字节，后面空的会补零。</p>
-<p>char读写快，空间占用大。varchar省空间，读写慢。</p>
-<h3 id="int-11-的11含义">int(11)的11含义</h3>
-<p>不影响字段的存储范围，仅影响查询的展示效果。</p>
-<h3 id="MySQL的索引类型">MySQL的索引类型</h3>
-<p>主键索引：必须唯一，不可为空</p>
-<p>普通索引：允许重复和空</p>
-<p>唯一索引：值必须唯一，可以为空</p>
-<p>全文索引：只能在文本字段创建，用于加速like查询</p>
-<p>空间索引</p>
-<p>前缀索引</p>
-<p>单列和组合索引：最左匹配原则，优先用组合索引</p>
-<h3 id="什么场景不适合索引">什么场景不适合索引</h3>
-<p>1、经常更新的列</p>
-<p>2、内容大量重复的列</p>
-<p>3、表记录太少（不清楚具体是多少）</p>
-<p>4、写远大于读的表</p>
-<h3 id="MVCC">MVCC</h3>
-<p>多版本并发控制。用来解决读写冲突，是无锁并发。事务分配事务号（单向递增），每个修改保存一个版本。读只读老版本的数据，修改在新版本。可以同时避免脏读和不可重复读。</p>
-<p>实现：</p>
-<p>1、每行数据有一个版本链</p>
-<p>2、事务id，单调递增</p>
-<p>3、可见性判断，根据事务级别来判断是否可见</p>
-<p>4、过期数据清理</p>
-<p>级别和判断逻辑：</p>
-<p>读已提交：单行数据版本号小于当前事务版本号，并且此事务已提交，则可以看到</p>
-<p>可重复读：创建一致性视图，包含事务开始时所有可读的事务号。</p>
-<p>缺点，做不到串行化执行，在解决写冲突的时候还是要用锁或者重做</p>
-<h3 id="MySQL锁">MySQL锁</h3>
-<p>读锁和写锁（共享和排他）。</p>
-<p>按照粒度，可以划分为表锁和行锁。MyISAM是表级别的读写锁，InnoDB支持行锁。</p>
-<h3 id="锁升级">锁升级</h3>
-<p>行锁只能在索引上，没索引自动升级成表锁。</p>
-<p>没走索引时也会升级成表锁。比如非唯一索引相同的内容超过表的一半，优化器会选择不走索引。</p>
-<h3 id="乐观锁和悲观锁">乐观锁和悲观锁</h3>
-<p>悲观锁：倾向于一行数据总是会被同时修改，所以修改前加上排他锁</p>
-<p>乐观锁：倾向于一行数据不一定会被同时修改。加上版本号，类似MVCC，修改前读取版本号，修改后版本号+1，在更新版本号时做版本号检查，如果版本号和预期不符，说明此时有其他人修改了数据，否则就直接更新。乐观锁一般配合自旋，形成一个类似CAS的操作。</p>
-<h3 id="避免死锁">避免死锁</h3>
-<p>获取锁一定要加超时时间；</p>
-<p>按照固定顺序获取资源；</p>
-<p>事务尽量简短；</p>
-<p>事务隔离级别低一些；</p>
-<p>避免事务中的用户交叉；</p>
-<h3 id="索引注意事项">索引注意事项</h3>
-<p>1、where中使用!=、&lt;&gt;、or会导致放弃使用索引</p>
-<p>2、符合索引要复合最左前缀原则</p>
-<p>3、where中进行字段表达式运算、函数运算可能导致索引失效</p>
-<p>4、Like使用是%不能在前，模糊匹配可以用全文索引</p>
-<p>5、字段是字符串类型，必须加引号，否则索引失效</p>
-<h3 id="主键-索引">主键 索引</h3>
-<p>主键是唯一索引，唯一索引不一定是主键</p>
-<p>主键不允许空，唯一索引可以为空</p>
-<p>一个表只能有一个主键，但可以有多个唯一索引</p>
-<p>主键是约束，而唯一索引是冗余的数据结构</p>
-<h3 id="MySQL的高可用">MySQL的高可用</h3>
-<p>MySQL分库分表。</p>
-<p>意义不是很大，一般是整个系统都做高可用。</p>
-<h2 id="总结">总结</h2>
-<p>MySQL的MVCC机制是一个非常标准的实现，可以和我之前做的缓存框架结合起来，很多道理都是共通的。</p>
+    <title>Netty的FastThreadLocal带来了什么？</title>
+    <url>/2024/09/13/14-49-51/</url>
+    <content><![CDATA[<h2 id="和Netty的缘分">和Netty的缘分</h2>
+<p>要聊能力前，先聊聊我和Netty的缘分。</p>
+<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
+<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
+<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
+<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
+<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
+<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
+<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
+<h2 id="FastThreadLocal快在哪？">FastThreadLocal快在哪？</h2>
+<p>聊一个技术，总是得聊聊实现。</p>
+<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
+<p>然后再来聊聊其中的实现。</p>
+<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
+<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
+<p>它的get()过程是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
+<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
+<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
+<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>
+这样的话，它的get()过程就可以优化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
+<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
+<h2 id="带来了什么？">带来了什么？</h2>
+<p>终于讲到重点了。<br>
+FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
+<p>这带来了一些影响：<br>
+1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>
+2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
+<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
+<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
+<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
+<h2 id="感想">感想</h2>
+<p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>
+我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>
+不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
 ]]></content>
       <categories>
         <category>工作</category>
       </categories>
       <tags>
-        <tag>面试</tag>
+        <tag>工作总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Unsafe的使用记录</title>
+    <url>/2024/01/07/11-15-32/</url>
+    <content><![CDATA[<h2 id="什么是Unsafe">什么是Unsafe</h2>
+<p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
+<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
+<p>为何如此？</p>
+<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
+<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
+<h2 id="使用Unsafe">使用Unsafe</h2>
+<p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>但是也不麻烦，我们可以使用如下代码获取到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
+<h2 id="内存操作">内存操作</h2>
+<p>要说Unsafe提供最大的能力，就是内存操作了。</p>
+<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
+<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
+<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
+<p>那么我们看一下实际怎么操作内存：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
+<p>这种操作，几乎和C++程序是一致的了。</p>
+<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
+<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
+<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
+<h2 id="对象操作">对象操作</h2>
+<p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
+<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
+<p>首先来看一个Java对象的内存结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
+<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
+<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
+<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
+<p>下面看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
+<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
+<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
+<h2 id="CAS操作">CAS操作</h2>
+<p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
+<p>下面简单看一个api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
+<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
+<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
+<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
+<h2 id="版本支持">版本支持</h2>
+<p>还是要额外提一下关于Unsafe的版本支持问题。</p>
+<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
+<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
+<h2 id="总结">总结</h2>
+<p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
+<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
+<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>性能调优</tag>
       </tags>
   </entry>
   <entry>
@@ -1596,6 +1223,492 @@
       </tags>
   </entry>
   <entry>
+    <title>JRE环境使用Arthas</title>
+    <url>/2024/09/20/19-12-39/</url>
+    <content><![CDATA[<h2 id="场景">场景</h2>
+<p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
+<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
+<h2 id="解决方案">解决方案</h2>
+<p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
+<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
+<p>这里提供一个脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>最关键的就是脚本中最后的两句</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
+<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
+<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用浏览器发送POST请求</title>
+    <url>/2023/09/27/15-25-40/</url>
+    <content><![CDATA[<h2 id="场景">场景</h2>
+<p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
+<p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
+<h2 id="方式">方式</h2>
+<p>打开浏览器的console，写入js代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
+<p>表现如下：</p>
+<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
+<p>完事。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-Java基础</title>
+    <url>/2024/10/16/15-04-36/</url>
+    <content><![CDATA[<h2 id="语法基础">语法基础</h2>
+<h3 id="Java语言特点">Java语言特点</h3>
+<p>一次编译处处运行，天然具有跨平台的能力。只要不用JNI。</p>
+<p>开源社区资源丰富，活跃。</p>
+<p>适合企业级开发，多方面：有Spring为主流的开源框架，大型项目的构建和维护的成本较低。语言的规范性强。</p>
+<h3 id="基本类型和包装类型">基本类型和包装类型</h3>
+<p>byte、char、boolean、short、int、float、long、double</p>
+<p>基本类型不是对象，包装类型是对象。使用时有自动的拆装箱机制。但编码过程中如果可以用基本类型的建议还是用基本类型。</p>
+<p>区别在于对象是有对应的Class类，这些类信息会记录在JVM的ClassLoader中。对象有对象头。</p>
+<p>字节码的方法签名，基本类型是BCJFI之类的大写字母，对象是L加全限定类名。</p>
+<h3 id="instance-of">instance of</h3>
+<p>检测对象是否是某个类型的实例。可以用来检测对象是否实现了某个接口。</p>
+<p>HashMap中有使用到，用来检测当前节点的实现是链表还是红黑树。</p>
+<h3 id="重写和重载">重写和重载</h3>
+<p>重写建议加@Override注解，标明该方法是重写方法。</p>
+<p>重写发生在子类重写了父类的同名且参数完全一致的方法，或者是实现了某个接口的方法。有重写就一定是有extend或者impliment。</p>
+<p>重载是同名方法用不同的参数实现。同名方法的方法签名是不一样的。</p>
+<h3 id="equals和">equals和==</h3>
+<p>==是比较两个变量所指向的内存地址是否相同，其实是个指针操作。基本类型就相当于值比较。</p>
+<p>equals是Object类的一个方法，Object类中的实现就是==。一般不同的类会有不同的实现，String的实现就是逐个比较字符值是否相等。</p>
+<h3 id="四种引用">四种引用</h3>
+<p>强引用：使用最多的引用，默认就是强引用。</p>
+<p>软引用：缓存会用。可能会被回收，优先级在弱引用之后。</p>
+<p>弱引用：young GC时必定会回收。</p>
+<p>虚引用：这个引用不会影响GC，需要有其他引用方式指向这个对象。</p>
+<h3 id="Cleaner">Cleaner</h3>
+<p>Cleaner机制用到了虚引用。Cleaner继承了虚引用，GC后，所有的cleaner会被回收到一个pending队列，reference handler线程会调用这个pending队列中的对象，会检测下是不是Cleaner对象，是的话就直接调用Cleaner的clean方法。</p>
+<h3 id="Exception和Error">Exception和Error</h3>
+<p>都是Throwable的实现类。</p>
+<p>运行时异常不用显式地catch。被检查异常需要catch或向上抛出。</p>
+<p>Error是非常严重的错误，可能宕机。但是不需要显式抛出。</p>
+<h2 id="数据结构">数据结构</h2>
+<h3 id="HashMap">HashMap</h3>
+<p>线程不安全。</p>
+<p>put：hash之后找到数组中的对应位置，如果为空直接塞；不为空说明哈希冲突，检查一下当前的数据结构，按照数据结构来添加这个对象，可能是替换也可能是新增。</p>
+<h3 id="LinkedList">LinkedList</h3>
+<p>双向链表，线程不安全。</p>
+<h3 id="阻塞队列">阻塞队列</h3>
+<p>阻塞队列的经典实现：ArrayBlockQueue，LinkedBlockQueue</p>
+<p>用了大小堆的priority queue</p>
+<p>阻塞队列的锁就是线程池的锁。所以阻塞队列的性能也一定程度上决定了线程池的性能。举例：Disruptor、参考Disruptor实现了自己的阻塞队列。</p>
+<p>阻塞队列可以当做对象池来用。</p>
+<h2 id="JVM">JVM</h2>
+<h3 id="JVM内存模型">JVM内存模型</h3>
+<p>线程独占的：栈，本地方法栈，程序计数器</p>
+<p>线程共享的：堆，方法区</p>
+<p>栈：存储局部变量，操作栈，动态链接，方法出口。调用一个方法时入栈，方法返回出栈。</p>
+<p>本地方法栈：Native方法的栈</p>
+<p>程序计数器：当前程序执行的字节码位置。也就是打印异常堆栈时看到的执行到第几行出错。执行到native方法时，程序计数器清空，因为不是在执行字节码了。</p>
+<p>堆：存储对象实例，线程共享。会垃圾回收。</p>
+<p>方法区：虚拟机加载的类信息，常量，静态变量，JIT优化后的代码。总之就是些全局的信息。</p>
+<h3 id="内存可见性">内存可见性</h3>
+<p>也就是为什么要volatile关键字。</p>
+<p>线程执行时，会拷贝一份线程间的共享变量至线程的工作内存。拷贝的数据可能已经被其他线程修改了，导致执行结果错误。</p>
+<p>volatile会在共享变量修改时，强制同步一份副本至所有涉及到的线程的工作空间。</p>
+<h3 id="类加载和卸载">类加载和卸载</h3>
+<p>加载字节码文件到内存-&gt;验证并解析为Class类，创建静态变量执行静态代码块-&gt;实例化-&gt;GC</p>
+<h3 id="三种加载器">三种加载器</h3>
+<p>JAVA_HOME/lib: Bootstrap ClassLoader</p>
+<p>JAVA_HOME/lib/ext: Extension ClassLoader</p>
+<p>Application ClassLoader</p>
+<h3 id="双亲委派">双亲委派</h3>
+<p>加载器加载一个类时，先委托给父类加载器。父类无法加载才会自己加载。</p>
+<p>主要是为了避免同一个类被多个加载器重复加载。已经避免Java的核心类被修改。</p>
+<h3 id="回收算法G1">回收算法G1</h3>
+<p>高频率回收，减少每次的停顿。</p>
+<p>分老年代和年轻代。分块region，年轻代和老年代都由若干个分块组成。</p>
+<p>年轻代使用并行的复制和收集算法。</p>
+<p>mix-GC会回收一部分老年代。</p>
+<p>标记清除算法：STW进行初始标记，确实GC root可直达的对象，伴随一次young GC。然后GC线程和应用线程并行进行并发标记，尽可能标记出存活对象，使用SATB记录对象的引用关系。最终标记，STW，修改并发标记的错误。然后多线程进行GC。</p>
+<h3 id="ZGC">ZGC</h3>
+<p>低延时垃圾收集器。</p>
+<h3 id="Full-GC">Full GC</h3>
+<p>当老年代满时会进行，耗时长。需要避免。</p>
+<h3 id="对象分配原则">对象分配原则</h3>
+<p>新对象优先在eden区，如果大于survivor的二分之一就认定为大对象，直接晋升老年代。</p>
+<p>对象没存活过一次young GC，年龄+1，到达一定年龄（默认15）就晋升老年代。</p>
+<p>Survivor区中同年龄对象的总和大小超过一半，这个年龄以及这个年龄以上的对象进入老年代。</p>
+<h3 id="对象的创建过程">对象的创建过程</h3>
+<p>先去常量池找类信息，然后加载类信息，找不到就报ClassNotFound。</p>
+<p>为对象分配内存，将除了对象头之外的内存块初始化为0。</p>
+<p>设置对象头。</p>
+<h3 id="对象结构">对象结构</h3>
+<p>对象头12字节，数组16字节。</p>
+<p>对象信息，基础类型直接在对象内存存储。</p>
+<p>Java会自动排列对象中的Field顺序以更好地满足8字节对齐。</p>
+<h3 id="对象头的内容">对象头的内容</h3>
+<p>4字节的hashcode</p>
+<p>2字节的分代年龄</p>
+<p>1字节偏向锁</p>
+<p>1字节锁标志</p>
+<p>4字节的对象类型指针，指向Class类信息</p>
+<p>数组的话还有4字节的数组长度</p>
+<h3 id="常见的调优工具">常见的调优工具</h3>
+<p>jps：展示所有的java进程</p>
+<p>jstat：查看虚拟机运行状态</p>
+<p>jmap：主要用于dump</p>
+<p>jstack：生成线程快照</p>
+<p>jinfo：实时查看和修改JVM参数</p>
+<p>MAT：dump文件分析</p>
+<p>visualVM：自带可视化界面</p>
+<p>arthas：阿里开源的运行时诊断工具</p>
+<h2 id="多线程">多线程</h2>
+<h3 id="怎么创建线程">怎么创建线程</h3>
+<p>只有new Thread()才算创建了一个新线程。其他的方式比如实现Runnable接口Callable接口之类的都没有新线程产生。</p>
+<p>Runnable接口Callable接口本质是一个task，需要提交给线程才能执行。</p>
+<h3 id="如何停止一个线程">如何停止一个线程</h3>
+<p>最佳是用退出标志，完成当前方法后当前线程终止。</p>
+<p>推荐调用interrupt，会抛出interrupt异常。</p>
+<p>stop可以强行终止，不推荐。</p>
+<h3 id="notify和notifyAll有什么区别">notify和notifyAll有什么区别</h3>
+<p>notify可能死锁，notifyAll不会。</p>
+<p>假如有多个线程正在wait，会要求notify唤醒的任意一个线程可以处理接下来的逻辑，否则就会死锁。</p>
+<p>如果无法正确处理，则应该继续notify下一个，并让自己进入wait状态。</p>
+<p>notifyAll唤醒所有线程，但是争抢锁还是无序的。</p>
+<h3 id="sleep和wait有什么区别">sleep和wait有什么区别</h3>
+<p>sleep在线程类中，wait在Object类。</p>
+<p>sleep不释放锁，会让出cpu。</p>
+<p>wait会释放锁，并且让出cpu。调用wait后，会释放线程持有的所有对象锁，然后进入对象的等待区。只有针对此对象调用notify或notifyAll后，才会获取对象锁进入运行状态。</p>
+<h3 id="volatile">volatile</h3>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-Spring</title>
+    <url>/2024/10/16/11-43-17/</url>
+    <content><![CDATA[<h2 id="Spring篇">Spring篇</h2>
+<p>Spring是一个Java开发框架，主要是解决企业级开发的一些痛点。一开始可能主要是用于Web应用的开发，但目前实践中它已经在国内Java后端开发这方面一统江湖。</p>
+<p>它把各种业务逻辑都抽象封装为Bean，Spring负责项目启动时把这些Bean创建出来，进行业务开发的时候只需要通过Spring提供的API或其他方式，获取到对应的Bean就可以执行各种复杂业务操作。</p>
+<h3 id="为什么是Spring">为什么是Spring</h3>
+<p>轻量。</p>
+<p>IOC，控制反转。业务开发不用关注对象创建之类的事情，只需要编码，并给出依赖，框架会自动帮你找到对应的实现类。</p>
+<p>AOP，面向切面编程。</p>
+<p>事务管理。</p>
+<p>异常处理。</p>
+<h3 id="Autowired和Resource的区别">Autowired和Resource的区别</h3>
+<p>Autowired是Spring提供的注解，Resource是javax的注解。Spring是支持了javax提供的标准注解，是标准的一个实现。</p>
+<p>假如换了框架（一般不会），Autowired必定不可用，Resource可能还能用。</p>
+<p>Autowired默认按照type类装配，默认要求对象必须存在且唯一。可以用Qualifier来指定BeanName。</p>
+<p>Resource注解提供了type和name两个注解字段。name的优先级高于type。</p>
+<h3 id="依赖注入的方式">依赖注入的方式</h3>
+<p>构造器、setter、接口。反射注入</p>
+<h3 id="Spring-MVC">Spring MVC</h3>
+<p>Spring MVC是Spring的一个模块，针对web应用的场景。</p>
+<p>V不是普遍意义上的前端，而是用jsp或其他方式渲染的一个页面。</p>
+<p>M是逻辑层，做计算和数据库操作。C是控制层，负责接收网络请求。</p>
+<p>Spring在Servlet的基础上实现，定义了一个统一的请求接收入口：DispatcherServlet。DispatcherServlet会根据url和请求类型分发请求到用户编码的Controller中，然后执行用户的逻辑。</p>
+<p>常用注解：@RequestMapping、@RequestBody、@ResponseBody</p>
+<h3 id="AOP">AOP</h3>
+<p>把一些业务无关，在系统层面共通的逻辑封装起来，从而减少代码冗余，有利于代码的扩展性和维护性。比如参数校验、日志采集、权限控制。</p>
+<p>Spring的AOP是基于动态代理实现的。对于已经实现了接口的，用JDK动态代理，创建一个接口的实现类然后代理。没有实现的，用CGlib，创建一个类的子类然后代理。</p>
+<p>也可以用AspectJ实现自己的AOP逻辑。</p>
+<p>Spring的AOP属于运行时增强，AspectJ的AOP是编译时增强。AspectJ是字节码操作，性能稍高。</p>
+<h3 id="关注点和横切关注点">关注点和横切关注点</h3>
+<p>关注点是某个特定的业务功能，横切关注点是多个业务都会用到的系统功能，比如日志、参数校验、权限。</p>
+<h3 id="什么是通知advice">什么是通知advice</h3>
+<p>方法执行前和后要做的逻辑处理。</p>
+<p>before</p>
+<p>after</p>
+<p>after-returning</p>
+<p>after-throwing</p>
+<p>around</p>
+<p>这个结果处理和Spring WebFlux中的回调很像。</p>
+<h3 id="IOC">IOC</h3>
+<p>控制反转，把创建对象的权利移交给框架。</p>
+<p>对象不需要程序自己去new，而是通过依赖注入从框架中获取。</p>
+<p>IOC让组件保持松散的耦合，从而创造了可以进行AOP编程的余地。</p>
+<h3 id="Spring-Bean生命周期">Spring Bean生命周期</h3>
+<p>Servlet：实例化、初始化、接收请求、销毁。</p>
+<p>Bean：</p>
+<p>1、配置扫描，创建BeanDefinition，构建BeanFactory。</p>
+<p>2、实例化：启动时的第一步。当BeanFactory被请求一个未实例化的Bean时，会调用createBean方法实例化一个Bean。</p>
+<p>3、依赖注入：实例化之后的对象在BeanWrapper中，Spring通过BeanDefinition的配置进行依赖注入。这里会先找这个Bean的依赖所对应的BeanFactory，然后提供一个实例化Bean进行依赖注入。</p>
+<p>4、处理Aware接口：BeanNameAware、BeanFactoryAware、ApplicationContextAware</p>
+<p>5、BeanPostProcessor的postProcessBeforeInitialization方法</p>
+<p>6、InitializingBean的afterPropertiesSet</p>
+<p>7、BeanPostProcessor的postProcessAfterInitialization方法</p>
+<p>8、scope为singleton的缓存在容器，prototype的返回最开始请求的客户端。</p>
+<p>9、销毁，调用DisposableBean的afterPropertiesSet</p>
+<h3 id="Bean的作用域">Bean的作用域</h3>
+<p>1、singleton：单例</p>
+<p>2、prototype：每个Bean一个实例</p>
+<p>3、request：每个网络请求一个实例</p>
+<p>4、session：每个session一个实例</p>
+<p>5、globe-session</p>
+<h3 id="Spring的设计模式">Spring的设计模式</h3>
+<p>简单工厂模式：Bean的创建</p>
+<p>单例模式：单例的Bean</p>
+<p>代理模式：AOP的实现</p>
+<p>适配器：Adapter，Spring中以Adapter结尾的一般都是适配器模式。比如AdvisorAdapter</p>
+<p>观察者模式：Spring事件</p>
+<p>模版模式：JdbcTemplate</p>
+<h3 id="ApplicationContext和BeanFactory">ApplicationContext和BeanFactory</h3>
+<p>BeanFactory是基础接口，只提供最基础的Bean管理功能，在spring-beans包中。</p>
+<p>ApplicationContext继承了BeanFactory，并且扩展了事务管理、国际化、AOP。</p>
+<p>BeanFactory是延迟加载，而ApplicationContext是启动时实例化所有的Bean。</p>
+<h3 id="Spring的单例Bean是线程安全的吗">Spring的单例Bean是线程安全的吗</h3>
+<p>是否线程安全和单例无关。Spring本身没有对Bean做任何并发的保护，这也不是Spring应该关心的东西。是否线程安全由开发者来保证。</p>
+<h3 id="循环依赖怎么解决">循环依赖怎么解决</h3>
+<p>三级缓存</p>
+<p>第一级缓存是初始化完成的Bean；第二级是完成了实例化，但是没有完成依赖注入的Bean；第三级是没实例化的Bean，存放其BeanFactory。</p>
+<p>假设有两个Bean A、B，AB循环依赖</p>
+<p>1、Bean都是由BeanFactory创建，A的BeanFactory会先实例化A，放入二级缓存，随后进行依赖注入。</p>
+<p>2、A的BeanFactory通过依赖找到了B，先从一级缓存找，一路找到三级缓存，最后找到了B的BeanFactory。这时候B没有创建，所以用B的BeanFactory创建B。BeanFactory会先创建一个B的实例，这样在二级缓存就有了一个B的实例，然后进行依赖注入。</p>
+<p>3、B在依赖注入的时候会在二级缓存找到A，这时会直接获取A的实例注入B，这样就完成B的依赖注入。B完成创建后放入一级缓存，然后把B通过BeanFactory的方法返回给A，A就可以继续进行依赖注入。</p>
+<h3 id="Spring事务隔离级别">Spring事务隔离级别</h3>
+<p>同数据库的级别：读未提交、读已提交、可重复读、串行化</p>
+<h3 id="Spring事务传播级别">Spring事务传播级别</h3>
+<p>PROPAGATION_REQUIRED：有事务就加入，没有就创建</p>
+<p>PROPAGATION_SUPPORTS：有就加入，没有就不加事务</p>
+<p>PROPAGATION_MANDATORY：有就加入，没有就抛异常</p>
+<p>PROPAGATION_REQUIRES_NEW：永远创建一个新的事务执行</p>
+<p>PROPAGATION_NOT_SUPPORTED：永远不以事务执行</p>
+<p>PROPAGATION_NEVER：有事务就抛异常</p>
+<p>PROPAGATION_NESTED：有事务就创建嵌套事务，没有就创建</p>
+<h3 id="Spring事务实现">Spring事务实现</h3>
+<p>编程式事务、声明式事务。</p>
+<p>PlatformTransactionManager中定义了事务的开始、提交、回滚等操作。不同数据库会有不同实现。</p>
+<h3 id="Spring事务管理优点">Spring事务管理优点</h3>
+<p>抽象了统一的接口。支持声明式事务管理。</p>
+<p>可以和Spring多数据源结合。</p>
+<h3 id="事务三要素">事务三要素</h3>
+<p>数据源：事务的真正处理者。</p>
+<p>事务管理器：处理事务的打开、提交、回滚。</p>
+<p>事务应用和配置：表明哪些方法参与事务，事务的隔离级别，传播级别，超时时间。</p>
+<h3 id="事务注解的本质">事务注解的本质</h3>
+<p>@Transactional仅仅是一些元数据，这里通过AOP的方式，将元信息传递事务管理器，事务管理器再提交给数据源实现具体的事务。</p>
+<p>其实就相当于在方法前后加了一些事务的代码。</p>
+<h2 id="Spring-Boot篇">Spring Boot篇</h2>
+<h3 id="为什么是Spring-Boot">为什么是Spring Boot</h3>
+<p>独立运行：内嵌了tomcat、Jetty。不需要打成war包部署到容器。可以打成独立的Jar包运行。</p>
+<p>配置简化，自动装配：能根据当前路径下的类、jar来自动配置bean。</p>
+<p>无代码生成：配置过程中没有代码生成，没有xml配置文件，都是基于条件注解完成。</p>
+<p>监控：默认就提供了很多监控端点。</p>
+<p>Spring Boot大量使用了注解来驱动开发。</p>
+<h3 id="核心注解">核心注解</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@SpringBootConfiguration</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@ComponentScan</span><br></pre></td></tr></table></figure>
+<h3 id="如何理解starters">如何理解starters</h3>
+<p>一个把所有依赖都集成在一起的依赖包，简化引入的成本。</p>
+<h3 id="如何在启动时执行一些特殊的逻辑">如何在启动时执行一些特殊的逻辑</h3>
+<p>ApplicationRunner，CommandLineRunner。</p>
+<p>ApplicationRunner有一个实现，是在启动时把程序的pid打印到一个文件中，方便运维。</p>
+<h3 id="监视器-actuator">监视器 actuator</h3>
+<p>actuator会对外暴露一些端点，可以通过配置的方式管理这些端点（endpoint）。这是能让用户来访问和监控程序当前的运行状态。配合运维平台使用。</p>
+<h3 id="异常处理">异常处理</h3>
+<p>ControllerAdvice，可以用来处理所有的异常，封装为统一的异常信息返回。</p>
+<h3 id="配置加载顺序">配置加载顺序</h3>
+<p>Spring Boot的配置加载顺序和其优先级一致。</p>
+<p>1、命令行，–大于-D</p>
+<p>2、Java系统属性，System.getProperties。</p>
+<p>3、环境变量</p>
+<p>4、yml文件</p>
+<p>5、默认配置</p>
+<h3 id="application和bootstrap文件">application和bootstrap文件</h3>
+<p>老版本Spring Cloud Alibaba的Nacos只能使用bootstrap文件，后面版本修改了。</p>
+<h3 id="自动装配">自动装配</h3>
+<p>自动装配就是把第三方的Bean装载到Spring的容器里。以前是需要开发人员写xml才能把这些Bean装载到容器的。</p>
+<p>原理：第三方组件定义了Configuration类，在其中声明了需要装载的Bean对象，同时也在这个类里定义了一些自动装配的规则。Spring在启动时通过META-INF/spring.factories文件找到对应的配置类，然后对这些配置类进行动态加载。</p>
+<h2 id="Spring-Cloud篇">Spring Cloud篇</h2>
+<h3 id="为什么是Spring-Cloud">为什么是Spring Cloud</h3>
+<p>是用于构建分布式应用的开源框架。基于Spring Boot，提供与外部系统集成的能力。国内有很多二开的框架，比如Spring Cloud Alibaba，TSF，Spring Cloud Huawei。</p>
+<h3 id="什么是微服务">什么是微服务</h3>
+<p>一种架构。将单一功能的应用程序划分为一组小的服务，每个服务独立运行，服务之间相互协调、配合，最终实现一个业务功能。</p>
+<p>服务之间使用轻量级的通讯机制（通常是http，但是dubbo之类的也可以）。</p>
+<p>需要有一个中心来集中化管理这些服务。</p>
+<h3 id="服务熔断和降级">服务熔断和降级</h3>
+<p>分布式的场景下，某个服务出现异常，当检测到这种情况后，可以切断对该服务的调用。等到服务正常以后，再恢复服务。这就是熔断。</p>
+<p>降级是是指服务熔断以后，如果还有对该服务的调用，直接失败。</p>
+<h3 id="eureka-zookeeper-nacos">eureka zookeeper nacos</h3>
+<p>Eureka的高可用机制比较完善，可以保证服务随时可用。</p>
+<p>zookeeper对于多节点的数据一致性处理比较完善，可以用于主从选举。zk其实为了分布式协调而设计的，比如分布式锁、选举都可以用zk来做。</p>
+<p>nacos提供了可视化界面，同时支持服务注册发现和配置下发，一个人干了两个人的活。</p>
+<h3 id="Spring-Boot-Spring-Cloud">Spring Boot Spring Cloud</h3>
+<p>Spring Boot是专注于开发单个微服务。</p>
+<p>Spring Cloud是关注分布式系统的，分布式系统可以是多个Spring Boot开发的微服务的集合，Spring Cloud用于提供微服务之间调用、微服务的配置获取、服务注册、路由等。</p>
+<h3 id="负载均衡">负载均衡</h3>
+<p>某个服务可能有多个实例，调用该服务时，每个请求会分发到不同的实例处理，有助于提高服务的吞吐量。</p>
+<h3 id="Feign">Feign</h3>
+<p>Feign是一个HTTP请求客户端，提供了声明式的调用方式。主要是通过JDK动态代理实现。它整合了负载均衡的能力（Spring Cloud LoadBalance）</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试笔记-数据库</title>
+    <url>/2024/10/14/13-48-06/</url>
+    <content><![CDATA[<h2 id="知识点">知识点</h2>
+<h3 id="三范式">三范式</h3>
+<p>第一范式：列不可再分；</p>
+<p>第二范式：表中的每一行都可以唯一区分，通过主键实现；</p>
+<p>第三范式：（用于避免数据冗余，减少内存占用，实践中常被忽视）表的非主键字段不能依赖于其他非主键字段；比如学生表，里边有班级名称字段和辅导员名称字段，那么班级和辅导员会大量重复，应当拆分出班级表和辅导员表。</p>
+<h3 id="MySQL的存储引擎">MySQL的存储引擎</h3>
+<p>MyISAM、InnoDB、Memory</p>
+<p>MyISAM：全表锁，没有事务和外键，单表执行性能高，并发性能差，空间占用小。</p>
+<p>InnoDB：行锁，有事务，支持自增序列，支持外键，并发性能高，空间占用大。</p>
+<p>Memory：纯内存。</p>
+<h3 id="InnoDB和MyISAM">InnoDB和MyISAM</h3>
+<p>InnoDB支持事务，默认是每一条SQL都封装为一个事务。MyISAM没有事务。</p>
+<p>InnoDB有外键，MyISAM没有。</p>
+<p>InnoDB是行锁，MyISAM是表锁，InnoDB并发场景性能会好一些。</p>
+<p>InnoDB是聚集索引，必须有主键。在表上建立的其他索引，都是指向主键。通过其他索引查询时，先经过索引查到主键，再通过主键查找数据。MyISAM是非聚集索引，主键和索引都是直接指向数据指针，主键和索引相互独立。</p>
+<p>InnoDB不保存表的行数，计算行数时要全表扫描。MyISAM保存了表的行数。</p>
+<h3 id="数据库事务">数据库事务</h3>
+<p>ACID：atomic、consistency、isolation、durability</p>
+<p>原子性：一个事务内的多个操作可以看成一个原子操作，即要么成功要么失败。事务中任意一个操作失败了都会回滚到没有开始事务之前的状态。</p>
+<p>一致性：事务操作的结果和业务规则是一致的。即事务成功时，可以达成操作者目的。</p>
+<p>隔离性：多个事务之间互相数据隔离，彼此没有影响。</p>
+<p>持久性：事务完成后会持久化到数据库。</p>
+<h3 id="索引是什么">索引是什么</h3>
+<p>官方：一种帮助MySQL快速获取数据的数据结构。</p>
+<p>类似目录，默认是B+树实现。</p>
+<h3 id="索引的优缺点">索引的优缺点</h3>
+<p>优点：提升查询速度。</p>
+<p>缺点：索引也有空间占用，更新速度变慢，因为表更新的时候索引也要更新。</p>
+<h3 id="SQL优化">SQL优化</h3>
+<p>原则：避免全表扫描，查询时尽量走索引。少于三张表的查询允许关联，关联不了就走子查询。</p>
+<p>1、尽量不要用select *</p>
+<p>2、减少子查询，用少于三张表的关联查询替代</p>
+<p>3、少用in和not in，因为绝对可以用exists和not exists替代</p>
+<p>4、where子句中慎用!=，走不到索引</p>
+<p>5、少用or，走不到索引</p>
+<p>6、少用null判断，走不到索引</p>
+<h3 id="drop、delete和truncate">drop、delete和truncate</h3>
+<p>drop和truncate不能回滚，不在事务中。delete是在事务中，提交时才生效。</p>
+<p>drop删的最多，会删表结构，可以重新建同名表，及时生效不在事务中。</p>
+<p>truncate其次，对比drop是少删表结构，仅删除数据，还是不在事务中。</p>
+<p>delete再次，仅删除表数据，会在事务中，事务提交后才生效。</p>
+<h3 id="视图">视图</h3>
+<p>理解为虚拟表。类似函数封装的概念。</p>
+<p>可以封装复杂查询的结果。</p>
+<p>可以用来做权限隔离，比如仅展示某几个字段给特定用户。</p>
+<p>底层表有改动，比如拆分了，可以建一个视图，避免上层应用修改SQL。</p>
+<h3 id="并发事务的问题">并发事务的问题</h3>
+<p>脏读：一个事务读到了另一个事务修改了但未提交的数据。</p>
+<p>修改丢失：两个事务同时修改了同一个值，后一个覆盖了前一个。比如两个事务同时做x-1，先读x再减一，并发之后可能结果是x-1而不是x-2。</p>
+<p>不可重复读：一个事务未结束时，读到了另一个事务B修改了并提交的最新值。</p>
+<p>幻读：一个事务查询一批数据的过程中，这批数据被另一个事务新增或删除了一些数据（比如新增了几条数据），于是查询到了新的数据。</p>
+<p>不可重复读重点在修改，幻读重点在新增或删除。重点在行锁和表锁区别。</p>
+<h3 id="事务隔离级别">事务隔离级别</h3>
+<p>MySQL的InnoDB默认是可重复读</p>
+<p>读未提交：脏读，不可重复读，幻读</p>
+<p>读已提交：不可重复读，幻读</p>
+<p>可重复读：幻读（解决了单行的修改，但没解决表级别的增删）</p>
+<p>串行化：事务逐个执行，库锁</p>
+<p>大部分数据库是读已提交级别的事务（比如postgre）。</p>
+<p>mysql额外用了next key Lock，用行锁和间隙锁在可重复读的场景下避免了幻读。具体做法就是，锁了一行数据的前一条和后一条中间的范围。比如5、10、15三条数据，当10被事务读的时候，如果有一个事务插入一条数据8，则会触发间隙锁，插入8的事务会阻塞。这里和聚簇索引也有关系。</p>
+<h3 id="大表优化">大表优化</h3>
+<p>方向：单体变分布式-拆，限制结果数量</p>
+<p>1、查询时限制范围，分页</p>
+<p>2、读写分离，拆到多个机器上</p>
+<p>3、垂直拆分，把字段拆到不同的表中</p>
+<p>4、水平拆分，根据某些逻辑把数据分到不同的片区。比如地区信息做异地多活。</p>
+<h3 id="分库分表后的ID处理">分库分表后的ID处理</h3>
+<p>可转化为全局唯一ID问题：与消息中间件的消息防丢差不多。</p>
+<p>uuid、雪花、美团的leaf。</p>
+<h3 id="MySQL的一条查询SQL执行过程">MySQL的一条查询SQL执行过程</h3>
+<p>8.0没有查询缓存。</p>
+<p>1、语法分析：包括解析SQL语法的正确性，涉及到的表和字段是否存在</p>
+<p>2、准备阶段：会对查询进行逻辑优化，比如选择索引，去除不必要的子查询之类的。逻辑优化后还有物理优化，会根据统计信息和成本计算模型来确定具体的执行计划</p>
+<p>3、执行查询：由执行引擎和存储引擎交互产出查询结果</p>
+<p>4、结果返回：去重排序之类的处理，最终结果返回给客户端</p>
+<h3 id="varchar和char的区别">varchar和char的区别</h3>
+<p>varchar可变长度，char不可变，定长。</p>
+<p>比如varchar(30)的字段存一个字节长度为3的字符，实际空间占用可能为5或者6字节左右，因为有一定的空间用于存储其字段长度。</p>
+<p>char(30)的字段存同样的字符，那么固定占用30字节，后面空的会补零。</p>
+<p>char读写快，空间占用大。varchar省空间，读写慢。</p>
+<h3 id="int-11-的11含义">int(11)的11含义</h3>
+<p>不影响字段的存储范围，仅影响查询的展示效果。</p>
+<h3 id="MySQL的索引类型">MySQL的索引类型</h3>
+<p>主键索引：必须唯一，不可为空</p>
+<p>普通索引：允许重复和空</p>
+<p>唯一索引：值必须唯一，可以为空</p>
+<p>全文索引：只能在文本字段创建，用于加速like查询</p>
+<p>空间索引</p>
+<p>前缀索引</p>
+<p>单列和组合索引：最左匹配原则，优先用组合索引</p>
+<h3 id="什么场景不适合索引">什么场景不适合索引</h3>
+<p>1、经常更新的列</p>
+<p>2、内容大量重复的列</p>
+<p>3、表记录太少（不清楚具体是多少）</p>
+<p>4、写远大于读的表</p>
+<h3 id="MVCC">MVCC</h3>
+<p>多版本并发控制。用来解决读写冲突，是无锁并发。事务分配事务号（单向递增），每个修改保存一个版本。读只读老版本的数据，修改在新版本。可以同时避免脏读和不可重复读。</p>
+<p>实现：</p>
+<p>1、每行数据有一个版本链</p>
+<p>2、事务id，单调递增</p>
+<p>3、可见性判断，根据事务级别来判断是否可见</p>
+<p>4、过期数据清理</p>
+<p>级别和判断逻辑：</p>
+<p>读已提交：单行数据版本号小于当前事务版本号，并且此事务已提交，则可以看到</p>
+<p>可重复读：创建一致性视图，包含事务开始时所有可读的事务号。</p>
+<p>缺点，做不到串行化执行，在解决写冲突的时候还是要用锁或者重做</p>
+<h3 id="MySQL锁">MySQL锁</h3>
+<p>读锁和写锁（共享和排他）。</p>
+<p>按照粒度，可以划分为表锁和行锁。MyISAM是表级别的读写锁，InnoDB支持行锁。</p>
+<h3 id="锁升级">锁升级</h3>
+<p>行锁只能在索引上，没索引自动升级成表锁。</p>
+<p>没走索引时也会升级成表锁。比如非唯一索引相同的内容超过表的一半，优化器会选择不走索引。</p>
+<h3 id="乐观锁和悲观锁">乐观锁和悲观锁</h3>
+<p>悲观锁：倾向于一行数据总是会被同时修改，所以修改前加上排他锁</p>
+<p>乐观锁：倾向于一行数据不一定会被同时修改。加上版本号，类似MVCC，修改前读取版本号，修改后版本号+1，在更新版本号时做版本号检查，如果版本号和预期不符，说明此时有其他人修改了数据，否则就直接更新。乐观锁一般配合自旋，形成一个类似CAS的操作。</p>
+<h3 id="避免死锁">避免死锁</h3>
+<p>获取锁一定要加超时时间；</p>
+<p>按照固定顺序获取资源；</p>
+<p>事务尽量简短；</p>
+<p>事务隔离级别低一些；</p>
+<p>避免事务中的用户交叉；</p>
+<h3 id="索引注意事项">索引注意事项</h3>
+<p>1、where中使用!=、&lt;&gt;、or会导致放弃使用索引</p>
+<p>2、符合索引要复合最左前缀原则</p>
+<p>3、where中进行字段表达式运算、函数运算可能导致索引失效</p>
+<p>4、Like使用是%不能在前，模糊匹配可以用全文索引</p>
+<p>5、字段是字符串类型，必须加引号，否则索引失效</p>
+<h3 id="主键-索引">主键 索引</h3>
+<p>主键是唯一索引，唯一索引不一定是主键</p>
+<p>主键不允许空，唯一索引可以为空</p>
+<p>一个表只能有一个主键，但可以有多个唯一索引</p>
+<p>主键是约束，而唯一索引是冗余的数据结构</p>
+<h3 id="MySQL的高可用">MySQL的高可用</h3>
+<p>MySQL分库分表。</p>
+<p>意义不是很大，一般是整个系统都做高可用。</p>
+<h2 id="总结">总结</h2>
+<p>MySQL的MVCC机制是一个非常标准的实现，可以和我之前做的缓存框架结合起来，很多道理都是共通的。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面试笔记-网络协议</title>
     <url>/2024/10/14/13-41-52/</url>
     <content><![CDATA[<h3 id="HTTP响应码">HTTP响应码</h3>
@@ -1700,119 +1813,6 @@
       </categories>
       <tags>
         <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Netty的FastThreadLocal带来了什么？</title>
-    <url>/2024/09/13/14-49-51/</url>
-    <content><![CDATA[<h2 id="和Netty的缘分">和Netty的缘分</h2>
-<p>要聊能力前，先聊聊我和Netty的缘分。</p>
-<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
-<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
-<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
-<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
-<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
-<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
-<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
-<h2 id="FastThreadLocal快在哪？">FastThreadLocal快在哪？</h2>
-<p>聊一个技术，总是得聊聊实现。</p>
-<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
-<p>然后再来聊聊其中的实现。</p>
-<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
-<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
-<p>它的get()过程是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
-<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
-<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
-<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>
-这样的话，它的get()过程就可以优化为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
-<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
-<h2 id="带来了什么？">带来了什么？</h2>
-<p>终于讲到重点了。<br>
-FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
-<p>这带来了一些影响：<br>
-1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>
-2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
-<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
-<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
-<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
-<h2 id="感想">感想</h2>
-<p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>
-我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>
-不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>工作总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Unsafe的使用记录</title>
-    <url>/2024/01/07/11-15-32/</url>
-    <content><![CDATA[<h2 id="什么是Unsafe">什么是Unsafe</h2>
-<p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
-<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
-<p>为何如此？</p>
-<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
-<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
-<h2 id="使用Unsafe">使用Unsafe</h2>
-<p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>但是也不麻烦，我们可以使用如下代码获取到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
-<h2 id="内存操作">内存操作</h2>
-<p>要说Unsafe提供最大的能力，就是内存操作了。</p>
-<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
-<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
-<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
-<p>那么我们看一下实际怎么操作内存：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
-<p>这种操作，几乎和C++程序是一致的了。</p>
-<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
-<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
-<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
-<h2 id="对象操作">对象操作</h2>
-<p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
-<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
-<p>首先来看一个Java对象的内存结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
-<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
-<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
-<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
-<p>下面看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
-<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
-<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
-<h2 id="CAS操作">CAS操作</h2>
-<p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
-<p>下面简单看一个api：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
-<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
-<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
-<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
-<h2 id="版本支持">版本支持</h2>
-<p>还是要额外提一下关于Unsafe的版本支持问题。</p>
-<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
-<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
-<h2 id="总结">总结</h2>
-<p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
-<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
-<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>性能调优</tag>
       </tags>
   </entry>
 </search>
