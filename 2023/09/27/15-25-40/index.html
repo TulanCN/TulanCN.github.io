@@ -508,7 +508,7 @@
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2023 – 
   <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -516,64 +516,7 @@
   <span class="author" itemprop="copyrightHolder">Tulan</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-  </div><!-- 自定义页脚内容 -->
-<div class="footer-custom">
-  <div class="powered-by">
-    <i class="fa fa-user-md"></i>
-    <span id="busuanzi_container_site_uv">
-      本站访客数: <span id="busuanzi_value_site_uv"></span>
-    </span>
   </div>
-
-  <div class="site-visit-counter">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量: <span id="busuanzi_value_site_pv"></span>
-    </span>
-  </div>
-
-  <div class="site-runtime">
-    <i class="fa fa-clock-o"></i>
-    <span id="site-runtime"></span>
-  </div>
-</div>
-
-<script>
-  // 计算网站运行时间
-  function siteRuntime() {
-    var siteStartTime = new Date("2023-03-29"); // 替换为你的网站创建日期
-    var now = new Date();
-    var diff = now.getTime() - siteStartTime.getTime();
-    
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    
-    document.getElementById("site-runtime").innerHTML = 
-      "网站已运行: " + days + "天" + hours + "小时" + minutes + "分" + seconds + "秒";
-  }
-  
-  setInterval(siteRuntime, 1000);
-  siteRuntime();
-</script>
-
-<!-- 不蒜子计数器 -->
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<style>
-  .footer-custom {
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #666;
-  }
-  .footer-custom div {
-    margin: 5px 0;
-  }
-  .footer-custom i {
-    margin-right: 5px;
-  }
-</style> 
 
         
 <div class="busuanzi-count">
