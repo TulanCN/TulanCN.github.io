@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>回炉重造是种什么样的感觉？</title>
-    <url>/2024/11/20/13-32-12/</url>
+    <url>/2024/11/20/life/%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0%E6%98%AF%E7%A7%8D%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%84%9F%E8%A7%89%EF%BC%9F/</url>
     <content><![CDATA[<h2 id="就读体验">就读体验</h2>
 <p>整体来说，在polyu的就读体验还算不错。</p>
 <p>各种流程都会有较为详细的指引。比如入学、选课、课程的考试之类的日常流程，都有邮件会提醒，邮件中会有很详细的说明，足够每个人完成这些。</p>
@@ -21,7 +21,7 @@
 <p>到NLP的小组作业，也算是小小地喷发了一会儿。</p>
 <p>我久违地写了点代码，然后把服务部署到了阿里云的云服务器上，最后接入通义千问大模型。搞出来的效果让同组的人都惊呆了。</p>
 <p>其他组大多是在大模型的上层做了RAG，但我的思路是在RAG之外要给模型提供插件来获取实时信息，否则这个项目的成果完全不可用。</p>
-<img src="/2024/11/20/13-32-12/image-20241121203740450.png" class="" title="image-20241121203740450">
+<img src="/2024/11/20/life/%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0%E6%98%AF%E7%A7%8D%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%84%9F%E8%A7%89%EF%BC%9F/image-20241121203740450.png" class="" title="image-20241121203740450">
 <p>做完的时候有种感觉，就是自己好像确实学了不少新玩意儿。</p>
 <p>这次回炉重造，最初的目标就是能开拓一些新的知识点，希望能学python，学数据分析，学AI训练，学会写前端。</p>
 <p>我觉得还是有些进步的，至少python会写了，数分也入门了，大模型的训练、微调也会了。目前还差点前端，打算是考试期间学点微信小程序的前端，先入门一下。</p>
@@ -58,7 +58,7 @@
   </entry>
   <entry>
     <title>我为什么选择去留学</title>
-    <url>/2023/09/28/19-55-01/</url>
+    <url>/2023/09/28/life/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E5%8E%BB%E7%95%99%E5%AD%A6/</url>
     <content><![CDATA[<p>眼下我正在中国人民大学的教学楼二2211教室，坐在一个小小的椅子上，有充足的时间来整理思绪。</p>
 <h2 id="起因">起因</h2>
 <p>去香港留学的想法，其实很早就有了，最早应该能追溯到大三。当时思考要不要读研，摆在眼前的就是考研或者出国留学。</p>
@@ -92,7 +92,7 @@
   </entry>
   <entry>
     <title>股市投机的原则</title>
-    <url>/2024/12/13/16-49-54/</url>
+    <url>/2024/12/13/life/%E8%82%A1%E5%B8%82%E6%8A%95%E6%9C%BA%E7%9A%84%E5%8E%9F%E5%88%99/</url>
     <content><![CDATA[<h2 id="A股的底层逻辑是博弈">A股的底层逻辑是博弈</h2>
 <p>这是对A股市场中股价波动的解释。在A股市场中，几乎没有人是通过分红的复利来实现财富增长和价值投资的。</p>
 <p>那么，所谓的政策利好其实也只是给赌徒们指明了一个方向：下一波我们炒这个。</p>
@@ -143,7 +143,7 @@
   </entry>
   <entry>
     <title>龙年第一天</title>
-    <url>/2024/02/18/13-22-14/</url>
+    <url>/2024/02/18/life/%E9%BE%99%E5%B9%B4%E7%AC%AC%E4%B8%80%E5%A4%A9/</url>
     <content><![CDATA[<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p>
 <p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p>
 <p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p>
@@ -162,36 +162,8 @@
       </tags>
   </entry>
   <entry>
-    <title>第一篇博客，聊聊这个博客本身</title>
-    <url>/2023/03/29/20-26-12/</url>
-    <content><![CDATA[<p>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
-<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
-<p>为了解决文档的管理问题，我就建了一个博客。</p>
-<h2 id="还有更多的想法么？">还有更多的想法么？</h2>
-<p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
-<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
-<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
-<h2 id="博客的内容会有哪些？">博客的内容会有哪些？</h2>
-<p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
-<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
-<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
-<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
-<h2 id="后续规划？">后续规划？</h2>
-<p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
-<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
-<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
-<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NLP的project复盘</title>
-    <url>/2024/11/22/14-57-31/</url>
+    <url>/2024/11/22/study/NLP%E7%9A%84project%E5%A4%8D%E7%9B%98/</url>
     <content><![CDATA[<h2 id="背景">背景</h2>
 <p>这是第一门需要协作的大作业，过程中着实暴露了很多问题。我觉得是需要复盘来明确这些问题，以免在下次的作业中再有类似的情况发生。</p>
 <p>项目要求是利用大模型的技术，结合课上所学的NLP相关知识，来开发一个对话模型。最终这个系统能做到让用户通过自然语言来查询某个领域的数据。</p>
@@ -255,7 +227,7 @@
   </entry>
   <entry>
     <title>聊聊AI工具和学习</title>
-    <url>/2025/02/15/19-54-17/</url>
+    <url>/2025/02/15/study/%E8%81%8A%E8%81%8AAI%E5%B7%A5%E5%85%B7%E5%92%8C%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h2 id="背景">背景</h2>
 <p>上次nlp的project被同学宣传了一下，后来有人来交流，就被拉去给老师做项目了。</p>
 <p>名义上是当了student assistant，工资也是按照这个待遇来。80港币一小时，说实话还不少。</p>
@@ -314,8 +286,36 @@
       </tags>
   </entry>
   <entry>
+    <title>第一篇博客，聊聊这个博客本身</title>
+    <url>/2023/03/29/others/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%81%8A%E8%81%8A%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E6%9C%AC%E8%BA%AB/</url>
+    <content><![CDATA[<p>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
+<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
+<p>为了解决文档的管理问题，我就建了一个博客。</p>
+<h2 id="还有更多的想法么？">还有更多的想法么？</h2>
+<p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
+<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
+<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
+<h2 id="博客的内容会有哪些？">博客的内容会有哪些？</h2>
+<p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
+<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
+<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
+<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
+<h2 id="后续规划？">后续规划？</h2>
+<p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
+<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
+<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
+<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SSE协议和流式输出</title>
-    <url>/2025/03/09/11-17-03/</url>
+    <url>/2025/03/09/work/SSE%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA/</url>
     <content><![CDATA[<h2 id="流式输出">流式输出</h2>
 <p>大多数的聊天机器人都会用到流式输出。为什么一定要用这能力呢？</p>
 <p>任何的LLM的回答都是逐字逐句生成的，因此使用同步调用一次获取所有的消息，会造成长时间的阻塞。</p>
@@ -391,7 +391,7 @@
   </entry>
   <entry>
     <title>大模型技术到底带来了什么</title>
-    <url>/2024/10/19/16-33-05/</url>
+    <url>/2024/10/19/work/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%88%B0%E5%BA%95%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88/</url>
     <content><![CDATA[<h2 id="正文">正文</h2>
 <p>时间到2024年，以LLM为首的AI热潮似乎开始冷却。但是工具已经开始普及，大部分人已经开始尝试和AI一起工作。</p>
 <p>我首先想提的是国内大模型的水平。目前接触下来，国产的AI在下限方面基本已经满足了我们的日常生活需要。也就是说，平时一些简单的任务已经可以让AI去完成，大部分问题都能收到一个令人满意的回答。对于大部分人的日常工作来说，已经足够。</p>
@@ -427,7 +427,7 @@
   </entry>
   <entry>
     <title>工作中印象最深刻的一件事</title>
-    <url>/2024/09/16/20-02-30/</url>
+    <url>/2024/09/16/work/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%8D%B0%E8%B1%A1%E6%9C%80%E6%B7%B1%E5%88%BB%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B/</url>
     <content><![CDATA[<h2 id="技术之外的东西">技术之外的东西</h2>
 <p>如果是放在还没参加工作时，看到这个问题“你在项目中遇到过的印象最深刻的一件事”，我大概率就是：胡诌一个很难的技术问题，然后说这问题解决的过程有些困难，但是经过我艰苦卓绝地努力，还是完成了，最后觉得自己很有成就感巴拉巴拉……</p>
 <p>但是放到今天，再看这问题，我就倾向于带一些技术之外的东西进去。</p>
@@ -459,7 +459,7 @@
   </entry>
   <entry>
     <title>我也是全栈</title>
-    <url>/2025/02/28/22-07-08/</url>
+    <url>/2025/02/28/work/%E6%88%91%E4%B9%9F%E6%98%AF%E5%85%A8%E6%A0%88/</url>
     <content><![CDATA[<h2 id="经历">经历</h2>
 <p>如果说我是什么时候有这个想法，那我觉得最早应该要追溯到大一的时候了。</p>
 <p>当时刚入学，正在军训。我们有一次思想测验，当时年级里有同学搭了一个网站供我们考试。</p>
@@ -519,7 +519,7 @@
   </entry>
   <entry>
     <title>秋招的总结</title>
-    <url>/2024/11/01/15-08-20/</url>
+    <url>/2024/11/01/work/%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h2 id="经历">经历</h2>
 <p>最开始是准备简历和找招聘信息，这部分就略过不谈。</p>
 <p>麻烦的还是面试的准备，前期刷了leetcode的hot100，然后搞了一份80字面试宝典一点点看。</p>
@@ -577,7 +577,7 @@
   </entry>
   <entry>
     <title>聊聊低时延</title>
-    <url>/2024/05/19/14-26-55/</url>
+    <url>/2024/05/19/work/%E8%81%8A%E8%81%8A%E4%BD%8E%E6%97%B6%E5%BB%B6/</url>
     <content><![CDATA[<h2 id="关于开发语言">关于开发语言</h2>
 <p>市面上绝大多数低时延相关的产品，都会选择C++作为开发语言。不得不说，C++在处理这种场景有天然的优势，接近底层的好处就是可以做到硬件级别的优化。</p>
 <p>我们公司的消息总线就更为离谱了，全面使用C语言进行开发，性能快到极致。</p>
@@ -611,7 +611,7 @@
   </entry>
   <entry>
     <title>聊聊管理</title>
-    <url>/2024/04/29/14-42-33/</url>
+    <url>/2024/04/29/work/%E8%81%8A%E8%81%8A%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<h2 id="经历">经历</h2>
 <p>从我工作以来，我一直在和管理打交道。</p>
 <p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
@@ -640,7 +640,7 @@
   </entry>
   <entry>
     <title>JRE环境使用Arthas</title>
-    <url>/2024/09/20/19-12-39/</url>
+    <url>/2024/09/20/work/tips/JRE%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8Arthas/</url>
     <content><![CDATA[<h2 id="场景">场景</h2>
 <p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
 <p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
@@ -663,7 +663,7 @@
   </entry>
   <entry>
     <title>用浏览器发送POST请求</title>
-    <url>/2023/09/27/15-25-40/</url>
+    <url>/2023/09/27/work/tips/%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E9%80%81POST%E8%AF%B7%E6%B1%82/</url>
     <content><![CDATA[<h2 id="场景">场景</h2>
 <p>在封闭环境、虚拟机等场景下，我们拿到的环境没法安装postman。</p>
 <p>为了解决这问题，可以直接使用浏览器来发送这类请求。</p>
@@ -671,7 +671,7 @@
 <p>打开浏览器的console，写入js代码</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>();</span><br><span class="line">myHeaders.<span class="title function_">append</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> raw = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="string">&quot;id&quot;</span>: <span class="string">&quot;999999999&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> requestOptions = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: myHeaders,</span><br><span class="line">  <span class="attr">body</span>: raw,</span><br><span class="line">  <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://127.0.0.1:8101/del-condition&quot;</span>, requestOptions)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">text</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;error&#x27;</span>, error));</span><br></pre></td></tr></table></figure>
 <p>表现如下：</p>
-<img src="/2023/09/27/15-25-40/image-20230927153017161.png" class="" title="image-20230927153017161">
+<img src="/2023/09/27/work/tips/%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E9%80%81POST%E8%AF%B7%E6%B1%82/image-20230927153017161.png" class="" title="image-20230927153017161">
 <p>完事。</p>
 ]]></content>
       <categories>
@@ -683,7 +683,7 @@
   </entry>
   <entry>
     <title>面试笔记-Java基础</title>
-    <url>/2024/10/16/15-04-36/</url>
+    <url>/2024/10/16/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Java%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="语法基础">语法基础</h2>
 <h3 id="Java语言特点">Java语言特点</h3>
 <p>一次编译处处运行，天然具有跨平台的能力。只要不用JNI。</p>
@@ -814,7 +814,7 @@
   </entry>
   <entry>
     <title>面试笔记-Spring</title>
-    <url>/2024/10/16/11-43-17/</url>
+    <url>/2024/10/16/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Spring/</url>
     <content><![CDATA[<h2 id="Spring篇">Spring篇</h2>
 <p>Spring是一个Java开发框架，主要是解决企业级开发的一些痛点。一开始可能主要是用于Web应用的开发，但目前实践中它已经在国内Java后端开发这方面一统江湖。</p>
 <p>它把各种业务逻辑都抽象封装为Bean，Spring负责项目启动时把这些Bean创建出来，进行业务开发的时候只需要通过Spring提供的API或其他方式，获取到对应的Bean就可以执行各种复杂业务操作。</p>
@@ -977,115 +977,8 @@
       </tags>
   </entry>
   <entry>
-    <title>面试笔记-网络协议</title>
-    <url>/2024/10/14/13-41-52/</url>
-    <content><![CDATA[<h3 id="HTTP响应码">HTTP响应码</h3>
-<p>200 - 成功</p>
-<p>301 - 永久重定向    302 - 临时重定向</p>
-<p>4开头是客户端问题</p>
-<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
-<p>5开头是服务器问题</p>
-<p>500 - 服务器崩了  504 - badgateway</p>
-<h3 id="Forward和Redirect">Forward和Redirect</h3>
-<p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
-<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
-<h3 id="GET和POST">GET和POST</h3>
-<p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
-<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
-<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
-<h3 id="TCP和UDP">TCP和UDP</h3>
-<p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
-<p>UDP无连接，不可靠，传输性能高</p>
-<p>TCP是点对点，UDP支持广播</p>
-<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
-<h3 id="HTTP和HTTPS">HTTP和HTTPS</h3>
-<p>HTTP用80端口，HTTPS用443</p>
-<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
-<h3 id="HTTP、TCP和Socket">HTTP、TCP和Socket</h3>
-<p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
-<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
-<p>HTTP是应用层的协议，基于TCP来实现</p>
-<p>TCP是网络层协议</p>
-<h3 id="HTTP的长连接和短连接">HTTP的长连接和短连接</h3>
-<p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
-<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
-<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
-<h3 id="TCP三次握手">TCP三次握手</h3>
-<p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
-<p>第一次：客户端-&gt;服务端，syn=1，seq=x</p>
-<p>第二次：服务端-&gt;客户端，syn=1，seq=y，ack=x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
-<p>第三次：客户端-&gt;服务端，seq=x+1, ack=y+1。告知服务端，你发送的消息我也能收到。</p>
-<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
-<h3 id="TCP四次挥手">TCP四次挥手</h3>
-<p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
-<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
-<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
-<h3 id="TCP粘包">TCP粘包</h3>
-<p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
-<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
-<p>TCP的分包是由滑动窗口来控制的。</p>
-<p>解决方式，都是在应用的协议层解决：</p>
-<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
-<p>2、把协议固定长度，所有协议包的长度都一致。</p>
-<p>3、特殊分隔符号。</p>
-<h3 id="TCP可靠性">TCP可靠性</h3>
-<p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
-<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
-<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
-<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
-<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
-<h3 id="OSI七层模型">OSI七层模型</h3>
-<p>应用层：HTTP、FTP</p>
-<p>表示层：加解密</p>
-<p>会话层：RPC</p>
-<p>传输层：TCP、UDP</p>
-<p>网络层：IP、IPv6</p>
-<p>数据链路层：物理寻址层。交换机等</p>
-<p>物理层：硬件</p>
-<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
-<h3 id="浏览器输入一个网址后发生了什么">浏览器输入一个网址后发生了什么</h3>
-<p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
-<p>2、建立TCP连接</p>
-<p>3、发送HTTP的GET请求</p>
-<p>4、请求经过路由器转发到服务器</p>
-<p>5、服务器处理请求，返回网页文件（HTML）</p>
-<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
-<h3 id="如何跨域">如何跨域</h3>
-<p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
-<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
-<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
-<h3 id="HTTP-1-0-1-1-2-0-3-0">HTTP 1.0 1.1 2.0 3.0</h3>
-<p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
-<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
-<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
-<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
-<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
-<h3 id="HTTP与TCP-IP">HTTP与TCP/IP</h3>
-<p>HTTP是应用层的报文协议，一般数据传输是用TCP/IP实现。</p>
-<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
-<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
-<h3 id="HTTP长连接短连接">HTTP长连接短连接</h3>
-<p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
-<h3 id="长连接和短连接的优缺点">长连接和短连接的优缺点</h3>
-<p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
-<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
-<h3 id="域名解析过程">域名解析过程</h3>
-<p>从开销最小的地方开始找，没有就去更远的地方找。</p>
-<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
-<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
-<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
-<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>面试笔记-数据库</title>
-    <url>/2024/10/14/13-48-06/</url>
+    <url>/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[<h2 id="知识点">知识点</h2>
 <h3 id="三范式">三范式</h3>
 <p>第一范式：列不可再分；</p>
@@ -1232,8 +1125,115 @@
       </tags>
   </entry>
   <entry>
+    <title>面试笔记-网络协议</title>
+    <url>/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h3 id="HTTP响应码">HTTP响应码</h3>
+<p>200 - 成功</p>
+<p>301 - 永久重定向    302 - 临时重定向</p>
+<p>4开头是客户端问题</p>
+<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
+<p>5开头是服务器问题</p>
+<p>500 - 服务器崩了  504 - badgateway</p>
+<h3 id="Forward和Redirect">Forward和Redirect</h3>
+<p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
+<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
+<h3 id="GET和POST">GET和POST</h3>
+<p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
+<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
+<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
+<h3 id="TCP和UDP">TCP和UDP</h3>
+<p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
+<p>UDP无连接，不可靠，传输性能高</p>
+<p>TCP是点对点，UDP支持广播</p>
+<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
+<h3 id="HTTP和HTTPS">HTTP和HTTPS</h3>
+<p>HTTP用80端口，HTTPS用443</p>
+<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
+<h3 id="HTTP、TCP和Socket">HTTP、TCP和Socket</h3>
+<p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
+<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
+<p>HTTP是应用层的协议，基于TCP来实现</p>
+<p>TCP是网络层协议</p>
+<h3 id="HTTP的长连接和短连接">HTTP的长连接和短连接</h3>
+<p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
+<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
+<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
+<h3 id="TCP三次握手">TCP三次握手</h3>
+<p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
+<p>第一次：客户端-&gt;服务端，syn=1，seq=x</p>
+<p>第二次：服务端-&gt;客户端，syn=1，seq=y，ack=x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
+<p>第三次：客户端-&gt;服务端，seq=x+1, ack=y+1。告知服务端，你发送的消息我也能收到。</p>
+<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
+<h3 id="TCP四次挥手">TCP四次挥手</h3>
+<p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
+<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
+<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
+<h3 id="TCP粘包">TCP粘包</h3>
+<p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
+<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
+<p>TCP的分包是由滑动窗口来控制的。</p>
+<p>解决方式，都是在应用的协议层解决：</p>
+<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
+<p>2、把协议固定长度，所有协议包的长度都一致。</p>
+<p>3、特殊分隔符号。</p>
+<h3 id="TCP可靠性">TCP可靠性</h3>
+<p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
+<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
+<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
+<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
+<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
+<h3 id="OSI七层模型">OSI七层模型</h3>
+<p>应用层：HTTP、FTP</p>
+<p>表示层：加解密</p>
+<p>会话层：RPC</p>
+<p>传输层：TCP、UDP</p>
+<p>网络层：IP、IPv6</p>
+<p>数据链路层：物理寻址层。交换机等</p>
+<p>物理层：硬件</p>
+<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
+<h3 id="浏览器输入一个网址后发生了什么">浏览器输入一个网址后发生了什么</h3>
+<p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
+<p>2、建立TCP连接</p>
+<p>3、发送HTTP的GET请求</p>
+<p>4、请求经过路由器转发到服务器</p>
+<p>5、服务器处理请求，返回网页文件（HTML）</p>
+<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
+<h3 id="如何跨域">如何跨域</h3>
+<p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
+<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
+<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
+<h3 id="HTTP-1-0-1-1-2-0-3-0">HTTP 1.0 1.1 2.0 3.0</h3>
+<p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
+<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
+<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
+<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
+<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
+<h3 id="HTTP与TCP-IP">HTTP与TCP/IP</h3>
+<p>HTTP是应用层的报文协议，一般数据传输是用TCP/IP实现。</p>
+<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
+<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
+<h3 id="HTTP长连接短连接">HTTP长连接短连接</h3>
+<p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
+<h3 id="长连接和短连接的优缺点">长连接和短连接的优缺点</h3>
+<p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
+<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
+<h3 id="域名解析过程">域名解析过程</h3>
+<p>从开销最小的地方开始找，没有就去更远的地方找。</p>
+<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
+<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
+<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
+<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JNI调用的优化</title>
-    <url>/2023/12/19/17-55-26/</url>
+    <url>/2023/12/19/work/java/JNI%E8%B0%83%E7%94%A8%E7%9A%84%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h2 id="传统的优化方式">传统的优化方式</h2>
 <p>首先，我这里给出JNI的官方手册：<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html">https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html</a></p>
 <p>Java本身已经提供了相当数量的接口用于JNI开发，一般来说是够用了。但在低时延或频繁调用的场景，JNI层的性能损耗还是不能忽视的。</p>
@@ -1285,7 +1285,7 @@
   </entry>
   <entry>
     <title>JNI调用的优化（第二版)</title>
-    <url>/2024/08/08/10-28-13/</url>
+    <url>/2024/08/08/work/java/JNI%E8%B0%83%E7%94%A8%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88/</url>
     <content><![CDATA[<p>源头是这篇博客：<a href="http://blog.hakugyokurou.net/?p=1758">http://blog.hakugyokurou.net/?p=1758</a></p>
 <p>讲到了最正式的文档也就是bug系统中的一条记录：<a href="https://bugs.openjdk.org/browse/JDK-7013347">https://bugs.openjdk.org/browse/JDK-7013347</a></p>
 <p>另外在stackoverflow上有人爆料了这个能力：<a href="https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652">https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652</a></p>
@@ -1303,7 +1303,7 @@
   </entry>
   <entry>
     <title>Java反射调用的优化</title>
-    <url>/2023/05/04/10-44-04/</url>
+    <url>/2023/05/04/work/java/Java%E5%8F%8D%E5%B0%84%E8%B0%83%E7%94%A8%E7%9A%84%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h2 id="场景">场景</h2>
 <p>在公司内部的缓存框架中，需要实现类似数据库的能力：比如主键、索引，还有条件查询等。</p>
 <p>这些能力不可避免的需要从一个对象中，通过反射的方式来取参数的值。且目前没有办法通过定义接口的方式来优化。</p>
@@ -1376,7 +1376,7 @@
   </entry>
   <entry>
     <title>Netty的FastThreadLocal带来了什么？</title>
-    <url>/2024/09/13/14-49-51/</url>
+    <url>/2024/09/13/work/java/Netty%E7%9A%84FastThreadLocal%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/</url>
     <content><![CDATA[<h2 id="和Netty的缘分">和Netty的缘分</h2>
 <p>要聊能力前，先聊聊我和Netty的缘分。</p>
 <p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
@@ -1422,75 +1422,8 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
       </tags>
   </entry>
   <entry>
-    <title>内存分析记录手册</title>
-    <url>/2023/06/12/13-46-18/</url>
-    <content><![CDATA[<h2 id="常用命令">常用命令</h2>
-<p><code>jps</code> jps命令，查看所有java程序</p>
-<p><code>jmap -heap &lt;pid&gt;</code> jmap命令，查看jvm内存分区，包括老年代、新生代等内存占用情况</p>
-<p><code>jmap -dump:live,format=b,file=/tmp/dump.hprof &lt;pid&gt;</code> jmap的dump命令</p>
-<p><code>jmap -histo &lt;pid&gt;</code> 和 <code>jmap -histo:live &lt;pid&gt;</code> 抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象</p>
-<p>arthus命令略，可借用arthus的IDEA插件生成command</p>
-<h2 id="什么是大对象">什么是大对象</h2>
-<p>都说大对象会进入老年代，那么什么才是大对象呢？</p>
-<p>假如一个对象A，内部引用了对象B，那么在计算对象大小的时候，是否会把对象B的大小也计入对象A呢？</p>
-<p>答案是不会，这个有很多的地方可以证明：每个对象其实都只是存了其他对象的指针；dump文件在分析时，对象大小需要先用工具进行计算；在代码中分析对象大小大家用的都是第三方工具。这些都从侧面说明了，JVM本身并没有去计算对象引用的实际大小。</p>
-<p>那么，JVM做垃圾回收时，其实垃圾收集器关心的只是对象本身的大小。所有对象的引用，都是一个内存地址，也就是指针。</p>
-<p>举例，假如B是一个大数组，B在老年代。假如A在B进入老年代之后，持有了B对象作为成员变量。</p>
-<p>在Java的垃圾回收机制中，对象进入老年代（Old Generation）通常需要满足以下条件：</p>
-<ol>
-<li>对象经过多次GC仍然存活。在Eden区进行Minor GC后，如果对象仍然存活，会被移动到Survivor区。在Survivor区进行GC后，如果对象仍然存活，会被移动到老年代。</li>
-<li>对象的大小超过了Survivor区的阈值。每个Survivor区都有一个固定的容量限制。如果新创建的对象太大，以至于在当前Survivor区容纳不下，那么这个对象就会被直接分配到老年代。</li>
-<li>对象被长期持有。一些被长时间持有的对象，比如长期存活或者被强引用的对象，可能会被直接分配到老年代。</li>
-</ol>
-<p>所以，如果对象A持有一个老年代对象B，并不意味着A自己会进入老年代。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>双重锁和CAS</title>
-    <url>/2024/02/18/13-47-01/</url>
-    <content><![CDATA[<h2 id="引子">引子</h2>
-<p>在做一些变量的初始化时，我会有如下的实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">private volatile Class&lt;?&gt; rowType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取缓存存储对象的类型</span><br><span class="line"> *</span><br><span class="line"> * @return 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">public Class&lt;?&gt; rowType() &#123;</span><br><span class="line">    if (rowType == null) &#123;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            if (rowType == null) &#123;</span><br><span class="line">                // todo 这里是初始化rowType的逻辑</span><br><span class="line">             </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return rowType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种写法，我最初是在Protobuf生成的代码中看到的，后来查阅了一下，这种逻辑叫双重锁。</p>
-<p>或者说，叫双重检查模式，是一种软件的设计模式。</p>
-<p>而我在写一些其他的代码时，往往也会使用类似这种模式的方式。用多了以后，我觉得可以分析一下其中的道理。</p>
-<h2 id="分析">分析</h2>
-<p>双重锁的逻辑是两次检查：首先验证锁定条件(第一次检查)，只有通过锁定条件验证才真正的进行加锁逻辑并再次验证条件(第二次检查)。</p>
-<p>那么，如果中间的锁定操作，我们改成一个计算过程，在最后赋值之前做二次检查，是否也是可以的呢？</p>
-<p>答案是肯定的。下面给个伪代码说明：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">int b = a;</span><br><span class="line">// 第一次检查</span><br><span class="line">if (a == b) &#123;</span><br><span class="line">  // 上锁</span><br><span class="line">  lock.lock();</span><br><span class="line">  // 第二次检查</span><br><span class="line">  if (a == b) &#123;</span><br><span class="line">  	// 计算操作</span><br><span class="line">		int c = b + 1；</span><br><span class="line">  	// 赋值</span><br><span class="line">  	a = c;</span><br><span class="line">  &#125;</span><br><span class="line">  lock.unLock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可是这样就太重了，要知道，有些时候，加锁的成本也很高。使用双重锁仅仅是能避免锁定中的操作多次重复，但是没有从根本上避免锁，所有的操作还是在锁中进行的，这就没有很好地发挥多线程的优势。</p>
-<p>那么优化一下，把这个锁去掉，只在计算结束后进行一次检查，是否可行呢？答案也是肯定的，这样就变成了乐观锁+自旋锁的结合。伪代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">// 自旋</span><br><span class="line">for (;;) &#123;</span><br><span class="line">	int b = a;</span><br><span class="line">	// 计算操作</span><br><span class="line">	int c = b + 1；</span><br><span class="line">	// 第一次检查</span><br><span class="line">	if (b == a) &#123;</span><br><span class="line">		// 赋值</span><br><span class="line">		a = c;</span><br><span class="line">		// 第二次检查</span><br><span class="line">		if (a == c) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到锁被去掉了，这样并发时性能会远优于加锁。这就是CAS机制。</p>
-<p>但是这里的CAS机制还不够，并不能保证极端情况下的线程安全。因为还有指令重排序的问题。</p>
-<p>为了解决指令重排序的问题，需要在特定的变量上添加volatile注解。</p>
-<p>在高性能场景下，CAS是一种非常优秀的机制，有以下优点：</p>
-<ol>
-<li>高效性：CAS 操作不需要加锁，因此可以避免加锁操作所带来的性能开销。</li>
-<li>原子性：CAS 操作是原子的，因此可以保证操作的一致性。</li>
-<li>无阻塞：CAS 操作不会阻塞线程，因此可以避免线程的切换和上下文切换带来的开销。</li>
-</ol>
-<h2 id="总结">总结</h2>
-<p>双重锁的方式，一般是用于初始化的场景，是用来避免某个代码块执行两次的。</p>
-<p>而在此基础上我们推演出自旋锁+乐观锁的方式，这样能实现无锁并发，这就是CAS机制。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Unsafe的使用记录</title>
-    <url>/2024/01/07/11-15-32/</url>
+    <url>/2024/01/07/work/java/Unsafe%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h2 id="什么是Unsafe">什么是Unsafe</h2>
 <p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
@@ -1555,8 +1488,75 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
       </tags>
   </entry>
   <entry>
+    <title>内存分析记录手册</title>
+    <url>/2023/06/12/work/java/%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90%E8%AE%B0%E5%BD%95%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h2 id="常用命令">常用命令</h2>
+<p><code>jps</code> jps命令，查看所有java程序</p>
+<p><code>jmap -heap &lt;pid&gt;</code> jmap命令，查看jvm内存分区，包括老年代、新生代等内存占用情况</p>
+<p><code>jmap -dump:live,format=b,file=/tmp/dump.hprof &lt;pid&gt;</code> jmap的dump命令</p>
+<p><code>jmap -histo &lt;pid&gt;</code> 和 <code>jmap -histo:live &lt;pid&gt;</code> 抓取内存中各对象的统计数据（直方图），主要包含实例个数，以及占用的内存空间。其中前一个命令，是抓取所有的对象，包括垃圾对象，而后一个命令只抓取存活对象</p>
+<p>arthus命令略，可借用arthus的IDEA插件生成command</p>
+<h2 id="什么是大对象">什么是大对象</h2>
+<p>都说大对象会进入老年代，那么什么才是大对象呢？</p>
+<p>假如一个对象A，内部引用了对象B，那么在计算对象大小的时候，是否会把对象B的大小也计入对象A呢？</p>
+<p>答案是不会，这个有很多的地方可以证明：每个对象其实都只是存了其他对象的指针；dump文件在分析时，对象大小需要先用工具进行计算；在代码中分析对象大小大家用的都是第三方工具。这些都从侧面说明了，JVM本身并没有去计算对象引用的实际大小。</p>
+<p>那么，JVM做垃圾回收时，其实垃圾收集器关心的只是对象本身的大小。所有对象的引用，都是一个内存地址，也就是指针。</p>
+<p>举例，假如B是一个大数组，B在老年代。假如A在B进入老年代之后，持有了B对象作为成员变量。</p>
+<p>在Java的垃圾回收机制中，对象进入老年代（Old Generation）通常需要满足以下条件：</p>
+<ol>
+<li>对象经过多次GC仍然存活。在Eden区进行Minor GC后，如果对象仍然存活，会被移动到Survivor区。在Survivor区进行GC后，如果对象仍然存活，会被移动到老年代。</li>
+<li>对象的大小超过了Survivor区的阈值。每个Survivor区都有一个固定的容量限制。如果新创建的对象太大，以至于在当前Survivor区容纳不下，那么这个对象就会被直接分配到老年代。</li>
+<li>对象被长期持有。一些被长时间持有的对象，比如长期存活或者被强引用的对象，可能会被直接分配到老年代。</li>
+</ol>
+<p>所以，如果对象A持有一个老年代对象B，并不意味着A自己会进入老年代。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>双重锁和CAS</title>
+    <url>/2024/02/18/work/java/%E5%8F%8C%E9%87%8D%E9%94%81%E5%92%8CCAS/</url>
+    <content><![CDATA[<h2 id="引子">引子</h2>
+<p>在做一些变量的初始化时，我会有如下的实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">private volatile Class&lt;?&gt; rowType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取缓存存储对象的类型</span><br><span class="line"> *</span><br><span class="line"> * @return 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">public Class&lt;?&gt; rowType() &#123;</span><br><span class="line">    if (rowType == null) &#123;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            if (rowType == null) &#123;</span><br><span class="line">                // todo 这里是初始化rowType的逻辑</span><br><span class="line">             </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return rowType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种写法，我最初是在Protobuf生成的代码中看到的，后来查阅了一下，这种逻辑叫双重锁。</p>
+<p>或者说，叫双重检查模式，是一种软件的设计模式。</p>
+<p>而我在写一些其他的代码时，往往也会使用类似这种模式的方式。用多了以后，我觉得可以分析一下其中的道理。</p>
+<h2 id="分析">分析</h2>
+<p>双重锁的逻辑是两次检查：首先验证锁定条件(第一次检查)，只有通过锁定条件验证才真正的进行加锁逻辑并再次验证条件(第二次检查)。</p>
+<p>那么，如果中间的锁定操作，我们改成一个计算过程，在最后赋值之前做二次检查，是否也是可以的呢？</p>
+<p>答案是肯定的。下面给个伪代码说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">int b = a;</span><br><span class="line">// 第一次检查</span><br><span class="line">if (a == b) &#123;</span><br><span class="line">  // 上锁</span><br><span class="line">  lock.lock();</span><br><span class="line">  // 第二次检查</span><br><span class="line">  if (a == b) &#123;</span><br><span class="line">  	// 计算操作</span><br><span class="line">		int c = b + 1；</span><br><span class="line">  	// 赋值</span><br><span class="line">  	a = c;</span><br><span class="line">  &#125;</span><br><span class="line">  lock.unLock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可是这样就太重了，要知道，有些时候，加锁的成本也很高。使用双重锁仅仅是能避免锁定中的操作多次重复，但是没有从根本上避免锁，所有的操作还是在锁中进行的，这就没有很好地发挥多线程的优势。</p>
+<p>那么优化一下，把这个锁去掉，只在计算结束后进行一次检查，是否可行呢？答案也是肯定的，这样就变成了乐观锁+自旋锁的结合。伪代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">// 自旋</span><br><span class="line">for (;;) &#123;</span><br><span class="line">	int b = a;</span><br><span class="line">	// 计算操作</span><br><span class="line">	int c = b + 1；</span><br><span class="line">	// 第一次检查</span><br><span class="line">	if (b == a) &#123;</span><br><span class="line">		// 赋值</span><br><span class="line">		a = c;</span><br><span class="line">		// 第二次检查</span><br><span class="line">		if (a == c) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到锁被去掉了，这样并发时性能会远优于加锁。这就是CAS机制。</p>
+<p>但是这里的CAS机制还不够，并不能保证极端情况下的线程安全。因为还有指令重排序的问题。</p>
+<p>为了解决指令重排序的问题，需要在特定的变量上添加volatile注解。</p>
+<p>在高性能场景下，CAS是一种非常优秀的机制，有以下优点：</p>
+<ol>
+<li>高效性：CAS 操作不需要加锁，因此可以避免加锁操作所带来的性能开销。</li>
+<li>原子性：CAS 操作是原子的，因此可以保证操作的一致性。</li>
+<li>无阻塞：CAS 操作不会阻塞线程，因此可以避免线程的切换和上下文切换带来的开销。</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>双重锁的方式，一般是用于初始化的场景，是用来避免某个代码块执行两次的。</p>
+<p>而在此基础上我们推演出自旋锁+乐观锁的方式，这样能实现无锁并发，这就是CAS机制。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在Java程序使用Grpc protobuf的动态加载及类型反射</title>
-    <url>/2023/05/31/15-41-05/</url>
+    <url>/2023/05/31/work/java/%E5%9C%A8Java%E7%A8%8B%E5%BA%8F%E4%B8%AD%E4%BD%BF%E7%94%A8Grpc%20protobuf%E7%9A%84%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E5%8F%8A%E7%B1%BB%E5%9E%8B%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h2 id="准备工作">准备工作</h2>
 <p>在阅读下面的文章之前，读者需要懂得gRPC的服务端、调用端的基本使用方式。否则可能无法理解文章中出现的部分概念。</p>
 <h2 id="区分Protobuf和gRPC">区分Protobuf和gRPC</h2>
@@ -1589,11 +1589,83 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
       </tags>
   </entry>
   <entry>
+    <title>字符串编解码的特殊处理</title>
+    <url>/2024/01/28/work/java/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9A%84%E7%89%B9%E6%AE%8A%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<p>起因是在做内存数据库时，遇到了序列化的问题。其中，Java的字符串最是重量级，转化时怎么搞都有很大的性能问题。</p>
+<p>后来搜寻了资料，FastJSON2的作者高铁在阿里开发者的公众号分享了一篇文章，阅读后受益匪浅，决定改动之后运用到自己的项目中。</p>
+<p>高铁对String对象转化字节数组的优化主要有两方面：</p>
+<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
+<p>2、重写unicode到utf8的转换逻辑。</p>
+<p>而字节数组转化为String对象，使用的是：</p>
+<p>1、重写utf8到unicode的转换逻辑。</p>
+<p>2、通过零拷贝构造器构建String对象。</p>
+<p>说白了，就是通过一些旁门左道（比如Lambda表达式工厂替代反射，Unsafe操作）来绕过String对象本身的一些限制，从而重写其编解码逻辑。</p>
+<p>但是话又说回来，结合实际场景分析后，字节数组转化为String对象似乎并没有太多的提升。后文会解释为什么提升有限。</p>
+<p>实际运用到自己项目中时，我也进行了一些改造，从而适配项目本身的情况。</p>
+<h2 id="String转byte">String转byte[]</h2>
+<p>Java的String，本质是一个封装好的不可变char数组对象。</p>
+<p>Java的char类型，底层编码是unicode，每个char占两位字节。而UTF-8使用可变长度的编码，不同字符所占的字节数不同。</p>
+<p>FastJSON2的优化就如上文所述，分两步：</p>
+<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
+<p>2、重写unicode到utf8的转换逻辑。</p>
+<p>我们先开看第一步，以下是核心代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 当前优化仅在Java8有效</span><br><span class="line">// Java9修改了String的字符串实现，因此无法使用以下的方式初始化</span><br><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	Field field = null;</span><br><span class="line">	long fieldOffset = -1;</span><br><span class="line">	if (!ANDROID) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			field = String.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">			field.setAccessible(true);</span><br><span class="line">			fieldOffset = UNSAFE.objectFieldOffset(field);</span><br><span class="line">		&#125; catch (Exception ignored) &#123;</span><br><span class="line">			FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	FIELD_STRING_VALUE = field;</span><br><span class="line">	FIELD_STRING_VALUE_OFFSET = fieldOffset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用反射和Unsafe获取了value对象的偏移量，缓存到了一个静态变量汇总。</p>
+<p>后续是使用Unsafe，通过缓存的静态变量来获取char数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static char[] getCharArray(String str) &#123;</span><br><span class="line">    // GraalVM not support</span><br><span class="line">    // Android not support</span><br><span class="line">    if (!FIELD_STRING_VALUE_ERROR) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return (char[]) UNSAFE.getObject(str, FIELD_STRING_VALUE_OFFSET);</span><br><span class="line">        &#125; catch (Exception ignored) &#123;</span><br><span class="line">            FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return str.toCharArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而编码逻辑，则是参考了JDK原来的实现，进行了一定的修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    public static int encodeUTF8(char[] src, int offset, int len, byte[] dst, int dp) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        int dlASCII = dp + Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            dst[dp++] = (byte) src[offset++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                dst[dp++] = (byte) c;</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                dst[dp] = (byte) (0xc0 | (c &gt;&gt; 6));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) + (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">//                            throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                            dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                    continue;</span><br><span class="line">//                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (byte) (0xf0 | ((uc &gt;&gt; 18)));</span><br><span class="line">                    dst[dp + 1] = (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 2] = (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 3] = (byte) (0x80 | (uc &amp; 0x3f));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                dst[dp] = (byte) (0xe0 | ((c &gt;&gt; 12)));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | ((c &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                dst[dp + 2] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这里有个很抽象的逻辑需要解释一下。</p>
+<p>上述编码的方法入参有个名为dst的byte数组，它的意思是最终要写入的目标数组。在序列化框架中，有的时候就是要在一个已经提前创建好的byte[]数组里，从某个位置开始把转换后的结果append进去。这个方法就是为了兼容这种情况，所以还额外提供了dp这一入参，用来标识是从dst[]的第几位开始写数据。</p>
+<h2 id="byte-转String">byte[]转String</h2>
+<p>FastJSON2在处理此类场景时，也是进行了优化，分两步：</p>
+<p>1、重写utf8到unicode的转换逻辑。</p>
+<p>2、通过零拷贝构造器构建String对象。</p>
+<p>重写后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">public static int decodeUTF8(byte[] src, int off, int len, char[] dst) &#123;</span><br><span class="line">    final int sl = off + len;</span><br><span class="line">    int dp = 0;</span><br><span class="line">    int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">    // ASCII only optimized loop</span><br><span class="line">    while (dp &lt; dlASCII &amp;&amp; src[off] &gt;= 0) &#123;</span><br><span class="line">        dst[dp++] = (char) src[off++];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while (off &lt; sl) &#123;</span><br><span class="line">        int b1 = src[off++];</span><br><span class="line">        if (b1 &gt;= 0) &#123;</span><br><span class="line">            // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">            dst[dp++] = (char) b1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">            // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">            if (off &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off++];</span><br><span class="line">                if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^</span><br><span class="line">                            (((byte) 0xC0 &lt;&lt; 6) ^</span><br><span class="line">                                    ((byte) 0x80)));</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">            // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 1 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                off += 2;</span><br><span class="line">                if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    char c = (char) ((b1 &lt;&lt; 12) ^</span><br><span class="line">                            (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^</span><br><span class="line">                                    (((byte) 0xE0 &lt;&lt; 12) ^</span><br><span class="line">                                            ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                            ((byte) 0x80))));</span><br><span class="line">                    boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                    if (isSurrogate) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = c;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">            // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 2 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                int b4 = src[off + 2];</span><br><span class="line">                off += 3;</span><br><span class="line">                int uc = ((b1 &lt;&lt; 18) ^</span><br><span class="line">                        (b2 &lt;&lt; 12) ^</span><br><span class="line">                        (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^</span><br><span class="line">                                (((byte) 0xF0 &lt;&lt; 18) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 12) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                        ((byte) 0x80))));</span><br><span class="line">                if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                ) &#123;</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                    dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                    dp += 2;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至于零拷贝的构造器，是使用了Lambda工厂来实现的，这里不多提，就看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	MethodHandles.Lookup lookup = trustedLookup(String.class);</span><br><span class="line"></span><br><span class="line">	MethodHandle handle = lookup.findConstructor(</span><br><span class="line">				String.class, methodType(void.class, char[].class, boolean.class)</span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">	CallSite callSite = LambdaMetafactory.metafactory(</span><br><span class="line">				lookup,</span><br><span class="line">				&quot;apply&quot;,</span><br><span class="line">				methodType(BiFunction.class),</span><br><span class="line">				methodType(Object.class, Object.class, Object.class),</span><br><span class="line">				handle,</span><br><span class="line">				methodType(String.class, char[].class, boolean.class)</span><br><span class="line">	);</span><br><span class="line">	stringCreatorJDK8 = (BiFunction&lt;char[], Boolean, String&gt;) callSite.getTarget().invokeExact();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要还是讲下为什么这个零拷贝构造器实际用的时候发现很鸡肋。</p>
+<p>首先，这个零拷贝构造器是要求传入一个<code>char[]</code>，传的<code>char[]</code>是什么它就用什么。</p>
+<p>那么这个<code>char[]</code>哪里来？通过<code>decodeUTF8</code>方法构建的。</p>
+<p>但是，在编码这一步，我们不能保证获得一个正确的<code>char[]</code>。这问题是UTF-8和Unicode的编码长度差异带来的。</p>
+<p>我简单用代码举个例子。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 假设我们已经有了一个固定长度的byte[]</span><br><span class="line">public String getString(byte[] src) &#123;</span><br><span class="line">		// 首先得创建一个dst，才能decode</span><br><span class="line">		char[] dst = new char[src.length / 3];</span><br><span class="line">		int dp = StringUtils.decodeUTF8(src, 0, src.length, dst);</span><br><span class="line">		// 后续代码略……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，必须先创建好dst对象，才能做decode。但是由于UTF-8和Unicode编码长度的差异，初始化的dst长度可能过长了，也就是dst可能最后几位是<code>\u0000</code>。</p>
+<p>如果不清理最后这几位，直接用零拷贝的方法去构建String，就会导致字符串在其他地方展示的时候最后有乱码或空白。</p>
+<p>但是Java中又没有办法零拷贝截断数组。所有的截断方式本质都是通过创建一个新的数组，然后把原来数组的数据拷贝过去。</p>
+<p>所以，用零拷贝的方式去构建，就必须在外部显式地拷贝一次。那既然如此，和直接使用String本身提供的方法又有什么区别呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public String(char value[], int offset, int count) &#123;</span><br><span class="line">        if (offset &lt; 0) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset);</span><br><span class="line">        &#125;</span><br><span class="line">        if (count &lt;= 0) &#123;</span><br><span class="line">            if (count &lt; 0) &#123;</span><br><span class="line">                throw new StringIndexOutOfBoundsException(count);</span><br><span class="line">            &#125;</span><br><span class="line">            if (offset &lt;= value.length) &#123;</span><br><span class="line">                this.value = &quot;&quot;.value;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // Note: offset or count might be near -1&gt;&gt;&gt;1.</span><br><span class="line">        if (offset &gt; value.length - count) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset + count);</span><br><span class="line">        &#125;</span><br><span class="line">        this.value = Arrays.copyOfRange(value, offset, offset+count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到String本来就是拷贝一次然后创建对象的。</p>
+<p>所以这种零拷贝的方式就很鸡肋。</p>
+<h2 id="使用">使用</h2>
+<p>最后简单聊聊我在项目的使用。</p>
+<p>我的项目是需要把String的数据转换为UTF-8编码，然后通过Unsafe写到一个内存块上。同时也有从内存块读取的需求。</p>
+<p>很可惜现在提供的api，最终都是落到byte[]。因此我修改了这两个方法，重写了其中对于dst的操作，变更为直接操作内存块。</p>
+<p>修改后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    private static int getStringUTF8JDK8(long off, int len, char[] dst) &#123;</span><br><span class="line">        final long sl = off + len;</span><br><span class="line">        int dp = 0;</span><br><span class="line">        int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; UNSAFE.getByte(off) &gt; 0) &#123;</span><br><span class="line">            dst[dp++] = (char) UNSAFE.getByte(off++);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (off &lt; sl) &#123;</span><br><span class="line">            int b1 = UNSAFE.getByte(off++);</span><br><span class="line">            if (b1 == 0) &#123;</span><br><span class="line">            // 读到0直接返回，不需要继续读取</span><br><span class="line">                return dp;</span><br><span class="line">            &#125; else if (b1 &gt; 0) &#123;</span><br><span class="line">                // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">                dst[dp++] = (char) b1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">                // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">                if (off &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off++);</span><br><span class="line">                    if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^ (((byte) 0xC0 &lt;&lt; 6) ^ ((byte) 0x80)));</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">                // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 1 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    off += 2;</span><br><span class="line">                    if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char c = (char) ((b1 &lt;&lt; 12) ^ (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^ (((byte) 0xE0 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                        boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                        if (isSurrogate) &#123;</span><br><span class="line">                            return -1;</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            dst[dp++] = c;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">                // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 2 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    int b4 = UNSAFE.getByte(off + 2);</span><br><span class="line">                    off += 3;</span><br><span class="line">                    int uc = ((b1 &lt;&lt; 18) ^ (b2 &lt;&lt; 12) ^ (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^ (((byte) 0xF0 &lt;&lt; 18) ^ ((byte) 0x80 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                    if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                    ) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                        dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                        dp += 2;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">private static long putStringUTF8JDK8(char[] src, int offset, int len, long dp, int size) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        long dlASCII = dp + Math.min(len, size);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            UNSAFE.putByte(dp++, (byte) src[offset++]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                UNSAFE.putByte(dp++, (byte) c);</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xc0 | (c &gt;&gt; 6)));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (c &amp; 0x3f)));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) +</span><br><span class="line">                                (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            //                            throw new JSONException(&quot;encodeUTF8 error&quot;, new</span><br><span class="line">                            //                            MalformedInputException(1));</span><br><span class="line">                            UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                    continue;</span><br><span class="line">                    //                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException</span><br><span class="line">                    //                        (1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    UNSAFE.putByte(dp, (byte) (0xf0 | ((uc &gt;&gt; 18))));</span><br><span class="line">                    UNSAFE.putByte(dp + 1, (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 2, (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 3, (byte) (0x80 | (uc &amp; 0x3f)));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xe0 | ((c &gt;&gt; 12))));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (((c &gt;&gt; 6) &amp; 0x3f))));</span><br><span class="line">                UNSAFE.putByte(dp + 2, (byte) (0x80 | ((c &amp; 0x3f))));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>另外，从内存块读取字节时，读到<code>0x00</code>就可以停止了，这个逻辑我也加了进去。</p>
+<h2 id="总结">总结</h2>
+<p>还是得例行总结一下。</p>
+<p>阅读开源代码确实能快速提升个人能力，我觉得以后这种事情应该多做。</p>
+<p>使用开源代码，不仅仅是引入人家的包，为了追求技术可控性，我们也应当了解开源代码中的实现。而且追求极致性能的场景，还是得改改人家的代码，拿过来直接能用的概率还是挺小的。</p>
+<p>再说远点的话，读到高铁的分享时，我确实觉得是受益匪浅。程序员中有一类很特殊的人，自己写了个很牛逼的东西，希望全世界都能知道我写了个很牛逼的玩意儿，让大家都用起来。就是有着这类人，才让软件行业一往无前地汹涌发展吧。</p>
+<p>我尊敬，并希望也能成为那样的人。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>性能调优</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我是怎么使用线程池的</title>
-    <url>/2023/09/25/17-37-38/</url>
+    <url>/2023/09/25/work/java/%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84/</url>
     <content><![CDATA[<h2 id="简单的说明">简单的说明</h2>
 <p>首先给出声明的方法，也就是线程池的构造器。</p>
-<img src="/2023/09/25/17-37-38/image-20230926151418320.png" class="" title="image-20230926151418320">
+<img src="/2023/09/25/work/java/%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84/image-20230926151418320.png" class="" title="image-20230926151418320">
 <ul>
 <li>
 <p>corePoolSize：线程池中一直存活的线程数量</p>
@@ -1674,80 +1746,8 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
       </tags>
   </entry>
   <entry>
-    <title>字符串编解码的特殊处理</title>
-    <url>/2024/01/28/11-39-06/</url>
-    <content><![CDATA[<h2 id="前言">前言</h2>
-<p>起因是在做内存数据库时，遇到了序列化的问题。其中，Java的字符串最是重量级，转化时怎么搞都有很大的性能问题。</p>
-<p>后来搜寻了资料，FastJSON2的作者高铁在阿里开发者的公众号分享了一篇文章，阅读后受益匪浅，决定改动之后运用到自己的项目中。</p>
-<p>高铁对String对象转化字节数组的优化主要有两方面：</p>
-<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
-<p>2、重写unicode到utf8的转换逻辑。</p>
-<p>而字节数组转化为String对象，使用的是：</p>
-<p>1、重写utf8到unicode的转换逻辑。</p>
-<p>2、通过零拷贝构造器构建String对象。</p>
-<p>说白了，就是通过一些旁门左道（比如Lambda表达式工厂替代反射，Unsafe操作）来绕过String对象本身的一些限制，从而重写其编解码逻辑。</p>
-<p>但是话又说回来，结合实际场景分析后，字节数组转化为String对象似乎并没有太多的提升。后文会解释为什么提升有限。</p>
-<p>实际运用到自己项目中时，我也进行了一些改造，从而适配项目本身的情况。</p>
-<h2 id="String转byte">String转byte[]</h2>
-<p>Java的String，本质是一个封装好的不可变char数组对象。</p>
-<p>Java的char类型，底层编码是unicode，每个char占两位字节。而UTF-8使用可变长度的编码，不同字符所占的字节数不同。</p>
-<p>FastJSON2的优化就如上文所述，分两步：</p>
-<p>1、直接获取char数组，避免自带方法的判断逻辑。</p>
-<p>2、重写unicode到utf8的转换逻辑。</p>
-<p>我们先开看第一步，以下是核心代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 当前优化仅在Java8有效</span><br><span class="line">// Java9修改了String的字符串实现，因此无法使用以下的方式初始化</span><br><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	Field field = null;</span><br><span class="line">	long fieldOffset = -1;</span><br><span class="line">	if (!ANDROID) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			field = String.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">			field.setAccessible(true);</span><br><span class="line">			fieldOffset = UNSAFE.objectFieldOffset(field);</span><br><span class="line">		&#125; catch (Exception ignored) &#123;</span><br><span class="line">			FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	FIELD_STRING_VALUE = field;</span><br><span class="line">	FIELD_STRING_VALUE_OFFSET = fieldOffset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用反射和Unsafe获取了value对象的偏移量，缓存到了一个静态变量汇总。</p>
-<p>后续是使用Unsafe，通过缓存的静态变量来获取char数组：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static char[] getCharArray(String str) &#123;</span><br><span class="line">    // GraalVM not support</span><br><span class="line">    // Android not support</span><br><span class="line">    if (!FIELD_STRING_VALUE_ERROR) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return (char[]) UNSAFE.getObject(str, FIELD_STRING_VALUE_OFFSET);</span><br><span class="line">        &#125; catch (Exception ignored) &#123;</span><br><span class="line">            FIELD_STRING_VALUE_ERROR = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return str.toCharArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而编码逻辑，则是参考了JDK原来的实现，进行了一定的修改：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    public static int encodeUTF8(char[] src, int offset, int len, byte[] dst, int dp) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        int dlASCII = dp + Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            dst[dp++] = (byte) src[offset++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                dst[dp++] = (byte) c;</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                dst[dp] = (byte) (0xc0 | (c &gt;&gt; 6));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) + (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">//                            throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                            dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                    continue;</span><br><span class="line">//                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException(1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    dst[dp++] = (byte) &#x27;?&#x27;;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (byte) (0xf0 | ((uc &gt;&gt; 18)));</span><br><span class="line">                    dst[dp + 1] = (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 2] = (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                    dst[dp + 3] = (byte) (0x80 | (uc &amp; 0x3f));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                dst[dp] = (byte) (0xe0 | ((c &gt;&gt; 12)));</span><br><span class="line">                dst[dp + 1] = (byte) (0x80 | ((c &gt;&gt; 6) &amp; 0x3f));</span><br><span class="line">                dst[dp + 2] = (byte) (0x80 | (c &amp; 0x3f));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>这里有个很抽象的逻辑需要解释一下。</p>
-<p>上述编码的方法入参有个名为dst的byte数组，它的意思是最终要写入的目标数组。在序列化框架中，有的时候就是要在一个已经提前创建好的byte[]数组里，从某个位置开始把转换后的结果append进去。这个方法就是为了兼容这种情况，所以还额外提供了dp这一入参，用来标识是从dst[]的第几位开始写数据。</p>
-<h2 id="byte-转String">byte[]转String</h2>
-<p>FastJSON2在处理此类场景时，也是进行了优化，分两步：</p>
-<p>1、重写utf8到unicode的转换逻辑。</p>
-<p>2、通过零拷贝构造器构建String对象。</p>
-<p>重写后的代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">public static int decodeUTF8(byte[] src, int off, int len, char[] dst) &#123;</span><br><span class="line">    final int sl = off + len;</span><br><span class="line">    int dp = 0;</span><br><span class="line">    int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">    // ASCII only optimized loop</span><br><span class="line">    while (dp &lt; dlASCII &amp;&amp; src[off] &gt;= 0) &#123;</span><br><span class="line">        dst[dp++] = (char) src[off++];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while (off &lt; sl) &#123;</span><br><span class="line">        int b1 = src[off++];</span><br><span class="line">        if (b1 &gt;= 0) &#123;</span><br><span class="line">            // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">            dst[dp++] = (char) b1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">            // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">            if (off &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off++];</span><br><span class="line">                if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^</span><br><span class="line">                            (((byte) 0xC0 &lt;&lt; 6) ^</span><br><span class="line">                                    ((byte) 0x80)));</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">            // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 1 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                off += 2;</span><br><span class="line">                if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    char c = (char) ((b1 &lt;&lt; 12) ^</span><br><span class="line">                            (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^</span><br><span class="line">                                    (((byte) 0xE0 &lt;&lt; 12) ^</span><br><span class="line">                                            ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                            ((byte) 0x80))));</span><br><span class="line">                    boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                    if (isSurrogate) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = c;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">            // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">            if (off + 2 &lt; sl) &#123;</span><br><span class="line">                int b2 = src[off];</span><br><span class="line">                int b3 = src[off + 1];</span><br><span class="line">                int b4 = src[off + 2];</span><br><span class="line">                off += 3;</span><br><span class="line">                int uc = ((b1 &lt;&lt; 18) ^</span><br><span class="line">                        (b2 &lt;&lt; 12) ^</span><br><span class="line">                        (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^</span><br><span class="line">                                (((byte) 0xF0 &lt;&lt; 18) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 12) ^</span><br><span class="line">                                        ((byte) 0x80 &lt;&lt; 6) ^</span><br><span class="line">                                        ((byte) 0x80))));</span><br><span class="line">                if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                ) &#123;</span><br><span class="line">                    return -1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                    dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                    dp += 2;</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>至于零拷贝的构造器，是使用了Lambda工厂来实现的，这里不多提，就看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (JVM_VERSION == 8) &#123;</span><br><span class="line">	MethodHandles.Lookup lookup = trustedLookup(String.class);</span><br><span class="line"></span><br><span class="line">	MethodHandle handle = lookup.findConstructor(</span><br><span class="line">				String.class, methodType(void.class, char[].class, boolean.class)</span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">	CallSite callSite = LambdaMetafactory.metafactory(</span><br><span class="line">				lookup,</span><br><span class="line">				&quot;apply&quot;,</span><br><span class="line">				methodType(BiFunction.class),</span><br><span class="line">				methodType(Object.class, Object.class, Object.class),</span><br><span class="line">				handle,</span><br><span class="line">				methodType(String.class, char[].class, boolean.class)</span><br><span class="line">	);</span><br><span class="line">	stringCreatorJDK8 = (BiFunction&lt;char[], Boolean, String&gt;) callSite.getTarget().invokeExact();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主要还是讲下为什么这个零拷贝构造器实际用的时候发现很鸡肋。</p>
-<p>首先，这个零拷贝构造器是要求传入一个<code>char[]</code>，传的<code>char[]</code>是什么它就用什么。</p>
-<p>那么这个<code>char[]</code>哪里来？通过<code>decodeUTF8</code>方法构建的。</p>
-<p>但是，在编码这一步，我们不能保证获得一个正确的<code>char[]</code>。这问题是UTF-8和Unicode的编码长度差异带来的。</p>
-<p>我简单用代码举个例子。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 假设我们已经有了一个固定长度的byte[]</span><br><span class="line">public String getString(byte[] src) &#123;</span><br><span class="line">		// 首先得创建一个dst，才能decode</span><br><span class="line">		char[] dst = new char[src.length / 3];</span><br><span class="line">		int dp = StringUtils.decodeUTF8(src, 0, src.length, dst);</span><br><span class="line">		// 后续代码略……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到，必须先创建好dst对象，才能做decode。但是由于UTF-8和Unicode编码长度的差异，初始化的dst长度可能过长了，也就是dst可能最后几位是<code>\u0000</code>。</p>
-<p>如果不清理最后这几位，直接用零拷贝的方法去构建String，就会导致字符串在其他地方展示的时候最后有乱码或空白。</p>
-<p>但是Java中又没有办法零拷贝截断数组。所有的截断方式本质都是通过创建一个新的数组，然后把原来数组的数据拷贝过去。</p>
-<p>所以，用零拷贝的方式去构建，就必须在外部显式地拷贝一次。那既然如此，和直接使用String本身提供的方法又有什么区别呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public String(char value[], int offset, int count) &#123;</span><br><span class="line">        if (offset &lt; 0) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset);</span><br><span class="line">        &#125;</span><br><span class="line">        if (count &lt;= 0) &#123;</span><br><span class="line">            if (count &lt; 0) &#123;</span><br><span class="line">                throw new StringIndexOutOfBoundsException(count);</span><br><span class="line">            &#125;</span><br><span class="line">            if (offset &lt;= value.length) &#123;</span><br><span class="line">                this.value = &quot;&quot;.value;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // Note: offset or count might be near -1&gt;&gt;&gt;1.</span><br><span class="line">        if (offset &gt; value.length - count) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(offset + count);</span><br><span class="line">        &#125;</span><br><span class="line">        this.value = Arrays.copyOfRange(value, offset, offset+count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到String本来就是拷贝一次然后创建对象的。</p>
-<p>所以这种零拷贝的方式就很鸡肋。</p>
-<h2 id="使用">使用</h2>
-<p>最后简单聊聊我在项目的使用。</p>
-<p>我的项目是需要把String的数据转换为UTF-8编码，然后通过Unsafe写到一个内存块上。同时也有从内存块读取的需求。</p>
-<p>很可惜现在提供的api，最终都是落到byte[]。因此我修改了这两个方法，重写了其中对于dst的操作，变更为直接操作内存块。</p>
-<p>修改后的代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    private static int getStringUTF8JDK8(long off, int len, char[] dst) &#123;</span><br><span class="line">        final long sl = off + len;</span><br><span class="line">        int dp = 0;</span><br><span class="line">        int dlASCII = Math.min(len, dst.length);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; UNSAFE.getByte(off) &gt; 0) &#123;</span><br><span class="line">            dst[dp++] = (char) UNSAFE.getByte(off++);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (off &lt; sl) &#123;</span><br><span class="line">            int b1 = UNSAFE.getByte(off++);</span><br><span class="line">            if (b1 == 0) &#123;</span><br><span class="line">            // 读到0直接返回，不需要继续读取</span><br><span class="line">                return dp;</span><br><span class="line">            &#125; else if (b1 &gt; 0) &#123;</span><br><span class="line">                // 1 byte, 7 bits: 0xxxxxxx</span><br><span class="line">                dst[dp++] = (char) b1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 5) == -2 &amp;&amp; (b1 &amp; 0x1e) != 0) &#123;</span><br><span class="line">                // 2 bytes, 11 bits: 110xxxxx 10xxxxxx</span><br><span class="line">                if (off &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off++);</span><br><span class="line">                    if ((b2 &amp; 0xc0) != 0x80) &#123; // isNotContinuation(b2)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp++] = (char) (((b1 &lt;&lt; 6) ^ b2) ^ (((byte) 0xC0 &lt;&lt; 6) ^ ((byte) 0x80)));</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 4) == -2) &#123;</span><br><span class="line">                // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 1 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    off += 2;</span><br><span class="line">                    if ((b1 == (byte) 0xe0 &amp;&amp; (b2 &amp; 0xe0) == 0x80) //</span><br><span class="line">                        || (b2 &amp; 0xc0) != 0x80 //</span><br><span class="line">                        || (b3 &amp; 0xc0) != 0x80) &#123; // isMalformed3(b1, b2, b3)</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char c = (char) ((b1 &lt;&lt; 12) ^ (b2 &lt;&lt; 6) ^</span><br><span class="line">                            (b3 ^ (((byte) 0xE0 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                        boolean isSurrogate = c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1);</span><br><span class="line">                        if (isSurrogate) &#123;</span><br><span class="line">                            return -1;</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            dst[dp++] = c;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else if ((b1 &gt;&gt; 3) == -2) &#123;</span><br><span class="line">                // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</span><br><span class="line">                if (off + 2 &lt; sl) &#123;</span><br><span class="line">                    int b2 = UNSAFE.getByte(off);</span><br><span class="line">                    int b3 = UNSAFE.getByte(off + 1);</span><br><span class="line">                    int b4 = UNSAFE.getByte(off + 2);</span><br><span class="line">                    off += 3;</span><br><span class="line">                    int uc = ((b1 &lt;&lt; 18) ^ (b2 &lt;&lt; 12) ^ (b3 &lt;&lt; 6) ^</span><br><span class="line">                        (b4 ^ (((byte) 0xF0 &lt;&lt; 18) ^ ((byte) 0x80 &lt;&lt; 12) ^ ((byte) 0x80 &lt;&lt; 6) ^ ((byte) 0x80))));</span><br><span class="line">                    if (((b2 &amp; 0xc0) != 0x80 || (b3 &amp; 0xc0) != 0x80 || (b4 &amp; 0xc0) != 0x80) // isMalformed4</span><br><span class="line">                        ||</span><br><span class="line">                        // shortest form check</span><br><span class="line">                        !(uc &gt;= 0x010000 &amp;&amp; uc &lt; 0X10FFFF + 1) // !Character.isSupplementaryCodePoint(uc)</span><br><span class="line">                    ) &#123;</span><br><span class="line">                        return -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dst[dp] = (char) ((uc &gt;&gt;&gt; 10) + (&#x27;\uD800&#x27; - (0x010000 &gt;&gt;&gt; 10))); // Character.highSurrogate(uc);</span><br><span class="line">                        dst[dp + 1] = (char) ((uc &amp; 0x3ff) + &#x27;\uDC00&#x27;); // Character.lowSurrogate(uc);</span><br><span class="line">                        dp += 2;</span><br><span class="line">                    &#125;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">private static long putStringUTF8JDK8(char[] src, int offset, int len, long dp, int size) &#123;</span><br><span class="line">        int sl = offset + len;</span><br><span class="line">        long dlASCII = dp + Math.min(len, size);</span><br><span class="line"></span><br><span class="line">        // ASCII only optimized loop</span><br><span class="line">        while (dp &lt; dlASCII &amp;&amp; src[offset] &lt; &#x27;\u0080&#x27;) &#123;</span><br><span class="line">            UNSAFE.putByte(dp++, (byte) src[offset++]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (offset &lt; sl) &#123;</span><br><span class="line">            char c = src[offset++];</span><br><span class="line">            if (c &lt; 0x80) &#123;</span><br><span class="line">                // Have at most seven bits</span><br><span class="line">                UNSAFE.putByte(dp++, (byte) c);</span><br><span class="line">            &#125; else if (c &lt; 0x800) &#123;</span><br><span class="line">                // 2 bytes, 11 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xc0 | (c &gt;&gt; 6)));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (c &amp; 0x3f)));</span><br><span class="line">                dp += 2;</span><br><span class="line">            &#125; else if (c &gt;= &#x27;\uD800&#x27; &amp;&amp; c &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; //Character.isSurrogate(c) but 1.7</span><br><span class="line">                final int uc;</span><br><span class="line">                int ip = offset - 1;</span><br><span class="line">                if (c &lt; &#x27;\uDBFF&#x27; + 1) &#123; // Character.isHighSurrogate(c)</span><br><span class="line">                    if (sl - ip &lt; 2) &#123;</span><br><span class="line">                        uc = -1;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        char d = src[ip + 1];</span><br><span class="line">                        // d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)</span><br><span class="line">                        if (d &gt;= &#x27;\uDC00&#x27; &amp;&amp; d &lt; (&#x27;\uDFFF&#x27; + 1)) &#123; // Character.isLowSurrogate(d)</span><br><span class="line">                            uc = ((c &lt;&lt; 10) + d) +</span><br><span class="line">                                (0x010000 - (&#x27;\uD800&#x27; &lt;&lt; 10) - &#x27;\uDC00&#x27;); // Character.toCodePoint(c, d)</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            //                            throw new JSONException(&quot;encodeUTF8 error&quot;, new</span><br><span class="line">                            //                            MalformedInputException(1));</span><br><span class="line">                            UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //</span><br><span class="line">                    // Character.isLowSurrogate(c)</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                    continue;</span><br><span class="line">                    //                        throw new JSONException(&quot;encodeUTF8 error&quot;, new MalformedInputException</span><br><span class="line">                    //                        (1));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (uc &lt; 0) &#123;</span><br><span class="line">                    UNSAFE.putByte(dp++, (byte) &#x27;?&#x27;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    UNSAFE.putByte(dp, (byte) (0xf0 | ((uc &gt;&gt; 18))));</span><br><span class="line">                    UNSAFE.putByte(dp + 1, (byte) (0x80 | ((uc &gt;&gt; 12) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 2, (byte) (0x80 | ((uc &gt;&gt; 6) &amp; 0x3f)));</span><br><span class="line">                    UNSAFE.putByte(dp + 3, (byte) (0x80 | (uc &amp; 0x3f)));</span><br><span class="line">                    dp += 4;</span><br><span class="line">                    offset++; // 2 chars</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 3 bytes, 16 bits</span><br><span class="line">                UNSAFE.putByte(dp, (byte) (0xe0 | ((c &gt;&gt; 12))));</span><br><span class="line">                UNSAFE.putByte(dp + 1, (byte) (0x80 | (((c &gt;&gt; 6) &amp; 0x3f))));</span><br><span class="line">                UNSAFE.putByte(dp + 2, (byte) (0x80 | ((c &amp; 0x3f))));</span><br><span class="line">                dp += 3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>另外，从内存块读取字节时，读到<code>0x00</code>就可以停止了，这个逻辑我也加了进去。</p>
-<h2 id="总结">总结</h2>
-<p>还是得例行总结一下。</p>
-<p>阅读开源代码确实能快速提升个人能力，我觉得以后这种事情应该多做。</p>
-<p>使用开源代码，不仅仅是引入人家的包，为了追求技术可控性，我们也应当了解开源代码中的实现。而且追求极致性能的场景，还是得改改人家的代码，拿过来直接能用的概率还是挺小的。</p>
-<p>再说远点的话，读到高铁的分享时，我确实觉得是受益匪浅。程序员中有一类很特殊的人，自己写了个很牛逼的东西，希望全世界都能知道我写了个很牛逼的玩意儿，让大家都用起来。就是有着这类人，才让软件行业一往无前地汹涌发展吧。</p>
-<p>我尊敬，并希望也能成为那样的人。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>性能调优</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>老年代大对象的问题排查</title>
-    <url>/2023/05/05/10-26-55/</url>
+    <url>/2023/05/05/work/java/%E8%80%81%E5%B9%B4%E4%BB%A3%E5%A4%A7%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</url>
     <content><![CDATA[<h2 id="堆内存">堆内存</h2>
 <p>堆内存被划分为老年代和新生代。而新生代又可以划分为Eden区和Suivior区，Suivior还可以分为s1和s2。</p>
 <p>先说为什么要分为老年代和新生代。内存中会有一些对象会长久的存活而不能回收（比如缓存对象），这些对象会放入老年代。我们可以把每一次GC当做是一次轮回，每次新生代GC后，如果有某一个对象没有被回收，那么就认定其年龄增长了一岁。当这个对象的年龄超过了某个值（默认是15）后，它就会从新生代被挪到老年代中。另外，如果一个对象的大小超过了某个值，那么会直接被挪到老年代。</p>
@@ -1785,7 +1785,7 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
   </entry>
   <entry>
     <title>远程调试案例</title>
-    <url>/2023/07/10/15-08-11/</url>
+    <url>/2023/07/10/work/java/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E6%A1%88%E4%BE%8B/</url>
     <content><![CDATA[<p>下面我们来看一下怎么使用jvm的远程调试能力。</p>
 <h2 id="前提">前提</h2>
 <p>本地需要有源码，有源码才可以敲断点调试。</p>
@@ -1801,9 +1801,9 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
 <p>这个debug端口就是命令中设置的5005。</p>
 <h2 id="本地创建客户端">本地创建客户端</h2>
 <p>本地使用IDEA创建客户端。</p>
-<img src="/2023/07/10/15-08-11/image-20230630174009789.png" class="" title="image-20230630174009789">
+<img src="/2023/07/10/work/java/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E6%A1%88%E4%BE%8B/image-20230630174009789.png" class="" title="image-20230630174009789">
 <p>修改host为服务器地址</p>
-<img src="/2023/07/10/15-08-11/image-20230630174033683.png" class="" title="image-20230630174033683">
+<img src="/2023/07/10/work/java/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E6%A1%88%E4%BE%8B/image-20230630174033683.png" class="" title="image-20230630174033683">
 <p>创建完毕后运行该客户端，运行时该客户端会和服务端建立连接。</p>
 <p>可以看到原本卡住的服务端开始正常运行。</p>
 <p>在本地的代码中敲断点，就可以进行debug了，和平时在本地debug没什么差别。</p>

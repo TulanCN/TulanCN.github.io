@@ -3,11 +3,11 @@
   <title>涂蓝</title>
   
   
-  <link href="http://tulancn.github.io/atom.xml" rel="self"/>
+  <link href="https://tulancn.github.io/atom.xml" rel="self"/>
   
-  <link href="http://tulancn.github.io/"/>
+  <link href="https://tulancn.github.io/"/>
   <updated>2025-03-10T13:52:48.138Z</updated>
-  <id>http://tulancn.github.io/</id>
+  <id>https://tulancn.github.io/</id>
   
   <author>
     <name>Tulan</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>SSE协议和流式输出</title>
-    <link href="http://tulancn.github.io/2025/03/09/11-17-03/"/>
-    <id>http://tulancn.github.io/2025/03/09/11-17-03/</id>
+    <link href="https://tulancn.github.io/2025/03/09/work/SSE%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA/"/>
+    <id>https://tulancn.github.io/2025/03/09/work/SSE%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA/</id>
     <published>2025-03-09T03:17:03.000Z</published>
     <updated>2025-03-10T13:52:48.138Z</updated>
     
@@ -30,17 +30,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="技术协议" scheme="http://tulancn.github.io/tags/%E6%8A%80%E6%9C%AF%E5%8D%8F%E8%AE%AE/"/>
+    <category term="技术协议" scheme="https://tulancn.github.io/tags/%E6%8A%80%E6%9C%AF%E5%8D%8F%E8%AE%AE/"/>
     
   </entry>
   
   <entry>
     <title>我也是全栈</title>
-    <link href="http://tulancn.github.io/2025/02/28/22-07-08/"/>
-    <id>http://tulancn.github.io/2025/02/28/22-07-08/</id>
+    <link href="https://tulancn.github.io/2025/02/28/work/%E6%88%91%E4%B9%9F%E6%98%AF%E5%85%A8%E6%A0%88/"/>
+    <id>https://tulancn.github.io/2025/02/28/work/%E6%88%91%E4%B9%9F%E6%98%AF%E5%85%A8%E6%A0%88/</id>
     <published>2025-02-28T14:07:08.000Z</published>
     <updated>2025-03-10T13:49:45.421Z</updated>
     
@@ -51,17 +51,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="工作总结" scheme="http://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
+    <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>聊聊AI工具和学习</title>
-    <link href="http://tulancn.github.io/2025/02/15/19-54-17/"/>
-    <id>http://tulancn.github.io/2025/02/15/19-54-17/</id>
+    <link href="https://tulancn.github.io/2025/02/15/study/%E8%81%8A%E8%81%8AAI%E5%B7%A5%E5%85%B7%E5%92%8C%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://tulancn.github.io/2025/02/15/study/%E8%81%8A%E8%81%8AAI%E5%B7%A5%E5%85%B7%E5%92%8C%E5%AD%A6%E4%B9%A0/</id>
     <published>2025-02-15T11:54:17.000Z</published>
     <updated>2025-03-10T13:54:25.192Z</updated>
     
@@ -72,17 +72,17 @@
     
     
     
-    <category term="学习" scheme="http://tulancn.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://tulancn.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="学习总结" scheme="http://tulancn.github.io/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    <category term="学习总结" scheme="https://tulancn.github.io/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>股市投机的原则</title>
-    <link href="http://tulancn.github.io/2024/12/13/16-49-54/"/>
-    <id>http://tulancn.github.io/2024/12/13/16-49-54/</id>
+    <link href="https://tulancn.github.io/2024/12/13/life/%E8%82%A1%E5%B8%82%E6%8A%95%E6%9C%BA%E7%9A%84%E5%8E%9F%E5%88%99/"/>
+    <id>https://tulancn.github.io/2024/12/13/life/%E8%82%A1%E5%B8%82%E6%8A%95%E6%9C%BA%E7%9A%84%E5%8E%9F%E5%88%99/</id>
     <published>2024-12-13T08:49:54.000Z</published>
     <updated>2025-03-10T13:55:47.433Z</updated>
     
@@ -93,17 +93,17 @@
     
     
     
-    <category term="生活" scheme="http://tulancn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    <category term="生活" scheme="https://tulancn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
     
     
-    <category term="投资" scheme="http://tulancn.github.io/tags/%E6%8A%95%E8%B5%84/"/>
+    <category term="投资" scheme="https://tulancn.github.io/tags/%E6%8A%95%E8%B5%84/"/>
     
   </entry>
   
   <entry>
     <title>NLP的project复盘</title>
-    <link href="http://tulancn.github.io/2024/11/22/14-57-31/"/>
-    <id>http://tulancn.github.io/2024/11/22/14-57-31/</id>
+    <link href="https://tulancn.github.io/2024/11/22/study/NLP%E7%9A%84project%E5%A4%8D%E7%9B%98/"/>
+    <id>https://tulancn.github.io/2024/11/22/study/NLP%E7%9A%84project%E5%A4%8D%E7%9B%98/</id>
     <published>2024-11-22T06:57:31.000Z</published>
     <updated>2025-03-10T13:56:09.342Z</updated>
     
@@ -114,38 +114,38 @@
     
     
     
-    <category term="学习" scheme="http://tulancn.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://tulancn.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="学习总结" scheme="http://tulancn.github.io/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    <category term="学习总结" scheme="https://tulancn.github.io/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>回炉重造是种什么样的感觉？</title>
-    <link href="http://tulancn.github.io/2024/11/20/13-32-12/"/>
-    <id>http://tulancn.github.io/2024/11/20/13-32-12/</id>
+    <link href="https://tulancn.github.io/2024/11/20/life/%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0%E6%98%AF%E7%A7%8D%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%84%9F%E8%A7%89%EF%BC%9F/"/>
+    <id>https://tulancn.github.io/2024/11/20/life/%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0%E6%98%AF%E7%A7%8D%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%84%9F%E8%A7%89%EF%BC%9F/</id>
     <published>2024-11-20T05:32:12.000Z</published>
     <updated>2025-03-10T13:55:54.636Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="就读体验">就读体验</h2><p>整体来说，在polyu的就读体验还算不错。</p><p>各种流程都会有较为详细的指引。比如入学、选课、课程的考试之类的日常流程，都有邮件会提醒，邮件中会有很详细的说明，足够每个人完成这些。</p><p>每个学生也都会收到不少附赠的资源，比如学生的云电脑有两块免费的4090ti可用。在学校想训练自己的大模型，或是做一些微调都足够用了。</p><p>同学倒是也都挺实在的。毕竟排名是港三之外吧，挺少见到本科985的同学，遇到的985也大多是转方向来读计算机的。像我这种工作4年再来读书的确实是少数的少数。这也导致了遇到的同学大多很佛系，不太在意成绩，大多是一个能过就行的态度。某种意义上倒也挺符合对港留子的刻板印象的。</p><p>虽说绝大部分人都是抱着一个拿到学位就算成功的态度，但同学中也有少数比较卷的，大部分是local，目标都是继续深造读博。</p><p>学校的课也不算太水，NLP、AI concept和Big Data都会介绍目前最前沿的技术。对于我这种没接触过AI算法的人来说，确实有点头大。不过也算学到了新东西，倒也不亏。</p><p>本科毕业之后，可能大家都已经有了自己的规划。对于读书这事，目的也各不相同。</p><p>这港硕的一年，就像是把一群各有自己想法的人聚集到了一块儿，每次遇到陌生同学，聊几句就会发现对方过着和你截然不同的人生。</p><p>从我个人角度，满分100，我给港理工打90。10分扣在不是港三，但这事也怨我，早点申请可能也就到港三去了。</p><h2 id="回炉重造的成果">回炉重造的成果</h2><p>挨过了社会的毒打，重新回到校园，以为会是狼入羊群嘎嘎乱杀，结果是发现牛混到了羊群里，居然要重新学怎么吃草。</p><p>技术栈差别很大，真的很大。我原本是搞工程方向的人，但是研究生也不得不去学算法，学AI的技术了。</p><p>大模型的风确实刮到了各种地方，现在是个学科只要挂上机器学习的名头就能变成一个新学科，一个新方向。</p><p>风来了，那么也只能顺着风的方向去飞。借着学校的课程，我也开始在AI这块入了个门。</p><p>到NLP的小组作业，也算是小小地喷发了一会儿。</p><p>我久违地写了点代码，然后把服务部署到了阿里云的云服务器上，最后接入通义千问大模型。搞出来的效果让同组的人都惊呆了。</p><p>其他组大多是在大模型的上层做了RAG，但我的思路是在RAG之外要给模型提供插件来获取实时信息，否则这个项目的成果完全不可用。</p><img src="/2024/11/20/13-32-12/image-20241121203740450.png" class="" title="image-20241121203740450"><p>做完的时候有种感觉，就是自己好像确实学了不少新玩意儿。</p><p>这次回炉重造，最初的目标就是能开拓一些新的知识点，希望能学python，学数据分析，学AI训练，学会写前端。</p><p>我觉得还是有些进步的，至少python会写了，数分也入门了，大模型的训练、微调也会了。目前还差点前端，打算是考试期间学点微信小程序的前端，先入门一下。</p><p>也慢慢明白自己擅长和不擅长的地方，对未来的规划也更加明确了。</p><p>回炉重造初显成效。</p><h2 id="看过猪跑很重要">看过猪跑很重要</h2><p>我当时下定决心要读研究生，这句话对我影响很大：“看过猪跑很重要”。</p><p>应该是阿里的毕玄在一次采访中说的。大概意思是公司的业务发展中，总会随着业务量出现各种新的问题。这时候能了解其他人的解法，是非常有参考价值的。</p><p>拿阿里来说，当时国内没有什么公司能作为参考，他们会去找谷歌的案例。但是找到的案例可能是10年前的，对于当时的业务量，足以够用。</p><p>而业务快速成长，遇到的困难也越来越多。到某一天，突然发现谷歌也没处理过现在阿里遇到的问题了。那这时候怎么办？</p><p>唯有自己解决了？</p><p>非也。这时候，答案在学术界。</p><p>时代变化，公司可能已经成长为巨头，此时不能直接照抄人家的答案，你也得作为开拓者参与最前沿的技术。</p><p>这时候各种国际会议、学术论文会进入你的视野，从学术角度找方案来落地才是最切实可行的。为什么说&quot;看过猪跑很重要&quot;，学习的知识来源是实践，而模仿是实践中效率最高的方式。</p><p>公司的业务变化，模仿的对象也要变化。当接近了金字塔的顶尖，所有人都不得不参与到名为学术的圈子里。</p><p>而这时候，你也得产出一些成果，可能是学术会议上的论文、各种分享会上的演讲，你也会变成别人眼中奔跑的猪。</p><p>我想读研究生，就是希望能先打个基础，以后做到这个程度的时候不会有短板。</p><h2 id="回炉重造的感受">回炉重造的感受</h2><p>自由、时间充裕、需要自控力。这三点是我最大的想法。</p><p>不用上班之后确实时间很多，也很自由，但是想做些什么有意义的事情，得靠自控力。</p><p>我每年都有立个目标和年末总结的习惯。</p><p>今年的目标，有两个：上学和变全栈。上学算是完成了，全栈还需要一点点时间，不过我相信我绝对没什么问题。</p><p>当时脑袋里萌发出读研的想法，我觉得这个决定可能会影响我一生，于是我马上订了去广州的高铁去找中介，并且立马签了合同。</p><p>现在已经初现倪端，我接触的技术范围大大超过了工作时。</p><p>我始终觉得方法比实际的努力更重要，因此我学习更注重学会学习方法，走通学习新知识的路，而不是学会这个知识本身。</p><p>在这方面，研究生读得还挺值得的。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="就读体验">就读体验</h2><p>整体来说，在polyu的就读体验还算不错。</p><p>各种流程都会有较为详细的指引。比如入学、选课、课程的考试之类的日常流程，都有邮件会提醒，邮件中会有很详细的说明，足够每个人完成这些。</p><p>每个学生也都会收到不少附赠的资源，比如学生的云电脑有两块免费的4090ti可用。在学校想训练自己的大模型，或是做一些微调都足够用了。</p><p>同学倒是也都挺实在的。毕竟排名是港三之外吧，挺少见到本科985的同学，遇到的985也大多是转方向来读计算机的。像我这种工作4年再来读书的确实是少数的少数。这也导致了遇到的同学大多很佛系，不太在意成绩，大多是一个能过就行的态度。某种意义上倒也挺符合对港留子的刻板印象的。</p><p>虽说绝大部分人都是抱着一个拿到学位就算成功的态度，但同学中也有少数比较卷的，大部分是local，目标都是继续深造读博。</p><p>学校的课也不算太水，NLP、AI concept和Big Data都会介绍目前最前沿的技术。对于我这种没接触过AI算法的人来说，确实有点头大。不过也算学到了新东西，倒也不亏。</p><p>本科毕业之后，可能大家都已经有了自己的规划。对于读书这事，目的也各不相同。</p><p>这港硕的一年，就像是把一群各有自己想法的人聚集到了一块儿，每次遇到陌生同学，聊几句就会发现对方过着和你截然不同的人生。</p><p>从我个人角度，满分100，我给港理工打90。10分扣在不是港三，但这事也怨我，早点申请可能也就到港三去了。</p><h2 id="回炉重造的成果">回炉重造的成果</h2><p>挨过了社会的毒打，重新回到校园，以为会是狼入羊群嘎嘎乱杀，结果是发现牛混到了羊群里，居然要重新学怎么吃草。</p><p>技术栈差别很大，真的很大。我原本是搞工程方向的人，但是研究生也不得不去学算法，学AI的技术了。</p><p>大模型的风确实刮到了各种地方，现在是个学科只要挂上机器学习的名头就能变成一个新学科，一个新方向。</p><p>风来了，那么也只能顺着风的方向去飞。借着学校的课程，我也开始在AI这块入了个门。</p><p>到NLP的小组作业，也算是小小地喷发了一会儿。</p><p>我久违地写了点代码，然后把服务部署到了阿里云的云服务器上，最后接入通义千问大模型。搞出来的效果让同组的人都惊呆了。</p><p>其他组大多是在大模型的上层做了RAG，但我的思路是在RAG之外要给模型提供插件来获取实时信息，否则这个项目的成果完全不可用。</p><img src="/2024/11/20/life/%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0%E6%98%AF%E7%A7%8D%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%84%9F%E8%A7%89%EF%BC%9F/image-20241121203740450.png" class="" title="image-20241121203740450"><p>做完的时候有种感觉，就是自己好像确实学了不少新玩意儿。</p><p>这次回炉重造，最初的目标就是能开拓一些新的知识点，希望能学python，学数据分析，学AI训练，学会写前端。</p><p>我觉得还是有些进步的，至少python会写了，数分也入门了，大模型的训练、微调也会了。目前还差点前端，打算是考试期间学点微信小程序的前端，先入门一下。</p><p>也慢慢明白自己擅长和不擅长的地方，对未来的规划也更加明确了。</p><p>回炉重造初显成效。</p><h2 id="看过猪跑很重要">看过猪跑很重要</h2><p>我当时下定决心要读研究生，这句话对我影响很大：“看过猪跑很重要”。</p><p>应该是阿里的毕玄在一次采访中说的。大概意思是公司的业务发展中，总会随着业务量出现各种新的问题。这时候能了解其他人的解法，是非常有参考价值的。</p><p>拿阿里来说，当时国内没有什么公司能作为参考，他们会去找谷歌的案例。但是找到的案例可能是10年前的，对于当时的业务量，足以够用。</p><p>而业务快速成长，遇到的困难也越来越多。到某一天，突然发现谷歌也没处理过现在阿里遇到的问题了。那这时候怎么办？</p><p>唯有自己解决了？</p><p>非也。这时候，答案在学术界。</p><p>时代变化，公司可能已经成长为巨头，此时不能直接照抄人家的答案，你也得作为开拓者参与最前沿的技术。</p><p>这时候各种国际会议、学术论文会进入你的视野，从学术角度找方案来落地才是最切实可行的。为什么说&quot;看过猪跑很重要&quot;，学习的知识来源是实践，而模仿是实践中效率最高的方式。</p><p>公司的业务变化，模仿的对象也要变化。当接近了金字塔的顶尖，所有人都不得不参与到名为学术的圈子里。</p><p>而这时候，你也得产出一些成果，可能是学术会议上的论文、各种分享会上的演讲，你也会变成别人眼中奔跑的猪。</p><p>我想读研究生，就是希望能先打个基础，以后做到这个程度的时候不会有短板。</p><h2 id="回炉重造的感受">回炉重造的感受</h2><p>自由、时间充裕、需要自控力。这三点是我最大的想法。</p><p>不用上班之后确实时间很多，也很自由，但是想做些什么有意义的事情，得靠自控力。</p><p>我每年都有立个目标和年末总结的习惯。</p><p>今年的目标，有两个：上学和变全栈。上学算是完成了，全栈还需要一点点时间，不过我相信我绝对没什么问题。</p><p>当时脑袋里萌发出读研的想法，我觉得这个决定可能会影响我一生，于是我马上订了去广州的高铁去找中介，并且立马签了合同。</p><p>现在已经初现倪端，我接触的技术范围大大超过了工作时。</p><p>我始终觉得方法比实际的努力更重要，因此我学习更注重学会学习方法，走通学习新知识的路，而不是学会这个知识本身。</p><p>在这方面，研究生读得还挺值得的。</p>]]></content>
     
     
     <summary type="html">港硕第一学期即将结束，赶due的期间摸鱼写个博客。</summary>
     
     
     
-    <category term="生活" scheme="http://tulancn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    <category term="生活" scheme="https://tulancn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
     
     
-    <category term="杂谈" scheme="http://tulancn.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="https://tulancn.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
   <entry>
     <title>秋招的总结</title>
-    <link href="http://tulancn.github.io/2024/11/01/15-08-20/"/>
-    <id>http://tulancn.github.io/2024/11/01/15-08-20/</id>
+    <link href="https://tulancn.github.io/2024/11/01/work/%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%80%BB%E7%BB%93/"/>
+    <id>https://tulancn.github.io/2024/11/01/work/%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%80%BB%E7%BB%93/</id>
     <published>2024-11-01T07:08:20.000Z</published>
     <updated>2025-03-10T13:57:29.416Z</updated>
     
@@ -156,17 +156,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="找工作" scheme="http://tulancn.github.io/tags/%E6%89%BE%E5%B7%A5%E4%BD%9C/"/>
+    <category term="找工作" scheme="https://tulancn.github.io/tags/%E6%89%BE%E5%B7%A5%E4%BD%9C/"/>
     
   </entry>
   
   <entry>
     <title>大模型技术到底带来了什么</title>
-    <link href="http://tulancn.github.io/2024/10/19/16-33-05/"/>
-    <id>http://tulancn.github.io/2024/10/19/16-33-05/</id>
+    <link href="https://tulancn.github.io/2024/10/19/work/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%88%B0%E5%BA%95%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88/"/>
+    <id>https://tulancn.github.io/2024/10/19/work/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%88%B0%E5%BA%95%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88/</id>
     <published>2024-10-19T08:33:05.000Z</published>
     <updated>2025-03-10T13:56:48.151Z</updated>
     
@@ -177,17 +177,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="工作总结" scheme="http://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
+    <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>面试笔记-Java基础</title>
-    <link href="http://tulancn.github.io/2024/10/16/15-04-36/"/>
-    <id>http://tulancn.github.io/2024/10/16/15-04-36/</id>
+    <link href="https://tulancn.github.io/2024/10/16/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Java%E5%9F%BA%E7%A1%80/"/>
+    <id>https://tulancn.github.io/2024/10/16/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Java%E5%9F%BA%E7%A1%80/</id>
     <published>2024-10-16T07:04:36.000Z</published>
     <updated>2025-03-10T14:00:22.699Z</updated>
     
@@ -198,17 +198,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="面试" scheme="http://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="https://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>面试笔记-Spring</title>
-    <link href="http://tulancn.github.io/2024/10/16/11-43-17/"/>
-    <id>http://tulancn.github.io/2024/10/16/11-43-17/</id>
+    <link href="https://tulancn.github.io/2024/10/16/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Spring/"/>
+    <id>https://tulancn.github.io/2024/10/16/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Spring/</id>
     <published>2024-10-16T03:43:17.000Z</published>
     <updated>2025-03-10T14:00:33.126Z</updated>
     
@@ -219,17 +219,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="面试" scheme="http://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="https://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>面试笔记-数据库</title>
-    <link href="http://tulancn.github.io/2024/10/14/13-48-06/"/>
-    <id>http://tulancn.github.io/2024/10/14/13-48-06/</id>
+    <link href="https://tulancn.github.io/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>https://tulancn.github.io/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
     <published>2024-10-14T05:48:06.000Z</published>
     <updated>2025-03-10T14:00:06.526Z</updated>
     
@@ -240,17 +240,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="面试" scheme="http://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="https://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>面试笔记-网络协议</title>
-    <link href="http://tulancn.github.io/2024/10/14/13-41-52/"/>
-    <id>http://tulancn.github.io/2024/10/14/13-41-52/</id>
+    <link href="https://tulancn.github.io/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    <id>https://tulancn.github.io/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</id>
     <published>2024-10-14T05:41:52.000Z</published>
     <updated>2025-03-10T14:00:16.272Z</updated>
     
@@ -261,17 +261,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="面试" scheme="http://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="https://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>JRE环境使用Arthas</title>
-    <link href="http://tulancn.github.io/2024/09/20/19-12-39/"/>
-    <id>http://tulancn.github.io/2024/09/20/19-12-39/</id>
+    <link href="https://tulancn.github.io/2024/09/20/work/tips/JRE%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8Arthas/"/>
+    <id>https://tulancn.github.io/2024/09/20/work/tips/JRE%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8Arthas/</id>
     <published>2024-09-20T11:12:39.000Z</published>
     <updated>2025-03-10T14:00:46.667Z</updated>
     
@@ -282,17 +282,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="优秀实践" scheme="http://tulancn.github.io/tags/%E4%BC%98%E7%A7%80%E5%AE%9E%E8%B7%B5/"/>
+    <category term="优秀实践" scheme="https://tulancn.github.io/tags/%E4%BC%98%E7%A7%80%E5%AE%9E%E8%B7%B5/"/>
     
   </entry>
   
   <entry>
     <title>工作中印象最深刻的一件事</title>
-    <link href="http://tulancn.github.io/2024/09/16/20-02-30/"/>
-    <id>http://tulancn.github.io/2024/09/16/20-02-30/</id>
+    <link href="https://tulancn.github.io/2024/09/16/work/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%8D%B0%E8%B1%A1%E6%9C%80%E6%B7%B1%E5%88%BB%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B/"/>
+    <id>https://tulancn.github.io/2024/09/16/work/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%8D%B0%E8%B1%A1%E6%9C%80%E6%B7%B1%E5%88%BB%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B/</id>
     <published>2024-09-16T12:02:30.000Z</published>
     <updated>2025-03-10T13:56:43.120Z</updated>
     
@@ -303,17 +303,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="工作总结" scheme="http://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
+    <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>Netty的FastThreadLocal带来了什么？</title>
-    <link href="http://tulancn.github.io/2024/09/13/14-49-51/"/>
-    <id>http://tulancn.github.io/2024/09/13/14-49-51/</id>
+    <link href="https://tulancn.github.io/2024/09/13/work/java/Netty%E7%9A%84FastThreadLocal%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
+    <id>https://tulancn.github.io/2024/09/13/work/java/Netty%E7%9A%84FastThreadLocal%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/</id>
     <published>2024-09-13T06:49:51.000Z</published>
     <updated>2025-03-10T13:59:46.997Z</updated>
     
@@ -324,17 +324,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="工作总结" scheme="http://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
+    <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>JNI调用的优化（第二版)</title>
-    <link href="http://tulancn.github.io/2024/08/08/10-28-13/"/>
-    <id>http://tulancn.github.io/2024/08/08/10-28-13/</id>
+    <link href="https://tulancn.github.io/2024/08/08/work/java/JNI%E8%B0%83%E7%94%A8%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88/"/>
+    <id>https://tulancn.github.io/2024/08/08/work/java/JNI%E8%B0%83%E7%94%A8%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88/</id>
     <published>2024-08-08T02:28:13.000Z</published>
     <updated>2025-03-10T13:59:38.569Z</updated>
     
@@ -345,17 +345,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="性能调优" scheme="http://tulancn.github.io/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/"/>
+    <category term="性能调优" scheme="https://tulancn.github.io/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/"/>
     
   </entry>
   
   <entry>
     <title>聊聊低时延</title>
-    <link href="http://tulancn.github.io/2024/05/19/14-26-55/"/>
-    <id>http://tulancn.github.io/2024/05/19/14-26-55/</id>
+    <link href="https://tulancn.github.io/2024/05/19/work/%E8%81%8A%E8%81%8A%E4%BD%8E%E6%97%B6%E5%BB%B6/"/>
+    <id>https://tulancn.github.io/2024/05/19/work/%E8%81%8A%E8%81%8A%E4%BD%8E%E6%97%B6%E5%BB%B6/</id>
     <published>2024-05-19T06:26:55.000Z</published>
     <updated>2025-03-10T13:57:03.820Z</updated>
     
@@ -366,17 +366,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="工作总结" scheme="http://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
+    <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>聊聊管理</title>
-    <link href="http://tulancn.github.io/2024/04/29/14-42-33/"/>
-    <id>http://tulancn.github.io/2024/04/29/14-42-33/</id>
+    <link href="https://tulancn.github.io/2024/04/29/work/%E8%81%8A%E8%81%8A%E7%AE%A1%E7%90%86/"/>
+    <id>https://tulancn.github.io/2024/04/29/work/%E8%81%8A%E8%81%8A%E7%AE%A1%E7%90%86/</id>
     <published>2024-04-29T06:42:33.000Z</published>
     <updated>2025-03-10T13:57:08.540Z</updated>
     
@@ -387,17 +387,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="管理" scheme="http://tulancn.github.io/tags/%E7%AE%A1%E7%90%86/"/>
+    <category term="管理" scheme="https://tulancn.github.io/tags/%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>双重锁和CAS</title>
-    <link href="http://tulancn.github.io/2024/02/18/13-47-01/"/>
-    <id>http://tulancn.github.io/2024/02/18/13-47-01/</id>
+    <link href="https://tulancn.github.io/2024/02/18/work/java/%E5%8F%8C%E9%87%8D%E9%94%81%E5%92%8CCAS/"/>
+    <id>https://tulancn.github.io/2024/02/18/work/java/%E5%8F%8C%E9%87%8D%E9%94%81%E5%92%8CCAS/</id>
     <published>2024-02-18T05:47:01.000Z</published>
     <updated>2025-03-10T13:58:17.532Z</updated>
     
@@ -408,17 +408,17 @@
     
     
     
-    <category term="工作" scheme="http://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
-    <category term="多线程" scheme="http://tulancn.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    <category term="多线程" scheme="https://tulancn.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>龙年第一天</title>
-    <link href="http://tulancn.github.io/2024/02/18/13-22-14/"/>
-    <id>http://tulancn.github.io/2024/02/18/13-22-14/</id>
+    <link href="https://tulancn.github.io/2024/02/18/life/%E9%BE%99%E5%B9%B4%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
+    <id>https://tulancn.github.io/2024/02/18/life/%E9%BE%99%E5%B9%B4%E7%AC%AC%E4%B8%80%E5%A4%A9/</id>
     <published>2024-02-18T05:22:14.000Z</published>
     <updated>2025-03-10T13:55:59.523Z</updated>
     
@@ -429,10 +429,10 @@
     
     
     
-    <category term="生活" scheme="http://tulancn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    <category term="生活" scheme="https://tulancn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
     
     
-    <category term="杂谈" scheme="http://tulancn.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="https://tulancn.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
