@@ -6,7 +6,7 @@
   <link href="https://tulancn.github.io/atom.xml" rel="self"/>
   
   <link href="https://tulancn.github.io/"/>
-  <updated>2025-03-10T13:52:48.138Z</updated>
+  <updated>2025-03-21T12:03:57.566Z</updated>
   <id>https://tulancn.github.io/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>路由权限问题导致的一次离奇Bug</title>
+    <link href="https://tulancn.github.io/2025/03/21/work/%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A6%BB%E5%A5%87Bug/"/>
+    <id>https://tulancn.github.io/2025/03/21/work/%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A6%BB%E5%A5%87Bug/</id>
+    <published>2025-03-21T11:13:04.000Z</published>
+    <updated>2025-03-21T12:03:57.566Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="起因">起因</h2><p>最近重新写了一个项目，本地运行时一直没什么问题，但是部署到服务器上时出现了打开前端页面一片空白的情况。</p><img src="/2025/03/21/work/%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A6%BB%E5%A5%87Bug/image-20250321191917050.png" class="" title="image-20250321191917050"><p>大概表现就是如图中的情况，打开控制台看到有三个请求，分别是获取index.html，获取js和css，但是响应中是一片空白。</p><h2 id="环境">环境</h2><p>部署是在校内的服务器，外网无法访问。</p><p>前后端都部署在同一个服务器上，都使用docker构建镜像后部署。</p><p>前端是在docker中进行打包，并且装了nginx来渲染页面。</p><h2 id="排查">排查</h2><h3 id="查看nginx配置">查看nginx配置</h3><p>遇到这个情况，我第一反应是路由转发有问题，导致前端一直在请求什么东西卡死了。</p><p>所以去翻了下nginx的配置，确实发现路由转发还写的是老的服务器。</p><p>笑死，太简单了。</p><p>修改config文件，git commit，git push，然后重新部署镜像。</p><p>结果还是一模一样。</p><p>看来并不是转发的问题。</p><h3 id="查看nginx日志">查看nginx日志</h3><p>没辙，只能去翻下docker日志。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs [container]</span><br></pre></td></tr></table></figure><p>由于做了日志映射，nginx的日志会打印在docker的日志里。</p><p>翻了下有一条报错，是没获取到logo文件。</p><p>笑死，被我找到了。</p><p>于是改了下logo的读取方式，保证能读到logo文件。</p><p>git commit，git push，然后重新部署镜像。</p><p>打开页面，发现还是不行。</p><p>不信邪，再翻了下日志，已经没这个报错了。</p><p>看来也不是logo文件读不到的问题。</p><h3 id="查看docker脚本">查看docker脚本</h3><p>再去看了下docker的脚本，可能是端口映射的问题。</p><p>查看后发现也没什么问题。</p><p>但是想了想，也许是网络问题，修改了启动命令，加上了<code>--network=host</code>。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm --network=host your_image curl http://localhost:8000</span><br></pre></td></tr></table></figure><p>这样docker会直接使用宿主机的网络配置，也就是没有端口映射这一说了。</p><p>某些情况下这样性能会好一些。</p><p>但改了之后还是没解决。</p><h3 id="查看docker内部文件">查看docker内部文件</h3><p>在看看nginx的运行日志吧。</p><p>先进入docker的镜像内部，这里用shell，因为镜像没装bash，不然用bash更方便些。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it [container] sh</span><br></pre></td></tr></table></figure><p>找了下nginx的日志，发现没什么异常。</p><p>再找了下前端的静态文件，也没看出来什么问题。</p><p>不信邪，试试在docker内ping了一下后端，发现也能ping通。</p><p>那看来网络是没什么问题了。</p><h3 id="查看本地打包的文件">查看本地打包的文件</h3><p>本地打包后的文件，我试着用serve来运行。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx serve -s dist</span><br></pre></td></tr></table></figure><p>运行后打开localhost，发现页面是正常的。</p><p>看来本地文件没问题。</p><h3 id="在服务器上打包">在服务器上打包</h3><p>重新登录服务器，在服务器上用npx serve来运行后端的文件。</p><p>提示没有npx。</p><p>行吧，那先安装npm。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure><p>再执行，说node版本太低，只有12。</p><p>那再升级node。先装个nvm。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash</span><br></pre></td></tr></table></figure><p>然后让nvm生效。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.nvm/nvm.sh</span><br></pre></td></tr></table></figure><p>最后nvm安装node 18，再切换到18。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm install 18</span><br><span class="line">nvm use 18</span><br></pre></td></tr></table></figure><p>用node的命令查了下，确实是18了。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure><p>终于完事，再用npx serve启动。</p><p>发现打开是404。</p><p>？？？</p><p>看了下是服务器上没build后的静态文件。</p><p>行，那先安装。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure><p>在本地用浏览器打开，居然也是一片空白。</p><p>？？？</p><p>至少复现了是吧。</p><p>看来不是网络问题，就是前端打包后的静态文件有问题。</p><p>脑袋里面灵光一闪，重新在本地起了下前端，这次不用localhost，用本机的IP来访问。</p><p>发现也是空白。</p><p>这下在本地复现了。</p><h3 id="询问AI">询问AI</h3><p>成功复现至少是成功了90%。</p><p>目前看下来，关键点在与用localhost能正常访问，而使用其他的IP则不行。</p><p>问了下AI，可能是什么原因。</p><p>提示说可能是cros，也可能是使用的命令不对，还有可能是防火墙问题。</p><p>都试了下，还是没解决问题。</p><h3 id="回退版本">回退版本</h3><p>最后无奈之下，开始回退版本。</p><p>用git命令回退到之前的版本，看看是哪个提交导致了目前的问题。</p><p>首先回退到之前改了logo的那次提交，发现不行。</p><p>再回退到这个提交的前一个。</p><p>启动，居然正常显示了？</p><p>ok，锁定是这个提交的改动有问题。</p><p>于是逐个逐个回退文件的改动。</p><p>回退到修改主页重定向的时候，页面正常显示了。</p><p>好，找到问题了。</p><h2 id="修复">修复</h2><p>分析一下，是路由守卫和主页重定向有冲突。</p><p>当时让未登录的用户会重定向到一个文档管理页面，而这个文档管理页面被路由守卫了，需要用户进行登录才可访问。</p><p>一来一去，死循环了，于是页面就卡死了。</p><p>那么为什么用localhost可以正常访问？</p><p>因为有浏览器缓存，会保持用户的登录状态。而其他的路由没有缓存，需要重新登录，于是就会进入死循环。</p><p>修改了这个逻辑，添加了一个未登录也可访问的落地页，让用户先在这个页面登录。</p><p>修改后重新构建，已经能正常渲染了。</p><h2 id="结论">结论</h2><p>重新看下来，debug的过程就是要对整个部署流程、前端渲染过程有一定的了解。</p><p>我还是有些依赖个人的经验，导致我直接从最大可能的地方入手，进行排查。</p><p>当然也确实一下子就找到了一个问题（虽然和最终的问题无关）。</p><p>但仔细想想，主要也是对前端不熟悉，很多时候就缺少了些验证手段。</p><p>这次都是现査工具现用的。</p><p>不过这样解决问题，才能让人有所成长吧？</p>]]></content>
+    
+    
+    <summary type="html">这两天遇到了一个很奇怪的Bug，最后的错误原因也令人啼笑皆非，这里记录下排查过程。</summary>
+    
+    
+    
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    
+    
+    <category term="前端" scheme="https://tulancn.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>SSE协议和流式输出</title>
     <link href="https://tulancn.github.io/2025/03/09/work/SSE%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA/"/>
     <id>https://tulancn.github.io/2025/03/09/work/SSE%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA/</id>
     <published>2025-03-09T03:17:03.000Z</published>
-    <updated>2025-03-10T13:52:48.138Z</updated>
+    <updated>2025-03-21T11:16:40.807Z</updated>
     
     <content type="html"><![CDATA[<h2 id="流式输出">流式输出</h2><p>大多数的聊天机器人都会用到流式输出。为什么一定要用这能力呢？</p><p>任何的LLM的回答都是逐字逐句生成的，因此使用同步调用一次获取所有的消息，会造成长时间的阻塞。</p><p>尤其是DeepSeek R1这类推理模型，在给出正式的回答前还有大段大段的思考文本，这让用户的等待时间更加长了。</p><p>同时，一个请求的超时时间过长会带来其他副作用，比如用同步调用很难判断是LLM服务挂掉了还是单纯生成内容很长所以一直没回答。</p><p>因此，为了提升用户体验，减少后端一些不必要的麻烦，流式输出在目前的AI应用中越来越重要了。</p><h2 id="SSE-Server-Sent-Events-协议">SSE (Server-Sent Events) 协议</h2><h3 id="SSE协议概念">SSE协议概念</h3><ul><li>SSE（Server-Sent Events）是一种服务器推送技术，允许服务器向客户端发送事件流</li><li>它建立在HTTP协议上，使用标准的HTTP连接，但允许服务器持续向客户端推送数据</li><li>SSE连接是单向的（只能服务器向客户端发送数据），与WebSocket不同（WebSocket是双向通信）</li><li>SSE适用于实时通知、实时日志、聊天应用等场景</li></ul><h3 id="SSE协议技术特点">SSE协议技术特点</h3><ul><li>使用标准HTTP连接，不需要特殊协议或端口</li><li>自动重连功能，断开连接后会自动尝试重新连接</li><li>使用纯文本传输，每条消息格式为<code>data: 消息内容\n\n</code></li><li>支持事件ID和事件类型，便于客户端处理不同类型的消息</li><li>比WebSocket更简单，更容易实现，但功能稍弱</li></ul><h3 id="技术选型">技术选型</h3><p>后端使用的是<code>FastAPI</code>，本身就有很好的流式输出支持。</p><p>前端则是使用了<code>@microsoft/fetch-event-source</code>库，因为这个库允许修改请求头的内容，方便做鉴权。</p><h3 id="项目中SSE的应用">项目中SSE的应用</h3><ol><li><strong>后端实现（FastAPI）</strong><ul><li>使用<code>FastAPI</code>的<code>StreamingResponse</code>实现流式响应</li><li>通过异步生成器<code>serialize_generator</code>生成SSE数据流</li><li>标准SSE格式: <code>data: JSON数据\n\n</code></li><li>使用<code>time.sleep(0.05)</code>控制响应速率，避免客户端接收过快导致丢包</li></ul></li><li><strong>前端实现（Vue 3 + TypeScript）</strong><ul><li>使用<code>@microsoft/fetch-event-source</code>库处理SSE连接</li><li>在<code>frontend/src/utils/request.ts</code>中封装了<code>sseRequest</code>函数</li><li>支持请求头设置、身份验证、错误处理和连接状态管理</li><li>通过<code>parseSSEMessage</code>函数解析接收到的SSE消息</li></ul></li></ol><h2 id="打字机">打字机</h2><h3 id="为什么要做打字机效果">为什么要做打字机效果</h3><p>由于网络波动，后端的推送并不是匀速到达客户端的。如果前端仅仅是收到一条消息就拼接到前端的文本上，那么最终效果就会显得很呆。</p><p>通过在前端添加一个缓冲队列，来让字符匀速显示，会让前端的展示效果显著提升。</p><p>就是俗话说的&quot;质感&quot;。</p><h3 id="核心功能">核心功能</h3><ul><li>实现了文字逐字打印的动画效果</li><li>支持动态调整打字速度</li></ul><h3 id="技术实现">技术实现</h3><ul><li>使用TypeScript实现类封装</li><li>采用缓冲区设计模式存储待显示的文本</li><li>使用定时器控制打字速度</li><li>提供丰富的回调函数支持，如<code>onComplete</code>、<code>onPause</code>等</li></ul><h2 id="总结">总结</h2><p>整体逻辑其实很简单，SSE+前端打字机。</p><p>前端本身就是响应式的，所以代码实现其实不麻烦，直接往文本框里拼接字符就行，甚至有点简单。</p><p>但不管怎么说，SSE协议在AI应用中目前使用应该是最为广泛的，几乎所有项目都得走这个流程。</p>]]></content>
     
@@ -412,27 +433,6 @@
     
     
     <category term="多线程" scheme="https://tulancn.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>龙年第一天</title>
-    <link href="https://tulancn.github.io/2024/02/18/life/%E9%BE%99%E5%B9%B4%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
-    <id>https://tulancn.github.io/2024/02/18/life/%E9%BE%99%E5%B9%B4%E7%AC%AC%E4%B8%80%E5%A4%A9/</id>
-    <published>2024-02-18T05:22:14.000Z</published>
-    <updated>2025-03-10T13:55:59.523Z</updated>
-    
-    <content type="html"><![CDATA[<p>昨晚8点从德清出发，到杭州转乘卧铺高铁，今早6点45到深圳北。从深圳北出站，坐5号线地铁到家，放下了行李，洗了个脸，匆匆忙忙出门上班。</p><p>早上8点，到工位坐下。原来从老家到工位，也不过12个小时的距离。</p><p>回顾去年，我最大的一件事，就是选择去香港留学。找了中介，考了雅思；至于这个选择最大的动力来源，就是我的女朋友。工作上，出差去北京中信证券，去惠州集中开发；深入业务线，搞懂了不少东西；也当了小领导，分配和规划任务，和其他人对接。</p><p>去年确实是做了不少事。</p><p>过年期间，也试着去学开车。这事情上手之后确实不难。也拜访了女朋友的家里，还在她家吃了两顿饭，见了她的亲朋好友。最后一天上午，我收到了第一份offer，来自港理工。这个年圆满收工。</p><p>那今年的话，我就得准备好去读书了。工作中，手上的事情也要慢慢放下，或者分配给别人，或者直接收尾。</p><p>今年想做的事情有好多，我要学粤语，要健身，要学python，想去旅游，想赚钱……人生总是这么丰富多彩，有些事情，一旦开始，就踩不住刹车了。</p><p>我真的非常感激我的女朋友，没有她的支持，我一定不会有动力去改变。我和她规划了好多好多的未来，这些都等着我们去实现。</p><p>最后，希望在新的一年，我能拿到更好的offer，能在工作上有更多的创新，能减肥成功，能学好粤语。</p>]]></content>
-    
-    
-    <summary type="html">今天是龙年上班的第一天，正月初九。</summary>
-    
-    
-    
-    <category term="生活" scheme="https://tulancn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="杂谈" scheme="https://tulancn.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
