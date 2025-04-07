@@ -6,7 +6,7 @@
   <link href="https://tulancn.github.io/atom.xml" rel="self"/>
   
   <link href="https://tulancn.github.io/"/>
-  <updated>2025-03-21T12:03:57.566Z</updated>
+  <updated>2025-04-07T08:58:31.919Z</updated>
   <id>https://tulancn.github.io/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我对MCP的理解</title>
+    <link href="https://tulancn.github.io/2025/03/22/study/%E6%88%91%E5%AF%B9MCP%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>https://tulancn.github.io/2025/03/22/study/%E6%88%91%E5%AF%B9MCP%E7%9A%84%E7%90%86%E8%A7%A3/</id>
+    <published>2025-03-22T13:30:56.000Z</published>
+    <updated>2025-04-07T08:58:31.919Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>Model Context Portocal（MCP）真的是很火。自从这协议被提出以后，不少人觉得是一个未来的方向。</p><p>尤其是最近OpenAI也宣布要支持MCP，肉眼可见的在2025年这个协议会被人不断地提起。</p><p>2025是AI应用的大年，必然会有一批又一批的App或是软件转向拥抱AI的能力，而在这场转变中，MCP是不能绕开的一个话题。</p><h2 id="什么是MCP">什么是MCP</h2><p>在官方的介绍中，MCP被形容为大模型的type-c接口。</p><p>我觉得这概念过于抽象了，理解之后会觉得确实很有道理，但对于初学者来说这不能建立起一个直观的印象。</p><p>所以这里也想用自己的语言来组织一下我对其的理解。</p><p>目前最大的误解，就是MCP是一个标准化的Function Calling。</p><p>其实不然。</p><p>第一点，MCP是个应用层的协议，它和Function Calling完全不冲突。</p><p>第二点，函数调用是MCP中包含的能力的一部分，被称为tools。除了tools，还有其他很多功能。</p><img src="/2025/03/22/study/%E6%88%91%E5%AF%B9MCP%E7%9A%84%E7%90%86%E8%A7%A3/image-20250407162739388.png" class="" title="image-20250407162739388"><p>MCP协议还提供了prompt补全、提示词模版等能力，只不过目前客户端支持不是很到位，因此大家用的不多。</p><p>所以，为了直观理解MCP，我觉得应该先从调用方来说起。</p><p>MCP是给MCP客户端使用的，这里的MCP客户端并不等于是LLM，这点很重要。</p><p>以Claude客户端为例，我们在自己的电脑上启动Claude客户端时，客户端仅仅是提供了一个聊天界面，实际上LLM还是在云端。</p><p>这场景下，我们自己电脑上的Claude客户端是MCP Client。</p><p>假设有个工具调用触发了，我们走一下实际的调用链路。</p><p>用户在客户端询问Claude，今天XXX的天气怎么样。请求会发送到Claude的服务器，Claude判断需要调用工具来获取天气的情况，此时它会发起Function Calling，这个Calling会原路返回到我们本地的客户端。</p><p>我们的客户端上会显示一条提示信息：Claude请求调用天气查询工具，是否同意？</p><p>我们点击同意，接着我们本地的Claude客户端就会发送一个MCP调用给MCP服务器，获取到最新的天气信息，然后把这个天气信息作为一个新的请求发送给Claude。</p><p>这时候，Claude才获取到最新的天气信息，此时它会组织语言重新把结果返回给客户端。</p><p>最后我们的客户端上才会显示我们最开始问题的回复：今天XXX的天气是晴天。</p><p>显然，MCP并没有取代Function Calling。</p><h2 id="MCP的价值在哪">MCP的价值在哪</h2><p>为什么我说MCP是AI应用开发绕不过的一个协议呢。</p><p>还是以我之前写过的一个玩具项目举例，我给Qwen写过一个Function Calling。</p><p>当时需要我做什么呢？</p><p>首先，我得编写一个功能，然后作为一个开放的接口在公网暴露出来。</p><p>然后我要把这个接口通过Qwen提供的工具注册方式，把这个接口注册到Qwen里。</p><p>最后还要进行功能的调试。</p><p>整个流程下来非常繁杂，因为我作为一个开发AI应用的人，我承担了太多的责任。</p><p>比如我得负责把工具包装成接口，还得专门写一个提示词来描述这个工具。</p><p>比如我得进行功能的调试，模型的调试极其麻烦。</p><p>同时，我写好的工具，大概率以后想复用时，还得写一套代码来实现把工具传递给AI。</p><p>这还不算其中认证之类的事情，实在是过于麻烦了。</p><p>但有了MCP之后呢？</p><p>对应的功能我可以包装为MCP的Server，然后用MCP Client的SDK快速实现功能调用和传输给AI。</p><p>以后我想复用功能，我只需要继续用MCP Client的SDK写一下调用就行了，不需要再去动MCP Server的代码。</p><p>简单来说，MCP的价值就在于提供了一个良好的职责划分。</p><p>MCP Server负责提供具体的工具，同时也是Server来负责提供工具描述之类的信息。</p><p>MCP Client负责转发AI的工具调用等，同时也可以使用MCP协议提供的Sampling等能力实现一些客户端的其他功能。</p><p>LLM模型的提供商负责提供Function Calling即可。</p><p>你看，负责开发具体功能的，也负责提供了给模型的接入文档；负责开发客户端的，只需要关心怎么写胶水代码来拼凑功能。</p><p>这样就解决了AI应用最大的痛点，开发成本高昂。</p><p>有相当多的软件，也可以发布自己的MCP Server来实现无缝变身AI应用了。</p><p>试想一下，假设美团提供了MCP服务，那么是不是真的就可以做到，我们在手机的语音助手里说一句：我要点杯咖啡，然后语音助手自动帮我们利用MCP去查询美团上的信息，然后下单支付呢？</p><p>这时候回头看看官方说的那句，MCP就是type-c接口，是不是有点味道了呢？</p>]]></content>
+    
+    
+    <summary type="html">MCP肉眼可见地火了，这次聊聊MCP。</summary>
+    
+    
+    
+    <category term="工作、生活、学习、其他" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C%E3%80%81%E7%94%9F%E6%B4%BB%E3%80%81%E5%AD%A6%E4%B9%A0%E3%80%81%E5%85%B6%E4%BB%96/"/>
+    
+    
+    <category term="技术协议" scheme="https://tulancn.github.io/tags/%E6%8A%80%E6%9C%AF%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>canvas-editor使用记录</title>
+    <link href="https://tulancn.github.io/2025/03/21/work/canvas-editor%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/"/>
+    <id>https://tulancn.github.io/2025/03/21/work/canvas-editor%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</id>
+    <published>2025-03-21T13:06:31.000Z</published>
+    <updated>2025-04-07T09:08:07.034Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介">简介</h2><p>主页：<a href="https://hufe.club/canvas-editor-docs/">https://hufe.club/canvas-editor-docs/</a></p><p>canvas-editor是个基于canvas/svg的富文本编辑器。</p><p>使用下来，比较优秀的点有：</p><p>1、页面类似word，并且开箱即用。</p><p>2、提供了非常多扩展的接口。</p><p>3、数据保存非常方便。</p><p>当前，也有些缺点：</p><p>1、文档不够详细，很多接口仅仅是说明了有这个接口，具体的用法都没讲。</p><p>2、事件回调的机制说明不够清晰。也算是个文档的问题。</p><p>3、没有Vue或Reactor的开箱即用包。</p><h2 id="空的回调事件">空的回调事件</h2><p>在实现工具栏时，发现了一个很抽象的事情。</p><p>官方的工具栏中，假设我选中一些文字然后加粗，工具栏会正常把加粗的按钮置为已经点击的状态。</p><p>而在我实现的工具栏中，每次点击工具栏的按钮后，会出现一个空的回调事件，把工具栏的状态置回没有点击的状态。</p><p>最后询问了官方，也翻了下对方的代码。</p><p>发现是因为官方的工具栏用的事件不是click，而是鼠标按下的事件。</p><p>我用click，所以点击的时候出现了失焦，因此有个空的回调事件出来。</p><h2 id="Word插件样式">Word插件样式</h2><p>官方的实现中，word的导入导入功能有非常严重的样式丢失。</p><p>最后是我自己写了一个导入的功能，把word解析为xml然后转化为canvas-editor的json格式。</p><p>目前导出还没实现，但大概率也得手动写一个导出了。</p><h2 id="任何操作都会被记录">任何操作都会被记录</h2><p>发现对文档的操作都会被记录。</p><p>这导致了我们用AI添加一些文字内容到文档时，明明正常执行完了，但点击回退又会回到填了一半的情况。</p><p>比如我们润色时会高亮原文，那么润色完了点击回退，就会回到原文被高亮的状态。</p><p>最后发现可以在操作时加一个参数来让本次操作不被记录。</p>]]></content>
+    
+    
+    <summary type="html">canvas-editor是个很优秀的国产开源富文本编辑器，这里记录下我的使用。</summary>
+    
+    
+    
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    
+    
+    <category term="前端" scheme="https://tulancn.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>路由权限问题导致的一次离奇Bug</title>
@@ -391,48 +433,6 @@
     
     
     <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>聊聊管理</title>
-    <link href="https://tulancn.github.io/2024/04/29/work/%E8%81%8A%E8%81%8A%E7%AE%A1%E7%90%86/"/>
-    <id>https://tulancn.github.io/2024/04/29/work/%E8%81%8A%E8%81%8A%E7%AE%A1%E7%90%86/</id>
-    <published>2024-04-29T06:42:33.000Z</published>
-    <updated>2025-03-10T13:57:08.540Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="经历">经历</h2><p>从我工作以来，我一直在和管理打交道。</p><p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p><p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p><p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p><p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p><p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p><p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p><p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p><p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p><h2 id="领导力的来源是什么？">领导力的来源是什么？</h2><p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p><p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p><p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p><p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p><p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p><p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p><p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>]]></content>
-    
-    
-    <summary type="html">想起来写这个事情，是正好从上海出差回家的时候，回想起这两年的经历，让我深有感触。</summary>
-    
-    
-    
-    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
-    
-    
-    <category term="管理" scheme="https://tulancn.github.io/tags/%E7%AE%A1%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>双重锁和CAS</title>
-    <link href="https://tulancn.github.io/2024/02/18/work/java/%E5%8F%8C%E9%87%8D%E9%94%81%E5%92%8CCAS/"/>
-    <id>https://tulancn.github.io/2024/02/18/work/java/%E5%8F%8C%E9%87%8D%E9%94%81%E5%92%8CCAS/</id>
-    <published>2024-02-18T05:47:01.000Z</published>
-    <updated>2025-03-10T13:58:17.532Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="引子">引子</h2><p>在做一些变量的初始化时，我会有如下的实现：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">private volatile Class&lt;?&gt; rowType;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取缓存存储对象的类型</span><br><span class="line"> *</span><br><span class="line"> * @return 缓存存储对象的类型</span><br><span class="line"> */</span><br><span class="line">public Class&lt;?&gt; rowType() &#123;</span><br><span class="line">    if (rowType == null) &#123;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            if (rowType == null) &#123;</span><br><span class="line">                // todo 这里是初始化rowType的逻辑</span><br><span class="line">             </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return rowType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这种写法，我最初是在Protobuf生成的代码中看到的，后来查阅了一下，这种逻辑叫双重锁。</p><p>或者说，叫双重检查模式，是一种软件的设计模式。</p><p>而我在写一些其他的代码时，往往也会使用类似这种模式的方式。用多了以后，我觉得可以分析一下其中的道理。</p><h2 id="分析">分析</h2><p>双重锁的逻辑是两次检查：首先验证锁定条件(第一次检查)，只有通过锁定条件验证才真正的进行加锁逻辑并再次验证条件(第二次检查)。</p><p>那么，如果中间的锁定操作，我们改成一个计算过程，在最后赋值之前做二次检查，是否也是可以的呢？</p><p>答案是肯定的。下面给个伪代码说明：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">int b = a;</span><br><span class="line">// 第一次检查</span><br><span class="line">if (a == b) &#123;</span><br><span class="line">  // 上锁</span><br><span class="line">  lock.lock();</span><br><span class="line">  // 第二次检查</span><br><span class="line">  if (a == b) &#123;</span><br><span class="line">  // 计算操作</span><br><span class="line">int c = b + 1；</span><br><span class="line">  // 赋值</span><br><span class="line">  a = c;</span><br><span class="line">  &#125;</span><br><span class="line">  lock.unLock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可是这样就太重了，要知道，有些时候，加锁的成本也很高。使用双重锁仅仅是能避免锁定中的操作多次重复，但是没有从根本上避免锁，所有的操作还是在锁中进行的，这就没有很好地发挥多线程的优势。</p><p>那么优化一下，把这个锁去掉，只在计算结束后进行一次检查，是否可行呢？答案也是肯定的，这样就变成了乐观锁+自旋锁的结合。伪代码如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">// 自旋</span><br><span class="line">for (;;) &#123;</span><br><span class="line">int b = a;</span><br><span class="line">// 计算操作</span><br><span class="line">int c = b + 1；</span><br><span class="line">// 第一次检查</span><br><span class="line">if (b == a) &#123;</span><br><span class="line">// 赋值</span><br><span class="line">a = c;</span><br><span class="line">// 第二次检查</span><br><span class="line">if (a == c) &#123;</span><br><span class="line">break;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可以看到锁被去掉了，这样并发时性能会远优于加锁。这就是CAS机制。</p><p>但是这里的CAS机制还不够，并不能保证极端情况下的线程安全。因为还有指令重排序的问题。</p><p>为了解决指令重排序的问题，需要在特定的变量上添加volatile注解。</p><p>在高性能场景下，CAS是一种非常优秀的机制，有以下优点：</p><ol><li>高效性：CAS 操作不需要加锁，因此可以避免加锁操作所带来的性能开销。</li><li>原子性：CAS 操作是原子的，因此可以保证操作的一致性。</li><li>无阻塞：CAS 操作不会阻塞线程，因此可以避免线程的切换和上下文切换带来的开销。</li></ol><h2 id="总结">总结</h2><p>双重锁的方式，一般是用于初始化的场景，是用来避免某个代码块执行两次的。</p><p>而在此基础上我们推演出自旋锁+乐观锁的方式，这样能实现无锁并发，这就是CAS机制。</p>]]></content>
-    
-    
-    <summary type="html">这次来聊聊多线程场景的二次确认机制。</summary>
-    
-    
-    
-    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
-    
-    
-    <category term="多线程" scheme="https://tulancn.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
