@@ -6,7 +6,7 @@
   <link href="https://tulancn.github.io/atom.xml" rel="self"/>
   
   <link href="https://tulancn.github.io/"/>
-  <updated>2025-04-07T08:58:31.919Z</updated>
+  <updated>2025-04-08T13:05:08.598Z</updated>
   <id>https://tulancn.github.io/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>redis</title>
+    <link href="https://tulancn.github.io/2025/04/08/study/redis/"/>
+    <id>https://tulancn.github.io/2025/04/08/study/redis/</id>
+    <published>2025-04-08T08:55:35.000Z</published>
+    <updated>2025-04-08T13:05:08.598Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Redis基础概念">Redis基础概念</h2><p>Redis是一个开源的、基于内存的数据结构存储系统，常被用作数据库、缓存和消息中间件。</p><p>它支持多种数据结构，包括字符串（String）、哈希（Hash）、列表（List）、集合（Set）和有序集合（Sorted Set）等。每种数据结构都有其独特的操作命令和适用场景。</p><p>redis是个k-v数据库，在redis内部维护了一个哈希表。当有查询来的时候，会先查全局的表获取键值，然后基于键值的类型进行后续处理。</p><p>String就理解为用了一个全局的哈希表。</p><p>Hash就是在全局的哈希表中再建了一个哈希表，比如专门建立一个user表用于存用户信息。这种表查询的时候会有两次哈希，第一次是查键，第二次是查具体的表。</p><p>Set、List也是类似，这里省略了。</p><h2 id="Redis常用命令">Redis常用命令</h2><ul><li><strong>字符串操作</strong>：<code>SET</code> 用于设置键值对，<code>GET</code> 用于获取指定键的值，<code>INCR</code> 用于将键的值加 1（键值需为整数）。</li><li><strong>哈希操作</strong>：<code>HSET</code> 在哈希表中设置字段值，<code>HGET</code> 获取哈希表中指定字段的值，<code>HGETALL</code> 获取哈希表中所有字段和值。</li><li><strong>列表操作</strong>：<code>LPUSH</code> 从列表头部插入元素，<code>RPUSH</code> 从列表尾部插入元素，<code>LPOP</code> 移除并返回列表的第一个元素，<code>RPOP</code> 移除并返回列表的最后一个元素，<code>LRANGE</code> 返回列表中指定区间内的元素。</li><li><strong>集合操作</strong>：<code>SADD</code> 添加元素到集合，<code>SMEMBERS</code> 返回集合中的所有元素，<code>SISMEMBER</code> 判断元素是否存在于集合中，<code>SREM</code> 移除集合中的元素，还支持集合的交集（<code>SINTER</code>）、并集（<code>SUNION</code>）、差集（<code>SDIFF</code>）等运算。</li><li><strong>有序集合操作</strong>：<code>ZADD</code> 添加成员到有序集合并指定分数，<code>ZRANGE</code> 返回有序集合中指定区间内的成员（按分数从小到大排序），<code>ZREM</code> 移除有序集合中的成员。</li><li><strong>键操作</strong>：<code>DEL</code> 删除一个或多个键，<code>KEYS</code> 查找所有符合给定模式的键，<code>EXISTS</code> 检查给定键是否存在。</li></ul><h2 id="Redis数据结构使用">Redis数据结构使用</h2><ul><li><strong>集合（Set）</strong>：适用于去重、判断元素是否存在以及集合运算等场景，例如存储用户标签、共同好友等。使用Python的<code>redis-py</code>库操作集合时，可通过<code>sadd</code>、<code>smembers</code>等方法实现添加元素、获取所有元素等操作。</li><li><strong>列表（List）</strong>：可用于实现队列（先进先出，FIFO）、栈（先进后出，LIFO）等数据结构，如消息队列、任务队列等。使用<code>redis-py</code>库时，<code>lpush</code>、<code>rpush</code>等方法可实现列表元素的插入操作。</li></ul><h2 id="Redis本地连接方式">Redis本地连接方式</h2><p>远程连接走的TCP，这里省略。</p><ul><li><strong>TCP/IP连接</strong>：即使Redis服务器和应用程序在同一台机器上，使用TCP/IP连接时，数据会经过本地的网络协议栈，通过回环地址进行传输。在Python中，使用<code>redis-py</code>库通过TCP/IP连接本地Redis服务器时，可指定<code>host</code>和<code>port</code>参数。</li><li><strong>本地套接字（Unix Domain Socket）连接</strong>：应用程序与Redis服务器通过本地文件系统中的套接字文件进行通信，不经过网络协议栈，效率较高。在Python中，使用<code>redis-py</code>库可通过指定<code>unix_socket_path</code>参数来使用本地套接字连接Redis。</li></ul><p>本地的套接字连接还是要走网络的那一套，建立连接、监听之类的，所以性能上比JNI要低。</p><h2 id="Redis性能优化技巧">Redis性能优化技巧</h2><ul><li><strong>配置优化</strong>：合理设置<code>maxmemory</code>参数和内存淘汰策略；根据业务需求选择合适的持久化方式（RDB或AOF），并调整相关参数。</li><li><strong>数据结构优化</strong>：根据业务场景选择合适的数据结构，优化数据结构设计以减少内存占用。</li><li><strong>客户端优化</strong>：使用连接池管理客户端连接，减少网络往返次数，控制请求数据量。</li><li><strong>服务器优化</strong>：将Redis服务器运行在单核CPU上，绑定特定CPU核心；使用高性能存储设备，优化操作系统I/O调度算法。</li><li><strong>监控与优化</strong>：使用<code>INFO</code>、<code>MONITOR</code>等命令监控性能指标，分析并优化查询语句。</li></ul><h2 id="持久化">持久化</h2><p>RDB，固定时间把所有数据写入本地文件。</p><p>AOF，每次写操作都把数据写入文件。</p><p>可以使用AOF的特殊参数，来实现每隔多少时间把写操作写入文件中。</p><p>这种方式类似MySQL的binlog。</p><h2 id="Redis集群方案">Redis集群方案</h2><ul><li><strong>主从复制</strong>：主节点处理写操作并将数据异步复制到从节点，从节点处理读操作。优点是实现读操作负载均衡，提高读性能；缺点是主节点单点故障，可能存在数据丢失风险。</li><li><strong>Sentinel（哨兵）</strong>：在主从复制基础上，引入Sentinel进程监控节点状态。当主节点故障时，自动从从节点中选举新主节点。多个Sentinel节点组成集群，通过Gossip协议通信，提高监控可靠性。但配置和管理相对复杂，故障转移可能存在短暂服务中断和数据不一致情况。</li><li><strong>Redis Cluster</strong>：采用数据分片，将键空间划分为16384个哈希槽，每个节点负责一部分哈希槽。节点间通过内部二进制协议通信，使用哨兵机制进行故障检测和转移。支持水平扩展，客户端可连接任意节点，通过<code>MOVED</code>错误重定向到正确节点。</li><li><strong>Codis</strong>：由Codis Server、Codis Proxy和ZooKeeper等组件组成。Codis Server存储数据，Codis Proxy代理客户端请求，ZooKeeper存储集群配置信息。支持动态扩展和收缩集群，对客户端透明，但依赖ZooKeeper，性能可能有损耗。</li></ul><p>主从是最基础的方案，配合AOF很好理解。能在多读少写的场景实现很有效的集群。</p><p>Sentinel机制是在主从的基础上添加了高可用的机制，能在主节点故障时自动选举出新的主节点。</p><p>Redis Cluster则是数据分片存储的方案，类似分库分表，实现上也很像。</p><h2 id="相关通信协议">相关通信协议</h2><ul><li><strong>Gossip协议</strong>：是一种分布式算法，用于在节点之间传递信息。具有去中心化、简单、扩展性好、容错性强、性能高效等特点。通过节点间随机的信息交换实现最终一致性，常见的通信方式有Push、Pull、Push&amp;Pull。适用于对一致性要求不是非常严格，但对系统扩展性、容错性和性能有较高要求的场景。</li><li><strong>与其他协议对比</strong>：与Raft、Paxos、Zookeeper等协议相比，在一致性保证、性能、扩展性、故障容错性、复杂性、应用场景等方面存在差异。例如，Raft和Paxos保证强一致性，Gossip协议提供最终一致性；Zookeeper是分布式协调服务，而Gossip协议主要用于信息传播和状态同步。</li></ul><h2 id="客户端从Redis-Cluster获取数据的过程">客户端从Redis Cluster获取数据的过程</h2><p>客户端先计算键的哈希槽编号，随机连接集群中的一个节点并发送获取数据的命令。若该节点负责该哈希槽，则直接返回数据；若不负责，则返回<code>MOVED</code>错误，包含目标节点信息。客户端根据错误信息重定向到正确节点再次请求数据。</p><p>客户端可维护哈希槽到节点的映射表以减少重定向开销。</p><h2 id="Redis的单线程">Redis的单线程</h2><p>Redis是个事件驱动的架构。维护了一个事件队列，线程不断从事件队列中取出事件进行处理。</p><p>比如发送了命令，那么会自动进入事件队列，上一个事件结束时才会处理下一个事件，这样保证了事务的一致性。</p><p>那么如何保证性能？</p><p>首先大部分操作都是纯内存的操作，耗时极短，用时在纳秒和微秒级别。</p><p>最耗费时间的操作往往都是IO操作，redis使用了IO多路复用的技术。没有IO多路复用的话，收到请求时，监听线程发起进行读操作，然后会阻塞，直到IO设备把数据读取到了内存中才能进行后续处理。IO多路复用的情况下，监听线程发起读操作，然后检查是否真的能读，不能则通过epoll的机制，等待内核回调。线程就直接去找下一个可以处理的任务了。</p><p>当然4.0以后，Redis也是引入了多线程机制，可以做到异步删除和异步持久化。</p>]]></content>
+    
+    
+    <summary type="html">工作中对redis用得不多，先标记一下。</summary>
+    
+    
+    
+    <category term="学习" scheme="https://tulancn.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="缓存" scheme="https://tulancn.github.io/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
+  
+  <entry>
     <title>我对MCP的理解</title>
     <link href="https://tulancn.github.io/2025/03/22/study/%E6%88%91%E5%AF%B9MCP%E7%9A%84%E7%90%86%E8%A7%A3/"/>
     <id>https://tulancn.github.io/2025/03/22/study/%E6%88%91%E5%AF%B9MCP%E7%9A%84%E7%90%86%E8%A7%A3/</id>
     <published>2025-03-22T13:30:56.000Z</published>
-    <updated>2025-04-07T08:58:31.919Z</updated>
+    <updated>2025-04-08T08:56:08.880Z</updated>
     
     <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>Model Context Portocal（MCP）真的是很火。自从这协议被提出以后，不少人觉得是一个未来的方向。</p><p>尤其是最近OpenAI也宣布要支持MCP，肉眼可见的在2025年这个协议会被人不断地提起。</p><p>2025是AI应用的大年，必然会有一批又一批的App或是软件转向拥抱AI的能力，而在这场转变中，MCP是不能绕开的一个话题。</p><h2 id="什么是MCP">什么是MCP</h2><p>在官方的介绍中，MCP被形容为大模型的type-c接口。</p><p>我觉得这概念过于抽象了，理解之后会觉得确实很有道理，但对于初学者来说这不能建立起一个直观的印象。</p><p>所以这里也想用自己的语言来组织一下我对其的理解。</p><p>目前最大的误解，就是MCP是一个标准化的Function Calling。</p><p>其实不然。</p><p>第一点，MCP是个应用层的协议，它和Function Calling完全不冲突。</p><p>第二点，函数调用是MCP中包含的能力的一部分，被称为tools。除了tools，还有其他很多功能。</p><img src="/2025/03/22/study/%E6%88%91%E5%AF%B9MCP%E7%9A%84%E7%90%86%E8%A7%A3/image-20250407162739388.png" class="" title="image-20250407162739388"><p>MCP协议还提供了prompt补全、提示词模版等能力，只不过目前客户端支持不是很到位，因此大家用的不多。</p><p>所以，为了直观理解MCP，我觉得应该先从调用方来说起。</p><p>MCP是给MCP客户端使用的，这里的MCP客户端并不等于是LLM，这点很重要。</p><p>以Claude客户端为例，我们在自己的电脑上启动Claude客户端时，客户端仅仅是提供了一个聊天界面，实际上LLM还是在云端。</p><p>这场景下，我们自己电脑上的Claude客户端是MCP Client。</p><p>假设有个工具调用触发了，我们走一下实际的调用链路。</p><p>用户在客户端询问Claude，今天XXX的天气怎么样。请求会发送到Claude的服务器，Claude判断需要调用工具来获取天气的情况，此时它会发起Function Calling，这个Calling会原路返回到我们本地的客户端。</p><p>我们的客户端上会显示一条提示信息：Claude请求调用天气查询工具，是否同意？</p><p>我们点击同意，接着我们本地的Claude客户端就会发送一个MCP调用给MCP服务器，获取到最新的天气信息，然后把这个天气信息作为一个新的请求发送给Claude。</p><p>这时候，Claude才获取到最新的天气信息，此时它会组织语言重新把结果返回给客户端。</p><p>最后我们的客户端上才会显示我们最开始问题的回复：今天XXX的天气是晴天。</p><p>显然，MCP并没有取代Function Calling。</p><h2 id="MCP的价值在哪">MCP的价值在哪</h2><p>为什么我说MCP是AI应用开发绕不过的一个协议呢。</p><p>还是以我之前写过的一个玩具项目举例，我给Qwen写过一个Function Calling。</p><p>当时需要我做什么呢？</p><p>首先，我得编写一个功能，然后作为一个开放的接口在公网暴露出来。</p><p>然后我要把这个接口通过Qwen提供的工具注册方式，把这个接口注册到Qwen里。</p><p>最后还要进行功能的调试。</p><p>整个流程下来非常繁杂，因为我作为一个开发AI应用的人，我承担了太多的责任。</p><p>比如我得负责把工具包装成接口，还得专门写一个提示词来描述这个工具。</p><p>比如我得进行功能的调试，模型的调试极其麻烦。</p><p>同时，我写好的工具，大概率以后想复用时，还得写一套代码来实现把工具传递给AI。</p><p>这还不算其中认证之类的事情，实在是过于麻烦了。</p><p>但有了MCP之后呢？</p><p>对应的功能我可以包装为MCP的Server，然后用MCP Client的SDK快速实现功能调用和传输给AI。</p><p>以后我想复用功能，我只需要继续用MCP Client的SDK写一下调用就行了，不需要再去动MCP Server的代码。</p><p>简单来说，MCP的价值就在于提供了一个良好的职责划分。</p><p>MCP Server负责提供具体的工具，同时也是Server来负责提供工具描述之类的信息。</p><p>MCP Client负责转发AI的工具调用等，同时也可以使用MCP协议提供的Sampling等能力实现一些客户端的其他功能。</p><p>LLM模型的提供商负责提供Function Calling即可。</p><p>你看，负责开发具体功能的，也负责提供了给模型的接入文档；负责开发客户端的，只需要关心怎么写胶水代码来拼凑功能。</p><p>这样就解决了AI应用最大的痛点，开发成本高昂。</p><p>有相当多的软件，也可以发布自己的MCP Server来实现无缝变身AI应用了。</p><p>试想一下，假设美团提供了MCP服务，那么是不是真的就可以做到，我们在手机的语音助手里说一句：我要点杯咖啡，然后语音助手自动帮我们利用MCP去查询美团上的信息，然后下单支付呢？</p><p>这时候回头看看官方说的那句，MCP就是type-c接口，是不是有点味道了呢？</p>]]></content>
     
@@ -30,7 +51,7 @@
     
     
     
-    <category term="工作、生活、学习、其他" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C%E3%80%81%E7%94%9F%E6%B4%BB%E3%80%81%E5%AD%A6%E4%B9%A0%E3%80%81%E5%85%B6%E4%BB%96/"/>
+    <category term="学习" scheme="https://tulancn.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
     <category term="技术协议" scheme="https://tulancn.github.io/tags/%E6%8A%80%E6%9C%AF%E5%8D%8F%E8%AE%AE/"/>
@@ -412,27 +433,6 @@
     
     
     <category term="性能调优" scheme="https://tulancn.github.io/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>聊聊低时延</title>
-    <link href="https://tulancn.github.io/2024/05/19/work/%E8%81%8A%E8%81%8A%E4%BD%8E%E6%97%B6%E5%BB%B6/"/>
-    <id>https://tulancn.github.io/2024/05/19/work/%E8%81%8A%E8%81%8A%E4%BD%8E%E6%97%B6%E5%BB%B6/</id>
-    <published>2024-05-19T06:26:55.000Z</published>
-    <updated>2025-03-10T13:57:03.820Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="关于开发语言">关于开发语言</h2><p>市面上绝大多数低时延相关的产品，都会选择C++作为开发语言。不得不说，C++在处理这种场景有天然的优势，接近底层的好处就是可以做到硬件级别的优化。</p><p>我们公司的消息总线就更为离谱了，全面使用C语言进行开发，性能快到极致。</p><p>在Java这层，想利用硬件的优化，只能使用JNI的技术来调用C函数了。这会导致Java“一次编译处处运行”的能力不再生效，部署时要考虑的事情也会相应增多。</p><p>话又说回来，为了解决不同场景下要加载不同JNI的问题，我也是专门写了一个JNI加载框架。</p><p>同时，也经常会提到的一件事，就是Java的内存管理问题。JVM垃圾回收的随机性，会导致低时延业务可能随时中断，这是不可接受的。</p><p>市面上，对于Java的GC，最好的解决方式是使用ZingJDK。可惜是商业收费的，一般用不了。</p><h2 id="关于架构">关于架构</h2><p>公司对于低时延场景，做的架构我觉得并没有特别优秀。或者说并没有到让人有眼前一亮的感觉的那种地步。</p><p>我们的架构还是分了各种通道，把用户隔离到各个通道中。每个通道享有各自的CPU、线程以及内存数据库等信息。</p><p>通道本质是个数据隔离。</p><p>这种做法下，每个通道内的消息永远由一个线程来执行。那么这个通道内所有的操作，其实都可以做到无锁化了，因为自始至终都仅有一个线程进行读写操作。</p><p>这种方式下，运行时扩容几乎就是不可能的事情。同时，也对数据的分布有了一定的要求，假如某一个通道的用户成交数量特别多，也会影响到整个系统的吞吐量。理想状态下，用户应该是均匀分布在各个通道的。</p><h2 id="关于技术">关于技术</h2><p>低时延的技术栈中，最重要的一点就是无锁化。有锁就快不起来。</p><p>另外，内存技术也是挺重要的。Java就需要去操作堆外内存了，这确实是一般人接触不到的部分。</p><p>我专门写了一个给开发者的文档放在了公司的仓库里，大概整理了一些技术要点。</p><p>想了想，主要就三块：</p><p>1、内存技术。包括堆内堆外，CPU缓存，GC调优等。</p><p>2、序列化技术。包括Java对象的快速访问，协议编解码等。</p><p>3、并发技术。包括原子操作、disruptor、无锁队列等。</p><p>这些技术需要在构建低时延项目时时时刻刻关注，并写到代码中。</p><p>当然还有一个，就是测试框架和性能分析工具。比如Arthus、JMH等，这些也是需要掌握的技术点。</p>]]></content>
-    
-    
-    <summary type="html">低时延平台作为公司的战略产品，一直是交易系统中核心的核心。在对接低时延平台的过程中，我也有了一些想法。</summary>
-    
-    
-    
-    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
-    
-    
-    <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
