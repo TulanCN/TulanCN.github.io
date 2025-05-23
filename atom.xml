@@ -6,7 +6,7 @@
   <link href="https://tulancn.github.io/atom.xml" rel="self"/>
   
   <link href="https://tulancn.github.io/"/>
-  <updated>2025-04-08T13:05:08.598Z</updated>
+  <updated>2025-05-23T03:21:14.122Z</updated>
   <id>https://tulancn.github.io/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于时代与我的碎碎念</title>
+    <link href="https://tulancn.github.io/2025/05/20/life/%E5%85%B3%E4%BA%8E%E6%97%B6%E4%BB%A3%E4%B8%8E%E6%88%91%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <id>https://tulancn.github.io/2025/05/20/life/%E5%85%B3%E4%BA%8E%E6%97%B6%E4%BB%A3%E4%B8%8E%E6%88%91%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/</id>
+    <published>2025-05-20T00:17:09.000Z</published>
+    <updated>2025-05-23T03:21:14.122Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="从人力车到马车">从人力车到马车</h2><p>在技术这块，近两年最火的议题只有一个：AI。</p><p>围绕着新的风口，诸多需求、诸多岗位涌现，更别说国内有自上而下的命令下来，让所有的干部都学习以deepseek为代表的大语言模型。2025年春节，我回家的时候，感觉最奇怪的一点就是，公园里路边的大爷都能和你聊几句deepseek。我老爸也问我deepseek怎么装到手机上。信息的传播速度在国内展现出一种很独特的曲线。一开始没有人注意，当某个事件导致某个东西爆火后，会在一到两天内传到大部分人耳中。这或许就是自媒体时代的魅力。</p><p>AI并不是新东西，但AI真正让人感觉到有质变的点，就在ChatGPT-3.5上线之后。大约2022年末，ChatGPT出现，一开始大家只是当做一个AI聊天的游戏，并没有完全发掘其潜力。大部分人对其的评价是幻觉过于严重，胡编乱造的情况太多了。</p><p>而我个人认为第一个质变的点，是有人发现可以用类似讲故事的形式，让GPT来主动要求获取什么信息，这时候最初级的Function Call就出现了。</p><p>比如这样的一个对话：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">人：我这里有个工具能查询火星的天气。当有人问火星的天气怎么样，你应该用这个工具来获取信息，然后回答。使用工具的方式是回复：func call marsweather。如果你知道了，请回答好的。</span><br><span class="line">AI：好的。</span><br><span class="line">人：火星现在是什么天气？</span><br><span class="line">AI：func call marsweather</span><br><span class="line">人：下雨</span><br><span class="line">AI：目前火星的天气是雨天</span><br></pre></td></tr></table></figure><p>AI会自动通过上下文判断缺少什么数据，会主动要求获取什么信息，这是LLM表现出的一个特殊能力。</p><p>随后我们包装了Function Call的能力，后面甚至发展出了更多的实践标准，比如MCP。这大大增强了AI的能力边界。</p><p>第二个质变的点是RAG。有个黄金8000字法则，LLM对于最近的8000字记忆相对深刻，大部分时候会严格按照这8000字的要求来回答。</p><p>所以假设我们在这8000字中输入一些有时效性的信息，或是一些对回答有用的知识，可以让LLM在输出结果时大大增强准确性。举个例子，就是从闭卷考试变成了开卷考试。</p><p>RAG全名是检索增强生成。</p><p>首先是检索，我们的知识库很大，上下文很长，因此得先寻找和用户的提问最相关的内容。就像开卷考试我们看着题目去目录里找相关的页码。</p><p>在检索这一步，可以利用各种NLP的技术来确定文本的相关性。这里还有召回率等指标用于测试检索方法的准确性。</p><p>再深入一点说，这里的检索还有很多东西，比如可以提供用户的个人信息来增强生成结果的个性化能力；可以优化embadding模型来提高分片逻辑；生成知识图谱等；</p><p>但无论如何，检索的目标只有一个，就是找到相关的文本片段，然后一并提供给LLM。</p><p>LLM生成结果的这一步，可以理解为人脑思考、推理的过程，我们提供相关性更强的上下文，以提高结果的准确性或是质量。</p><p>大模型的幻觉问题，在目前RAG的机制下，已经很少了。目前更多的问题是原始的数据，也就是提供的文本片段可能是错误的虚假的。</p><p>在AI越发强大的情况，已经有相当一部分的工作可以被AI取代了。</p><p>程序员是脑力劳动的职业，但<strong>实际工作中的生产力会被限制在过时的人机交互技术</strong>上。编码是个体力活，设计画图也是，人总是一下子就能想到结果，但最麻烦的却是把想法变成现实。</p><p>以前有IDE，有提示补全，能减少一部分编码的重复工作，但依旧不够。</p><p>如今的AI开发工具，人需要手动说出自己的需求，AI会自动进行实现和编码。人在AI产出的基础上进行进一步提示或手动改写。</p><p>这确实相当程度上减少了编码的重复工作，在AI生成的结果有质量保证时，很多时候就是说需求然后tabtab或是点击接受。</p><p>很多人喜欢用马车和汽车的比喻来形容新事物产生时对生产力发展的影响。</p><p>但我觉得目前LLM对编程的影响还没到马车和汽车这级别，更像是人力车到马车。</p><p>以前程序员需要手敲代码，手动debug査资料。随着工作的进行，编码能力会自然提高。</p><p>就像种地的人，身体也会被锻炼到。</p><p>但到了LLM时代，手敲代码的机会逐渐减少，更多的时候程序员只是充当了LLM的一个助手。大部分工作是复制粘贴代码和错误信息，来回切换IDE和LLM的对话界面。</p><p>就像马车的车夫，重点在于怎么驾驭马，而不是拉车本身了。</p><p>随着工作的进行，程序员本身的能力成长相当有限。</p><p>此时，还想提升编码能力，可能就得专门锻炼了。就像不种地以后，想锻炼身体就得去健身房；程序员的工作有大量被LLM覆盖后，想提高编码能力也得专门锻炼。</p><p>为了适应这种从人力车到马车的变化，我也得转变观念了吧。</p><h2 id="未来是一片迷茫">未来是一片迷茫</h2><p>我看不到两年之后的事情。</p><p>这是我最近的一个想法。大到国际局势，小到身边的就业，我朋友的境况。这些事情中我能看到的最远的，也仅有两个月。</p><p>不知道什么时候就失去了长期规划。</p><p>实际上在刚毕业的时候还是很自信的，觉得自己可以在就业的前10年完成学历的提升，把工作换到老家，找一个女友，定居在大城市。</p><p>5年一过，这些都已经完成，但我却不知道下一步会是什么？</p><p>技术的潮流并没褪去，每年都有新的技术热点出现，大家不知道明年会不会出现什么新东西。大多团队年初的计划撑不过一个季度就直接推翻重来。</p><p>政治上，美国成了国际局势的搅屎棍，世界各地的摩擦走火也时有发生。俄乌的仗打了好些年，大家都想着会不会继续扩大化。</p><p>可能两年内台湾就收复了，可能接着中美竞争白热化，可能明天的黄金还会继续走高。</p><p>不管怎么说，这几年都是无法稳定的，迷茫才是常态。</p><p>而我能做的，就是相信自己的判断，一条道走到黑吧。</p>]]></content>
+    
+    
+    <summary type="html">到云南的第一天，在民宿写下这篇博客，记录一些杂碎的想法。</summary>
+    
+    
+    
+    <category term="生活" scheme="https://tulancn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="技术协议" scheme="https://tulancn.github.io/tags/%E6%8A%80%E6%9C%AF%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>kafka文档阅读笔记</title>
+    <link href="https://tulancn.github.io/2025/04/15/study/kafka%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>https://tulancn.github.io/2025/04/15/study/kafka%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
+    <published>2025-04-15T05:32:01.000Z</published>
+    <updated>2025-04-20T06:05:21.758Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介">简介</h2><p>提到Kafka，第一印象是其中心化的设计，可靠的持久化和良好的生态。</p><p>最早Kafka设计是个日志系统。各个系统把日志发送到Kafka，然后被其他系统消费，进行后续处理。</p><p>最新的文档中，Kafka提到是event stream（事件流）平台。</p><blockquote><p>从技术角度讲，事件流是从数据库、传感器、移动设备、云服务和软件应用等事件源实时捕获数据，以事件流的形式存储这些事件流以供后续检索；实时以及事后处理和响应事件流；根据需要将事件流路由到不同的目标技术。因此，事件流确保了数据的持续流动和解释，以便在正确的时间、正确的地点提供正确的信息。</p></blockquote><p>Kafka的核心能力有三点：</p><ol><li><p>发布（写入）和订阅（读取）事件流，包括从其他系统持续导入/导出数据。</p></li><li><p>可靠地存储事件流，并持久化，满足对数据存储时间的需求。</p></li><li><p>处理实时或回顾性的事件流。</p></li></ol><p>这些在分布式系统中非常有用。</p><p>一个常见的场景是，一个系统只需要生成数据并把数据提交给Kafka即可，其他的系统则消费这些数据，进行其他的处理。</p><p>这是个典型的事件驱动架构，各个系统通过Kafka实现了良好的解耦。</p><h2 id="核心实现">核心实现</h2><p>Kafka有server和client之分，是由server与client组成的分布式系统。</p><p>server与client之间通讯使用TCP协议。</p><p>server就是Kafka节点，client则是业务节点。</p><p>server可以由多个节点组成集群，这个集群可以横跨多个机器、机房。</p><p>server中又分为broker和connect：</p><ul><li>broker：kafka的持久化节点，数据存到文件中。</li><li>connect：kafka的数据节点，类似client，会持续地生产数据或消费数据。算是Kafka生态的一部分。</li></ul><p>client可以往kafka提交或接收数据，或者说发布和订阅事件流。client有多种语言的SDK，允许集成到业务系统中。</p><h2 id="核心概念">核心概念</h2><h3 id="Event-事件">Event 事件</h3><p>或者说消息。事件有一个键、值、时间戳和可选的元数据头。</p><p>以下是一个示例事件：</p><ul><li>Event key: “Alice”</li><li>Event value: “Made a payment of $200 to Bob”</li><li>Event timestamp: “Jun. 25, 2020 at 2:06 p.m.”</li></ul><p>在消息队列中，所有的消息都被视为一个事件。</p><h3 id="Producer-和-Consumer">Producer 和 Consumer</h3><p>向Kafka发布事件的客户端被称为生产者。<strong>Producer</strong></p><p>从Kafka订阅事件，接收事件进行处理的客户端被称为消费者。<strong>Consumer</strong></p><p>在Kafka中，生产者和消费者完全解耦，互相之间没有任何依赖。</p><h3 id="Topic-主题">Topic 主题</h3><p>Event事件会被划分到一个Topic之下。类比文件系统，Topic类似文件夹，而Event则是文件夹中的文件。</p><p>对于一个主题，可以有任意个生产者写入事件，也可以有任意个消费者消费事件。</p><p>注意，这里的任意可以是0。因为Kafka会持久化消息到文件系统中，因此即便没有消费者来消费数据，生产者也可以无限地往Kafka推送数据，而不会产生数据背压。</p><p>这里还有一点要说明，消费者消费Kafka主题中的事件后，事件不会被删除。</p><p>Kafka提供了事件过期事件的配置，能控制事件的删除时机。</p><p>最后还有一点，Kafka的性能与数据大小无关。</p><h3 id="Partition-分区">Partition 分区</h3><p>分区的概念仅在分布式场景下会用到。分区的概念可以理解为是同一个主题下的多个消息队列。</p><p>一个主题可能消息过多，因此需要被划分到不同的分区中。同个主题的不同分区可以在不同的Kafka节点（Broker）中。</p><p>不同的Kafka节点可以存在于不同的地区、机房里。</p><p>生产者发布和消费者订阅时，是可以是直接针对主题发送的消息，也可以指定分区发送消息。</p><p>如果是针对主题发送的消息，Kafka会保证具有同样Event key的事件被划分到同一个分区中。以用户ID举例，Kafka会保证同个用户的事件始终在同个分区里，因此会一直被同样的消费者消费。这样保证了消息的局部有序性。</p><p>而通过指定分区进行消息发布和订阅，就能允许生产者和消费者并行处理同个主题下的数据。比如一个主题有2个分区，有两个消费者分别来处理分区1和分区2的数据，这样就能让消费的过程变成并行了。</p><p>此外，分区有Replica（副本），用来做容灾时很好用。</p><p>Kafka会自动把分区的数据分配到不同的Broker中，这样可以保证不同Broker都是均匀地处理数据。另外，这种设计让扩容变得简单了，当有新的Broker加入时，Kafka可以自动把部分分区迁移到新的Broker上。</p>]]></content>
+    
+    
+    <summary type="html">这是阅读Kafka文档时记录的一些心得与关键点</summary>
+    
+    
+    
+    <category term="学习" scheme="https://tulancn.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="技术协议" scheme="https://tulancn.github.io/tags/%E6%8A%80%E6%9C%AF%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>redis</title>
@@ -391,48 +433,6 @@
     
     
     <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Netty的FastThreadLocal带来了什么？</title>
-    <link href="https://tulancn.github.io/2024/09/13/work/java/Netty%E7%9A%84FastThreadLocal%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
-    <id>https://tulancn.github.io/2024/09/13/work/java/Netty%E7%9A%84FastThreadLocal%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/</id>
-    <published>2024-09-13T06:49:51.000Z</published>
-    <updated>2025-03-10T13:59:46.997Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="和Netty的缘分">和Netty的缘分</h2><p>要聊能力前，先聊聊我和Netty的缘分。</p><p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p><p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p><p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p><p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p><p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p><p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p><p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p><h2 id="FastThreadLocal快在哪？">FastThreadLocal快在哪？</h2><p>聊一个技术，总是得聊聊实现。</p><p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p><p>然后再来聊聊其中的实现。</p><p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p><p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p><p>它的get()过程是这样的：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure><p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p><p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p><p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>这样的话，它的get()过程就可以优化为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure><p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p><h2 id="带来了什么？">带来了什么？</h2><p>终于讲到重点了。<br>FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p><p>这带来了一些影响：<br>1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p><p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p><p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p><p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p><h2 id="感想">感想</h2><p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>]]></content>
-    
-    
-    <summary type="html">在之前的工作中，每次和人吹牛逼我都会提到：Netty的FastThreadLocal是一个最基础最核心的技术。为什么这么说呢，这次我专门开一个篇章来聊聊。</summary>
-    
-    
-    
-    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
-    
-    
-    <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JNI调用的优化（第二版)</title>
-    <link href="https://tulancn.github.io/2024/08/08/work/java/JNI%E8%B0%83%E7%94%A8%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88/"/>
-    <id>https://tulancn.github.io/2024/08/08/work/java/JNI%E8%B0%83%E7%94%A8%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88/</id>
-    <published>2024-08-08T02:28:13.000Z</published>
-    <updated>2025-03-10T13:59:38.569Z</updated>
-    
-    <content type="html"><![CDATA[<p>源头是这篇博客：<a href="http://blog.hakugyokurou.net/?p=1758">http://blog.hakugyokurou.net/?p=1758</a></p><p>讲到了最正式的文档也就是bug系统中的一条记录：<a href="https://bugs.openjdk.org/browse/JDK-7013347">https://bugs.openjdk.org/browse/JDK-7013347</a></p><p>另外在stackoverflow上有人爆料了这个能力：<a href="https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652">https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652</a></p><p>处于验证的目的，我写了jmh对其进行测试。</p><p>不过测试结果倒是有提升，但也仅仅是20ns。</p><p>聊胜于无，就目前的场景（单次调用800ns）来看，并没有必要做这个优化。</p><p>带来的不稳定因素反而是更大的问题。</p>]]></content>
-    
-    
-    <summary type="html">这一次验证了critical native调用。</summary>
-    
-    
-    
-    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
-    
-    
-    <category term="性能调优" scheme="https://tulancn.github.io/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/"/>
     
   </entry>
   
