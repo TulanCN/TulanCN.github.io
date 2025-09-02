@@ -1,57 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>关于时代与我的碎碎念</title>
-    <url>/2025/05/20/life/%E5%85%B3%E4%BA%8E%E6%97%B6%E4%BB%A3%E4%B8%8E%E6%88%91%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
-    <content><![CDATA[<h2 id="从人力车到马车">从人力车到马车</h2>
-<p>在技术这块，近两年最火的议题只有一个：AI。</p>
-<p>围绕着新的风口，诸多需求、诸多岗位涌现，更别说国内有自上而下的命令下来，让所有的干部都学习以deepseek为代表的大语言模型。2025年春节，我回家的时候，感觉最奇怪的一点就是，公园里路边的大爷都能和你聊几句deepseek。我老爸也问我deepseek怎么装到手机上。信息的传播速度在国内展现出一种很独特的曲线。一开始没有人注意，当某个事件导致某个东西爆火后，会在一到两天内传到大部分人耳中。这或许就是自媒体时代的魅力。</p>
-<p>AI并不是新东西，但AI真正让人感觉到有质变的点，就在ChatGPT-3.5上线之后。大约2022年末，ChatGPT出现，一开始大家只是当做一个AI聊天的游戏，并没有完全发掘其潜力。大部分人对其的评价是幻觉过于严重，胡编乱造的情况太多了。</p>
-<p>而我个人认为第一个质变的点，是有人发现可以用类似讲故事的形式，让GPT来主动要求获取什么信息，这时候最初级的Function Call就出现了。</p>
-<p>比如这样的一个对话：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">人：我这里有个工具能查询火星的天气。当有人问火星的天气怎么样，你应该用这个工具来获取信息，然后回答。使用工具的方式是回复：func call marsweather。如果你知道了，请回答好的。</span><br><span class="line">AI：好的。</span><br><span class="line">人：火星现在是什么天气？</span><br><span class="line">AI：func call marsweather</span><br><span class="line">人：下雨</span><br><span class="line">AI：目前火星的天气是雨天</span><br></pre></td></tr></table></figure>
-<p>AI会自动通过上下文判断缺少什么数据，会主动要求获取什么信息，这是LLM表现出的一个特殊能力。</p>
-<p>随后我们包装了Function Call的能力，后面甚至发展出了更多的实践标准，比如MCP。这大大增强了AI的能力边界。</p>
-<p>第二个质变的点是RAG。有个黄金8000字法则，LLM对于最近的8000字记忆相对深刻，大部分时候会严格按照这8000字的要求来回答。</p>
-<p>所以假设我们在这8000字中输入一些有时效性的信息，或是一些对回答有用的知识，可以让LLM在输出结果时大大增强准确性。举个例子，就是从闭卷考试变成了开卷考试。</p>
-<p>RAG全名是检索增强生成。</p>
-<p>首先是检索，我们的知识库很大，上下文很长，因此得先寻找和用户的提问最相关的内容。就像开卷考试我们看着题目去目录里找相关的页码。</p>
-<p>在检索这一步，可以利用各种NLP的技术来确定文本的相关性。这里还有召回率等指标用于测试检索方法的准确性。</p>
-<p>再深入一点说，这里的检索还有很多东西，比如可以提供用户的个人信息来增强生成结果的个性化能力；可以优化embadding模型来提高分片逻辑；生成知识图谱等；</p>
-<p>但无论如何，检索的目标只有一个，就是找到相关的文本片段，然后一并提供给LLM。</p>
-<p>LLM生成结果的这一步，可以理解为人脑思考、推理的过程，我们提供相关性更强的上下文，以提高结果的准确性或是质量。</p>
-<p>大模型的幻觉问题，在目前RAG的机制下，已经很少了。目前更多的问题是原始的数据，也就是提供的文本片段可能是错误的虚假的。</p>
-<p>在AI越发强大的情况，已经有相当一部分的工作可以被AI取代了。</p>
-<p>程序员是脑力劳动的职业，但<strong>实际工作中的生产力会被限制在过时的人机交互技术</strong>上。编码是个体力活，设计画图也是，人总是一下子就能想到结果，但最麻烦的却是把想法变成现实。</p>
-<p>以前有IDE，有提示补全，能减少一部分编码的重复工作，但依旧不够。</p>
-<p>如今的AI开发工具，人需要手动说出自己的需求，AI会自动进行实现和编码。人在AI产出的基础上进行进一步提示或手动改写。</p>
-<p>这确实相当程度上减少了编码的重复工作，在AI生成的结果有质量保证时，很多时候就是说需求然后tabtab或是点击接受。</p>
-<p>很多人喜欢用马车和汽车的比喻来形容新事物产生时对生产力发展的影响。</p>
-<p>但我觉得目前LLM对编程的影响还没到马车和汽车这级别，更像是人力车到马车。</p>
-<p>以前程序员需要手敲代码，手动debug査资料。随着工作的进行，编码能力会自然提高。</p>
-<p>就像种地的人，身体也会被锻炼到。</p>
-<p>但到了LLM时代，手敲代码的机会逐渐减少，更多的时候程序员只是充当了LLM的一个助手。大部分工作是复制粘贴代码和错误信息，来回切换IDE和LLM的对话界面。</p>
-<p>就像马车的车夫，重点在于怎么驾驭马，而不是拉车本身了。</p>
-<p>随着工作的进行，程序员本身的能力成长相当有限。</p>
-<p>此时，还想提升编码能力，可能就得专门锻炼了。就像不种地以后，想锻炼身体就得去健身房；程序员的工作有大量被LLM覆盖后，想提高编码能力也得专门锻炼。</p>
-<p>为了适应这种从人力车到马车的变化，我也得转变观念了吧。</p>
-<h2 id="未来是一片迷茫">未来是一片迷茫</h2>
-<p>我看不到两年之后的事情。</p>
-<p>这是我最近的一个想法。大到国际局势，小到身边的就业，我朋友的境况。这些事情中我能看到的最远的，也仅有两个月。</p>
-<p>不知道什么时候就失去了长期规划。</p>
-<p>实际上在刚毕业的时候还是很自信的，觉得自己可以在就业的前10年完成学历的提升，把工作换到老家，找一个女友，定居在大城市。</p>
-<p>5年一过，这些都已经完成，但我却不知道下一步会是什么？</p>
-<p>技术的潮流并没褪去，每年都有新的技术热点出现，大家不知道明年会不会出现什么新东西。大多团队年初的计划撑不过一个季度就直接推翻重来。</p>
-<p>政治上，美国成了国际局势的搅屎棍，世界各地的摩擦走火也时有发生。俄乌的仗打了好些年，大家都想着会不会继续扩大化。</p>
-<p>可能两年内台湾就收复了，可能接着中美竞争白热化，可能明天的黄金还会继续走高。</p>
-<p>不管怎么说，这几年都是无法稳定的，迷茫才是常态。</p>
-<p>而我能做的，就是相信自己的判断，一条道走到黑吧。</p>
+    <title>第一篇博客，聊聊这个博客本身</title>
+    <url>/2023/03/29/others/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%81%8A%E8%81%8A%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E6%9C%AC%E8%BA%AB/</url>
+    <content><![CDATA[<p>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
+<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
+<p>为了解决文档的管理问题，我就建了一个博客。</p>
+<h2 id="还有更多的想法么？">还有更多的想法么？</h2>
+<p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
+<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
+<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
+<h2 id="博客的内容会有哪些？">博客的内容会有哪些？</h2>
+<p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
+<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
+<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
+<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
+<h2 id="后续规划？">后续规划？</h2>
+<p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
+<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
+<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
+<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
 ]]></content>
       <categories>
-        <category>生活</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>技术协议</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -145,6 +119,60 @@
       </tags>
   </entry>
   <entry>
+    <title>关于时代与我的碎碎念</title>
+    <url>/2025/05/20/life/%E5%85%B3%E4%BA%8E%E6%97%B6%E4%BB%A3%E4%B8%8E%E6%88%91%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
+    <content><![CDATA[<h2 id="从人力车到马车">从人力车到马车</h2>
+<p>在技术这块，近两年最火的议题只有一个：AI。</p>
+<p>围绕着新的风口，诸多需求、诸多岗位涌现，更别说国内有自上而下的命令下来，让所有的干部都学习以deepseek为代表的大语言模型。2025年春节，我回家的时候，感觉最奇怪的一点就是，公园里路边的大爷都能和你聊几句deepseek。我老爸也问我deepseek怎么装到手机上。信息的传播速度在国内展现出一种很独特的曲线。一开始没有人注意，当某个事件导致某个东西爆火后，会在一到两天内传到大部分人耳中。这或许就是自媒体时代的魅力。</p>
+<p>AI并不是新东西，但AI真正让人感觉到有质变的点，就在ChatGPT-3.5上线之后。大约2022年末，ChatGPT出现，一开始大家只是当做一个AI聊天的游戏，并没有完全发掘其潜力。大部分人对其的评价是幻觉过于严重，胡编乱造的情况太多了。</p>
+<p>而我个人认为第一个质变的点，是有人发现可以用类似讲故事的形式，让GPT来主动要求获取什么信息，这时候最初级的Function Call就出现了。</p>
+<p>比如这样的一个对话：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">人：我这里有个工具能查询火星的天气。当有人问火星的天气怎么样，你应该用这个工具来获取信息，然后回答。使用工具的方式是回复：func call marsweather。如果你知道了，请回答好的。</span><br><span class="line">AI：好的。</span><br><span class="line">人：火星现在是什么天气？</span><br><span class="line">AI：func call marsweather</span><br><span class="line">人：下雨</span><br><span class="line">AI：目前火星的天气是雨天</span><br></pre></td></tr></table></figure>
+<p>AI会自动通过上下文判断缺少什么数据，会主动要求获取什么信息，这是LLM表现出的一个特殊能力。</p>
+<p>随后我们包装了Function Call的能力，后面甚至发展出了更多的实践标准，比如MCP。这大大增强了AI的能力边界。</p>
+<p>第二个质变的点是RAG。有个黄金8000字法则，LLM对于最近的8000字记忆相对深刻，大部分时候会严格按照这8000字的要求来回答。</p>
+<p>所以假设我们在这8000字中输入一些有时效性的信息，或是一些对回答有用的知识，可以让LLM在输出结果时大大增强准确性。举个例子，就是从闭卷考试变成了开卷考试。</p>
+<p>RAG全名是检索增强生成。</p>
+<p>首先是检索，我们的知识库很大，上下文很长，因此得先寻找和用户的提问最相关的内容。就像开卷考试我们看着题目去目录里找相关的页码。</p>
+<p>在检索这一步，可以利用各种NLP的技术来确定文本的相关性。这里还有召回率等指标用于测试检索方法的准确性。</p>
+<p>再深入一点说，这里的检索还有很多东西，比如可以提供用户的个人信息来增强生成结果的个性化能力；可以优化embadding模型来提高分片逻辑；生成知识图谱等；</p>
+<p>但无论如何，检索的目标只有一个，就是找到相关的文本片段，然后一并提供给LLM。</p>
+<p>LLM生成结果的这一步，可以理解为人脑思考、推理的过程，我们提供相关性更强的上下文，以提高结果的准确性或是质量。</p>
+<p>大模型的幻觉问题，在目前RAG的机制下，已经很少了。目前更多的问题是原始的数据，也就是提供的文本片段可能是错误的虚假的。</p>
+<p>在AI越发强大的情况，已经有相当一部分的工作可以被AI取代了。</p>
+<p>程序员是脑力劳动的职业，但<strong>实际工作中的生产力会被限制在过时的人机交互技术</strong>上。编码是个体力活，设计画图也是，人总是一下子就能想到结果，但最麻烦的却是把想法变成现实。</p>
+<p>以前有IDE，有提示补全，能减少一部分编码的重复工作，但依旧不够。</p>
+<p>如今的AI开发工具，人需要手动说出自己的需求，AI会自动进行实现和编码。人在AI产出的基础上进行进一步提示或手动改写。</p>
+<p>这确实相当程度上减少了编码的重复工作，在AI生成的结果有质量保证时，很多时候就是说需求然后tabtab或是点击接受。</p>
+<p>很多人喜欢用马车和汽车的比喻来形容新事物产生时对生产力发展的影响。</p>
+<p>但我觉得目前LLM对编程的影响还没到马车和汽车这级别，更像是人力车到马车。</p>
+<p>以前程序员需要手敲代码，手动debug査资料。随着工作的进行，编码能力会自然提高。</p>
+<p>就像种地的人，身体也会被锻炼到。</p>
+<p>但到了LLM时代，手敲代码的机会逐渐减少，更多的时候程序员只是充当了LLM的一个助手。大部分工作是复制粘贴代码和错误信息，来回切换IDE和LLM的对话界面。</p>
+<p>就像马车的车夫，重点在于怎么驾驭马，而不是拉车本身了。</p>
+<p>随着工作的进行，程序员本身的能力成长相当有限。</p>
+<p>此时，还想提升编码能力，可能就得专门锻炼了。就像不种地以后，想锻炼身体就得去健身房；程序员的工作有大量被LLM覆盖后，想提高编码能力也得专门锻炼。</p>
+<p>为了适应这种从人力车到马车的变化，我也得转变观念了吧。</p>
+<h2 id="未来是一片迷茫">未来是一片迷茫</h2>
+<p>我看不到两年之后的事情。</p>
+<p>这是我最近的一个想法。大到国际局势，小到身边的就业，我朋友的境况。这些事情中我能看到的最远的，也仅有两个月。</p>
+<p>不知道什么时候就失去了长期规划。</p>
+<p>实际上在刚毕业的时候还是很自信的，觉得自己可以在就业的前10年完成学历的提升，把工作换到老家，找一个女友，定居在大城市。</p>
+<p>5年一过，这些都已经完成，但我却不知道下一步会是什么？</p>
+<p>技术的潮流并没褪去，每年都有新的技术热点出现，大家不知道明年会不会出现什么新东西。大多团队年初的计划撑不过一个季度就直接推翻重来。</p>
+<p>政治上，美国成了国际局势的搅屎棍，世界各地的摩擦走火也时有发生。俄乌的仗打了好些年，大家都想着会不会继续扩大化。</p>
+<p>可能两年内台湾就收复了，可能接着中美竞争白热化，可能明天的黄金还会继续走高。</p>
+<p>不管怎么说，这几年都是无法稳定的，迷茫才是常态。</p>
+<p>而我能做的，就是相信自己的判断，一条道走到黑吧。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>技术协议</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>股市投机的原则</title>
     <url>/2024/12/13/life/%E8%82%A1%E5%B8%82%E6%8A%95%E6%9C%BA%E7%9A%84%E5%8E%9F%E5%88%99/</url>
     <content><![CDATA[<h2 id="A股的底层逻辑是博弈">A股的底层逻辑是博弈</h2>
@@ -213,34 +241,6 @@
       </categories>
       <tags>
         <tag>杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第一篇博客，聊聊这个博客本身</title>
-    <url>/2023/03/29/others/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%81%8A%E8%81%8A%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E6%9C%AC%E8%BA%AB/</url>
-    <content><![CDATA[<p>平时工作中也积累的不少东西，但是一直没有很好的记录这些经验。</p>
-<p>自从换了电脑之后，我开始有了用markdown写一些经验分享或者工作记录的习惯。平时写技术预研的文档，或者设计文档，甚至是交付的说明文档，都开始使用markdown。这些文档逐渐变多之后，如何管理就成了一个问题。</p>
-<p>为了解决文档的管理问题，我就建了一个博客。</p>
-<h2 id="还有更多的想法么？">还有更多的想法么？</h2>
-<p>首先，作为技术人员，留存自己的经验是很重要的。一个人的工作经验就体现在这。程序员的工作很多时候是琐碎且非常细节的，单凭人脑的记忆，绝大多数时候都会出错。</p>
-<p>而且，工作毕竟是需求导向，获取新的知识只是为了解决当前的问题。但想要提高，就需要人主动去深入研究。所以我觉得，写博客的过程也是复习并提高的过程，对技术成长明显是有积极意义的。</p>
-<p>另外，很多开发人员遇到问题，都会通过搜索引擎去搜索问题的解决方案。随着技术的更新，已经出现了相当多的过时答案。网络上的资料良莠不齐，会给后来人造成各种困难。我写这个博客也是为了记录自己真实的情况，真实的解决方案，希望能提供一些正确的答案。</p>
-<h2 id="博客的内容会有哪些？">博客的内容会有哪些？</h2>
-<p>我初步考虑，是打算分三部分：生活、工作、杂谈。</p>
-<p>生活就是记录一些生活中小事，可能绝大多数是做饭和健身相关？这会是类似日记一样的东西。</p>
-<p>工作主要是技术文档了。更多的会是工作上的技术文档，我脱敏之后放到博客作为副本。还有些工作上遇到的问题，我尽量记录下来，把最终的解决方案也列出来，提供一些有价值的东西。当然，为了提高阅读量，我应该会单独列一个索引词的玩意儿，放在每篇文章的最前边。</p>
-<p>至于杂谈，就是一些思考和规划，也有可能是投资计划之类的。不能归到生活和工作的，就都会丢到杂谈这一栏中，比如现在这第一篇博客。</p>
-<h2 id="后续规划？">后续规划？</h2>
-<p>我平时使用的网名是涂蓝，以后在各种社交网站或者平台我应该都会统一使用这个名字。</p>
-<p>技术人员或多或少都会有个技术梦。我希望后续能参与一些开源项目，逐步提高自己吧。</p>
-<p>这次建博客，正好是我第一次向Spring Cloud Gateway提了一个issue，也是我第一次在github上提issue。很幸运，我提的issue被官方认证为一个确实的缺陷。不过本来我是想提PR的，可惜被一个阿里的哥们抢了。</p>
-<p>这也让我突然意识到，自己已经可以参与到更大的平台中了。和我直属领导聊天时，他说一个技术人员能够去挑开源项目的刺，才说明他确实入门了。我深以为然。</p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -846,44 +846,6 @@
       </tags>
   </entry>
   <entry>
-    <title>canvas-editor使用记录</title>
-    <url>/2025/03/21/work/front/canvas-editor%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="简介">简介</h2>
-<p>主页：<a href="https://hufe.club/canvas-editor-docs/">https://hufe.club/canvas-editor-docs/</a></p>
-<p>canvas-editor是个基于canvas/svg的富文本编辑器。</p>
-<p>使用下来，比较优秀的点有：</p>
-<p>1、页面类似word，并且开箱即用。</p>
-<p>2、提供了非常多扩展的接口。</p>
-<p>3、数据保存非常方便。</p>
-<p>当前，也有些缺点：</p>
-<p>1、文档不够详细，很多接口仅仅是说明了有这个接口，具体的用法都没讲。</p>
-<p>2、事件回调的机制说明不够清晰。也算是个文档的问题。</p>
-<p>3、没有Vue或Reactor的开箱即用包。</p>
-<h2 id="空的回调事件">空的回调事件</h2>
-<p>在实现工具栏时，发现了一个很抽象的事情。</p>
-<p>官方的工具栏中，假设我选中一些文字然后加粗，工具栏会正常把加粗的按钮置为已经点击的状态。</p>
-<p>而在我实现的工具栏中，每次点击工具栏的按钮后，会出现一个空的回调事件，把工具栏的状态置回没有点击的状态。</p>
-<p>最后询问了官方，也翻了下对方的代码。</p>
-<p>发现是因为官方的工具栏用的事件不是click，而是鼠标按下的事件。</p>
-<p>我用click，所以点击的时候出现了失焦，因此有个空的回调事件出来。</p>
-<h2 id="Word插件样式">Word插件样式</h2>
-<p>官方的实现中，word的导入导入功能有非常严重的样式丢失。</p>
-<p>最后是我自己写了一个导入的功能，把word解析为xml然后转化为canvas-editor的json格式。</p>
-<p>目前导出还没实现，但大概率也得手动写一个导出了。</p>
-<h2 id="任何操作都会被记录">任何操作都会被记录</h2>
-<p>发现对文档的操作都会被记录。</p>
-<p>这导致了我们用AI添加一些文字内容到文档时，明明正常执行完了，但点击回退又会回到填了一半的情况。</p>
-<p>比如我们润色时会高亮原文，那么润色完了点击回退，就会回到原文被高亮的状态。</p>
-<p>最后发现可以在操作时加一个参数来让本次操作不被记录。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JNI调用的优化</title>
     <url>/2023/12/19/work/java/JNI%E8%B0%83%E7%94%A8%E7%9A%84%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h2 id="传统的优化方式">传统的优化方式</h2>
@@ -1027,116 +989,41 @@
       </tags>
   </entry>
   <entry>
-    <title>Netty的FastThreadLocal带来了什么？</title>
-    <url>/2024/09/13/work/java/Netty%E7%9A%84FastThreadLocal%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/</url>
-    <content><![CDATA[<h2 id="和Netty的缘分">和Netty的缘分</h2>
-<p>要聊能力前，先聊聊我和Netty的缘分。</p>
-<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
-<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
-<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
-<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
-<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
-<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
-<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
-<h2 id="FastThreadLocal快在哪？">FastThreadLocal快在哪？</h2>
-<p>聊一个技术，总是得聊聊实现。</p>
-<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
-<p>然后再来聊聊其中的实现。</p>
-<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
-<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
-<p>它的get()过程是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
-<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
-<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
-<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>
-这样的话，它的get()过程就可以优化为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
-<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
-<h2 id="带来了什么？">带来了什么？</h2>
-<p>终于讲到重点了。<br>
-FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
-<p>这带来了一些影响：<br>
-1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>
-2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
-<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
-<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
-<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
-<h2 id="感想">感想</h2>
-<p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>
-我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>
-不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
+    <title>canvas-editor使用记录</title>
+    <url>/2025/03/21/work/front/canvas-editor%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p>主页：<a href="https://hufe.club/canvas-editor-docs/">https://hufe.club/canvas-editor-docs/</a></p>
+<p>canvas-editor是个基于canvas/svg的富文本编辑器。</p>
+<p>使用下来，比较优秀的点有：</p>
+<p>1、页面类似word，并且开箱即用。</p>
+<p>2、提供了非常多扩展的接口。</p>
+<p>3、数据保存非常方便。</p>
+<p>当前，也有些缺点：</p>
+<p>1、文档不够详细，很多接口仅仅是说明了有这个接口，具体的用法都没讲。</p>
+<p>2、事件回调的机制说明不够清晰。也算是个文档的问题。</p>
+<p>3、没有Vue或Reactor的开箱即用包。</p>
+<h2 id="空的回调事件">空的回调事件</h2>
+<p>在实现工具栏时，发现了一个很抽象的事情。</p>
+<p>官方的工具栏中，假设我选中一些文字然后加粗，工具栏会正常把加粗的按钮置为已经点击的状态。</p>
+<p>而在我实现的工具栏中，每次点击工具栏的按钮后，会出现一个空的回调事件，把工具栏的状态置回没有点击的状态。</p>
+<p>最后询问了官方，也翻了下对方的代码。</p>
+<p>发现是因为官方的工具栏用的事件不是click，而是鼠标按下的事件。</p>
+<p>我用click，所以点击的时候出现了失焦，因此有个空的回调事件出来。</p>
+<h2 id="Word插件样式">Word插件样式</h2>
+<p>官方的实现中，word的导入导入功能有非常严重的样式丢失。</p>
+<p>最后是我自己写了一个导入的功能，把word解析为xml然后转化为canvas-editor的json格式。</p>
+<p>目前导出还没实现，但大概率也得手动写一个导出了。</p>
+<h2 id="任何操作都会被记录">任何操作都会被记录</h2>
+<p>发现对文档的操作都会被记录。</p>
+<p>这导致了我们用AI添加一些文字内容到文档时，明明正常执行完了，但点击回退又会回到填了一半的情况。</p>
+<p>比如我们润色时会高亮原文，那么润色完了点击回退，就会回到原文被高亮的状态。</p>
+<p>最后发现可以在操作时加一个参数来让本次操作不被记录。</p>
 ]]></content>
       <categories>
         <category>工作</category>
       </categories>
       <tags>
-        <tag>工作总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Unsafe的使用记录</title>
-    <url>/2024/01/07/work/java/Unsafe%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="什么是Unsafe">什么是Unsafe</h2>
-<p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
-<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
-<p>为何如此？</p>
-<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
-<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
-<h2 id="使用Unsafe">使用Unsafe</h2>
-<p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>但是也不麻烦，我们可以使用如下代码获取到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
-<h2 id="内存操作">内存操作</h2>
-<p>要说Unsafe提供最大的能力，就是内存操作了。</p>
-<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
-<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
-<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
-<p>那么我们看一下实际怎么操作内存：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
-<p>这种操作，几乎和C++程序是一致的了。</p>
-<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
-<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
-<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
-<h2 id="对象操作">对象操作</h2>
-<p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
-<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
-<p>首先来看一个Java对象的内存结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
-<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
-<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
-<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
-<p>下面看下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
-<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
-<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
-<h2 id="CAS操作">CAS操作</h2>
-<p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
-<p>下面简单看一个api：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
-<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
-<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
-<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
-<h2 id="版本支持">版本支持</h2>
-<p>还是要额外提一下关于Unsafe的版本支持问题。</p>
-<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
-<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
-<h2 id="总结">总结</h2>
-<p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
-<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
-<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>性能调优</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -1468,26 +1355,547 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
       </tags>
   </entry>
   <entry>
-    <title>JRE环境使用Arthas</title>
-    <url>/2024/09/20/work/tips/JRE%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8Arthas/</url>
-    <content><![CDATA[<h2 id="场景">场景</h2>
-<p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
-<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
-<h2 id="解决方案">解决方案</h2>
-<p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
-<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
-<p>这里提供一个脚本：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>最关键的就是脚本中最后的两句</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
-<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
-<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
+    <title>AI Coding使用记录-20250813</title>
+    <url>/2025/08/13/work/%E6%9D%82%E8%B0%88/AI-Coding%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95-20250813/</url>
+    <content><![CDATA[<p>今年AI coding赛道一直挺火热。从25年2月左右我因为学校的项目开始使用cursor写前端，到目前在工作里用claude code之类的工具写业务，这中间也用了不少工具，体验有差异。这里记录下目前的体验。</p>
+<h2 id="GitHub-Copilot-初版">GitHub Copilot(初版)</h2>
+<p>单独把初版的Copilot拿出来说，还是因为它在当时确实太惊艳了。</p>
+<p>最初版的copilot只有代码补全的能力，但仅仅靠着这个能力，就征服了一众开发者的心。</p>
+<p>我刚开始使用的时候，copilot主要是可以补全一些变量名和写了一半的代码。</p>
+<p>我在代码里输入前缀，它就会自动补全我的后续内容。</p>
+<p>比如我输入下面这句话。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OrderVO order = new Order();</span><br></pre></td></tr></table></figure>
+<p>当我输入Or后，代码编辑器的提示就出现了，会让我选择什么对象，并自动引入。</p>
+<p>然后我按下空格，copilot自动帮我生成了一个变量名，我tab接收。</p>
+<p>再接着我按下=，输入new，copilot就自动帮我生成后续的Order();。</p>
+<p>整个流程非常顺畅。</p>
+<p>使用copilot能大大减少程序员在IDE中进行代码复制粘贴的情况。</p>
+<p>还有种用法是通过注释编写一些提示词，让copilot帮你写一些小的代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 生成订单号</span><br></pre></td></tr></table></figure>
+<p>比如我在代码中写下注释，生成订单号，copilot就会自动根据上下文（本文件内）尝试补全。</p>
+<p>这种类似于对话的方式，也能节省一定的开发时间。</p>
+<p>总的来说，在初版的Copilot出现时，<strong>大家几乎一边倒的好评</strong>，绝大多数质疑还仅仅是集中于代码的隐私问题。</p>
+<p>当时有博主发文称，已经不知道离开copilot怎么编码了。用了copilot之后，他的工作就变成了：搭建好框架，写好注释，然后停下来，等copilot帮他生成后续的代码。</p>
+<p>或许后面AI Coding的一些问题，此时也初现倪端。</p>
+<h2 id="通义灵码">通义灵码</h2>
+<p>在阿里推出通义大模型后，通义灵码的插件也快速上线了，对标的就是Copilot。功能上也相似，提供代码补全。</p>
+<p>公网版我试用之后，觉得提示的质量不及Copilot，于是弃用。</p>
+<p>但后来公司采购了企业版的通义灵码，私有化部署并且上传了公司的代码库，之后又尝试用了一段时间。</p>
+<p>私有化部署解决了企业内部使用代码补全插件的隐私问题。发展到这一步时，我觉得代码补全的功能已经算相当完善了。</p>
+<p>比起Copilot，通义灵码最大的优势是快。毕竟没有墙，甚至是内网部署，补全的速度比Copilot要快非常多。</p>
+<p>这段时间Copilot也陆续推出了一些工具，比如生成注释、生成单测之类的能力，通义灵码也跟进了，但我用的不多。</p>
+<p>而这时候，claude才刚推出2.0，大家觉得是个gpt-4的平替，还没有意识到它后续的统治力。</p>
+<p>这段时间，我们公司内部报告说代码补全生成的代码占到了我们公司新增代码的10%。</p>
+<h2 id="代码补全的小总结">代码补全的小总结</h2>
+<p>第一阶段的AI Coding，主要作用是代码补全。</p>
+<p>我见过一些论调是代码补全的能力与IDE本身提供的关键字、提示有一些冲突。对于熟练使用IDE插件的人来说，这个补全的功能有些鸡肋。</p>
+<p>从我自身的角度来说，我是觉得还算好用的。编程中有个说法是“心流”，代码补全插件能节省我编程时在文件间来回切换，复制粘贴的操作，能更加关注于代码本身，也就更加容易进入“心流”。</p>
+<p>大多数人的评价应该是与我一致的：<strong>好用，对编程速度有一定的提升，但没有产生质变</strong>。</p>
+<p>微软对Copilot的定位是一个编程的副驾驶，主要起辅助工作，编程的主要责任还是在用户。</p>
+<p>这个定位相当准确，在人机交互上也是相当友好——光标停顿时自动进行补全。使用久了之后，我基本可以预测Copilot可以帮我补全哪些代码，我仅需要写好必要的内容，然后等它补全完毕，再按下tab就行。</p>
+<h2 id="GitHub-Copilot-Chat">GitHub Copilot Chat</h2>
+<p>在Copilot推出一段时间后，微软和Github又推出了Copilot Chat。</p>
+<p>Copilot Chat像是一个<strong>过渡产品</strong>，它的作用是让用户在IDE中和LLM对话，询问一些技术问题。</p>
+<p>本意可能是为了让程序员不需要另外切换窗口来复制代码，但实际使用时，挑选合适的代码文件也是个很麻烦的活。</p>
+<p>产品性上，Copilot Chat有直接插入代码到文件中的能力。有一些用，但不多。</p>
+<p>还有选中一段代码，直接贴到Copilot Chat中询问，也没太多用处。</p>
+<p>但还是有些场景是比较适合的。代码补全只能覆盖到写代码的场景，但实际工作中，还会有写配置、Debug的情况，这种时候Copilot Chat更能发挥一些作用。spring boot工程有很多配置项，有些开源组件的配置一时想不起来也很正常，我这时候会打开Copilot Chat问一下，往往能获得准确的回答。</p>
+<h2 id="通义灵码（企业版）">通义灵码（企业版）</h2>
+<p>上面也说了我们公司采购了通义灵码，这里有几个比较有趣的事情。</p>
+<p>企业版的通义灵码是支持定制企业logo的，但我们上的第一版还是通义灵码的logo，直到第二个版本才更新。所以所有人都知道这玩意儿是个套壳的。但我们的AI部还是厚着脸皮和领导汇报说是自己产出的代码插件生成的采纳率达到了多少多少…</p>
+<p>企业版的通义灵码支持上传企业代码库。我们公司是用的自己的中台框架，通义灵码的提示有的时候确实无法提示到公司框架的API。按理说这里就得上传公司的代码和文档，方便通义灵码提示。但我们的AI部不知道哪根筋抽了，只上传了工具类，导致相当长一段时间公司框架的问题通义灵码都回答不上来，为此我们部门还被领导骂了（中台框架就是我们写的）。</p>
+<p>通义灵码后来也有样学样搞了个对话框，还支持企业配置自己的提示词和指令。我们部门抽调过去的小哥配了个单测的指令，试图一键生成单元测试的代码。但最后使用效果不太好，主要是上下文缺失，生成的代码少了很多赋值操作。</p>
+<h2 id="Chat插件总结">Chat插件总结</h2>
+<p>在代码补全插件的基础上，把对话框也搬进IDE，能拓展一部分覆盖场景，但终究带来的提升还是有限。</p>
+<p>现在回头看的话，当时的大模型可能已经能正常生成我们想要的代码了，问题在于筛选上下文的工作太麻烦，以至于大家不太愿意去做。</p>
+<p>试想一下，我要生成一个service文件的单元测试，我得把这个文件涉及到的所有POJO都一并传递给LLM，才有可能生成我想要的代码。</p>
+<p>所以，Chat插件就卡在了一个不上不下的地方。</p>
+<p>那么解决方案呢？就是索引和工具，或者用个更加新潮的说法：agent。</p>
+<h2 id="Cursor">Cursor</h2>
+<p>Cursor在产品刚推出的时候我就有关注。</p>
+<p>Cursor是从VS Code的仓库fork了一个自己的分支，因此可以使用VS Code的插件。这方式挺取巧的，但确实不赖。</p>
+<p>一开始Cursor想和Copilot做区分，Copilot的定位是帮你补全目前光标所在为止的代码，Cursor的定位是预测你下一个光标要移动的位置。</p>
+<p>这是个很神奇的体验。我刚改了上一行代码，然后Cursor就会自动提示是否要跳转到另外一行，按tab接收就会自动跳转过去，并进行新的补全和提示。用Cursor写前端项目的话，确实就一直是在tab tab tab。</p>
+<p>但Cursor真正火起来，还是在Claude 3.5 sonnect推出之后。因为Cursor Composer配合Claude 3.5 sonnect的效果实在是太惊艳了。</p>
+<p>Cursor Composer的功能很简单，你写需求和指令，它帮你生成对应的代码，然后你接受，则自动插入到仓库的文件中。</p>
+<p>说白了就是帮你写代码。Cursor给LLM开发了各种工具，能索引代码片段送给LLM，也能把LLM生成的代码写入到文件。</p>
+<p>Cursor Composer一开始用的模型都不够聪明，导致生成的代码充满了报错、异常。</p>
+<p>写个小功能还不如自己来，那么为什么还要用模型来生成呢？</p>
+<p>在AI Coding界，Claude 3.5 sonnect可以说就像是人类第一次学会了用火，此后就迎来了跨越式的发展。</p>
+<p>在Claude 3.5 sonnect的加持下，Cursor Composer生成代码可用性大大提升。</p>
+<p>我也就是这个时候开始使用Cursor的，绝大多数时候生成的代码都是可用的，如果不行大不了回退然后修改提示词重新生成一次。</p>
+<p>整个开发流程完全变了，从我亲自写代码，变成了写需求和指令给Cursor，然后筛选下相关的文件，最后等它生成。</p>
+<p>这就是Vibe Coding的魅力啊。</p>
+<p>后续Cursor修改了代码生成的模式，改为提供agent模式，进一步简化了开发流程。</p>
+<p>我甚至不再需要去做文件筛选的工作了，Cursor会主动寻找它需要的代码文件，读取到上下文中。</p>
+<p>这时候写一份高质量提示词才是我最重要的工作，其次就是看懂Cursor的输出，并修改其中不正确的部分。</p>
+<p>如果说要我评价此时的Cursor，应该说是<strong>如日中天，颠覆性的体验</strong>。</p>
+<h2 id="Cursor-（锁区）">Cursor （锁区）</h2>
+<p>好景不长，后来Cursor因为成本问题几次三番修改使用条款，不断缩减20刀订阅计划的使用次数。</p>
+<p>最开始是用完了订阅的请求次数，还能用慢请求，大不了排队。</p>
+<p>后面改成了用完了请求次数就只能用auto模式的请求。auto模式是由Cursor来帮你选择用什么模型生成代码。</p>
+<p>最后又改，auto也限流了。</p>
+<p>我正好在换工作，开发任务不多，也很少用Cursor了，限流对我的影响倒是没那么大。</p>
+<p>但是有一天，Cursor锁区了。</p>
+<p>于是我把它彻底埋了。</p>
+<p>当初捧得有多高，现在摔得有多惨。</p>
+<h2 id="后Cursor时代">后Cursor时代</h2>
+<p>在Cursor锁区之后，我尝试寻找Cursor的替代品。</p>
+<p>AI coding体验过之后，很难再接受手动编写大量的代码了。</p>
+<p>那段时间我试了Cline、Roo Code、Claude Code。</p>
+<p>模型上则是用了Kimi K2、GLM 4.5、Deepseek V3、Deepseek V3.1、Qwen3 Coder等。</p>
+<p>该说不说，Claude 3.5 Sonnect是个坎。模型的能力过了这个坎，写的代码就能在实际中用了。</p>
+<h2 id="Claude-Code">Claude Code</h2>
+<p>Cursor无疑是带火了AI Coding赛道。这是目前大家肉眼可见能赚钱的地方。</p>
+<p>但死活没想到的是，模型提供商自己入局了。</p>
+<p>Claude Code就是Anthropic推出的代码工具，主打一个Agent。</p>
+<p>这也是个颠覆性的产品，居然是命令行操作。</p>
+<p>命令行的好处是能嵌入所有的IDE终端，VS Code、Cursor、IDEA等等，都能无缝再接入一个Claude Code。</p>
+<p>作为一个产品，实在是过于超前了。以至于google光速抄了一个Gemini Cli出来并开源了。</p>
+<p>但国内使用还是有些问题，比如账户和锁区。所以我是配合Claude Code Router转发了国内的模型来使用的。</p>
+<p>虽然很可惜用不上最强的能力，但总体来说体验还是不错的，尤其是Cursor锁区的情况下。</p>
+<p>Claude Code有个todo list的功能，应该说是相当优秀，会先列出需要执行的任务，然后依次执行。</p>
+<p>后面cursor、roo code等其他工具也都跟进了todo list。</p>
+<p>Cluade Code的计划模式是一个比较有特色的功能，shift + tab按两次就切换到plan mode，这个模式下给出的任务会先进行规划而不进行具体的代码实现，如果发现计划不对可以及时指出并修改。一个很好的实践是先用4.0进行规划，再切换3.5进行代码生成。</p>
+<p>我个人很喜欢计划模式。因为很多时候其实需求描述出来我自己心里也没底，看到Claude Code帮我生成了具体的实现方案后，我再看其中的细节我才能确认它写的对不对。</p>
+<p>Claude Code离谱的点在于，依托于它强大的底层模型，只要计划没什么问题，它最终实现出来的代码几乎是立刻就能拿来用的。</p>
+<p>另外再大概聊聊使用的几个国产模型。</p>
+<p>Kimi K2在这里的表现不太行，当我在计划模式里两次修改了计划后，它就开始前言不接后语了，拉黑。</p>
+<p>Qwen3 Coder很棒，但真的是token杀手，给我三个问题干了25块钱，因此也被我拉黑。</p>
+<p>Deepseek V3的表现过于平庸，也弃用。</p>
+<p>GLM 4.5出乎我意料，还挺不错的。但问题是Claude Code的上下文是以256K为基准，而GLM 仅有128K，不算少但使用时多少还是有些不方便。</p>
+<h2 id="Roo-Code">Roo Code</h2>
+<p>对标Cursor的Composer功能，社区推出了Cline，一个开源的VS Code插件。</p>
+<p>但由于Cline不太愿意合并社区的pr，因此又有人另外fork了Cline的仓库，推出了Roo Code。</p>
+<p>我后面有不少功能是用Roo Code写的。</p>
+<p>Roo Code有不少很亮眼的功能：上下文窗口显示、仓库索引、自定义模式、子任务模式。</p>
+<p>对于小任务，我直接配合GLM 4.5先计划后实现。而较大的任务则可以使用Orchestrator模式拆分为多个子任务，每个子任务有独立的上下文窗口，从而在有限的上下文里实现更多的功能。</p>
+<p>Orchestrator模式的潜力我觉得还没完全发挥出来，目前传递给子任务的上下文还是有缺失，很多时候父任务已经阅读过的内容在子任务中还得重新阅读一遍，这就导致整个流程会拉得很长，并且有相当多的token被浪费了。</p>
+<h2 id="Github-Copilot（Agent）">Github Copilot（Agent）</h2>
+<p>在Cursor锁区后，想用Claude就得费点功夫了。</p>
+<p>有网友推荐我可以用Github Copilot，目前也是支持Claude 4.0的。于是我时隔半年再次开始使用Github Copilot。</p>
+<p>有意思的是，这次我打开Copilot就看到一个Agent模式。试用了一下，体验也和Cursor类似。</p>
+<p>毕竟有学生优惠，而且还能直连，所以后面也尝试用Copilot写了一些小功能。</p>
+<p>Claude 4还是厉害，写出来的代码质量很高。</p>
+<p>缺点就是使用上有些小功能比不上Cursor，而且任务执行总是会中断，但总体来说给人一种它很想取代Cursor，或者说是把Cursor作为直接竞争对手的感觉…</p>
+<p>Copilot在IDEA中的Agent模式总是会卡死，因此我后面都切换到VS Code里去了。</p>
+<h2 id="Vibe-Coding">Vibe Coding</h2>
+<p>现在流行的概念叫Vibe Coding，倒是不清楚这名字怎么来的…但突然间都在说。</p>
+<p>大概指的就是利用各种AI编程工具，仅用提示词来写代码，完成需求。</p>
+<p>或许最终目标就是自动化编程吧，仅仅提下需求就能完成所有的实现工作。</p>
+<p>我觉得这是个很困难的事情，事实上大部分人在一个东西做出来之前并不知道它到底长啥样，也是因此才有敏捷开发，快速迭代的概念出来。</p>
+<h2 id="小小的总结">小小的总结</h2>
+<p>话题回到最近用的几个编码工具。很显然，AI Coding的过程经历了几个阶段：代码补全、被动问答、主动搜索仓库问答、agent。</p>
+<p>代码补全就是Github Copilot为代表的插件。主要是协助编码，效率提升在10%-20%。</p>
+<p>被动问答则是Github Copilot Chat为代表的插件。主要能在IDE内进行问答，还能添加项目文件到对话框。编码效率没有提升多少，但debug之类的效率能有一定提升，算它总体30%吧。</p>
+<p>主动问答是类似Cursor这类编码IDE，能建立仓库代码文件的索引，也有用向量数据库做的。这类的特点是会自动搜索相关的代码片段一起传给LLM。在被动问答的基础上减轻了开发者的提问负担，生成的代码有时候也可以直接使用了。</p>
+<p>最后就是Agent模式。Agent不仅能使用工具，与之前所有的模式最大的差别在于，它具有规划的能力。Agent能拆解任务，并逐步执行，在每一步都选择合适的工具来完成任务。这让它最终产出的代码质量有了极大的提升。</p>
+<p>那么，我们不妨把视角从AI Coding这赛道中抽离出来。当我们提供更加丰富的工具，打通了LLM访问其他业务数据的渠道，这种Agent的能力，是否会泛化到各行各业的工作中去呢？</p>
+<p>我不好说，但唯一能确定的就是：</p>
+<p><strong>后面可用的AI应用，只会是Agent，也只能是Agent</strong>。</p>
+<h2 id="题外话">题外话</h2>
+<p>纵观AI Coding的发展过程，最关键的是基础模型的进步。</p>
+<p>这个进步方向有三个：</p>
+<p>1、模型代码能力的进步。这决定了模型生成的代码是否可用，是否有错误。在最开始我使用Claude 3.5时，它生成的代码还常常有语法错误，需要反复修改。而到Claude 4.0之后，则很少出现这种语法错误了。</p>
+<p>2、模型的任务规划能力和工具调用能力进步。这些是Agent使用工具的前置条件，Cline使用复杂的提示词也能做到类似的工具调用和规划能力，但是终究效果不及从模型训练时就添加相关训练数据来得好。</p>
+<p>3、模型的上下文长度。这个在编码中意外地重要。代码文件是个很耗费token的玩意儿，上下文越长，越能记住有用的信息。128k的长度在现在已经很常见了，但128k的上下文在使用效果上还是有些落后。目前先进的模型上下文直接到256K，甚至是1M，这让模型能直接阅读完仓库内的所有文件，甚至比业务开发更了解业务代码。另外，多轮对话的过程中会有很多工具调用等，也会大量占用上下文窗口。就我使用下来，64K的上下文目前几乎是不可用的状态。</p>
+<p>提到上下文，就还得提个上下文工程的概念。模型的上下文是有限的，并且不可能无限增长。目前我们给LLM提供了工具调用的能力，LLM能主动去获取外界的信息了。但是我们还是缺少控制上下文内容的能力，很多时候LLM在工具调用过程中浪费了不少上下文。</p>
+<p>在Vibe Coding的过程中，我绝大多数时间是在与GLM 4.5这短小的128K上下文做斗争。</p>
+<p>另外说一句，在上下文超过长度的50%时，大多数模型的输出效果会显著变差，目前用下来仅有Claude是还能正常遵循规则进行工具调用的，不知道是不是因为Anthropic专门把Claude Code的api拿去训练了。</p>
+<p>也提一嘴百度。</p>
+<p>AI Coding的模型中我唯独没用百度的模型，一方面是在LLM这个赛道上，Qwen真的是一路领先…另一方面还是百度有点烂泥扶不上墙。</p>
+<p>大家总说百度起个大早赶个晚集，没想到在LLM居然也是一样的结果。GPT 3.5刚发布时，百度率先推出文心一言，大约有GPT 3.0的水平，此时国内其他厂还仅有GPT 2.5的水平。结果3年过去了，Qwen、deepseek、Kimi、智谱清言都有开源的优秀模型推出，反而是百度渐渐淡出了大家的视野。明明最早提出All in AI的也是百度，咋最后就又竞争不过了呢。</p>
+<p>顺便一提，Agent是下一个风口这话我也是最早从Robin嘴里听到的，某种意义上百度还真是行业明灯啊。方向永远是对的，执行结果总是错的，也是没谁了。</p>
 ]]></content>
       <categories>
         <category>工作</category>
       </categories>
       <tags>
-        <tag>优秀实践</tag>
+        <tag>AI Coding</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大模型技术到底带来了什么</title>
+    <url>/2024/10/19/work/%E6%9D%82%E8%B0%88/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%88%B0%E5%BA%95%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<h2 id="正文">正文</h2>
+<p>时间到2024年，以LLM为首的AI热潮似乎开始冷却。但是工具已经开始普及，大部分人已经开始尝试和AI一起工作。</p>
+<p>我首先想提的是国内大模型的水平。目前接触下来，国产的AI在下限方面基本已经满足了我们的日常生活需要。也就是说，平时一些简单的任务已经可以让AI去完成，大部分问题都能收到一个令人满意的回答。对于大部分人的日常工作来说，已经足够。</p>
+<p>如果要用一个角色来形容AI目前的水平，我觉得是一个知识面很广，能力很强，在经过适当调教能很好地完成任务的实习生。</p>
+<p>这其实已经对我的日常工作方式有相当强烈地冲击了。举例来说，平日有些费时费力的总结报告，现在可以让AI来填写。一些技术文档全篇很长，而我需要知道的又只是其中的一个小点，那就可以让AI快速阅读之后我对其提问来获取答案。这种场景下，我的需求和问题都很明确，答案也有现成的，只是让AI在特定范围内进行一个快速的搜索，像是把LLM当做一个非常强大的搜索引擎，这种时候就非常好用。</p>
+<p>还有种场景是内容的格式改写，比如数据改写为JSON格式。人工做很费力，但是AI能听懂指令快速生成结果。这就很好用。</p>
+<p>那么工作的重点就变了。以前我的重点是把任务人工完成，要出力；现在我的重点是理清思路，转化为AI可以完成的任务，然后让AI先做一遍，我再检查一遍。这种思路确实就和分配任务给实习生是一样的。</p>
+<p>所以，这就引出了LLM最适合的工作场景之一：<strong>重复性的、有明确工作规范和成果验收的工作</strong>。</p>
+<p>另外，与AI协作的时候，很多人会感觉自己的能力也提高了。有一种场景，比如需要写一些自己平时不擅长的代码，像是后端程序员刚开始接触一门新的语言。这时候程序员可能是知道要做什么，但是苦于不知道怎么实现，因此需要一些额外的时间去学习。有了AI之后，这个学习成本降低了非常多，并且没有让人排斥的搜寻资料的过程。很多时候，我们要做的就是打开LLM输入界面，然后写出需求，等到LLM的回答，然后开始干活。得益于技术水平的提高，现在的LLM基本都很聪明，它们的回答大多数时候都是有用的。</p>
+<p>感觉自己能力的提高后，会让人变得自信，然后就愿意去做一些以前不能做的事情。</p>
+<p>但究其根本，不是人的能力提高了，而是<strong>学习的成本降低</strong>了。</p>
+<p>这就是LLM最适合的第二个工作场景：<strong>快速让人在一个知识领域达到入门水平</strong>。</p>
+<p>经过一些调教，我相信LLM在教育这方面大有可为。</p>
+<p>然后我就要提GitHub Copilot。作为代码提示工具，有了LLM加持后，它聪明得让人欣喜。有人评价是，有了Copilot之后，编码的方式就变成了：写好注释，写好框架代码，然后停下来，等待Copilot填充。这确实是我的真实写照。</p>
+<p>我觉得这就是大模型带来的最大影响：<strong>评价一个问题的难易程度，是取决于它有多少的部分能被LLM执行</strong>。</p>
+<p>在一个任务中，我们总是倾向于让LLM做更多，而自己做更少。为什么这么说？第一个原因，LLM执行任务非常快，快到人类无法比拟的程度了；第二个原因，LLM执行任务的成本极低，几乎相当于没有成本。</p>
+<p>但我们遇到的问题在最初往往并不是LLM可以直接解决的问题，因此我们要把问题转化为一个个LLM可以执行的最小单元。这考验了一个人思考问题、拆解问题和描述问题的能力，而显而易见的结论就是，这种能力越强的人，与LLM协作的能力也越强。</p>
+<p>反过来，这其实也让我们每个人先专注于分析问题，而不是埋头就做。某种意义上来说，也算是反哺自身，让人去思考得更深入。</p>
+<p>那么，我可以抛出一个命题：<strong>与大模型协作的能力越强，这个人的工作能力就越强</strong>。就像上文说的，一个人只有能分析拆解好问题，才能更好地让LLM完成工作。巧合的是，你把前面这句话中的LLM换成同事、下属也是一样成立的。原先AI部的同事就和我说过，常带实习生，或者手下有几个人的技术骨干，往往用Copilot也特别顺手。</p>
+<p>在肉眼可见的未来，大家的工作中必定绕不开LLM，那么今早培养好自己相关的能力，可能也是条出路吧。</p>
+<h2 id="总结">总结</h2>
+<p>目前在工作和学习中，与大模型协作是非常常见的场景。</p>
+<p>LLM的工作成本低，工作速度快，因此很适合进行一些重复性强、严格控制输入输出的工作。</p>
+<p>LLM的语料资源丰富，能有效降低知识的学习门槛。</p>
+<p>未来，人的工作能力可能很大程度上取决于他和AI配合能力的高低。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>工作总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工作中印象最深刻的一件事</title>
+    <url>/2024/09/16/work/%E6%9D%82%E8%B0%88/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%8D%B0%E8%B1%A1%E6%9C%80%E6%B7%B1%E5%88%BB%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B/</url>
+    <content><![CDATA[<h2 id="技术之外的东西">技术之外的东西</h2>
+<p>如果是放在还没参加工作时，看到这个问题“你在项目中遇到过的印象最深刻的一件事”，我大概率就是：胡诌一个很难的技术问题，然后说这问题解决的过程有些困难，但是经过我艰苦卓绝地努力，还是完成了，最后觉得自己很有成就感巴拉巴拉……</p>
+<p>但是放到今天，再看这问题，我就倾向于带一些技术之外的东西进去。</p>
+<p>这能聊的就多了。</p>
+<p>比如有个不怎么开窍的实习生，怎么教都教不会，最后是我自己帮他写了代码。我反思之后，觉得自己带人的方式有些问题，从此之后就换了一种方式教人。如果实习生能力差，就选取一些时间上限制不那么多的任务；如果愿意挑战，就分一些预研性质的任务，让他产出方案。<br>
+这样能说的就多多了，我相信也是大部分面试官可以感同身受的。</p>
+<p>当然上面只是个例子，最主要的一点就是，我觉得和同事相处的方式、选取某种技术的决断、一些任务优先级的取舍，这些都可以是印象深刻的事情。对于这些事情，技术固然包含在其中，但提升了这些事难度的、给人深刻印象的，恰恰就是技术之外的东西。</p>
+<h2 id="印象最深的一件事">印象最深的一件事</h2>
+<p>然后就提到我自己参加工作后印象最深的一件事，应该就是写公司业务协议序列化框架的纯Java版本了。</p>
+<p>准确说起来，这块的代码我没有写多少。我主要是负责这个任务的分配、监督和技术指导，编码由组内的一个同事负责。</p>
+<p>前期预研时，阅读了Protobuf的源码，然后实现时是参考了C++的实现。</p>
+<p>简单来说，就是参考C++的代码，从Protobuf中找到对应的可用代码，然后移植到我们的框架中。</p>
+<p>包体的解析逻辑有大量的可用实现，但是Java对象属性的获取和设置的逻辑，我们是用Unsafe重新写了一遍。</p>
+<p>整个过程顺利得不可思议，原计划两个月的任务，最后一个月就完成了。</p>
+<p>但是问题就出在这个完成之后，我们发现还有一些性能优化的空间。</p>
+<p>这个同事有些钻牛角尖，希望能把整个代码重构，然后做性能优化。但是我组织了他。</p>
+<p>这就是我印象最深的地方了，我经过了取舍，决定把重构和优化的工作往后无限期推迟，让他先基于目前的版本给出详细的文档。</p>
+<p>我们大部分同事都不具备给项目收尾的能力，就是一个模块，写到什么程度，我们就应该停止迭代，转而发布正式版。</p>
+<p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
+<p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
+<p>这就是我从这件事情里学到的。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>工作总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我也是全栈</title>
+    <url>/2025/02/28/work/%E6%9D%82%E8%B0%88/%E6%88%91%E4%B9%9F%E6%98%AF%E5%85%A8%E6%A0%88/</url>
+    <content><![CDATA[<h2 id="经历">经历</h2>
+<p>如果说我是什么时候有这个想法，那我觉得最早应该要追溯到大一的时候了。</p>
+<p>当时刚入学，正在军训。我们有一次思想测验，当时年级里有同学搭了一个网站供我们考试。</p>
+<p>刚上大学的我对这操作惊为天人。</p>
+<p>后来从别人那了解到，这些东西在大二的时候基本都会教。</p>
+<p>可惜，事实是直到大三我都不知道他们是怎么搭建的这网站。</p>
+<p>接着就是实习，才开始对软件开发有了些概念。了解了前端、后端，各种开发语言，各种基础概念。也算是开始学以致用了。</p>
+<p>毕业之后，我开始工作。</p>
+<p>还记得上班的第一天，部门最大的领导过来有个谈话的环节。</p>
+<p>海航总问我们，你们有什么目标吗？</p>
+<p>没人回应。</p>
+<p>稍稍沉默之后，我鼓起勇气回答道：“我想做全栈。”</p>
+<p>我觉得这就是我开始有做全栈的决心的时候。</p>
+<p>时光飞逝，我不断加深着后端的技能。数据库，运维部署，监控，开发框架，缓存，流量治理，网络通讯，这些点在我工作的这些年里我也慢慢加深了解。</p>
+<p>唯独前端一直没什么进展。</p>
+<p>我一直就是维持在有个前端项目，可以在我本地运行起来的这么个程度。</p>
+<p>第一次转机出现在第二年年末，我去做低码平台的项目。</p>
+<p>当时前端资源紧缺，很多细节让前端来改实在是有些慢了。我就看了下vue2的语法，还有前端的基础入门，就上手改一下样式和bug之类的。</p>
+<p>当时算是有了个基本的了解，大概前端是怎么个运行逻辑是知道了。</p>
+<p>第二次转机出现在上研究生之后，我参与了一个学校的项目，主攻前端。得益于大模型的发展，学习速度非常快。</p>
+<p>再加上有cursor之类的编程工具协助，我很快就能独立开发出非常美观的前端界面了。</p>
+<p>当然我也是看了些课程，以便了解前端的基础语法。这里主要是ts和vue3不懂，看了下尚硅谷的b站课程。效率不是很高，但我觉着也算是懂了不少吧。</p>
+<p>上学之后也有些其他的经历，比如用python做数分的项目，尝试写了些微信小游戏和小程序。</p>
+<p>就我个人而言，我觉得自己确实也算是真正成为一个合格的全栈开发了。</p>
+<p>能独立完成前端、后端、移动端、数据库和运维部署的所有工作，作为打工人已经没什么太多可求的了。</p>
+<p>我有段时间的QQ签名改成了一人成军，意思就是形容全栈可以一个人完成所有的开发工作。</p>
+<p>写代码确实是很有意思的事情。</p>
+<p>接触的东西多了以后，我开始有个想法：软件开发的各类工具只是表象，底层有两个东西，一是技术思维，二是业务知识。</p>
+<p>技术思维有两种，一是直觉性的，看到一个东西就能反应过来应该怎么做，二是思考后得出的。</p>
+<p>变为全栈之后，对我的技术直觉有了显著的提升。大多数的功能或架构，都能说上几句话，或者是在短短的时间内了解和掌握了。</p>
+<p>我常常过于信任直觉性的思维，二忽视思考的结论，这是不对的。</p>
+<p>业务知识是对具体业务场景的了解。技术总是趋向于无限增长的，总想得到最优解。但业务不是，业务知识充斥着边界和特例。这些边界和特例会反过来限制技术，让技术在到达某个界限后，就趋向于停止。</p>
+<p>只有业务发展了，才会对技术有需求。否则技术发展更多的是一种学习研究性质的工作，不是用来解决具体问题的，没有落地的地方。</p>
+<p>技术应该有前瞻性，但不应该过度，否则会对其他的资源造成挤压。</p>
+<h2 id="前后的对比">前后的对比</h2>
+<p>然后再聊聊我学了前端之后的理解。</p>
+<p>前端我理解中更像是用代码在布设各种陷阱，设置好了之后等用户点击触发，再改变页面的逻辑。前端的数据来源之一是用户，用户在某个组件填写的内容，得直到点击发送按钮时才会用上。</p>
+<p>后端则是从收到请求之后，运行各种复杂逻辑进行计算。</p>
+<p>区别在于后端不需要布设多个组件进行组件的联动，后端收到的用户请求中就是所有的信息，其他信息得从数据库或其他持久化数据源用获取。后端更多的是数据的流转和计算。</p>
+<p>这其实解释了为什么前端总是响应式的，前端的回调逻辑远多于后端。</p>
+<h2 id="未来发展">未来发展</h2>
+<p>现在讲究大前端，会写web，适当学一下就能写移动端和桌面端。</p>
+<p>挺好笑的就是前端现在有点TS一统天下的味道了，而TS的语法总觉得和Java或者Python一个味道。</p>
+<p>或者说未来大家的编程语言都会变成越来越像吧。</p>
+<p>就像Java缺少了很多语法糖，而Python则充斥着各种语法糖，Go学了Python，也搞了很多类似的语法。</p>
+<p>现在Java 21出来了，也在往这方向靠。</p>
+<p>新时代的编程语言似乎在趋向于统一，都在往高级编程语言的方向进化。这也是这么多年来，无数程序员编码过程中的实践而产生的经验了。</p>
+<p>编程语言这东西没必要卡这么死，大家到最后其实都差不多。</p>
+<p>搞全栈不太好的地方就是样样都会，但很难样样都精通。以后可能最好还是走中间人或者管理的方向会比较好，毕竟啥都懂的人也是少数，要取长补短嘛。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>工作总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>秋招的总结</title>
+    <url>/2024/11/01/work/%E6%9D%82%E8%B0%88/%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="经历">经历</h2>
+<p>最开始是准备简历和找招聘信息，这部分就略过不谈。</p>
+<p>麻烦的还是面试的准备，前期刷了leetcode的hot100，然后搞了一份80字面试宝典一点点看。</p>
+<p>这些处理完已经到9月中旬了，这才慢慢投了一些厂子。</p>
+<p>到十月国庆假期之后，才有一些笔试邀请过来。这时候已经是第二批次的秋招了，说实话互联网大厂的希望不大。</p>
+<p>不过我也投了一个国企，还意外做了个行测。没怎么准备这种题目，说实话还是挺有意思的，感觉像智商测试。</p>
+<p>等了一个月，到十月末，是华为给了面试的机会。</p>
+<p>推荐人说粤港澳的面试安排有些混乱，想着在香港的同学线下跑去面试也不方便，也干脆给我安排走线上了。</p>
+<p>一面在下午4点。</p>
+<p>一开始是自我介绍，然后面试官挑项目经历问了些问题。</p>
+<p>问了JNI是什么，为什么项目要用到JNI。回答提了一下Java的特性，JNI的用法和原理。</p>
+<p>接着就继续从项目挑技术点问，中途话题被我带到了信创，就聊了不少信创的事情，感觉快变成纯聊天了。</p>
+<p>一面大概是被安排了要问基础的问题，聊了一会儿之后面试官一拐话题说要继续问基础。</p>
+<p>手撕挺简单的，给两个二进制字符串求和。这里我一边念题目一边说想法，然后再实现。</p>
+<p>调试的时候出了一个bug，我说了一句Java不能多值返回就是麻烦，听到面试官笑了。</p>
+<p>最后让我解释了一下调试时出现的问题原因，一面就结束了。</p>
+<p>二面延后到了6点。</p>
+<p>因为有些推迟了，面试官上来说直接做道题吧。</p>
+<p>是一道分割整数数组的题，要求分割成三个数组，顺序不能变，数组和依次增大。问有几种解法。</p>
+<p>还是一样，一边念题目一边说想法。写完面试官问了下几个优化的点。</p>
+<p>然后就开始问项目，应该是想了解应聘者的技术思维吧。每个技术都问了下为什么这么做，有没有优化空间。</p>
+<p>倒是都答上来了，有些比较复杂的回答就先把场景说明清楚。</p>
+<p>中间提了项目中一些比较新奇的技术点，面试官也挺感兴趣的，就聊了挺久。</p>
+<p>比较刁钻的就是问了下kafka有什么缺点。我一开始说不上来，就先扯了一句说它不信创，有些客户觉得可能影响项目的信创认证。然后才从技术角度回答了一下，主要是从不去中心化，对zk的强依赖（新版本用kraft去掉了），以及做消息防丢之后性能比较差这三个方面来说。</p>
+<p>二面也顺利结束。</p>
+<p>三面主管面是在9点。</p>
+<p>上来主管先道歉，说拖了这么久，我说没关系。</p>
+<p>跳过了项目拷打，主管说有工作经历相信技术上不会有问题。</p>
+<p>先问为什么要重新去深造，会不会在华为工作以后也因为深造而离职。说上了研究生之后就像泄了气的皮球，没什么继续读书的兴趣。</p>
+<p>接着问为什么选华为，我说我家里人都是花粉。面试官直接笑出声。</p>
+<p>然后比较正式地回答是聊了下之前工作时做信创的经历，比较认可华为云自下而上从硬件层开始做信创的方案，认为公司有意愿去做其他公司不敢做的事，愿意在基础产品上投入。</p>
+<p>举了个例子，之前在华为的服务器做压测，性能指标一直上不去。最后把JDK从openjdk换成华为的毕昇JDK，触发了软硬件协同，性能指标就一下子提上去了。</p>
+<p>最后是关于压力，让我举个抗压的例子。先举了一个，不满意，然后再举。我说我为了读研究生考了7次雅思，第6次的时候崩溃大哭，但是收拾好心情继续去考了，最后终于过了。面试官边笑边说可以了。</p>
+<p>反问环节，我说华为云内部是否很重视信创，给了肯定的回答。</p>
+<p>结束时主管说希望还能再见到我，心理有预感已经过了。</p>
+<p>晚上11点45准时收到面试的评价。</p>
+<p>总体来说面试体验挺好的，虽然有些小插曲，但华为的员工们态度都很不错。</p>
+<p>华为的面试之后，也就没有其他的面试流程了，秋招的拼搏阶段也算画上了句号。</p>
+<h2 id="复盘">复盘</h2>
+<p>如果要想一下还有什么能提高的，我觉得首先是自我介绍。</p>
+<p>我发现很难在一两分钟内把自己所做过的所有事情都讲明白，一方面是经历比较丰富，一方面也是自己挑不到重点。</p>
+<p>所以自我介绍还是得磨一磨，围绕项目把技术亮点重点说明，简单的经历就汇在一起用一句话带过。</p>
+<p>第二个是下次春招要提前投递，这次秋招吃了不少的亏，主要是没有提前进行投递，导致没赶上9月的一批岗位。</p>
+<p>最后是算法题，倒不是写不出来，就是我写得有点慢，这得再写一些题目才行。</p>
+<h2 id="杂谈">杂谈</h2>
+<p>仔细想想其实没面几家，算不上海投，算不上准备很充分，但大部分时候我也不就是这样轻轻松松就上了么。</p>
+<p>就我个人而言，找工作这事情目前还不是特别急的一件事，秋招主要也是想打打基础。这么想的话就算这次最终结果不尽人意，可能也是可以接受的吧。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>找工作</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>聊聊低时延</title>
+    <url>/2024/05/19/work/%E6%9D%82%E8%B0%88/%E8%81%8A%E8%81%8A%E4%BD%8E%E6%97%B6%E5%BB%B6/</url>
+    <content><![CDATA[<h2 id="关于开发语言">关于开发语言</h2>
+<p>市面上绝大多数低时延相关的产品，都会选择C++作为开发语言。不得不说，C++在处理这种场景有天然的优势，接近底层的好处就是可以做到硬件级别的优化。</p>
+<p>我们公司的消息总线就更为离谱了，全面使用C语言进行开发，性能快到极致。</p>
+<p>在Java这层，想利用硬件的优化，只能使用JNI的技术来调用C函数了。这会导致Java“一次编译处处运行”的能力不再生效，部署时要考虑的事情也会相应增多。</p>
+<p>话又说回来，为了解决不同场景下要加载不同JNI的问题，我也是专门写了一个JNI加载框架。</p>
+<p>同时，也经常会提到的一件事，就是Java的内存管理问题。JVM垃圾回收的随机性，会导致低时延业务可能随时中断，这是不可接受的。</p>
+<p>市面上，对于Java的GC，最好的解决方式是使用ZingJDK。可惜是商业收费的，一般用不了。</p>
+<h2 id="关于架构">关于架构</h2>
+<p>公司对于低时延场景，做的架构我觉得并没有特别优秀。或者说并没有到让人有眼前一亮的感觉的那种地步。</p>
+<p>我们的架构还是分了各种通道，把用户隔离到各个通道中。每个通道享有各自的CPU、线程以及内存数据库等信息。</p>
+<p>通道本质是个数据隔离。</p>
+<p>这种做法下，每个通道内的消息永远由一个线程来执行。那么这个通道内所有的操作，其实都可以做到无锁化了，因为自始至终都仅有一个线程进行读写操作。</p>
+<p>这种方式下，运行时扩容几乎就是不可能的事情。同时，也对数据的分布有了一定的要求，假如某一个通道的用户成交数量特别多，也会影响到整个系统的吞吐量。理想状态下，用户应该是均匀分布在各个通道的。</p>
+<h2 id="关于技术">关于技术</h2>
+<p>低时延的技术栈中，最重要的一点就是无锁化。有锁就快不起来。</p>
+<p>另外，内存技术也是挺重要的。Java就需要去操作堆外内存了，这确实是一般人接触不到的部分。</p>
+<p>我专门写了一个给开发者的文档放在了公司的仓库里，大概整理了一些技术要点。</p>
+<p>想了想，主要就三块：</p>
+<p>1、内存技术。包括堆内堆外，CPU缓存，GC调优等。</p>
+<p>2、序列化技术。包括Java对象的快速访问，协议编解码等。</p>
+<p>3、并发技术。包括原子操作、disruptor、无锁队列等。</p>
+<p>这些技术需要在构建低时延项目时时时刻刻关注，并写到代码中。</p>
+<p>当然还有一个，就是测试框架和性能分析工具。比如Arthus、JMH等，这些也是需要掌握的技术点。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>工作总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>路由权限问题导致的一次离奇Bug</title>
+    <url>/2025/03/21/work/%E6%9D%82%E8%B0%88/%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A6%BB%E5%A5%87Bug/</url>
+    <content><![CDATA[<h2 id="起因">起因</h2>
+<p>最近重新写了一个项目，本地运行时一直没什么问题，但是部署到服务器上时出现了打开前端页面一片空白的情况。</p>
+<img src="/2025/03/21/work/%E6%9D%82%E8%B0%88/%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A6%BB%E5%A5%87Bug/image-20250321191917050.png" class="" title="image-20250321191917050">
+<p>大概表现就是如图中的情况，打开控制台看到有三个请求，分别是获取index.html，获取js和css，但是响应中是一片空白。</p>
+<h2 id="环境">环境</h2>
+<p>部署是在校内的服务器，外网无法访问。</p>
+<p>前后端都部署在同一个服务器上，都使用docker构建镜像后部署。</p>
+<p>前端是在docker中进行打包，并且装了nginx来渲染页面。</p>
+<h2 id="排查">排查</h2>
+<h3 id="查看nginx配置">查看nginx配置</h3>
+<p>遇到这个情况，我第一反应是路由转发有问题，导致前端一直在请求什么东西卡死了。</p>
+<p>所以去翻了下nginx的配置，确实发现路由转发还写的是老的服务器。</p>
+<p>笑死，太简单了。</p>
+<p>修改config文件，git commit，git push，然后重新部署镜像。</p>
+<p>结果还是一模一样。</p>
+<p>看来并不是转发的问题。</p>
+<h3 id="查看nginx日志">查看nginx日志</h3>
+<p>没辙，只能去翻下docker日志。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker logs [container]</span><br></pre></td></tr></table></figure>
+<p>由于做了日志映射，nginx的日志会打印在docker的日志里。</p>
+<p>翻了下有一条报错，是没获取到logo文件。</p>
+<p>笑死，被我找到了。</p>
+<p>于是改了下logo的读取方式，保证能读到logo文件。</p>
+<p>git commit，git push，然后重新部署镜像。</p>
+<p>打开页面，发现还是不行。</p>
+<p>不信邪，再翻了下日志，已经没这个报错了。</p>
+<p>看来也不是logo文件读不到的问题。</p>
+<h3 id="查看docker脚本">查看docker脚本</h3>
+<p>再去看了下docker的脚本，可能是端口映射的问题。</p>
+<p>查看后发现也没什么问题。</p>
+<p>但是想了想，也许是网络问题，修改了启动命令，加上了<code>--network=host</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it --rm --network=host your_image curl http://localhost:8000</span><br></pre></td></tr></table></figure>
+<p>这样docker会直接使用宿主机的网络配置，也就是没有端口映射这一说了。</p>
+<p>某些情况下这样性能会好一些。</p>
+<p>但改了之后还是没解决。</p>
+<h3 id="查看docker内部文件">查看docker内部文件</h3>
+<p>在看看nginx的运行日志吧。</p>
+<p>先进入docker的镜像内部，这里用shell，因为镜像没装bash，不然用bash更方便些。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it [container] sh</span><br></pre></td></tr></table></figure>
+<p>找了下nginx的日志，发现没什么异常。</p>
+<p>再找了下前端的静态文件，也没看出来什么问题。</p>
+<p>不信邪，试试在docker内ping了一下后端，发现也能ping通。</p>
+<p>那看来网络是没什么问题了。</p>
+<h3 id="查看本地打包的文件">查看本地打包的文件</h3>
+<p>本地打包后的文件，我试着用serve来运行。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npx serve -s dist</span><br></pre></td></tr></table></figure>
+<p>运行后打开localhost，发现页面是正常的。</p>
+<p>看来本地文件没问题。</p>
+<h3 id="在服务器上打包">在服务器上打包</h3>
+<p>重新登录服务器，在服务器上用npx serve来运行后端的文件。</p>
+<p>提示没有npx。</p>
+<p>行吧，那先安装npm。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure>
+<p>再执行，说node版本太低，只有12。</p>
+<p>那再升级node。先装个nvm。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>然后让nvm生效。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source ~/.nvm/nvm.sh</span><br></pre></td></tr></table></figure>
+<p>最后nvm安装node 18，再切换到18。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvm install 18</span><br><span class="line">nvm use 18</span><br></pre></td></tr></table></figure>
+<p>用node的命令查了下，确实是18了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<p>终于完事，再用npx serve启动。</p>
+<p>发现打开是404。</p>
+<p>？？？</p>
+<p>看了下是服务器上没build后的静态文件。</p>
+<p>行，那先安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>在本地用浏览器打开，居然也是一片空白。</p>
+<p>？？？</p>
+<p>至少复现了是吧。</p>
+<p>看来不是网络问题，就是前端打包后的静态文件有问题。</p>
+<p>脑袋里面灵光一闪，重新在本地起了下前端，这次不用localhost，用本机的IP来访问。</p>
+<p>发现也是空白。</p>
+<p>这下在本地复现了。</p>
+<h3 id="询问AI">询问AI</h3>
+<p>成功复现至少是成功了90%。</p>
+<p>目前看下来，关键点在与用localhost能正常访问，而使用其他的IP则不行。</p>
+<p>问了下AI，可能是什么原因。</p>
+<p>提示说可能是cros，也可能是使用的命令不对，还有可能是防火墙问题。</p>
+<p>都试了下，还是没解决问题。</p>
+<h3 id="回退版本">回退版本</h3>
+<p>最后无奈之下，开始回退版本。</p>
+<p>用git命令回退到之前的版本，看看是哪个提交导致了目前的问题。</p>
+<p>首先回退到之前改了logo的那次提交，发现不行。</p>
+<p>再回退到这个提交的前一个。</p>
+<p>启动，居然正常显示了？</p>
+<p>ok，锁定是这个提交的改动有问题。</p>
+<p>于是逐个逐个回退文件的改动。</p>
+<p>回退到修改主页重定向的时候，页面正常显示了。</p>
+<p>好，找到问题了。</p>
+<h2 id="修复">修复</h2>
+<p>分析一下，是路由守卫和主页重定向有冲突。</p>
+<p>当时让未登录的用户会重定向到一个文档管理页面，而这个文档管理页面被路由守卫了，需要用户进行登录才可访问。</p>
+<p>一来一去，死循环了，于是页面就卡死了。</p>
+<p>那么为什么用localhost可以正常访问？</p>
+<p>因为有浏览器缓存，会保持用户的登录状态。而其他的路由没有缓存，需要重新登录，于是就会进入死循环。</p>
+<p>修改了这个逻辑，添加了一个未登录也可访问的落地页，让用户先在这个页面登录。</p>
+<p>修改后重新构建，已经能正常渲染了。</p>
+<h2 id="结论">结论</h2>
+<p>重新看下来，debug的过程就是要对整个部署流程、前端渲染过程有一定的了解。</p>
+<p>我还是有些依赖个人的经验，导致我直接从最大可能的地方入手，进行排查。</p>
+<p>当然也确实一下子就找到了一个问题（虽然和最终的问题无关）。</p>
+<p>但仔细想想，主要也是对前端不熟悉，很多时候就缺少了些验证手段。</p>
+<p>这次都是现査工具现用的。</p>
+<p>不过这样解决问题，才能让人有所成长吧？</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Netty的FastThreadLocal带来了什么？</title>
+    <url>/2024/09/13/work/java/Netty%E7%9A%84FastThreadLocal%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/</url>
+    <content><![CDATA[<h2 id="和Netty的缘分">和Netty的缘分</h2>
+<p>要聊能力前，先聊聊我和Netty的缘分。</p>
+<p>最初接触Netty，是在一个和它完全不相关的项目。需求是要基于C++同事提供的网络通讯中间件写一个Java的网络通讯框架，有人实现了第一版，随后就由我接手了这框架。</p>
+<p>在那个时候就有人告诉我，整个系统链路的性能瓶颈是在这个网络通讯框架上。</p>
+<p>不过在当时也是才疏学浅，一开始定位方向就错了。我在那时候是觉得这框架卡在了服务端的处理上，使用了BIO而不是NIO的方式进行通讯，造成大量的线程空转，以致于拉低了吞吐量。</p>
+<p>接着就开始研究NIO，也就自然而然地学习了Reactor，以及Netty。</p>
+<p>得益于公司提供的极客时间企业会员，我在极客时间上把Netty的课程学了一遍，然后就慢慢了解了Netty的使用方式以及一些实现细节。</p>
+<p>但学完之后却是完全没用上。直到后来做行情客户端、做公司业务协议的服务器时，才用上这部分知识。</p>
+<p>最后，更是把Netty的能力拆分，用到了我自己写的交易框架上。</p>
+<h2 id="FastThreadLocal快在哪？">FastThreadLocal快在哪？</h2>
+<p>聊一个技术，总是得聊聊实现。</p>
+<p>先说结论：<code>FastThreadLocal</code>比起JDK自带的<code>ThreadLocal</code>，少了一次Hash的计算，这就是它快的地方。</p>
+<p>然后再来聊聊其中的实现。</p>
+<p>JDK自带的<code>ThreadLocal</code>，为了做线程隔离，是在每个线程中都创建了一个Hash表。</p>
+<p>这个Hash表的Key是<code>ThreadLocal</code>对象，Value是具体的值。</p>
+<p>它的get()过程是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、从Thread对象的hash表中获取当前ThreadLocal对应的Object并返回</span><br></pre></td></tr></table></figure>
+<p>在从hash表获取Object的过程中，不可避免会有一次hash计算。</p>
+<p>而<code>FastThreadLocal</code>则不一样。Netty创建了一个<code>FastThreadLocalThread</code>，继承JDK的<code>Thread</code>类，使用一个<code>Object[]</code>替换了其中的Hash表。</p>
+<p>核心思路就是，创建<code>FastThreadLocal</code>对象时，给其分配一个全局的ID（或者说index）。<br>
+这样的话，它的get()过程就可以优化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、Thread.currentThread()获取到当前线程</span><br><span class="line">2、检查当前线程是不是FastThreadLocalThread，是的话走fastGet();否则走JDK原生的get()</span><br><span class="line">3、fastGet()会从FastThreadLocalThread的Object[]，通过创建FastThreadLocal获得的全局ID，直接用数组随机访问的方式获取值</span><br></pre></td></tr></table></figure>
+<p>从结果上看，一个hash表取值的过程就优化为了数组随机访问，这就是最大的提升。</p>
+<h2 id="带来了什么？">带来了什么？</h2>
+<p>终于讲到重点了。<br>
+FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时间优化到了一次数组随机访问的时间。从时间上看，大约是4-10ns的操作优化为了小于1ns的操作。</p>
+<p>这带来了一些影响：<br>
+1、线程级别的资源，可以自行回收而不依赖JVM的GC。比如Netty中有一个工具类，存储着ArrayList和StringBuilder之类的对象，这些对象都存放于FastThreadLocal中。每次使用时，不需要new，而是从工具类中获取当前线程之前使用过的对象，使用完毕后手动清空这些对象即可。<br>
+2、在1的基础上，构建了Recycler，以及ObjectPool。这些是Netty中Pooled的Buffer的最核心实现。</p>
+<p>也就是说，线程级别的资源访问成本变低了，而线程数量又可控的情况下，我们可以把某些资源每个线程都分配一个。</p>
+<p>同时，在线程自己的视角，所有的资源都只被当前线程使用，线程安全，不需要做任何并发安全的编码，有效提升性能。</p>
+<p>虽然运行时的内存占用上去了，但是不会有更多的垃圾对象产生，这就让JVM的GC压力变得特别小。</p>
+<h2 id="感想">感想</h2>
+<p>Netty不愧是Java编程的教科书，这个FastThreadLocal在我看来，几乎是Java编程思想的集大成之作，完美发挥了Java的长处，尽可能避免了其短处。<br>
+我虽然工作中已经有使用Netty，但我觉得更底层的细节其实我还是不太清楚。<br>
+不谈FastThreadLocal，Netty还有很多优秀的实现值得参考，比如它的’0拷贝’、堆外内存的池化和回收机制。这值得我继续深入研究。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>工作总结</tag>
       </tags>
   </entry>
   <entry>
@@ -1508,6 +1916,101 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
       </categories>
       <tags>
         <tag>优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>聊聊管理</title>
+    <url>/2024/04/29/work/%E6%9D%82%E8%B0%88/%E8%81%8A%E8%81%8A%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<h2 id="经历">经历</h2>
+<p>从我工作以来，我一直在和管理打交道。</p>
+<p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
+<p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p>
+<p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p>
+<p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p>
+<p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p>
+<p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p>
+<p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p>
+<p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p>
+<h2 id="领导力的来源是什么？">领导力的来源是什么？</h2>
+<p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p>
+<p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p>
+<p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p>
+<p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p>
+<p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p>
+<p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p>
+<p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Unsafe的使用记录</title>
+    <url>/2024/01/07/work/java/Unsafe%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="什么是Unsafe">什么是Unsafe</h2>
+<p><code>sun.misc.Unsafe</code>是sun包下的一个类。它的类注释如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A collection of methods for performing low-level, unsafe operations.</span><br><span class="line"> * Although the class and all methods are public, use of this class is</span><br><span class="line"> * limited because only trusted code can obtain instances of it.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> * @see #getUnsafe</span><br><span class="line"> */</span><br><span class="line">public final class Unsafe &#123;</span><br></pre></td></tr></table></figure>
+<p>可见，这个类过于底层，至少Java的开发者本身是不希望其他人使用这个类的。</p>
+<p>为何如此？</p>
+<p>我想，最大的原因，就是Java本身是一种内存安全的语言。由于JVM的兜底机制，Java程序很少出现程序崩溃之类的问题。但是Unsafe提供的方法不同，正如其类名所述，它的方法都是“Unsafe”的，使用不当可能会导致程序崩溃。</p>
+<p>可事实上，Unsafe更像是一个语言开发者留给自己的后门，看JDK中的源码，我们不难发现它其实被Jdk中的包广泛使用。更有甚者，在很多知名开源项目中，也会利用Unsafe类的能力来提高程序的性能。</p>
+<h2 id="使用Unsafe">使用Unsafe</h2>
+<p>在程序中使用Unsafe，目前只能通过反射的方式来获取。这是因为Unsafe类添加了<code>@CallerSensitive</code>注解，只有特定类加载器加载的类可以使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">  public static Unsafe getUnsafe() &#123;</span><br><span class="line">      Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">      if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">          throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">      return theUnsafe;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>但是也不麻烦，我们可以使用如下代码获取到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static final Unsafe UNSAFE = reflectGetUnsafe();</span><br><span class="line"></span><br><span class="line">private static Unsafe reflectGetUnsafe() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Field field = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line">        return (Unsafe) field.get(null);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过一定要注意，不同版本的Unsafe类有不同的实现！使用前还是要谨慎。</p>
+<h2 id="内存操作">内存操作</h2>
+<p>要说Unsafe提供最大的能力，就是内存操作了。</p>
+<p>C++程序中，我们可以申请一段内存，然后往里边设置数据，再把内存的指针传递给其他方法使用，最后释放内存。</p>
+<p>这种操作在Java中，对应的就是创建一个对象，然后往对象里设置值，把对象传递给其他类的方法使用，最后交由JVM回收对象。</p>
+<p>显然，Java是不能直接操作内存的，但是通过Unsafe类，我们可以做到这种能力。但同时，这也意味着内存管理的职责从JVM转移到了程序员自身，如果申请了内存没有释放，就会造成内存泄漏（OOM）。</p>
+<p>那么我们看一下实际怎么操作内存：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 使用unsafe分配内存</span><br><span class="line">long addr = UNSAFE.allocateMemory(4);</span><br><span class="line">// 往内存块设置一个int类型数据</span><br><span class="line">UNSAFE.putInt(addr, 18);</span><br><span class="line">// 从内存块获取一个int类型数据</span><br><span class="line">UNSAFE.getInt(addr);</span><br><span class="line">// 调整大小</span><br><span class="line">UNSAFE.reallocateMemory(8)</span><br><span class="line">// 释放内存</span><br><span class="line">UNSAFE.freeMemory(addr);</span><br></pre></td></tr></table></figure>
+<p>这种操作，几乎和C++程序是一致的了。</p>
+<p>设置数据和获取数据的操作在Unsafe类中每种基础类型都已提供对应方法，这里就不再赘述。</p>
+<p>当然还有最关键的copyMemory方法，可以从Java的数组对象之间，或者Java的数组对象与内存块之间拷贝数据。</p>
+<p>不过需要注意的是：从内存块到Bean对象的拷贝是不被允许的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Sets all bytes in a given block of memory to a copy of another</span><br><span class="line"> * block.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method determines each block&#x27;s base address by means of two parameters,</span><br><span class="line"> * and so it provides (in effect) a &lt;em&gt;double-register&lt;/em&gt; addressing mode,</span><br><span class="line"> * as discussed in &#123;@link #getInt(Object,long)&#125;.  When the object reference is null,</span><br><span class="line"> * the offset supplies an absolute base address.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The transfers are in coherent (atomic) units of a size determined</span><br><span class="line"> * by the address and length parameters.  If the effective addresses and</span><br><span class="line"> * length are all even modulo 8, the transfer takes place in &#x27;long&#x27; units.</span><br><span class="line"> * If the effective addresses and length are (resp.) even modulo 4 or 2,</span><br><span class="line"> * the transfer takes place in units of &#x27;int&#x27; or &#x27;short&#x27;.</span><br><span class="line"> *</span><br><span class="line"> * @since 1.7</span><br><span class="line"> */</span><br><span class="line">public native void copyMemory(Object srcBase, long srcOffset,</span><br><span class="line">                              Object destBase, long destOffset,</span><br><span class="line">                              long bytes);</span><br></pre></td></tr></table></figure>
+<h2 id="对象操作">对象操作</h2>
+<p>接着是对象操作，使用反射和Unsafe，可以极快地获取对象中的字段信息。</p>
+<p>不过需要注意，这种操作会绕过字段的各种限制，相当于是直接从对象的内存块上取数据。这种操作很方便，但完全违反了面向对象的原则。</p>
+<p>首先来看一个Java对象的内存结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OFFSET  SIZE               TYPE DESCRIPTION                               VALUE</span><br><span class="line">     0     4                    (object header)                           01 00 00 00 </span><br><span class="line">     4     4                    (object header)                           00 00 00 00 </span><br><span class="line">     8     4                    (object header)                           18 0a 06 00 </span><br><span class="line">    12     4                int User.age                                  0</span><br><span class="line">    16     4   java.lang.String User.name                                 null</span><br><span class="line">    20     4   java.lang.String User.name1                                null</span><br><span class="line">    24     4   java.lang.String User.name2                                null</span><br><span class="line">    28     4   java.lang.String User.name3                                null</span><br><span class="line">    32     4   java.lang.String User.name4                                null</span><br><span class="line">    36     4   java.lang.String User.name5                                null</span><br><span class="line">    40     4   java.lang.String User.name6                                null</span><br><span class="line">    44     4   java.lang.String User.name7                                null</span><br><span class="line">    48     4   java.lang.String User.name8                                null</span><br><span class="line">    52     4   java.lang.String User.name9                                null</span><br><span class="line">    56     4   java.lang.String User.name10                               null</span><br><span class="line">    60     4   java.lang.String User.name11                               null</span><br><span class="line">    64     4   java.lang.String User.name12                               null</span><br><span class="line">    68     4   java.lang.String User.name13                               null</span><br><span class="line">    72     4   java.lang.String User.name14                               null</span><br><span class="line">    76     4   java.lang.String User.name15                               null</span><br><span class="line">    80     4   java.lang.String User.name16                               null</span><br><span class="line">    84     4   java.lang.String User.name17                               null</span><br><span class="line">    88     4   java.lang.String User.name18                               null</span><br><span class="line">    92     4                    (loss due to the next object alignment)</span><br></pre></td></tr></table></figure>
+<p>一个Java对象，有12字节长的对象头。基础类型会直接存放在对象中，引用类型存放的是对象的引用（4字节）。</p>
+<p>基础类型在各种处理上都有明显的优势，这里也可以理解为什么性能敏感的项目并不推荐使用包装类型。包装类型在对象中的存储方式就是引用类型，和String、BigDecimal是一样的，在存取效率和使用效率上会有明显的差异。</p>
+<p>Unsafe提供的第一种能力，就是直接通过offset的方式，从对象中获取数据。</p>
+<p>下面看下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) throws NoSuchFieldException &#123;</span><br><span class="line">        User user = new User();</span><br><span class="line">        // 使用unsafe的api获取字段的偏移量，需要通过反射来获取字段的Field对象</span><br><span class="line">        Field age = User.class.getDeclaredField(&quot;age&quot;);</span><br><span class="line">        long ageAddr = UNSAFE.objectFieldOffset(age);</span><br><span class="line">        // 设置时把对象的偏移量传入</span><br><span class="line">        UNSAFE.putInt(user, ageAddr, 10);</span><br><span class="line">        // 取出时也是通过偏移量</span><br><span class="line">        UNSAFE.getInt(user, ageAddr);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，类型操作是个重点。如果使用错误的api来获取对象数据，很可能出现程序崩溃的异常！这也是为什么这个类称之为Unsafe的原因，使用不当极有可能导致程序崩溃。正常的Java程序是内存安全的。</p>
+<p>上述方法在获取和设置对象的字段信息时，绕过了方法区和对象的字段范围限制。显然，这也脱离了面向对象的思维。</p>
+<p>另外，还提供了绕过构造器创建对象的方法。原理上就是直接划分一个对应大小内存块。这里就不多提了。</p>
+<h2 id="CAS操作">CAS操作</h2>
+<p>CAS操作不多解释，Java的Concurrent包下的AtomicInteger这些原子操作都是通过Unsafe的CAS相关API进行操作。ConcurrentHashMap也是使用到了此类操作。</p>
+<p>下面简单看一个api：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span><br><span class="line"> * holding &lt;tt&gt;expected&lt;/tt&gt;.</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if successful</span><br><span class="line"> */</span><br><span class="line">public final native boolean compareAndSwapObject(Object o, long offset,</span><br><span class="line">                                                 Object expected,</span><br><span class="line">                                                 Object x);</span><br></pre></td></tr></table></figure>
+<p>比较并替换，设置之前比较数据是否是和预期是一致的，设置之后比较数据是否和设置的数据是一致的。</p>
+<p>这种方式能在无锁的情况下进行并发操作，性能会非常高。</p>
+<p>类似的还有比较并递增，但是它的实现会有些区别：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Atomically adds the given value to the current value of a field</span><br><span class="line"> * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span><br><span class="line"> * at the given &lt;code&gt;offset&lt;/code&gt;.</span><br><span class="line"> *</span><br><span class="line"> * @param o object/array to update the field/element in</span><br><span class="line"> * @param offset field/element offset</span><br><span class="line"> * @param delta the value to add</span><br><span class="line"> * @return the previous value</span><br><span class="line"> * @since 1.8</span><br><span class="line"> */</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到是个do while的循环，实现了一个自旋操作来保证数据的递增操作是原子的。这就是AtomicInteger中所使用的方法。</p>
+<h2 id="版本支持">版本支持</h2>
+<p>还是要额外提一下关于Unsafe的版本支持问题。</p>
+<p>其实随着JDK版本的更新，确实有部分方法被取消了。但同时，有更多的方法被添加到了Unsafe类中。</p>
+<p>目前测试了Unsafe的jdk17和21版本，这两个版本都可以正常使用Unsafe。而本文提到的这些api，在这两个高级版本中都是可以正常使用，并且不需要其他任何配置或代码改动的。</p>
+<h2 id="总结">总结</h2>
+<p>本文简单说明了Unsafe的内存操作、对象操作和CAS操作。其实Unsafe的api中还包含了关于对于静态字段的处理、线程的操作（比如park），这些操作实际很少使用，目前就先不提。</p>
+<p>目前在工作中，使用到的主要还是内存和对象的操作，用来提升序列化和反序列化的速度。</p>
+<p>Unsafe说是不安全操作，但其实在JDK中是广泛使用。如果希望提升程序的性能，该用就用，毕竟Java开源生态中有大把大把的开源软件也在使用这个类。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>性能调优</tag>
       </tags>
   </entry>
   <entry>
@@ -1806,6 +2309,136 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
       </tags>
   </entry>
   <entry>
+    <title>面试笔记-网络协议</title>
+    <url>/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h3 id="HTTP响应码">HTTP响应码</h3>
+<p>200 - 成功</p>
+<p>301 - 永久重定向    302 - 临时重定向</p>
+<p>4开头是客户端问题</p>
+<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
+<p>5开头是服务器问题</p>
+<p>500 - 服务器崩了  504 - badgateway</p>
+<h3 id="Forward和Redirect">Forward和Redirect</h3>
+<p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
+<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
+<h3 id="GET和POST">GET和POST</h3>
+<p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
+<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
+<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
+<h3 id="TCP和UDP">TCP和UDP</h3>
+<p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
+<p>UDP无连接，不可靠，传输性能高</p>
+<p>TCP是点对点，UDP支持广播</p>
+<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
+<h3 id="HTTP和HTTPS">HTTP和HTTPS</h3>
+<p>HTTP用80端口，HTTPS用443</p>
+<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
+<h3 id="HTTP、TCP和Socket">HTTP、TCP和Socket</h3>
+<p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
+<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
+<p>HTTP是应用层的协议，基于TCP来实现</p>
+<p>TCP是网络层协议</p>
+<h3 id="HTTP的长连接和短连接">HTTP的长连接和短连接</h3>
+<p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
+<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
+<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
+<h3 id="TCP三次握手">TCP三次握手</h3>
+<p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
+<p>第一次：客户端-&gt;服务端，syn=1，seq=x</p>
+<p>第二次：服务端-&gt;客户端，syn=1，seq=y，ack=x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
+<p>第三次：客户端-&gt;服务端，seq=x+1, ack=y+1。告知服务端，你发送的消息我也能收到。</p>
+<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
+<h3 id="TCP四次挥手">TCP四次挥手</h3>
+<p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
+<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
+<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
+<h3 id="TCP粘包">TCP粘包</h3>
+<p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
+<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
+<p>TCP的分包是由滑动窗口来控制的。</p>
+<p>解决方式，都是在应用的协议层解决：</p>
+<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
+<p>2、把协议固定长度，所有协议包的长度都一致。</p>
+<p>3、特殊分隔符号。</p>
+<h3 id="TCP可靠性">TCP可靠性</h3>
+<p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
+<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
+<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
+<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
+<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
+<h3 id="OSI七层模型">OSI七层模型</h3>
+<p>应用层：HTTP、FTP</p>
+<p>表示层：加解密</p>
+<p>会话层：RPC</p>
+<p>传输层：TCP、UDP</p>
+<p>网络层：IP、IPv6</p>
+<p>数据链路层：物理寻址层。交换机等</p>
+<p>物理层：硬件</p>
+<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
+<h3 id="浏览器输入一个网址后发生了什么">浏览器输入一个网址后发生了什么</h3>
+<p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
+<p>2、建立TCP连接</p>
+<p>3、发送HTTP的GET请求</p>
+<p>4、请求经过路由器转发到服务器</p>
+<p>5、服务器处理请求，返回网页文件（HTML）</p>
+<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
+<h3 id="如何跨域">如何跨域</h3>
+<p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
+<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
+<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
+<h3 id="HTTP-1-0-1-1-2-0-3-0">HTTP 1.0 1.1 2.0 3.0</h3>
+<p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
+<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
+<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
+<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
+<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
+<h3 id="HTTP与TCP-IP">HTTP与TCP/IP</h3>
+<p>HTTP是应用层的报文协议，一般数据传输是用TCP/IP实现。</p>
+<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
+<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
+<h3 id="HTTP长连接短连接">HTTP长连接短连接</h3>
+<p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
+<h3 id="长连接和短连接的优缺点">长连接和短连接的优缺点</h3>
+<p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
+<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
+<h3 id="域名解析过程">域名解析过程</h3>
+<p>从开销最小的地方开始找，没有就去更远的地方找。</p>
+<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
+<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
+<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
+<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JRE环境使用Arthas</title>
+    <url>/2024/09/20/work/tips/JRE%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8Arthas/</url>
+    <content><![CDATA[<h2 id="场景">场景</h2>
+<p>实际工作中常遇到一种情况，线上环境出现异常，但是环境安装的是JRE。</p>
+<p>JRE环境下没有了JDK提供的各类工具，根本无法排查问题。如果重装JDK，那么同时也得重启项目，而项目一旦重启，问题的环境就已经丢失，下一次再遇到同样的问题就可遇不可求了。</p>
+<h2 id="解决方案">解决方案</h2>
+<p>使用轻量级的程序附加工具jattach可以做到将Arthas的Jar包attach到特定的进程上。</p>
+<p>网上有类似的解析。最关键的一点是Arthas只需要将一个jar附加到JVM中就可以运行了。</p>
+<p>这里提供一个脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 获取当前脚本所在的目录</span><br><span class="line">script_dir=$(cd &quot;$(dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot;)&quot; &amp;&amp; pwd)</span><br><span class="line"></span><br><span class="line"># 用户输入进程ID</span><br><span class="line">read -p &quot;请输入进程ID: &quot; pid</span><br><span class="line"></span><br><span class="line"># 用户输入可选参数host，提供默认值</span><br><span class="line">read -p &quot;请输入主机地址和端口号（格式：IP 端口，默认为 127.0.0.1 3658）: &quot; host</span><br><span class="line">host=$&#123;host:-&quot;127.0.0.1 3658&quot;&#125;</span><br><span class="line"></span><br><span class="line"># 检查当前目录下是否存在jattach文件</span><br><span class="line">if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">  # 查找以jattach-linux开头的tgz压缩包</span><br><span class="line">  jattach_tgz=$(find &quot;$script_dir&quot; -maxdepth 1 -type f -name &quot;jattach-linux-*.tgz&quot;)</span><br><span class="line"></span><br><span class="line">  if [[ -z &quot;$jattach_tgz&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到名为jattach的文件或符合条件的jattach-linux-*.tgz压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 判断系统架构</span><br><span class="line">  system_arch=$(uname -m)</span><br><span class="line">  case $system_arch in</span><br><span class="line">    &quot;aarch64&quot;|&quot;arm64&quot;)</span><br><span class="line">      arch=&quot;arm64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-arm64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    &quot;x86_64&quot;|&quot;amd64&quot;)</span><br><span class="line">      arch=&quot;x64&quot;</span><br><span class="line">      jattach_file=&quot;jattach-linux-x64.tgz&quot;</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;当前系统架构不支持自动解压jattach工具。&quot;</span><br><span class="line">      exit 1</span><br><span class="line">  esac</span><br><span class="line"></span><br><span class="line">  # 检查对应的jattach压缩包是否存在</span><br><span class="line">  if [[ ! -f &quot;$script_dir/$jattach_file&quot; ]]; then</span><br><span class="line">    echo &quot;当前目录下未找到与系统架构匹配的$jattach_file压缩包。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  # 解压缩对应架构的jattach工具到当前脚本目录，并使用绝对路径</span><br><span class="line">  tar -xzvf &quot;$script_dir/$jattach_file&quot; -C &quot;$script_dir&quot;</span><br><span class="line"></span><br><span class="line">  # 检查解压后jattach是否成功生成</span><br><span class="line">  if [[ ! -e &quot;$script_dir/jattach&quot; ]]; then</span><br><span class="line">    echo &quot;解压失败或未能在当前目录找到解压后的jattach文件。&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>最关键的就是脚本中最后的两句</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用jattach命令加载arthas-agent.jar，使用绝对路径</span><br><span class="line">&quot;$script_dir/jattach&quot; $pid load instrument false &quot;$script_dir/arthas-agent.jar&quot; &amp;&amp; \</span><br><span class="line"></span><br><span class="line"># 运行arthas客户端，同样使用绝对路径</span><br><span class="line">java -jar &quot;$script_dir/arthas-client.jar&quot; $host</span><br></pre></td></tr></table></figure>
+<p>这其实是一个命令，分成了两行。第一个命令是将<code>arthas-agent.jar</code>加载到某个pid的程序中，第二个命令是运行arthas的界面。</p>
+<p>脚本提供了自动安装jattach的能力，只需要将jattach的安装包与此脚本方式在arthas的目录内，然后运行此脚本即可。</p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>优秀实践</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面试笔记-数据库</title>
     <url>/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[<h2 id="知识点">知识点</h2>
@@ -1951,479 +2584,6 @@ FastThreadLocal把访问线程本地变量的时间，从一次hash计算的时�
       </categories>
       <tags>
         <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面试笔记-网络协议</title>
-    <url>/2024/10/14/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<h3 id="HTTP响应码">HTTP响应码</h3>
-<p>200 - 成功</p>
-<p>301 - 永久重定向    302 - 临时重定向</p>
-<p>4开头是客户端问题</p>
-<p>400 - 客户端请求有问题  404 - 找不到对应资源，url错了</p>
-<p>5开头是服务器问题</p>
-<p>500 - 服务器崩了  504 - badgateway</p>
-<h3 id="Forward和Redirect">Forward和Redirect</h3>
-<p>Forward是服务器把请求转发给其他服务器或应用处理，处理完原路返回给客户端</p>
-<p>Redirect是服务器直接返回指令，让客户端重新请求其他服务器 （去买牛肉，到店了发现店面贴着告示，说牛肉店搬到另一条街了，所以要去新的地址买）</p>
-<h3 id="GET和POST">GET和POST</h3>
-<p>用途不同，GET用来获取资源，POST用来提交数据，体现在浏览器的标签只能收藏GET请求，不能收藏POST请求</p>
-<p>参数：GET一般把参数直接拼在URL，POST在消息头或消息体</p>
-<p>编码：GET和URL一致，POST无所谓，编码按照约定来</p>
-<h3 id="TCP和UDP">TCP和UDP</h3>
-<p>TCP先建立连接才能通讯，可靠，传输性能一般</p>
-<p>UDP无连接，不可靠，传输性能高</p>
-<p>TCP是点对点，UDP支持广播</p>
-<p>但UDP也不是绝对不可靠，HTTP3的底层换成了QUIC协议，是基于UDP实现的</p>
-<h3 id="HTTP和HTTPS">HTTP和HTTPS</h3>
-<p>HTTP用80端口，HTTPS用443</p>
-<p>HTTPS多了加密，有性能开销，且加密证书需要额外购买</p>
-<h3 id="HTTP、TCP和Socket">HTTP、TCP和Socket</h3>
-<p>Socket是网络协议的API，由应用层的程序或编程语言提供</p>
-<p>用Socket可以实现一个HTTP协议的客户端或服务端</p>
-<p>HTTP是应用层的协议，基于TCP来实现</p>
-<p>TCP是网络层协议</p>
-<h3 id="HTTP的长连接和短连接">HTTP的长连接和短连接</h3>
-<p>本质是TCP的长连接和短连接。消息头里有个字段是keep-alive，如果为true，则一次请求后之前建立的TCP连接还会保留，不会进行四次挥手，下次再有请求就复用这个连接。</p>
-<p>在同一个客户端会有大量访问的情况下能提升性能，但是对服务器的连接数有要求。所以有了NIO，比如Netty，能支持大量的客户端连接。</p>
-<p>保持长连接的时间由服务端进行控制。tomcat有配置。</p>
-<h3 id="TCP三次握手">TCP三次握手</h3>
-<p>服务端在某个端口开启监听，客户端通过ip+port向服务器发起连接请求。</p>
-<p>第一次：客户端-&gt;服务端，syn=1，seq=x</p>
-<p>第二次：服务端-&gt;客户端，syn=1，seq=y，ack=x+1。第二次表示客户端到服务端的链路已经通了，这时候要验证服务端到客户端的链路是否通。</p>
-<p>第三次：客户端-&gt;服务端，seq=x+1, ack=y+1。告知服务端，你发送的消息我也能收到。</p>
-<p>为什么要三次：因为是双工通讯，要确认消息序号的起始值。</p>
-<h3 id="TCP四次挥手">TCP四次挥手</h3>
-<p>主动断开的一方，发送FIN，告知不再发送消息；对端接收到，返回ack；</p>
-<p>此时对端还可以发送消息，因为对端可能还有消息没传完。</p>
-<p>对端传完之后对端发送FIN，告知不再发送消息；主动断开的一方返回ack，连接彻底断开。</p>
-<h3 id="TCP粘包">TCP粘包</h3>
-<p>本质是因为TCP是传输字节流，字节流是没有边界概念的。</p>
-<p>包的概念是怎么来的？字节流实际在TCP传输的过程中是会分成多个数据包依次传输，这里的数据包切割方式和上层应用无关，因此这些数据包很可能和上层应用的协议包对不上。比如上层应用发了两个请求，但是底层会划分为3个数据包来传输。</p>
-<p>TCP的分包是由滑动窗口来控制的。</p>
-<p>解决方式，都是在应用的协议层解决：</p>
-<p>1、最常用，在协议包里定义协议头，协议头是固定格式的，在协议头里再定义一个协议体长度的变量。HTTP等协议都是如此。</p>
-<p>2、把协议固定长度，所有协议包的长度都一致。</p>
-<p>3、特殊分隔符号。</p>
-<h3 id="TCP可靠性">TCP可靠性</h3>
-<p>最重要的就是序列号和确认号（ack）：包里带seq，接收端检测包的完整性，完整则返回ack。</p>
-<p>超时重传：发送端发了包以后开始计时，如果一定时间内没收到ack，则重传。</p>
-<p>重排序：多个数据包在传输过程中可能乱序，tcp收到后对数据包重排序，保证上层读取的字节流是和发送端传的一致。</p>
-<p>丢弃重复包：比如超时重传等情况会造成重复包，tcp会丢弃这些重复的。</p>
-<p>流量控制：滑动窗口来控制流量，避免发送过快接收端无法处理。（行情客户端遇到过）</p>
-<h3 id="OSI七层模型">OSI七层模型</h3>
-<p>应用层：HTTP、FTP</p>
-<p>表示层：加解密</p>
-<p>会话层：RPC</p>
-<p>传输层：TCP、UDP</p>
-<p>网络层：IP、IPv6</p>
-<p>数据链路层：物理寻址层。交换机等</p>
-<p>物理层：硬件</p>
-<p>各种RPC框架一般是涵盖了会话层以下的所有能力，业务框架可能还会涵盖表示层。</p>
-<h3 id="浏览器输入一个网址后发生了什么">浏览器输入一个网址后发生了什么</h3>
-<p>1、域名-&gt;IP的转换，会经过浏览器缓存、系统缓存、hosts配置文件、路由器缓存，搜索域名对应的服务器。</p>
-<p>2、建立TCP连接</p>
-<p>3、发送HTTP的GET请求</p>
-<p>4、请求经过路由器转发到服务器</p>
-<p>5、服务器处理请求，返回网页文件（HTML）</p>
-<p>6、浏览器渲染html（渲染过程中执行了js，可能产生新的HTTP请求）</p>
-<h3 id="如何跨域">如何跨域</h3>
-<p>浏览器执行js的时候，如果产生新的HTTP请求，且新的请求和当前网址不一致，则发生了跨域，会被拒绝。</p>
-<p>CORS可以，但是需要服务器和浏览器都支持才行。</p>
-<p>使用NGINX反向代理，浏览器不用做任何支持，更合适。原理也是CORS，只是在nginx这一层改了请求。</p>
-<h3 id="HTTP-1-0-1-1-2-0-3-0">HTTP 1.0 1.1 2.0 3.0</h3>
-<p>1.0是无状态无连接，也就是每次请求都建立一次tcp连接。</p>
-<p>1.1添加了connection:keep-alive，可以建立长连接。但是要求服务器必须对应所有请求的顺序返回响应。</p>
-<p>2.0 添加了数据流，gRPC有使用。服务器可以并行传输数据，因为每个流有自己的streamid和序号。但所有流用的是一个TCP连接。</p>
-<p>2.0 还做了头部压缩，通过让服务器和客户端都缓存请求头的field表来实现。</p>
-<p>3.0 底层使用QUIC，不再使用TCP，QUIC是基于UDP实现的。在UDP上实现了TCP的可靠传输能力。</p>
-<h3 id="HTTP与TCP-IP">HTTP与TCP/IP</h3>
-<p>HTTP是应用层的报文协议，一般数据传输是用TCP/IP实现。</p>
-<p>TCP传输的是字节流，没有对包的格式做要求。在此基础上，HTTP定义了请求包的格式。</p>
-<p>理论上可以把HTTP的包用其他传输协议来发送。</p>
-<h3 id="HTTP长连接短连接">HTTP长连接短连接</h3>
-<p>本质是TCP的长连接和短连接。HTTP的1.1定义了Connection:keep-alive的请求头字段，避免每次请求都要三次握手和四次挥手。</p>
-<h3 id="长连接和短连接的优缺点">长连接和短连接的优缺点</h3>
-<p>长连接对于活跃的客户端，能减少连接和断连的成本。但是客户端一多，服务器资源比较浪费，可以用NIO来避免这个问题，一个线程处理多个TCP连接。</p>
-<p>短连接对服务端的管理比较简单，但是qps上去之后在连接和断连上会浪费很多时间和带宽。</p>
-<h3 id="域名解析过程">域名解析过程</h3>
-<p>从开销最小的地方开始找，没有就去更远的地方找。</p>
-<p>1、本机：浏览器缓存、操作系统缓存、hosts文件，</p>
-<p>2、本地配置的DNS服务器，可能是学校、企业的，如果缓存中有，直接返回。</p>
-<p>3、本地配置的DNS服务器没有，则其会向更高的根域名服务器查询，获得对应的权威域名服务器地址，然后再请求权威域名服务器获得IP。获得IP后，本地的DNS服务器会返回给本机，并缓存该域名，下一次再查询就直接从本地的DNS服务器可以查到。</p>
-<p>4、浏览器、操作系统也可能会缓存这个域名。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>大模型技术到底带来了什么</title>
-    <url>/2024/10/19/work/%E6%9D%82%E8%B0%88/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%88%B0%E5%BA%95%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<h2 id="正文">正文</h2>
-<p>时间到2024年，以LLM为首的AI热潮似乎开始冷却。但是工具已经开始普及，大部分人已经开始尝试和AI一起工作。</p>
-<p>我首先想提的是国内大模型的水平。目前接触下来，国产的AI在下限方面基本已经满足了我们的日常生活需要。也就是说，平时一些简单的任务已经可以让AI去完成，大部分问题都能收到一个令人满意的回答。对于大部分人的日常工作来说，已经足够。</p>
-<p>如果要用一个角色来形容AI目前的水平，我觉得是一个知识面很广，能力很强，在经过适当调教能很好地完成任务的实习生。</p>
-<p>这其实已经对我的日常工作方式有相当强烈地冲击了。举例来说，平日有些费时费力的总结报告，现在可以让AI来填写。一些技术文档全篇很长，而我需要知道的又只是其中的一个小点，那就可以让AI快速阅读之后我对其提问来获取答案。这种场景下，我的需求和问题都很明确，答案也有现成的，只是让AI在特定范围内进行一个快速的搜索，像是把LLM当做一个非常强大的搜索引擎，这种时候就非常好用。</p>
-<p>还有种场景是内容的格式改写，比如数据改写为JSON格式。人工做很费力，但是AI能听懂指令快速生成结果。这就很好用。</p>
-<p>那么工作的重点就变了。以前我的重点是把任务人工完成，要出力；现在我的重点是理清思路，转化为AI可以完成的任务，然后让AI先做一遍，我再检查一遍。这种思路确实就和分配任务给实习生是一样的。</p>
-<p>所以，这就引出了LLM最适合的工作场景之一：<strong>重复性的、有明确工作规范和成果验收的工作</strong>。</p>
-<p>另外，与AI协作的时候，很多人会感觉自己的能力也提高了。有一种场景，比如需要写一些自己平时不擅长的代码，像是后端程序员刚开始接触一门新的语言。这时候程序员可能是知道要做什么，但是苦于不知道怎么实现，因此需要一些额外的时间去学习。有了AI之后，这个学习成本降低了非常多，并且没有让人排斥的搜寻资料的过程。很多时候，我们要做的就是打开LLM输入界面，然后写出需求，等到LLM的回答，然后开始干活。得益于技术水平的提高，现在的LLM基本都很聪明，它们的回答大多数时候都是有用的。</p>
-<p>感觉自己能力的提高后，会让人变得自信，然后就愿意去做一些以前不能做的事情。</p>
-<p>但究其根本，不是人的能力提高了，而是<strong>学习的成本降低</strong>了。</p>
-<p>这就是LLM最适合的第二个工作场景：<strong>快速让人在一个知识领域达到入门水平</strong>。</p>
-<p>经过一些调教，我相信LLM在教育这方面大有可为。</p>
-<p>然后我就要提GitHub Copilot。作为代码提示工具，有了LLM加持后，它聪明得让人欣喜。有人评价是，有了Copilot之后，编码的方式就变成了：写好注释，写好框架代码，然后停下来，等待Copilot填充。这确实是我的真实写照。</p>
-<p>我觉得这就是大模型带来的最大影响：<strong>评价一个问题的难易程度，是取决于它有多少的部分能被LLM执行</strong>。</p>
-<p>在一个任务中，我们总是倾向于让LLM做更多，而自己做更少。为什么这么说？第一个原因，LLM执行任务非常快，快到人类无法比拟的程度了；第二个原因，LLM执行任务的成本极低，几乎相当于没有成本。</p>
-<p>但我们遇到的问题在最初往往并不是LLM可以直接解决的问题，因此我们要把问题转化为一个个LLM可以执行的最小单元。这考验了一个人思考问题、拆解问题和描述问题的能力，而显而易见的结论就是，这种能力越强的人，与LLM协作的能力也越强。</p>
-<p>反过来，这其实也让我们每个人先专注于分析问题，而不是埋头就做。某种意义上来说，也算是反哺自身，让人去思考得更深入。</p>
-<p>那么，我可以抛出一个命题：<strong>与大模型协作的能力越强，这个人的工作能力就越强</strong>。就像上文说的，一个人只有能分析拆解好问题，才能更好地让LLM完成工作。巧合的是，你把前面这句话中的LLM换成同事、下属也是一样成立的。原先AI部的同事就和我说过，常带实习生，或者手下有几个人的技术骨干，往往用Copilot也特别顺手。</p>
-<p>在肉眼可见的未来，大家的工作中必定绕不开LLM，那么今早培养好自己相关的能力，可能也是条出路吧。</p>
-<h2 id="总结">总结</h2>
-<p>目前在工作和学习中，与大模型协作是非常常见的场景。</p>
-<p>LLM的工作成本低，工作速度快，因此很适合进行一些重复性强、严格控制输入输出的工作。</p>
-<p>LLM的语料资源丰富，能有效降低知识的学习门槛。</p>
-<p>未来，人的工作能力可能很大程度上取决于他和AI配合能力的高低。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>工作总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工作中印象最深刻的一件事</title>
-    <url>/2024/09/16/work/%E6%9D%82%E8%B0%88/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%8D%B0%E8%B1%A1%E6%9C%80%E6%B7%B1%E5%88%BB%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B/</url>
-    <content><![CDATA[<h2 id="技术之外的东西">技术之外的东西</h2>
-<p>如果是放在还没参加工作时，看到这个问题“你在项目中遇到过的印象最深刻的一件事”，我大概率就是：胡诌一个很难的技术问题，然后说这问题解决的过程有些困难，但是经过我艰苦卓绝地努力，还是完成了，最后觉得自己很有成就感巴拉巴拉……</p>
-<p>但是放到今天，再看这问题，我就倾向于带一些技术之外的东西进去。</p>
-<p>这能聊的就多了。</p>
-<p>比如有个不怎么开窍的实习生，怎么教都教不会，最后是我自己帮他写了代码。我反思之后，觉得自己带人的方式有些问题，从此之后就换了一种方式教人。如果实习生能力差，就选取一些时间上限制不那么多的任务；如果愿意挑战，就分一些预研性质的任务，让他产出方案。<br>
-这样能说的就多多了，我相信也是大部分面试官可以感同身受的。</p>
-<p>当然上面只是个例子，最主要的一点就是，我觉得和同事相处的方式、选取某种技术的决断、一些任务优先级的取舍，这些都可以是印象深刻的事情。对于这些事情，技术固然包含在其中，但提升了这些事难度的、给人深刻印象的，恰恰就是技术之外的东西。</p>
-<h2 id="印象最深的一件事">印象最深的一件事</h2>
-<p>然后就提到我自己参加工作后印象最深的一件事，应该就是写公司业务协议序列化框架的纯Java版本了。</p>
-<p>准确说起来，这块的代码我没有写多少。我主要是负责这个任务的分配、监督和技术指导，编码由组内的一个同事负责。</p>
-<p>前期预研时，阅读了Protobuf的源码，然后实现时是参考了C++的实现。</p>
-<p>简单来说，就是参考C++的代码，从Protobuf中找到对应的可用代码，然后移植到我们的框架中。</p>
-<p>包体的解析逻辑有大量的可用实现，但是Java对象属性的获取和设置的逻辑，我们是用Unsafe重新写了一遍。</p>
-<p>整个过程顺利得不可思议，原计划两个月的任务，最后一个月就完成了。</p>
-<p>但是问题就出在这个完成之后，我们发现还有一些性能优化的空间。</p>
-<p>这个同事有些钻牛角尖，希望能把整个代码重构，然后做性能优化。但是我组织了他。</p>
-<p>这就是我印象最深的地方了，我经过了取舍，决定把重构和优化的工作往后无限期推迟，让他先基于目前的版本给出详细的文档。</p>
-<p>我们大部分同事都不具备给项目收尾的能力，就是一个模块，写到什么程度，我们就应该停止迭代，转而发布正式版。</p>
-<p>这个界定是有些困难的，作为开发者，你永远不会满意，永远会觉得还有优化空间。</p>
-<p>但工作都是由优先级的，我们只能接受不完美的现实，把有限的精力投入更高优先级的事项中去。</p>
-<p>这就是我从这件事情里学到的。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>工作总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我也是全栈</title>
-    <url>/2025/02/28/work/%E6%9D%82%E8%B0%88/%E6%88%91%E4%B9%9F%E6%98%AF%E5%85%A8%E6%A0%88/</url>
-    <content><![CDATA[<h2 id="经历">经历</h2>
-<p>如果说我是什么时候有这个想法，那我觉得最早应该要追溯到大一的时候了。</p>
-<p>当时刚入学，正在军训。我们有一次思想测验，当时年级里有同学搭了一个网站供我们考试。</p>
-<p>刚上大学的我对这操作惊为天人。</p>
-<p>后来从别人那了解到，这些东西在大二的时候基本都会教。</p>
-<p>可惜，事实是直到大三我都不知道他们是怎么搭建的这网站。</p>
-<p>接着就是实习，才开始对软件开发有了些概念。了解了前端、后端，各种开发语言，各种基础概念。也算是开始学以致用了。</p>
-<p>毕业之后，我开始工作。</p>
-<p>还记得上班的第一天，部门最大的领导过来有个谈话的环节。</p>
-<p>海航总问我们，你们有什么目标吗？</p>
-<p>没人回应。</p>
-<p>稍稍沉默之后，我鼓起勇气回答道：“我想做全栈。”</p>
-<p>我觉得这就是我开始有做全栈的决心的时候。</p>
-<p>时光飞逝，我不断加深着后端的技能。数据库，运维部署，监控，开发框架，缓存，流量治理，网络通讯，这些点在我工作的这些年里我也慢慢加深了解。</p>
-<p>唯独前端一直没什么进展。</p>
-<p>我一直就是维持在有个前端项目，可以在我本地运行起来的这么个程度。</p>
-<p>第一次转机出现在第二年年末，我去做低码平台的项目。</p>
-<p>当时前端资源紧缺，很多细节让前端来改实在是有些慢了。我就看了下vue2的语法，还有前端的基础入门，就上手改一下样式和bug之类的。</p>
-<p>当时算是有了个基本的了解，大概前端是怎么个运行逻辑是知道了。</p>
-<p>第二次转机出现在上研究生之后，我参与了一个学校的项目，主攻前端。得益于大模型的发展，学习速度非常快。</p>
-<p>再加上有cursor之类的编程工具协助，我很快就能独立开发出非常美观的前端界面了。</p>
-<p>当然我也是看了些课程，以便了解前端的基础语法。这里主要是ts和vue3不懂，看了下尚硅谷的b站课程。效率不是很高，但我觉着也算是懂了不少吧。</p>
-<p>上学之后也有些其他的经历，比如用python做数分的项目，尝试写了些微信小游戏和小程序。</p>
-<p>就我个人而言，我觉得自己确实也算是真正成为一个合格的全栈开发了。</p>
-<p>能独立完成前端、后端、移动端、数据库和运维部署的所有工作，作为打工人已经没什么太多可求的了。</p>
-<p>我有段时间的QQ签名改成了一人成军，意思就是形容全栈可以一个人完成所有的开发工作。</p>
-<p>写代码确实是很有意思的事情。</p>
-<p>接触的东西多了以后，我开始有个想法：软件开发的各类工具只是表象，底层有两个东西，一是技术思维，二是业务知识。</p>
-<p>技术思维有两种，一是直觉性的，看到一个东西就能反应过来应该怎么做，二是思考后得出的。</p>
-<p>变为全栈之后，对我的技术直觉有了显著的提升。大多数的功能或架构，都能说上几句话，或者是在短短的时间内了解和掌握了。</p>
-<p>我常常过于信任直觉性的思维，二忽视思考的结论，这是不对的。</p>
-<p>业务知识是对具体业务场景的了解。技术总是趋向于无限增长的，总想得到最优解。但业务不是，业务知识充斥着边界和特例。这些边界和特例会反过来限制技术，让技术在到达某个界限后，就趋向于停止。</p>
-<p>只有业务发展了，才会对技术有需求。否则技术发展更多的是一种学习研究性质的工作，不是用来解决具体问题的，没有落地的地方。</p>
-<p>技术应该有前瞻性，但不应该过度，否则会对其他的资源造成挤压。</p>
-<h2 id="前后的对比">前后的对比</h2>
-<p>然后再聊聊我学了前端之后的理解。</p>
-<p>前端我理解中更像是用代码在布设各种陷阱，设置好了之后等用户点击触发，再改变页面的逻辑。前端的数据来源之一是用户，用户在某个组件填写的内容，得直到点击发送按钮时才会用上。</p>
-<p>后端则是从收到请求之后，运行各种复杂逻辑进行计算。</p>
-<p>区别在于后端不需要布设多个组件进行组件的联动，后端收到的用户请求中就是所有的信息，其他信息得从数据库或其他持久化数据源用获取。后端更多的是数据的流转和计算。</p>
-<p>这其实解释了为什么前端总是响应式的，前端的回调逻辑远多于后端。</p>
-<h2 id="未来发展">未来发展</h2>
-<p>现在讲究大前端，会写web，适当学一下就能写移动端和桌面端。</p>
-<p>挺好笑的就是前端现在有点TS一统天下的味道了，而TS的语法总觉得和Java或者Python一个味道。</p>
-<p>或者说未来大家的编程语言都会变成越来越像吧。</p>
-<p>就像Java缺少了很多语法糖，而Python则充斥着各种语法糖，Go学了Python，也搞了很多类似的语法。</p>
-<p>现在Java 21出来了，也在往这方向靠。</p>
-<p>新时代的编程语言似乎在趋向于统一，都在往高级编程语言的方向进化。这也是这么多年来，无数程序员编码过程中的实践而产生的经验了。</p>
-<p>编程语言这东西没必要卡这么死，大家到最后其实都差不多。</p>
-<p>搞全栈不太好的地方就是样样都会，但很难样样都精通。以后可能最好还是走中间人或者管理的方向会比较好，毕竟啥都懂的人也是少数，要取长补短嘛。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>工作总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>秋招的总结</title>
-    <url>/2024/11/01/work/%E6%9D%82%E8%B0%88/%E7%A7%8B%E6%8B%9B%E7%9A%84%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="经历">经历</h2>
-<p>最开始是准备简历和找招聘信息，这部分就略过不谈。</p>
-<p>麻烦的还是面试的准备，前期刷了leetcode的hot100，然后搞了一份80字面试宝典一点点看。</p>
-<p>这些处理完已经到9月中旬了，这才慢慢投了一些厂子。</p>
-<p>到十月国庆假期之后，才有一些笔试邀请过来。这时候已经是第二批次的秋招了，说实话互联网大厂的希望不大。</p>
-<p>不过我也投了一个国企，还意外做了个行测。没怎么准备这种题目，说实话还是挺有意思的，感觉像智商测试。</p>
-<p>等了一个月，到十月末，是华为给了面试的机会。</p>
-<p>推荐人说粤港澳的面试安排有些混乱，想着在香港的同学线下跑去面试也不方便，也干脆给我安排走线上了。</p>
-<p>一面在下午4点。</p>
-<p>一开始是自我介绍，然后面试官挑项目经历问了些问题。</p>
-<p>问了JNI是什么，为什么项目要用到JNI。回答提了一下Java的特性，JNI的用法和原理。</p>
-<p>接着就继续从项目挑技术点问，中途话题被我带到了信创，就聊了不少信创的事情，感觉快变成纯聊天了。</p>
-<p>一面大概是被安排了要问基础的问题，聊了一会儿之后面试官一拐话题说要继续问基础。</p>
-<p>手撕挺简单的，给两个二进制字符串求和。这里我一边念题目一边说想法，然后再实现。</p>
-<p>调试的时候出了一个bug，我说了一句Java不能多值返回就是麻烦，听到面试官笑了。</p>
-<p>最后让我解释了一下调试时出现的问题原因，一面就结束了。</p>
-<p>二面延后到了6点。</p>
-<p>因为有些推迟了，面试官上来说直接做道题吧。</p>
-<p>是一道分割整数数组的题，要求分割成三个数组，顺序不能变，数组和依次增大。问有几种解法。</p>
-<p>还是一样，一边念题目一边说想法。写完面试官问了下几个优化的点。</p>
-<p>然后就开始问项目，应该是想了解应聘者的技术思维吧。每个技术都问了下为什么这么做，有没有优化空间。</p>
-<p>倒是都答上来了，有些比较复杂的回答就先把场景说明清楚。</p>
-<p>中间提了项目中一些比较新奇的技术点，面试官也挺感兴趣的，就聊了挺久。</p>
-<p>比较刁钻的就是问了下kafka有什么缺点。我一开始说不上来，就先扯了一句说它不信创，有些客户觉得可能影响项目的信创认证。然后才从技术角度回答了一下，主要是从不去中心化，对zk的强依赖（新版本用kraft去掉了），以及做消息防丢之后性能比较差这三个方面来说。</p>
-<p>二面也顺利结束。</p>
-<p>三面主管面是在9点。</p>
-<p>上来主管先道歉，说拖了这么久，我说没关系。</p>
-<p>跳过了项目拷打，主管说有工作经历相信技术上不会有问题。</p>
-<p>先问为什么要重新去深造，会不会在华为工作以后也因为深造而离职。说上了研究生之后就像泄了气的皮球，没什么继续读书的兴趣。</p>
-<p>接着问为什么选华为，我说我家里人都是花粉。面试官直接笑出声。</p>
-<p>然后比较正式地回答是聊了下之前工作时做信创的经历，比较认可华为云自下而上从硬件层开始做信创的方案，认为公司有意愿去做其他公司不敢做的事，愿意在基础产品上投入。</p>
-<p>举了个例子，之前在华为的服务器做压测，性能指标一直上不去。最后把JDK从openjdk换成华为的毕昇JDK，触发了软硬件协同，性能指标就一下子提上去了。</p>
-<p>最后是关于压力，让我举个抗压的例子。先举了一个，不满意，然后再举。我说我为了读研究生考了7次雅思，第6次的时候崩溃大哭，但是收拾好心情继续去考了，最后终于过了。面试官边笑边说可以了。</p>
-<p>反问环节，我说华为云内部是否很重视信创，给了肯定的回答。</p>
-<p>结束时主管说希望还能再见到我，心理有预感已经过了。</p>
-<p>晚上11点45准时收到面试的评价。</p>
-<p>总体来说面试体验挺好的，虽然有些小插曲，但华为的员工们态度都很不错。</p>
-<p>华为的面试之后，也就没有其他的面试流程了，秋招的拼搏阶段也算画上了句号。</p>
-<h2 id="复盘">复盘</h2>
-<p>如果要想一下还有什么能提高的，我觉得首先是自我介绍。</p>
-<p>我发现很难在一两分钟内把自己所做过的所有事情都讲明白，一方面是经历比较丰富，一方面也是自己挑不到重点。</p>
-<p>所以自我介绍还是得磨一磨，围绕项目把技术亮点重点说明，简单的经历就汇在一起用一句话带过。</p>
-<p>第二个是下次春招要提前投递，这次秋招吃了不少的亏，主要是没有提前进行投递，导致没赶上9月的一批岗位。</p>
-<p>最后是算法题，倒不是写不出来，就是我写得有点慢，这得再写一些题目才行。</p>
-<h2 id="杂谈">杂谈</h2>
-<p>仔细想想其实没面几家，算不上海投，算不上准备很充分，但大部分时候我也不就是这样轻轻松松就上了么。</p>
-<p>就我个人而言，找工作这事情目前还不是特别急的一件事，秋招主要也是想打打基础。这么想的话就算这次最终结果不尽人意，可能也是可以接受的吧。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>找工作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>聊聊低时延</title>
-    <url>/2024/05/19/work/%E6%9D%82%E8%B0%88/%E8%81%8A%E8%81%8A%E4%BD%8E%E6%97%B6%E5%BB%B6/</url>
-    <content><![CDATA[<h2 id="关于开发语言">关于开发语言</h2>
-<p>市面上绝大多数低时延相关的产品，都会选择C++作为开发语言。不得不说，C++在处理这种场景有天然的优势，接近底层的好处就是可以做到硬件级别的优化。</p>
-<p>我们公司的消息总线就更为离谱了，全面使用C语言进行开发，性能快到极致。</p>
-<p>在Java这层，想利用硬件的优化，只能使用JNI的技术来调用C函数了。这会导致Java“一次编译处处运行”的能力不再生效，部署时要考虑的事情也会相应增多。</p>
-<p>话又说回来，为了解决不同场景下要加载不同JNI的问题，我也是专门写了一个JNI加载框架。</p>
-<p>同时，也经常会提到的一件事，就是Java的内存管理问题。JVM垃圾回收的随机性，会导致低时延业务可能随时中断，这是不可接受的。</p>
-<p>市面上，对于Java的GC，最好的解决方式是使用ZingJDK。可惜是商业收费的，一般用不了。</p>
-<h2 id="关于架构">关于架构</h2>
-<p>公司对于低时延场景，做的架构我觉得并没有特别优秀。或者说并没有到让人有眼前一亮的感觉的那种地步。</p>
-<p>我们的架构还是分了各种通道，把用户隔离到各个通道中。每个通道享有各自的CPU、线程以及内存数据库等信息。</p>
-<p>通道本质是个数据隔离。</p>
-<p>这种做法下，每个通道内的消息永远由一个线程来执行。那么这个通道内所有的操作，其实都可以做到无锁化了，因为自始至终都仅有一个线程进行读写操作。</p>
-<p>这种方式下，运行时扩容几乎就是不可能的事情。同时，也对数据的分布有了一定的要求，假如某一个通道的用户成交数量特别多，也会影响到整个系统的吞吐量。理想状态下，用户应该是均匀分布在各个通道的。</p>
-<h2 id="关于技术">关于技术</h2>
-<p>低时延的技术栈中，最重要的一点就是无锁化。有锁就快不起来。</p>
-<p>另外，内存技术也是挺重要的。Java就需要去操作堆外内存了，这确实是一般人接触不到的部分。</p>
-<p>我专门写了一个给开发者的文档放在了公司的仓库里，大概整理了一些技术要点。</p>
-<p>想了想，主要就三块：</p>
-<p>1、内存技术。包括堆内堆外，CPU缓存，GC调优等。</p>
-<p>2、序列化技术。包括Java对象的快速访问，协议编解码等。</p>
-<p>3、并发技术。包括原子操作、disruptor、无锁队列等。</p>
-<p>这些技术需要在构建低时延项目时时时刻刻关注，并写到代码中。</p>
-<p>当然还有一个，就是测试框架和性能分析工具。比如Arthus、JMH等，这些也是需要掌握的技术点。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>工作总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>聊聊管理</title>
-    <url>/2024/04/29/work/%E6%9D%82%E8%B0%88/%E8%81%8A%E8%81%8A%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<h2 id="经历">经历</h2>
-<p>从我工作以来，我一直在和管理打交道。</p>
-<p>最初入职的时候，听了很多培训课。这些培训课上大多会教学一些工作方式，比如敏捷开发；也会教一些项目管理的基础知识。听了这些培训课，我对管理有了一些初步的认识，但那时候还没想太多。</p>
-<p>接着是参加工作的第一年，大概知道了程序员以后要么转型技术管理，要么走技术专家的路线。</p>
-<p>也是参加工作的第一年，在基本熟悉了工作内容后，领导很直接地分给了我一个大任务，要我去负责开发平台。作为平台的责任人，免不了向上汇报和向下管理。但是当时的情况下，向下也就一个实习生，另外就是一个专门做Java插件开发的程序员。这要谈管理，也管不上什么东西，但确实需要我作为中间人，去分配任务，监控进度了。</p>
-<p>再往后是开发平台一期结束，开始规划低码平台，也就是二期的开发平台，这正好是我参加工作的第二年。低码平台用的是敏捷开发，我作为被管理的一方，参与了到里面。到这时候才算是正式入了管理的门。敏捷开发的节奏很快，每天都有明确的任务需求，这难免会让人感到压力巨大；不过工作的充实感很足，每天不需要迷茫，能充分发挥每个人的能力。这份经历对我影响很大。</p>
-<p>第三年的时候，我开始鼓捣底层框架。低时延的技术也是这时候开始由我负责。不过很有趣的是，到这一年，反而没人到我手下工作了，我光杆司令一个。我一个人挑起了低时延组件的大梁，平时基本就是自己规划工作内容，自己写日报，最后定期和上级领导汇报进度。这段时间工作强度明显加大，也参加到了业务的第一线。</p>
-<p>最后终于也是突破了底线，让我去了业务现场做支持。持续了六周，等我23年国庆后回到深圳，恍惚间觉得自己和还在公司里的这些同事有了天差地别。</p>
-<p>有了在业务第一线的经历，我也终于名正言顺地升上了部门副经理。24年，考虑到我今年会离职去留学，领导分了三个同事到我手下，一方面是分担我的工作，另一方面是把我之前的工作成果沉淀下来，免得后面无人能维护我的代码。</p>
-<p>而这时候，我也算正式升到管理岗，一方面要负责开发的工作，另一方面也需要管控工作进度，还要考虑下属的能力培养。慢慢的也有了一些自己的心得。</p>
-<h2 id="领导力的来源是什么？">领导力的来源是什么？</h2>
-<p>我觉得这是个很现实的问题。这里的领导力，就是你说的话到底算不算数，算几分数。</p>
-<p>大多数时候，职级就是最现实的领导力来源。高职级的人能管控下属的绩效考评，就是等同于给了一定的权利来发布命令、指导工作。下属会倾向于获得更高的绩效来听取命令。</p>
-<p>第二，我觉得是责任的承担问题。如果一个项目有负责人，那么他下属的所有行为他都要担责。而下属也会在听取命令时，想着：反正出问题了最后负责的不是我，就能一定程度上为自己开脱。</p>
-<p>第三，是领导的个人能力。如果说领导能提出建设性意见，这是最能服众的一种手段了。下属遇到困难无法解决，而领导能上手解决问题，或是提供指导，这种类似师徒的观念，在中国人的心目中是最有效的建立上下级的方式。</p>
-<p>第四，在于下级自身。人都有性格，有些人性格上认真负责，那么就应该给予重用，或者是通过言语的方式提供一定的鼓励或其他情绪价值；有些人怕事，内向，那么就应该做好思想工作，或是通过流程制度、团队建设的方式是来将其融入团队内部；有些人不负责，或是能力不够，应当给予批评，并指名改进的方向，屡教不改的，应该移出团队。</p>
-<p>对于最后一种人，若是因为有复杂情况不能处理的，应该坦诚说明情况。不可因为此人影响到整体。这类人过多，则领导自己应该考虑跑路。</p>
-<p>总体来说，要有领导力，首先应该有一定的技术水平，这是基础。水平高，则多多举行技术沙龙、代码评审、方案评审等，能服众，也能培养团队；水平低，则和技术骨干搞好关系，虚心听取意见，也是可以的。其次，要摆平心态，即不干扰下属工作，保持距离感；也要适度检查进度，施加压力。最后，是要鼓励和批评并举，好的要夸，坏的要批，保持自己的原则，让他人从心底里服从。</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>管理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>路由权限问题导致的一次离奇Bug</title>
-    <url>/2025/03/21/work/%E6%9D%82%E8%B0%88/%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A6%BB%E5%A5%87Bug/</url>
-    <content><![CDATA[<h2 id="起因">起因</h2>
-<p>最近重新写了一个项目，本地运行时一直没什么问题，但是部署到服务器上时出现了打开前端页面一片空白的情况。</p>
-<img src="/2025/03/21/work/%E6%9D%82%E8%B0%88/%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A6%BB%E5%A5%87Bug/image-20250321191917050.png" class="" title="image-20250321191917050">
-<p>大概表现就是如图中的情况，打开控制台看到有三个请求，分别是获取index.html，获取js和css，但是响应中是一片空白。</p>
-<h2 id="环境">环境</h2>
-<p>部署是在校内的服务器，外网无法访问。</p>
-<p>前后端都部署在同一个服务器上，都使用docker构建镜像后部署。</p>
-<p>前端是在docker中进行打包，并且装了nginx来渲染页面。</p>
-<h2 id="排查">排查</h2>
-<h3 id="查看nginx配置">查看nginx配置</h3>
-<p>遇到这个情况，我第一反应是路由转发有问题，导致前端一直在请求什么东西卡死了。</p>
-<p>所以去翻了下nginx的配置，确实发现路由转发还写的是老的服务器。</p>
-<p>笑死，太简单了。</p>
-<p>修改config文件，git commit，git push，然后重新部署镜像。</p>
-<p>结果还是一模一样。</p>
-<p>看来并不是转发的问题。</p>
-<h3 id="查看nginx日志">查看nginx日志</h3>
-<p>没辙，只能去翻下docker日志。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker logs [container]</span><br></pre></td></tr></table></figure>
-<p>由于做了日志映射，nginx的日志会打印在docker的日志里。</p>
-<p>翻了下有一条报错，是没获取到logo文件。</p>
-<p>笑死，被我找到了。</p>
-<p>于是改了下logo的读取方式，保证能读到logo文件。</p>
-<p>git commit，git push，然后重新部署镜像。</p>
-<p>打开页面，发现还是不行。</p>
-<p>不信邪，再翻了下日志，已经没这个报错了。</p>
-<p>看来也不是logo文件读不到的问题。</p>
-<h3 id="查看docker脚本">查看docker脚本</h3>
-<p>再去看了下docker的脚本，可能是端口映射的问题。</p>
-<p>查看后发现也没什么问题。</p>
-<p>但是想了想，也许是网络问题，修改了启动命令，加上了<code>--network=host</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it --rm --network=host your_image curl http://localhost:8000</span><br></pre></td></tr></table></figure>
-<p>这样docker会直接使用宿主机的网络配置，也就是没有端口映射这一说了。</p>
-<p>某些情况下这样性能会好一些。</p>
-<p>但改了之后还是没解决。</p>
-<h3 id="查看docker内部文件">查看docker内部文件</h3>
-<p>在看看nginx的运行日志吧。</p>
-<p>先进入docker的镜像内部，这里用shell，因为镜像没装bash，不然用bash更方便些。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it [container] sh</span><br></pre></td></tr></table></figure>
-<p>找了下nginx的日志，发现没什么异常。</p>
-<p>再找了下前端的静态文件，也没看出来什么问题。</p>
-<p>不信邪，试试在docker内ping了一下后端，发现也能ping通。</p>
-<p>那看来网络是没什么问题了。</p>
-<h3 id="查看本地打包的文件">查看本地打包的文件</h3>
-<p>本地打包后的文件，我试着用serve来运行。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npx serve -s dist</span><br></pre></td></tr></table></figure>
-<p>运行后打开localhost，发现页面是正常的。</p>
-<p>看来本地文件没问题。</p>
-<h3 id="在服务器上打包">在服务器上打包</h3>
-<p>重新登录服务器，在服务器上用npx serve来运行后端的文件。</p>
-<p>提示没有npx。</p>
-<p>行吧，那先安装npm。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure>
-<p>再执行，说node版本太低，只有12。</p>
-<p>那再升级node。先装个nvm。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash</span><br></pre></td></tr></table></figure>
-<p>然后让nvm生效。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source ~/.nvm/nvm.sh</span><br></pre></td></tr></table></figure>
-<p>最后nvm安装node 18，再切换到18。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvm install 18</span><br><span class="line">nvm use 18</span><br></pre></td></tr></table></figure>
-<p>用node的命令查了下，确实是18了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
-<p>终于完事，再用npx serve启动。</p>
-<p>发现打开是404。</p>
-<p>？？？</p>
-<p>看了下是服务器上没build后的静态文件。</p>
-<p>行，那先安装。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
-<p>在本地用浏览器打开，居然也是一片空白。</p>
-<p>？？？</p>
-<p>至少复现了是吧。</p>
-<p>看来不是网络问题，就是前端打包后的静态文件有问题。</p>
-<p>脑袋里面灵光一闪，重新在本地起了下前端，这次不用localhost，用本机的IP来访问。</p>
-<p>发现也是空白。</p>
-<p>这下在本地复现了。</p>
-<h3 id="询问AI">询问AI</h3>
-<p>成功复现至少是成功了90%。</p>
-<p>目前看下来，关键点在与用localhost能正常访问，而使用其他的IP则不行。</p>
-<p>问了下AI，可能是什么原因。</p>
-<p>提示说可能是cros，也可能是使用的命令不对，还有可能是防火墙问题。</p>
-<p>都试了下，还是没解决问题。</p>
-<h3 id="回退版本">回退版本</h3>
-<p>最后无奈之下，开始回退版本。</p>
-<p>用git命令回退到之前的版本，看看是哪个提交导致了目前的问题。</p>
-<p>首先回退到之前改了logo的那次提交，发现不行。</p>
-<p>再回退到这个提交的前一个。</p>
-<p>启动，居然正常显示了？</p>
-<p>ok，锁定是这个提交的改动有问题。</p>
-<p>于是逐个逐个回退文件的改动。</p>
-<p>回退到修改主页重定向的时候，页面正常显示了。</p>
-<p>好，找到问题了。</p>
-<h2 id="修复">修复</h2>
-<p>分析一下，是路由守卫和主页重定向有冲突。</p>
-<p>当时让未登录的用户会重定向到一个文档管理页面，而这个文档管理页面被路由守卫了，需要用户进行登录才可访问。</p>
-<p>一来一去，死循环了，于是页面就卡死了。</p>
-<p>那么为什么用localhost可以正常访问？</p>
-<p>因为有浏览器缓存，会保持用户的登录状态。而其他的路由没有缓存，需要重新登录，于是就会进入死循环。</p>
-<p>修改了这个逻辑，添加了一个未登录也可访问的落地页，让用户先在这个页面登录。</p>
-<p>修改后重新构建，已经能正常渲染了。</p>
-<h2 id="结论">结论</h2>
-<p>重新看下来，debug的过程就是要对整个部署流程、前端渲染过程有一定的了解。</p>
-<p>我还是有些依赖个人的经验，导致我直接从最大可能的地方入手，进行排查。</p>
-<p>当然也确实一下子就找到了一个问题（虽然和最终的问题无关）。</p>
-<p>但仔细想想，主要也是对前端不熟悉，很多时候就缺少了些验证手段。</p>
-<p>这次都是现査工具现用的。</p>
-<p>不过这样解决问题，才能让人有所成长吧？</p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
       </tags>
   </entry>
 </search>
