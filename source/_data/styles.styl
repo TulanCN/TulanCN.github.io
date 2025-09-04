@@ -1,0 +1,101 @@
+// 自定义样式
+
+// 文章内链接样式
+.post-body a {
+  color: #0593d3;
+  border-bottom: 1px solid #0593d3;
+  &:hover {
+    color: #fc6423;
+    border-bottom: 1px solid #fc6423;
+  }
+}
+
+// 文章标题下划线动画
+.post-title {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #222;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+  &:hover::before {
+    visibility: visible;
+    width: 100%;
+  }
+}
+
+// 代码块样式优化
+pre {
+  border-radius: 5px;
+}
+code {
+  border-radius: 3px;
+  padding: 2px 4px;
+}
+
+// 滚动条美化
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #49b1f5;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+// 页面加载进度条
+.pace {
+  .pace-progress {
+    background: #49b1f5;
+  }
+}
+
+// 移动端优化
+@media (max-width: 767px) {
+  .posts-expand {
+    margin: 0 10px;
+  }
+  .post-body {
+    font-size: 15px;
+  }
+}
+
+// 自定义样式，移除可能的广告
+body {
+  background: #f7f9fe !important;
+}
+
+#page-header {
+  background: #49b1f5 !important;
+}
+
+// 确保没有意外的内容显示
+iframe, 
+ins,
+[id*="ads"],
+[class*="ad-"],
+[id*="google"],
+[class*="google"],
+[class*="banner"] {
+  display: none !important;
+}
+
+// 优化首页内容区域
+#recent-posts {
+  margin-top: 1rem;
+}
+
+// 美化导航菜单
+#nav {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+} 
