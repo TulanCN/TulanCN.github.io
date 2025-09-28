@@ -6,7 +6,7 @@
   <link href="https://tulancn.github.io/atom.xml" rel="self"/>
   
   <link href="https://tulancn.github.io/"/>
-  <updated>2025-09-05T09:55:19.682Z</updated>
+  <updated>2025-09-28T08:06:50.137Z</updated>
   <id>https://tulancn.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中小模型优化</title>
+    <link href="https://tulancn.github.io/2025/09/28/work/tips/%E4%B8%AD%E5%B0%8F%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96/"/>
+    <id>https://tulancn.github.io/2025/09/28/work/tips/%E4%B8%AD%E5%B0%8F%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96/</id>
+    <published>2025-09-28T07:09:56.000Z</published>
+    <updated>2025-09-28T08:06:50.137Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>理想情况下，我们购买大公司的算力服务或模型服务，用差不多的提示词调下接口，然后拿着可靠的返回值继续我们的业务逻辑。</p><p>但实际工作中，并没有那么多的钱能让我们去买这些算力或模型服务，而且往往是打着数据安全的旗号来的。</p><p>最后大部分公司里，可能就是拿着来之不易的一点点经费，自己摸索部署了一个小小的模型来开发对接。</p><p>很不幸，虽然我在的公司挺大的，但所在的部门经费有限。</p><p>考虑到项目成本和合同收益，让我发挥出了垃圾佬的本性，对着小模型鼓捣了半天，也算是有了些成果。</p><p>主打一个花小钱办大事，用不那么聪明的模型来干活。</p><h2 id="场景">场景</h2><p>应该算是典型的质检验收场景，大概就是安装设备的师傅会拍照上传到平台，平台要用多模态的AI来识别这个照片是否合格。</p><p>不同的设备安装合格的要求不一样，有些复杂有些简单，因此模型的智力水平会大大影响结果。</p><h2 id="常见的问题与解决方案">常见的问题与解决方案</h2><p>先聊聊小模型常见的问题吧。</p><h3 id="格式限制不生效">格式限制不生效</h3><p>这应该是很常见的问题了。提示词里限制了模型返回JSON格式，但模型就是自说自话返回了大段大段的废话。</p><p>解决方法有多个，这些方法可以一起用上。</p><ol><li>宽松校验：不严格校验模型返回的格式，而是进行关键内容提取，只要内容里有JSON就提取出来，认为模型是返回成功了。因为模型很多时候只是说了些废话，但最终还是能正常返回一个JSON格式的答案。所以只要能提取出最终的JSON，这问题就解决了。</li><li>重试：很多时候模型只是小概率返回非预期的回答，此时重试一下可能就好了。</li><li>调整温度：温度太高了导致模型开始自由发挥，此时适当调低温度也是可行的，比如从0.75调整到0.5。</li><li>模型总结：进行多轮对话，前面是聊业务，在最后一轮让模型把结果总结成JSON格式，大部分时候也是能产生较好的效果。</li></ol><h3 id="答非所问">答非所问</h3><p>在调试过程中，我使用的模型常常会回答&quot;我是个文本模型，不支持图像识别&quot;。</p><p>可实际上它是支持图像识别的。感觉是模型训练时有数据污染导致的，这问题是概率性触发。</p><p>解决方法：</p><ol><li>调整TopP和温度：TopP和温度太低时似乎这问题会出现概率变高。</li><li>调整系统提示词：告知模型你具有图像识别的能力。</li><li>重试：多次尝试大部分时候能正常返回。</li></ol><h3 id="识别不准确">识别不准确</h3><p>在某些场景下，发现模型不能正常识别到图片的内容，开始胡言乱语。</p><p>解决方法：</p><ol><li>调整系统提示词：需要判断是否是系统提示词出现了问题，可能是业务场景涉及到某些专业知识，而模型并没有直接识别到是此类场景，可以调整下系统提示词简要说明行业背景。</li><li>调整用户提示词：有些是用户提示词的描述不够准确，比如&quot;电线&quot;的概念较为宽泛，而模型不太能处理此类描述。一个好的办法是先把图片送给模型，<strong>让模型来描述图片的内容，然后挑选模型自己的描述来重构提示词</strong>。</li><li>拆分任务：多个任务放在一次问答里返回时效果不太好，因此更建议把任务拆分成一个个小的子任务，让模型分别处理。这问题在大参数量模型上较少出现，但在小参数量模型上会变得较为突出。</li></ol><h3 id="模型输出较慢">模型输出较慢</h3><p>在硬件系统太差的情况下，小模型的输出会很慢，此时建议直接换硬件。</p><p>实在不行的话只能限制下模型的输出token，在提示词中尽可能减少需要模型回答的内容。</p><p>比如“仅返回是或否”等。</p><h2 id="总体优化方向">总体优化方向</h2><p>小模型的缺点在于先验知识较少，指令遵循能力较差，返回的内容不可控。</p><p>因此，为了提高准确度，只能进行一些特定的优化。说白了就是<strong>拿时间换准确性</strong>。</p><p>一种方式是使用类似思维链的能力，在提示词中引导模型一步一步思考，先查什么后查什么，最后总结一个结果。</p><p>大部分时候这种方式能让模型在输出一大段对话后给出一个相对可靠的结论。</p><p>还有种方式是用代码来替换模型的部分操作，尽可能拆分任务。这就得具体问题具体讨论了，可以参考后面的实践。</p><h2 id="实践">实践</h2><p>需求：检测图片中是否存在XX设备，网线插入的网线口是否和工单中说明的一致，图片里是否有二维码。这三个都符合则合格。</p><p>在做这个需求的时候，显然需要拆分任务。</p><p>我先开始是拆成了三个任务：检测设备、检查网线口、检查二维码。</p><p>首先遇到的问题是格式限制不生效的问题。我参考其他人的提示词，要求模型返回JSON格式。但实际发现模型完全不会遵循这个指令，只会输出大段的思考过程，然后总结一个JSON的结果出来。</p><p>考虑到这是三个任务都是返回个是或否就足够的，我重新优化了一下提示词。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">仅判断图片中是否存在类似&quot;XXX箱&quot;的物体，不做其他判断。输出：存在输出1；不存在输出2。仅输出数字，不得包含其他内容。</span><br></pre></td></tr></table></figure><p>修改之后大部分时候是可以返回纯数字了，但偶尔还是会返回思考内容。</p><p>于是我更进一步，限制了模型的max_token，直接卡死在1。如此一来，只需要检查是否是返回了数字1或2即可。</p><p>这是被阿里的一个二元模型所启发的。</p><p>之后就遇到了另一个问题，这三个任务有难有简单，检查网线口的任务复杂程度比另外两个要高。</p><p>这个任务限制模型返回1或2后，模型反而完不成任务了。</p><p>因此只能继续调试，我发现输出大段思考过程后，模型确实能做出相对正确的判断。</p><p>所以就做了结果提取的能力，让模型在第一轮对话里进行思考，再进行第二轮对话，让其总结内容返回1或2。</p><p>这样就提高了一定的准确性。</p><p>重试的机制也加了，配合max_token调整为1，在前两个简单任务中表现相当不错。</p><p>在复杂任务里，重试则分为两部分。总结会重试3次，3次失败之后会回退到前面的图片识别。图片识别则是重试2次，2次失败后认定图片有问题，将其纳入人工干预的范畴。</p><p>对于总结这事，本来是考虑另外有个8B的文本模型来进行总结，但因为资源紧张就没落地。</p>]]></content>
+    
+    
+    <summary type="html">工作中使用了一些中小型的模型，也进行了多次优化以提高准确性。</summary>
+    
+    
+    
+    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    
+    
+    <category term="工作总结" scheme="https://tulancn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>对于当前大模型的直觉认知</title>
@@ -403,27 +424,6 @@
     
     
     <summary type="html">Java基础是纯纯的八股文了，但还是要过一遍。</summary>
-    
-    
-    
-    <category term="工作" scheme="https://tulancn.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
-    
-    
-    <category term="面试" scheme="https://tulancn.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面试笔记-Spring</title>
-    <link href="https://tulancn.github.io/2024/10/16/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Spring/"/>
-    <id>https://tulancn.github.io/2024/10/16/work/tips/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Spring/</id>
-    <published>2024-10-16T03:43:17.000Z</published>
-    <updated>2025-03-10T14:00:33.126Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Spring篇">Spring篇</h2><p>Spring是一个Java开发框架，主要是解决企业级开发的一些痛点。一开始可能主要是用于Web应用的开发，但目前实践中它已经在国内Java后端开发这方面一统江湖。</p><p>它把各种业务逻辑都抽象封装为Bean，Spring负责项目启动时把这些Bean创建出来，进行业务开发的时候只需要通过Spring提供的API或其他方式，获取到对应的Bean就可以执行各种复杂业务操作。</p><h3 id="为什么是Spring">为什么是Spring</h3><p>轻量。</p><p>IOC，控制反转。业务开发不用关注对象创建之类的事情，只需要编码，并给出依赖，框架会自动帮你找到对应的实现类。</p><p>AOP，面向切面编程。</p><p>事务管理。</p><p>异常处理。</p><h3 id="Autowired和Resource的区别">Autowired和Resource的区别</h3><p>Autowired是Spring提供的注解，Resource是javax的注解。Spring是支持了javax提供的标准注解，是标准的一个实现。</p><p>假如换了框架（一般不会），Autowired必定不可用，Resource可能还能用。</p><p>Autowired默认按照type类装配，默认要求对象必须存在且唯一。可以用Qualifier来指定BeanName。</p><p>Resource注解提供了type和name两个注解字段。name的优先级高于type。</p><h3 id="依赖注入的方式">依赖注入的方式</h3><p>构造器、setter、接口。反射注入</p><h3 id="Spring-MVC">Spring MVC</h3><p>Spring MVC是Spring的一个模块，针对web应用的场景。</p><p>V不是普遍意义上的前端，而是用jsp或其他方式渲染的一个页面。</p><p>M是逻辑层，做计算和数据库操作。C是控制层，负责接收网络请求。</p><p>Spring在Servlet的基础上实现，定义了一个统一的请求接收入口：DispatcherServlet。DispatcherServlet会根据url和请求类型分发请求到用户编码的Controller中，然后执行用户的逻辑。</p><p>常用注解：@RequestMapping、@RequestBody、@ResponseBody</p><h3 id="AOP">AOP</h3><p>把一些业务无关，在系统层面共通的逻辑封装起来，从而减少代码冗余，有利于代码的扩展性和维护性。比如参数校验、日志采集、权限控制。</p><p>Spring的AOP是基于动态代理实现的。对于已经实现了接口的，用JDK动态代理，创建一个接口的实现类然后代理。没有实现的，用CGlib，创建一个类的子类然后代理。</p><p>也可以用AspectJ实现自己的AOP逻辑。</p><p>Spring的AOP属于运行时增强，AspectJ的AOP是编译时增强。AspectJ是字节码操作，性能稍高。</p><h3 id="关注点和横切关注点">关注点和横切关注点</h3><p>关注点是某个特定的业务功能，横切关注点是多个业务都会用到的系统功能，比如日志、参数校验、权限。</p><h3 id="什么是通知advice">什么是通知advice</h3><p>方法执行前和后要做的逻辑处理。</p><p>before</p><p>after</p><p>after-returning</p><p>after-throwing</p><p>around</p><p>这个结果处理和Spring WebFlux中的回调很像。</p><h3 id="IOC">IOC</h3><p>控制反转，把创建对象的权利移交给框架。</p><p>对象不需要程序自己去new，而是通过依赖注入从框架中获取。</p><p>IOC让组件保持松散的耦合，从而创造了可以进行AOP编程的余地。</p><h3 id="Spring-Bean生命周期">Spring Bean生命周期</h3><p>Servlet：实例化、初始化、接收请求、销毁。</p><p>Bean：</p><p>1、配置扫描，创建BeanDefinition，构建BeanFactory。</p><p>2、实例化：启动时的第一步。当BeanFactory被请求一个未实例化的Bean时，会调用createBean方法实例化一个Bean。</p><p>3、依赖注入：实例化之后的对象在BeanWrapper中，Spring通过BeanDefinition的配置进行依赖注入。这里会先找这个Bean的依赖所对应的BeanFactory，然后提供一个实例化Bean进行依赖注入。</p><p>4、处理Aware接口：BeanNameAware、BeanFactoryAware、ApplicationContextAware</p><p>5、BeanPostProcessor的postProcessBeforeInitialization方法</p><p>6、InitializingBean的afterPropertiesSet</p><p>7、BeanPostProcessor的postProcessAfterInitialization方法</p><p>8、scope为singleton的缓存在容器，prototype的返回最开始请求的客户端。</p><p>9、销毁，调用DisposableBean的afterPropertiesSet</p><h3 id="Bean的作用域">Bean的作用域</h3><p>1、singleton：单例</p><p>2、prototype：每个Bean一个实例</p><p>3、request：每个网络请求一个实例</p><p>4、session：每个session一个实例</p><p>5、globe-session</p><h3 id="Spring的设计模式">Spring的设计模式</h3><p>简单工厂模式：Bean的创建</p><p>单例模式：单例的Bean</p><p>代理模式：AOP的实现</p><p>适配器：Adapter，Spring中以Adapter结尾的一般都是适配器模式。比如AdvisorAdapter</p><p>观察者模式：Spring事件</p><p>模版模式：JdbcTemplate</p><h3 id="ApplicationContext和BeanFactory">ApplicationContext和BeanFactory</h3><p>BeanFactory是基础接口，只提供最基础的Bean管理功能，在spring-beans包中。</p><p>ApplicationContext继承了BeanFactory，并且扩展了事务管理、国际化、AOP。</p><p>BeanFactory是延迟加载，而ApplicationContext是启动时实例化所有的Bean。</p><h3 id="Spring的单例Bean是线程安全的吗">Spring的单例Bean是线程安全的吗</h3><p>是否线程安全和单例无关。Spring本身没有对Bean做任何并发的保护，这也不是Spring应该关心的东西。是否线程安全由开发者来保证。</p><h3 id="循环依赖怎么解决">循环依赖怎么解决</h3><p>三级缓存</p><p>第一级缓存是初始化完成的Bean；第二级是完成了实例化，但是没有完成依赖注入的Bean；第三级是没实例化的Bean，存放其BeanFactory。</p><p>假设有两个Bean A、B，AB循环依赖</p><p>1、Bean都是由BeanFactory创建，A的BeanFactory会先实例化A，放入二级缓存，随后进行依赖注入。</p><p>2、A的BeanFactory通过依赖找到了B，先从一级缓存找，一路找到三级缓存，最后找到了B的BeanFactory。这时候B没有创建，所以用B的BeanFactory创建B。BeanFactory会先创建一个B的实例，这样在二级缓存就有了一个B的实例，然后进行依赖注入。</p><p>3、B在依赖注入的时候会在二级缓存找到A，这时会直接获取A的实例注入B，这样就完成B的依赖注入。B完成创建后放入一级缓存，然后把B通过BeanFactory的方法返回给A，A就可以继续进行依赖注入。</p><h3 id="Spring事务隔离级别">Spring事务隔离级别</h3><p>同数据库的级别：读未提交、读已提交、可重复读、串行化</p><h3 id="Spring事务传播级别">Spring事务传播级别</h3><p>PROPAGATION_REQUIRED：有事务就加入，没有就创建</p><p>PROPAGATION_SUPPORTS：有就加入，没有就不加事务</p><p>PROPAGATION_MANDATORY：有就加入，没有就抛异常</p><p>PROPAGATION_REQUIRES_NEW：永远创建一个新的事务执行</p><p>PROPAGATION_NOT_SUPPORTED：永远不以事务执行</p><p>PROPAGATION_NEVER：有事务就抛异常</p><p>PROPAGATION_NESTED：有事务就创建嵌套事务，没有就创建</p><h3 id="Spring事务实现">Spring事务实现</h3><p>编程式事务、声明式事务。</p><p>PlatformTransactionManager中定义了事务的开始、提交、回滚等操作。不同数据库会有不同实现。</p><h3 id="Spring事务管理优点">Spring事务管理优点</h3><p>抽象了统一的接口。支持声明式事务管理。</p><p>可以和Spring多数据源结合。</p><h3 id="事务三要素">事务三要素</h3><p>数据源：事务的真正处理者。</p><p>事务管理器：处理事务的打开、提交、回滚。</p><p>事务应用和配置：表明哪些方法参与事务，事务的隔离级别，传播级别，超时时间。</p><h3 id="事务注解的本质">事务注解的本质</h3><p>@Transactional仅仅是一些元数据，这里通过AOP的方式，将元信息传递事务管理器，事务管理器再提交给数据源实现具体的事务。</p><p>其实就相当于在方法前后加了一些事务的代码。</p><h2 id="Spring-Boot篇">Spring Boot篇</h2><h3 id="为什么是Spring-Boot">为什么是Spring Boot</h3><p>独立运行：内嵌了tomcat、Jetty。不需要打成war包部署到容器。可以打成独立的Jar包运行。</p><p>配置简化，自动装配：能根据当前路径下的类、jar来自动配置bean。</p><p>无代码生成：配置过程中没有代码生成，没有xml配置文件，都是基于条件注解完成。</p><p>监控：默认就提供了很多监控端点。</p><p>Spring Boot大量使用了注解来驱动开发。</p><h3 id="核心注解">核心注解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@SpringBootConfiguration</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@ComponentScan</span><br></pre></td></tr></table></figure><h3 id="如何理解starters">如何理解starters</h3><p>一个把所有依赖都集成在一起的依赖包，简化引入的成本。</p><h3 id="如何在启动时执行一些特殊的逻辑">如何在启动时执行一些特殊的逻辑</h3><p>ApplicationRunner，CommandLineRunner。</p><p>ApplicationRunner有一个实现，是在启动时把程序的pid打印到一个文件中，方便运维。</p><h3 id="监视器-actuator">监视器 actuator</h3><p>actuator会对外暴露一些端点，可以通过配置的方式管理这些端点（endpoint）。这是能让用户来访问和监控程序当前的运行状态。配合运维平台使用。</p><h3 id="异常处理">异常处理</h3><p>ControllerAdvice，可以用来处理所有的异常，封装为统一的异常信息返回。</p><h3 id="配置加载顺序">配置加载顺序</h3><p>Spring Boot的配置加载顺序和其优先级一致。</p><p>1、命令行，–大于-D</p><p>2、Java系统属性，System.getProperties。</p><p>3、环境变量</p><p>4、yml文件</p><p>5、默认配置</p><h3 id="application和bootstrap文件">application和bootstrap文件</h3><p>老版本Spring Cloud Alibaba的Nacos只能使用bootstrap文件，后面版本修改了。</p><h3 id="自动装配">自动装配</h3><p>自动装配就是把第三方的Bean装载到Spring的容器里。以前是需要开发人员写xml才能把这些Bean装载到容器的。</p><p>原理：第三方组件定义了Configuration类，在其中声明了需要装载的Bean对象，同时也在这个类里定义了一些自动装配的规则。Spring在启动时通过META-INF/spring.factories文件找到对应的配置类，然后对这些配置类进行动态加载。</p><h2 id="Spring-Cloud篇">Spring Cloud篇</h2><h3 id="为什么是Spring-Cloud">为什么是Spring Cloud</h3><p>是用于构建分布式应用的开源框架。基于Spring Boot，提供与外部系统集成的能力。国内有很多二开的框架，比如Spring Cloud Alibaba，TSF，Spring Cloud Huawei。</p><h3 id="什么是微服务">什么是微服务</h3><p>一种架构。将单一功能的应用程序划分为一组小的服务，每个服务独立运行，服务之间相互协调、配合，最终实现一个业务功能。</p><p>服务之间使用轻量级的通讯机制（通常是http，但是dubbo之类的也可以）。</p><p>需要有一个中心来集中化管理这些服务。</p><h3 id="服务熔断和降级">服务熔断和降级</h3><p>分布式的场景下，某个服务出现异常，当检测到这种情况后，可以切断对该服务的调用。等到服务正常以后，再恢复服务。这就是熔断。</p><p>降级是是指服务熔断以后，如果还有对该服务的调用，直接失败。</p><h3 id="eureka-zookeeper-nacos">eureka zookeeper nacos</h3><p>Eureka的高可用机制比较完善，可以保证服务随时可用。</p><p>zookeeper对于多节点的数据一致性处理比较完善，可以用于主从选举。zk其实为了分布式协调而设计的，比如分布式锁、选举都可以用zk来做。</p><p>nacos提供了可视化界面，同时支持服务注册发现和配置下发，一个人干了两个人的活。</p><h3 id="Spring-Boot-Spring-Cloud">Spring Boot Spring Cloud</h3><p>Spring Boot是专注于开发单个微服务。</p><p>Spring Cloud是关注分布式系统的，分布式系统可以是多个Spring Boot开发的微服务的集合，Spring Cloud用于提供微服务之间调用、微服务的配置获取、服务注册、路由等。</p><h3 id="负载均衡">负载均衡</h3><p>某个服务可能有多个实例，调用该服务时，每个请求会分发到不同的实例处理，有助于提高服务的吞吐量。</p><h3 id="Feign">Feign</h3><p>Feign是一个HTTP请求客户端，提供了声明式的调用方式。主要是通过JDK动态代理实现。它整合了负载均衡的能力（Spring Cloud LoadBalance）</p>]]></content>
-    
-    
-    <summary type="html">这里记录一下面试的准备过程中关于Spring的笔记。问Java不问Spring简直不可能好吧。</summary>
     
     
     
