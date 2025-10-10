@@ -79,15 +79,7 @@ build_blog() {
 deploy_to_github() {
     log_info "部署到GitHub Pages..."
 
-    # 检查是否存在本地配置文件（用于本地部署）
-    if [ -f "_config.local.yml" ]; then
-        log_info "使用本地配置进行部署..."
-        hexo deploy --config _config.local.yml
-    else
-        log_warning "未找到本地配置文件，无法直接部署"
-        log_info "请推送代码到GitHub仓库，由GitHub Actions自动部署"
-        return 1
-    fi
+    hexo deploy
 
     log_success "部署完成"
 }
@@ -182,11 +174,7 @@ main() {
 
     build_blog
 
-    # 尝试本地部署，如果失败则提示使用GitHub Actions
-    if ! deploy_to_github; then
-        log_warning "本地部署失败，将使用GitHub Actions自动部署"
-        log_info "推送代码后将自动触发部署"
-    fi
+    deploy_to_github
 
     commit_source_code
 

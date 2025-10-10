@@ -132,7 +132,7 @@ cache:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo:
+  repo: https://github.com/TulanCN/TulanCN.github.io.git
   name: TulanCN
   email: 522627142@qq.com
   branch: main
