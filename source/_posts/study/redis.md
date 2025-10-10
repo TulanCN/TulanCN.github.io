@@ -6,6 +6,7 @@ categories:
 tags:
   - 缓存
 date: 2025-04-08 16:55:35
+permalink: /post/redis-study/
 ---
 
 ## Redis基础概念

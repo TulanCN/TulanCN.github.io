@@ -78,7 +78,17 @@ build_blog() {
 # 部署到GitHub Pages
 deploy_to_github() {
     log_info "部署到GitHub Pages..."
-    hexo deploy
+
+    # 检查是否存在本地配置文件（用于本地部署）
+    if [ -f "_config.local.yml" ]; then
+        log_info "使用本地配置进行部署..."
+        hexo deploy --config _config.local.yml
+    else
+        log_warning "未找到本地配置文件，无法直接部署"
+        log_info "请推送代码到GitHub仓库，由GitHub Actions自动部署"
+        return 1
+    fi
+
     log_success "部署完成"
 }
 
@@ -151,31 +161,38 @@ main() {
     done
     
     log_info "开始Hexo博客自动化流程..."
-    
+
     # 检查命令
     check_commands
-    
+
     if [ "$ONLY_DEPLOY" = true ]; then
         deploy_to_github
         exit 0
     fi
-    
+
     if [ "$ONLY_BUILD" = true ]; then
         build_blog
         exit 0
     fi
-    
+
     # 完整流程
     if [ "$CLEAN_BUILD" = true ]; then
         clean_build
     fi
-    
+
     build_blog
-    deploy_to_github
+
+    # 尝试本地部署，如果失败则提示使用GitHub Actions
+    if ! deploy_to_github; then
+        log_warning "本地部署失败，将使用GitHub Actions自动部署"
+        log_info "推送代码后将自动触发部署"
+    fi
+
     commit_source_code
-    
+
     log_success "所有操作完成！"
-    log_info "博客已发布到: https://TulanCN.github.io/"
+    log_info "博客将自动发布到: https://TulanCN.github.io/"
+    log_info "查看部署状态: https://github.com/TulanCN/TulanCN.github.io/actions"
 }
 
 # 异常处理

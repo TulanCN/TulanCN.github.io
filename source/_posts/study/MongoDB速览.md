@@ -2,7 +2,7 @@
 title: MongoDB速览
 description: 新工作需要预研MongoDB，快速记录下了解到的信息。
 categories:
-  - 工作、生活、学习、其他
+  - 学习
 tags:
   - 技术协议
 date: 2025-06-25 09:29:45

@@ -1,0 +1,46 @@
+# GitHub Actions自动部署配置说明
+
+## 需要配置的Secrets
+
+在你的GitHub仓库中，需要配置以下Secrets：
+
+1. **GH_TOKEN** (可选)
+   - 用途：用于部署到GitHub Pages的访问令牌
+   - 获取方式：
+     - GitHub Settings → Developer settings → Personal access tokens
+     - 生成具有repo权限的token
+
+2. **GIT_REPO**
+   - 用途：部署目标仓库地址
+   - 格式：`https://github.com/TulanCN/TulanCN.github.io.git`
+
+3. **GITHUB_TOKEN** (自动提供)
+   - 用途：GitHub Actions自动提供的token，用于访问仓库
+
+## 配置步骤
+
+1. 进入GitHub仓库页面
+2. 点击 Settings → Secrets and variables → Actions
+3. 点击 "New repository secret"
+4. 添加上述需要的secrets
+
+## 工作流程
+
+1. 当代码推送到main分支时，自动触发GitHub Actions
+2. 安装依赖并构建静态文件
+3. 自动部署到GitHub Pages
+4. 无需在本地手动部署
+
+## 本地开发
+
+本地开发时仍可使用原有命令：
+```bash
+# 本地预览
+npm run server
+
+# 手动构建
+npm run build
+
+# 手动部署（如果需要）
+npm run deploy
+```

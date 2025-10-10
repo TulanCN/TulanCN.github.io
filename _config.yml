@@ -14,7 +14,7 @@ timezone: ''
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://TulanCN.github.io/
-permalink: :year/:month/:day/:title/
+permalink: :category/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
@@ -132,8 +132,7 @@ cache:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/TulanCN/TulanCN.github.io.git
-  # 请使用SSH密钥或环境变量来存储敏感信息，不要在配置文件中直接包含令牌
+  repo:
   name: TulanCN
   email: 522627142@qq.com
   branch: main
