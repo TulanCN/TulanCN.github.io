@@ -20,3 +20,5 @@ key.pub
 .Trashes
 ehthumbs.db
 Thumbs.db
+.omc/state/hud-stdin-cache.json
+.omc/state/hud-state.json
