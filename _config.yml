@@ -130,11 +130,4 @@ cache:
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
-deploy:
-  type: git
-  repo: https://github.com/TulanCN/TulanCN.github.io.git
-  name: TulanCN
-  email: 522627142@qq.com
-  branch: main
-  ignore_hidden: false
-  ignore_pattern: regexp
+## Using GitHub Actions for deployment, no local deploy needed
